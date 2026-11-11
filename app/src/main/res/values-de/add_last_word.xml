@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Anbieten, neue Wörter hinzuzufügen</string>
+    <string name="show_add_word_suggestion_description">Zeigt einen Vorschlag „Zum Wörterbuch hinzufügen“, wenn du ein Wort tippst, das das Wörterbuch nicht kennt. Aus kannst du Wörter weiterhin mit Ctrl + Shift + D oder in den Wörterbucheinstellungen hinzufügen.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D fügt das letzte Wort hinzu</string>
+    <string name="add_last_word_shortcut_description">Fügt das Wort vor dem Cursor deinem Wörterbuch hinzu, damit es vorgeschlagen und nie autokorrigiert wird.</string>
+    <string name="add_last_word_added">„%1$s“ zum Wörterbuch hinzugefügt</string>
+    <string name="add_last_word_known">„%1$s“ ist bereits im Wörterbuch</string>
+    <string name="add_last_word_none">Kein Wort vor dem Cursor zum Hinzufügen</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Đề nghị thêm từ mới</string>
+    <string name="show_add_word_suggestion_description">Hiện gợi ý “thêm vào từ điển” khi bạn gõ một từ mà từ điển chưa biết. Khi tắt, bạn vẫn có thể thêm từ bằng Ctrl + Shift + D hoặc trong cài đặt từ điển.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D thêm từ vừa gõ</string>
+    <string name="add_last_word_shortcut_description">Thêm từ trước con trỏ vào từ điển của bạn, để nó được gợi ý và không bao giờ bị tự sửa.</string>
+    <string name="add_last_word_added">Đã thêm “%1$s” vào từ điển</string>
+    <string name="add_last_word_known">“%1$s” đã có trong từ điển</string>
+    <string name="add_last_word_none">Không có từ nào trước con trỏ để thêm</string>
+</resources>

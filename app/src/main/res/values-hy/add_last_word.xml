@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Առաջարկել ավելացնել նոր բառեր</string>
+    <string name="show_add_word_suggestion_description">Ցույց է տալիս «ավելացնել բառարանում» առաջարկ, երբ մուտքագրում եք բառարանին անծանոթ բառ։ Անջատված վիճակում էլ կարող եք բառեր ավելացնել Ctrl + Shift + D-ով կամ բառարանի կարգավորումներից։</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D-ն ավելացնում է վերջին բառը</string>
+    <string name="add_last_word_shortcut_description">Ավելացնում է կուրսորից առաջ գտնվող բառը ձեր բառարանում, որպեսզի այն առաջարկվի և երբեք ինքնաշտկված չլինի։</string>
+    <string name="add_last_word_added">«%1$s»-ն ավելացվեց բառարանում</string>
+    <string name="add_last_word_known">«%1$s»-ն արդեն բառարանում է</string>
+    <string name="add_last_word_none">Կուրսորից առաջ ավելացնելու բառ չկա</string>
+</resources>

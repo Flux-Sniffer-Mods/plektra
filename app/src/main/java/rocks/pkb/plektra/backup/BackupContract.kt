@@ -314,6 +314,8 @@ internal object BackupPreferenceContract {
             "keyboard_layout_auto_by_locale" to PreferenceValueType.BOOLEAN,
             "keyboard_layout_list" to PreferenceValueType.STRING,
             "input_style_suggestion_locales" to PreferenceValueType.STRING,
+            "show_add_word_suggestion" to PreferenceValueType.BOOLEAN,
+            "add_last_word_shortcut" to PreferenceValueType.BOOLEAN,
             "hidden_system_input_styles" to PreferenceValueType.STRING,
             "sym_pages_config" to PreferenceValueType.STRING,
             "alt_modifier_binding" to PreferenceValueType.STRING,

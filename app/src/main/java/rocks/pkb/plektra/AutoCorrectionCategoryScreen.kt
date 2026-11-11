@@ -451,6 +451,27 @@ fun AutoCorrectionCategoryScreen(
                                 }
                             }
 
+                        var showAddWordSuggestion by remember { mutableStateOf(SettingsManager.getShowAddWordSuggestion(context)) }
+                        DictionarySwitchRow(
+                            title = stringResource(R.string.show_add_word_suggestion_title),
+                            description = stringResource(R.string.show_add_word_suggestion_description),
+                            checked = showAddWordSuggestion,
+                            linkId = SettingLinkIds.AUTO_CORRECTION_SHOW_ADD_WORD
+                        ) {
+                            showAddWordSuggestion = it
+                            SettingsManager.setShowAddWordSuggestion(context, it)
+                        }
+                        var addLastWordShortcut by remember { mutableStateOf(SettingsManager.getAddLastWordShortcut(context)) }
+                        DictionarySwitchRow(
+                            title = stringResource(R.string.add_last_word_shortcut_title),
+                            description = stringResource(R.string.add_last_word_shortcut_description),
+                            checked = addLastWordShortcut,
+                            linkId = SettingLinkIds.AUTO_CORRECTION_ADD_LAST_WORD_SHORTCUT
+                        ) {
+                            addLastWordShortcut = it
+                            SettingsManager.setAddLastWordShortcut(context, it)
+                        }
+
                         TextButton(
                             modifier = Modifier.fillMaxWidth().settingRow(SettingLinkIds.AUTO_CORRECTION_SUGGESTIONS),
                             onClick = {
@@ -1021,6 +1042,36 @@ private class DefaultUserDefaultsStore(private val context: Context) {
             file.writeText(array.toString())
         } catch (_: Exception) {
             // Ignore persistence errors; UI will just not reflect changes
+        }
+    }
+}
+
+/** A switch row for adding words to the dictionary (the chip, Ctrl + Shift + D). */
+@Composable
+private fun DictionarySwitchRow(
+    title: String,
+    description: String,
+    checked: Boolean,
+    linkId: String,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Surface(modifier = Modifier.fillMaxWidth().settingRow(linkId) { onCheckedChange(!checked) }) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Add,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(24.dp)
+            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Medium)
+                Text(text = description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = checked, onCheckedChange = onCheckedChange)
         }
     }
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Πρόταση προσθήκης νέων λέξεων</string>
+    <string name="show_add_word_suggestion_description">Εμφανίζει πρόταση «προσθήκη στο λεξικό» όταν πληκτρολογείτε λέξη που δεν γνωρίζει το λεξικό. Όταν είναι ανενεργό, μπορείτε ακόμα να προσθέτετε λέξεις με Ctrl + Shift + D ή από τις ρυθμίσεις λεξικού.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D προσθέτει την τελευταία λέξη</string>
+    <string name="add_last_word_shortcut_description">Προσθέτει τη λέξη πριν από τον κέρσορα στο λεξικό σας, ώστε να προτείνεται και να μη διορθώνεται ποτέ αυτόματα.</string>
+    <string name="add_last_word_added">Το «%1$s» προστέθηκε στο λεξικό</string>
+    <string name="add_last_word_known">Το «%1$s» υπάρχει ήδη στο λεξικό</string>
+    <string name="add_last_word_none">Δεν υπάρχει λέξη πριν από τον κέρσορα για προσθήκη</string>
+</resources>
