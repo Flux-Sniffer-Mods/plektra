@@ -35,7 +35,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*ShiftFieldTypesT
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 11 November 2026 against source commit `46f134fe` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 186 classes, 1,422 tests (upstream alone: 185 classes, 1,417 tests). New: 4 in `ShiftFieldTypesTest`, 1 in `PhysicalKeyboardInputMethodServiceDeviceBehaviorTest`; `SettingLinkCoverageTest` and `BackupPreferenceContractIntegrationTest` pass with the moved link and the new preference. One failure, `ClipboardHistoryTest.startupShowsLoadingAndBlocksHistoryActionsUntilReady`: a race in that upstream test (the history list is diffed on a background thread), unrelated to this change. The class passed when rerun on its own; `flux/test-races` fixes the race.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new class is in the `editing` topic.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,054 errors, no new errors against `ci/lint-errors.json`. Two fewer than upstream: the former switch's two strings, which lacked translations (`MissingTranslation`), are removed.
 
 ## Device check (still to do)
 
