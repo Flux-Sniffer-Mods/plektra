@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="snippets_placeholders_help">Լրացվում են, երբ հատվածը ընդլայնվում է՝ {date}, {time}, {datetime}, {isodate}, {day} և {clipboard}։</string>
+</resources>

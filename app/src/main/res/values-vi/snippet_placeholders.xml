@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="snippets_placeholders_help">Được điền khi đoạn mẫu được mở rộng: {date}, {time}, {datetime}, {isodate}, {day} và {clipboard}.</string>
+</resources>

@@ -127,6 +127,7 @@
       "rocks.pkb.plektra.inputmethod.SoftwareKeyboardTextInputHandlerTest",
       "rocks.pkb.plektra.inputmethod.TextSelectionHelperWordNavigationTest",
       "rocks.pkb.plektra.inputmethod.expansion.AssetExpansionSourcesTest",
+      "rocks.pkb.plektra.inputmethod.expansion.SnippetPlaceholdersTest",
       "rocks.pkb.plektra.inputmethod.expansion.TextExpansionControllerTest",
       "rocks.pkb.plektra.inputmethod.expansion.TextExpansionEngineTest",
       "rocks.pkb.plektra.inputmethod.expansion.TextExpansionPopupTest",

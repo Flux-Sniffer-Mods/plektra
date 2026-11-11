@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="snippets_placeholders_help">Підставляються під час розгортання фрагмента: {date}, {time}, {datetime}, {isodate}, {day} і {clipboard}.</string>
+</resources>

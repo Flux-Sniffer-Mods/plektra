@@ -18,7 +18,9 @@ class TextExpansionController(
     private val showSuggestionBar: (List<String>, (String) -> Unit) -> Unit,
     private val clearSuggestionBar: () -> Unit,
     private val requestSurfaceUpdate: () -> Unit,
-    private val onCommitted: (String) -> Unit
+    private val onCommitted: (String) -> Unit,
+    /** The clipboard's text for a snippet's {clipboard}; read only when a snippet asks for it. */
+    private val clipboardTextProvider: () -> String? = { primaryClipText(context) }
 ) {
     companion object {
         private const val REFRESH_DELAY_MS = 24L
@@ -167,13 +169,18 @@ class TextExpansionController(
             clear()
             return
         }
+        val replacement = if (match.provider == ExpansionProvider.SNIPPET) {
+            SnippetPlaceholders.fill(match.replacement, clipboard = clipboardTextProvider)
+        } else {
+            match.replacement
+        }
         inputConnection.beginBatchEdit()
         inputConnection.finishComposingText()
         inputConnection.deleteSurroundingText(query.token.length, 0)
-        inputConnection.commitText(match.replacement + suffix, 1)
+        inputConnection.commitText(replacement + suffix, 1)
         inputConnection.endBatchEdit()
         clear()
-        onCommitted(match.replacement + suffix)
+        onCommitted(replacement + suffix)
     }
 
     private fun render(presentation: ExpansionPresentation) {
@@ -236,3 +243,9 @@ class TextExpansionController(
         return true
     }
 }
+
+/** The text of the clipboard's first item, or null when it is empty or can't be read. */
+private fun primaryClipText(context: Context): String? = runCatching {
+    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as? android.content.ClipboardManager
+    clipboard?.primaryClip?.takeIf { it.itemCount > 0 }?.getItemAt(0)?.coerceToText(context)?.toString()
+}.getOrNull()
