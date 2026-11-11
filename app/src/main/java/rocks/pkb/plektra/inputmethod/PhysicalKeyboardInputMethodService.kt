@@ -39,6 +39,7 @@ import android.widget.Toast
 import rocks.pkb.plektra.BuildConfig
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.inputmethod.NotificationHelper
+import rocks.pkb.plektra.core.EditHistory
 import rocks.pkb.plektra.core.AutoCorrectionManager
 import rocks.pkb.plektra.core.DeferredPunctuationSpaceTracker
 import rocks.pkb.plektra.core.InputContextState
@@ -1496,6 +1497,32 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         return mapped.codePointAt(0)
     }
 
+    private val EDIT_STEP_CHECK_MS = 150L
+    private val EDIT_STEP_IDLE_MS = 900L
+    private var editHistoryRecord: Runnable? = null
+
+    /**
+     * Ctrl+Z's history: a step at the end of each word (a space, a newline or punctuation was just
+     * typed), or after a pause in typing.
+     */
+    private fun scheduleEditHistoryRecord(delay: Long) {
+        editHistoryRecord?.let { uiHandler.removeCallbacks(it) }
+        val runnable = Runnable {
+            editHistoryRecord = null
+            val ic = currentInputConnection ?: return@Runnable
+            if (delay == EDIT_STEP_CHECK_MS) {
+                val last = runCatching { ic.getTextBeforeCursor(1, 0) }.getOrNull()?.lastOrNull()
+                if (last == null || !(last.isWhitespace() || last in ".,!?;:")) {
+                    scheduleEditHistoryRecord(EDIT_STEP_IDLE_MS)
+                    return@Runnable
+                }
+            }
+            EditHistory.record(ic)
+        }
+        editHistoryRecord = runnable
+        uiHandler.postDelayed(runnable, delay)
+    }
+
     private fun handleSuggestionsUpdated(suggestions: List<SuggestionResult>) {
         val safeSuggestions = if (inputContextState.shouldDisableSuggestions) emptyList() else suggestions
         latestSuggestionResults = safeSuggestions
@@ -2198,11 +2225,11 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
         candidatesBarController.onUndoRequested = {
             variationInteractedDuringHold = true
-            sendCtrlShortcut(KeyEvent.KEYCODE_Z)
+            if (currentInputConnection?.let(EditHistory::undo) != true) sendCtrlShortcut(KeyEvent.KEYCODE_Z)
         }
         candidatesBarController.onRedoRequested = {
             variationInteractedDuringHold = true
-            sendCtrlShortcut(KeyEvent.KEYCODE_Y)
+            if (currentInputConnection?.let(EditHistory::redo) != true) sendCtrlShortcut(KeyEvent.KEYCODE_Y)
         }
         candidatesBarController.onSoftwareKeyboardKeyPressed = { keyCode ->
             typingSoundPlayer.play(keyCode)
@@ -3828,6 +3855,12 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             keyboardVisibilityController.onKeyboardBarConfigurationChanged()
         }
         traceImeVisibility("onStartInput restarting=$restarting")
+        // Ctrl+Z's history for this field (none for passwords)
+        EditHistory.onFieldStarted(
+            info?.let { "${it.packageName}:${it.fieldId}:${it.inputType}" },
+            recordable = isReallyEditable && !state.isPasswordField
+        )
+        scheduleEditHistoryRecord(300L)
         
         if (restarting) {
             enforceSmartFeatureDisabledState()
@@ -4584,6 +4617,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         val cursorPositionChanged = (oldSelStart != newSelStart) || (oldSelEnd != newSelEnd)
         val collapsedSelection = newSelStart == newSelEnd
         editorHasActiveSelection = !collapsedSelection
+        if (cursorPositionChanged) scheduleEditHistoryRecord(EDIT_STEP_CHECK_MS)
         if (cursorPositionChanged && ::candidatesBarController.isInitialized) {
             candidatesBarController.resetSuggestionActionMode()
         }

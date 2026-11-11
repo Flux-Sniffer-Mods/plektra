@@ -117,6 +117,7 @@
       "rocks.pkb.plektra.SettingsManagerRawModeTest",
       "rocks.pkb.plektra.SettingsManagerTextExpansionTest",
       "rocks.pkb.plektra.core.DeferredPunctuationSpaceTrackerTest",
+      "rocks.pkb.plektra.core.EditHistoryTest",
       "rocks.pkb.plektra.core.InputContextStateTest",
       "rocks.pkb.plektra.core.LiteralEntryInputContextTest",
       "rocks.pkb.plektra.core.PunctuationTest",
