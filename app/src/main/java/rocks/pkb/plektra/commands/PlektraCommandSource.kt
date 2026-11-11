@@ -44,6 +44,19 @@ class PlektraCommandSource : CommandSource {
                 capabilities = setOf(CommandCapability.AdjustsDeviceState),
                 defaultSurfaces = setOf(CommandSurface.AssignedKey, CommandSurface.QuickLauncher, CommandSurface.NavMode),
                 searchTokens = listOf("Keyboard", "Software", "Virtual", "Hardware", "Toggle")
+            ),
+            // Nav Mode with the selection anchored at the cursor
+            CommandTarget(
+                id = COMMAND_SELECT_FROM_CURSOR,
+                source = id,
+                kind = CommandKind.PlektraAction,
+                label = context.getString(R.string.select_from_cursor_title),
+                subtitle = context.getString(R.string.select_from_cursor_subtitle),
+                icon = CommandIcon.Settings,
+                launch = CommandLaunchSpec.InternalAction(ACTION_SELECT_FROM_CURSOR),
+                capabilities = setOf(CommandCapability.AdjustsDeviceState),
+                defaultSurfaces = setOf(CommandSurface.AssignedKey, CommandSurface.NavMode),
+                searchTokens = listOf("Select", "Selection", "Highlight", "Cursor")
             )
         )
     }
@@ -55,5 +68,7 @@ class PlektraCommandSource : CommandSource {
         const val ACTION_OPEN_QUICK_LAUNCHER = "open_quick_launcher"
         const val ACTION_OPEN_MAIN_ACTIVITY = "open_main_activity"
         const val ACTION_TOGGLE_SOFTWARE_KEYBOARD_MODE = "toggle_software_keyboard_mode"
+        const val COMMAND_SELECT_FROM_CURSOR = "plektra.select_from_cursor"
+        const val ACTION_SELECT_FROM_CURSOR = "select_from_cursor"
     }
 }

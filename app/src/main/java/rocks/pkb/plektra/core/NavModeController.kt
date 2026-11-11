@@ -26,6 +26,11 @@ class NavModeController(
 ) {
 
     companion object {
+        private val SELECTION_KEYS = setOf(
+            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_UP,
+            KeyEvent.KEYCODE_DPAD_DOWN, KeyEvent.KEYCODE_MOVE_HOME, KeyEvent.KEYCODE_MOVE_END,
+            KeyEvent.KEYCODE_PAGE_UP, KeyEvent.KEYCODE_PAGE_DOWN
+        )
         private const val TAG = "NavModeController"
     }
 
@@ -162,7 +167,17 @@ class NavModeController(
         hideNavModeStatusIcon()
     }
 
+    /** Starts selecting from the cursor: Nav Mode on, and its moves extend the selection. */
+    fun startSelectingFromCursor() {
+        if (!isNavModeActive()) {
+            applyNavModeResult(NavModeHandler.NavModeResult(ctrlLatchActive = true))
+        }
+        SelectFromCursor.start(::isNavModeActive)
+        notifyNavModeChanged()
+    }
+
     fun exitNavMode() {
+        SelectFromCursor.stop()
         if (modifierStateController.ctrlLatchFromNavMode || modifierStateController.ctrlLatchActive) {
             modifierStateController.ctrlLatchFromNavMode = false
             modifierStateController.ctrlLatchActive = false
@@ -274,7 +289,10 @@ class NavModeController(
     ): Boolean {
         val downTime = event?.downTime ?: SystemClock.uptimeMillis()
         val eventTime = event?.eventTime ?: downTime
-        val metaState = event?.metaState ?: 0
+        // Selecting from the cursor: arrows, Home and End move with Shift, extending the selection
+        val selecting = SelectFromCursor.active && mappedKeyCode in SELECTION_KEYS
+        val metaState = (event?.metaState ?: 0) or
+            (if (selecting) KeyEvent.META_SHIFT_ON or KeyEvent.META_SHIFT_LEFT_ON else 0)
 
         val downEvent = KeyEvent(
             downTime,

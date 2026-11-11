@@ -169,6 +169,7 @@
     ],
     "keys-modifiers": [
       "rocks.pkb.plektra.core.ModifierStateControllerTest",
+      "rocks.pkb.plektra.core.SelectFromCursorTest",
       "rocks.pkb.plektra.core.SymLayoutControllerPickerGateTest",
       "rocks.pkb.plektra.core.SymPageCycleTest",
       "rocks.pkb.plektra.core.SymShiftPortTest",
