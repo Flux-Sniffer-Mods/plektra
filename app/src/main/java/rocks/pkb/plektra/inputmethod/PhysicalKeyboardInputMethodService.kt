@@ -8,6 +8,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import rocks.pkb.plektra.AppBroadcastActions
 import rocks.pkb.plektra.ClicksPowerKeyboardController
+import rocks.pkb.plektra.ExternalLinks
 import rocks.pkb.plektra.SettingsManager
 import rocks.pkb.plektra.inputmethod.speech.*
 import rocks.pkb.plektra.speechErrorMessage
@@ -915,7 +916,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             val installed = ExternalSpeechProvider.isAvailable(this)
             Toast.makeText(this, if (installed) R.string.speech_external_enable else R.string.speech_external_missing,
                 Toast.LENGTH_LONG).show()
-            startActivity(if (installed) Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS).apply {
+            ExternalLinks.start(this, if (installed) Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             } else Intent(Intent.ACTION_VIEW, android.net.Uri.parse(ExternalSpeechProvider.FUTO_DOWNLOAD_URL)).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

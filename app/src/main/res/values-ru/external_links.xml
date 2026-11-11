@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="external_link_no_app">Нет приложения, чтобы открыть эту ссылку</string>
+</resources>

@@ -728,7 +728,7 @@ fun TrackpadGestureSettingsScreen(
                         .clickable {
                             val url = context.getString(R.string.trackpad_gestures_shizuku_url)
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                            context.startActivity(intent)
+                            ExternalLinks.start(context, intent)
                         }
                 ) {
                     Row(

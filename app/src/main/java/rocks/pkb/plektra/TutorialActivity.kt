@@ -1276,7 +1276,7 @@ fun TutorialWhatsNewPageContent(
 
         OutlinedButton(
             onClick = {
-                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(page.summary.docsUrl)))
+                ExternalLinks.start(context, Intent(Intent.ACTION_VIEW, Uri.parse(page.summary.docsUrl)))
             },
             modifier = Modifier.fillMaxWidth()
         ) {

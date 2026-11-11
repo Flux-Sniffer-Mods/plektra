@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="external_link_no_app">Keine App kann diesen Link öffnen</string>
+</resources>
