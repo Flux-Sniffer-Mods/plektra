@@ -39,6 +39,7 @@ import android.widget.Toast
 import rocks.pkb.plektra.BuildConfig
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.inputmethod.NotificationHelper
+import rocks.pkb.plektra.core.ContactDetails
 import rocks.pkb.plektra.core.AutoCorrectionManager
 import rocks.pkb.plektra.core.DeferredPunctuationSpaceTracker
 import rocks.pkb.plektra.core.InputContextState
@@ -46,6 +47,7 @@ import rocks.pkb.plektra.core.ModifierStateController
 import rocks.pkb.plektra.core.NavModeController
 import rocks.pkb.plektra.core.SymLayoutController
 import rocks.pkb.plektra.core.TextInputController
+import rocks.pkb.plektra.core.suggestions.UserDictionaryStore
 import rocks.pkb.plektra.core.suggestions.SuggestionController
 import rocks.pkb.plektra.core.suggestions.SuggestionKind
 import rocks.pkb.plektra.core.suggestions.SuggestionResult
@@ -3923,6 +3925,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (!inputContextState.shouldDisableSuggestions) {
             suggestionController.readInitialContext(currentInputConnection)
         }
+        // A new field: saved emails or numbers that fit it, as chips
+        if (!restarting) refreshContactSuggestions()
 
         val isEditable = inputContextState.isEditable
         val state = inputContextState
@@ -3978,7 +3982,108 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
     }
 
+    // Remember emails and phone numbers (ContactDetails): keys typed in this field, so only what
+    // was typed by hand is kept, and the saved ones for this field's chips
+    private var contactKeysTyped = 0
+    private var contactDetailsSaved: List<String>? = null
+    private var contactChips: List<String> = emptyList()
+    private val CONTACT_TEXT_LIMIT = 320
+
+    private fun contactFieldKind(): ContactDetails.Kind? = when {
+        inputContextState.isEmailField -> ContactDetails.Kind.EMAIL
+        inputContextState.isPhoneField -> ContactDetails.Kind.PHONE
+        else -> null
+    }
+
+    /** Whether this field may offer saved emails and numbers: never password fields. */
+    private fun contactDetailsAllowed(): Boolean {
+        if (!SettingsManager.getLearnContactDetails(this)) return false
+        val info = currentInputEditorInfo ?: return false
+        val state = inputContextState
+        return state.isReallyEditable && !state.isPasswordField && info.packageName != null
+    }
+
+    private fun countContactKey(keyCode: Int, event: KeyEvent?) {
+        if ((event?.repeatCount ?: 0) != 0 || KeyEvent.isModifierKey(keyCode)) return
+        when (keyCode) {
+            KeyEvent.KEYCODE_DEL, KeyEvent.KEYCODE_FORWARD_DEL, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_TAB,
+            KeyEvent.KEYCODE_ESCAPE, KeyEvent.KEYCODE_BACK, KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
+            KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN, KEYCODE_SYM -> return
+        }
+        contactKeysTyped++
+    }
+
+    private fun savedContactDetails(): List<String> = contactDetailsSaved ?: run {
+        val store = UserDictionaryStore()
+        store.loadUserEntries(this)
+        store.getSnapshot().map { it.word }.filter { ContactDetails.kindOf(it) != null }
+    }.also { contactDetailsSaved = it }
+
+    /**
+     * Keeps an email or phone number just typed by hand. [endOfEntry]: Enter, Tab or leaving the
+     * field, the only time a number with spaces is known to be complete. Never from a field
+     * that asks for no learning (IME_FLAG_NO_PERSONALIZED_LEARNING); saved ones are offered there.
+     */
+    private fun learnContactDetails(endOfEntry: Boolean) {
+        if (!contactDetailsAllowed()) return
+        val info = currentInputEditorInfo ?: return
+        if (info.imeOptions and EditorInfo.IME_FLAG_NO_PERSONALIZED_LEARNING != 0) return
+        val kind = contactFieldKind()
+        if (kind == ContactDetails.Kind.PHONE && !endOfEntry) return
+        val connection = currentInputConnection ?: return
+        val before = runCatching { connection.getTextBeforeCursor(CONTACT_TEXT_LIMIT, 0) }
+            .getOrNull()?.toString() ?: return
+        // In an email or phone field, only a whole entry: the cursor in the middle means part of it
+        if (kind != null && runCatching { connection.getTextAfterCursor(1, 0) }.getOrNull()?.isNotEmpty() == true) return
+        val detail = ContactDetails.toLearn(before, kind, contactKeysTyped) ?: return
+        val store = UserDictionaryStore()
+        store.loadUserEntries(this)
+        if (ContactDetails.alreadySaved(store.getSnapshot().map { it.word }, detail)) return
+        store.addWord(this, detail)
+        contactDetailsSaved = null
+        if (::suggestionController.isInitialized) suggestionController.refreshUserDictionary()
+    }
+
+    /** In an email or phone field: the saved ones that go on from what's typed, as chips. */
+    private fun refreshContactSuggestions() {
+        if (!::candidatesBarController.isInitialized) return
+        val kind = contactFieldKind()
+        val matches = if (kind == null || !contactDetailsAllowed()) {
+            emptyList()
+        } else {
+            val typed = runCatching { currentInputConnection?.getTextBeforeCursor(CONTACT_TEXT_LIMIT, 0) }
+                .getOrNull()?.toString().orEmpty()
+            ContactDetails.matching(savedContactDetails(), typed, kind)
+        }
+        if (matches == contactChips) return
+        contactChips = matches
+        if (matches.isEmpty()) {
+            candidatesBarController.clearExpansionSuggestions()
+            return
+        }
+        candidatesBarController.showExpansionSuggestions(matches) { chosen ->
+            val connection = currentInputConnection ?: return@showExpansionSuggestions
+            val typedLength = connection.getTextBeforeCursor(CONTACT_TEXT_LIMIT, 0)?.length ?: 0
+            connection.beginBatchEdit()
+            connection.deleteSurroundingText(typedLength, 0)
+            connection.commitText(chosen, 1)
+            connection.endBatchEdit()
+            UserDictionaryStore().apply {
+                loadUserEntries(this@PhysicalKeyboardInputMethodService)
+                markUsed(this@PhysicalKeyboardInputMethodService, chosen)
+            }
+            contactDetailsSaved = null
+            contactChips = emptyList()
+            candidatesBarController.clearExpansionSuggestions()
+        }
+    }
+
     override fun onFinishInput() {
+        // Leaving the field: an email or number typed there is complete
+        learnContactDetails(endOfEntry = true)
+        contactKeysTyped = 0
+        contactDetailsSaved = null
+        contactChips = emptyList()
         cancelSpeechRecognition()
         ++speechEditorSession
         disableSmoothCaretExperiment()
@@ -4572,6 +4677,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     ) {
         val perfStart = ImePerfLogger.mark()
         super.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd)
+        if (contactChips.isNotEmpty() || contactFieldKind() != null) refreshContactSuggestions()
         liveSpeechEditor?.let { editor ->
             val expected = if (candidatesEnd >= 0) candidatesEnd else editor.expectedCursor
             if ((oldSelStart != newSelStart || oldSelEnd != newSelEnd) &&
@@ -4833,6 +4939,13 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     }
 
     override fun onKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean {
+        if ((event_?.repeatCount ?: 0) == 0) {
+            when (keyCode_) {
+                KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_TAB -> learnContactDetails(endOfEntry = true)
+                KeyEvent.KEYCODE_SPACE -> learnContactDetails(endOfEntry = false)
+            }
+        }
+        countContactKey(keyCode_, event_)
         if (liveSpeechEditor != null && (event_?.unicodeChar?.let { it != 0 } == true ||
             keyCode_ in listOf(KeyEvent.KEYCODE_DEL, KeyEvent.KEYCODE_FORWARD_DEL, KeyEvent.KEYCODE_ENTER,
                 KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN))) {

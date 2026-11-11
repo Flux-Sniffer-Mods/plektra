@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Ricorda email e numeri di telefono</string>
+    <string name="learn_contact_details_description">Le email e i numeri di telefono che digiti tu vengono salvati nel dizionario e riproposti nei campi email e telefono. Mai ciò che incolli, né quanto scritto in campi password o privati.</string>
+</resources>

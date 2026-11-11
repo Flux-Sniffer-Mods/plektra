@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Απομνημόνευση email και τηλεφώνων</string>
+    <string name="learn_contact_details_description">Τα email και οι αριθμοί τηλεφώνου που πληκτρολογείτε μόνοι σας αποθηκεύονται στο λεξικό σας και προτείνονται ξανά σε πεδία email και τηλεφώνου. Ποτέ ό,τι επικολλάτε, ούτε από πεδία κωδικών ή ιδιωτικά πεδία.</string>
+</resources>

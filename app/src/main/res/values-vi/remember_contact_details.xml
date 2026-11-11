@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Ghi nhớ email và số điện thoại</string>
+    <string name="learn_contact_details_description">Email và số điện thoại bạn tự gõ được lưu trong từ điển và gợi ý lại trong các ô email và số điện thoại. Không bao giờ lưu nội dung dán vào, hay từ ô mật khẩu và ô riêng tư.</string>
+</resources>

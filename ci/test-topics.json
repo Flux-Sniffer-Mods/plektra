@@ -152,6 +152,7 @@
       "rocks.pkb.plektra.AutoCorrectEditScreenTest",
       "rocks.pkb.plektra.AutoCorrectionSubstitutionStoreTest",
       "rocks.pkb.plektra.core.AutoCorrectionManagerTest",
+      "rocks.pkb.plektra.core.ContactDetailsTest",
       "rocks.pkb.plektra.core.suggestions.AutoReplaceControllerLogicTest",
       "rocks.pkb.plektra.core.suggestions.CasingHelperTest",
       "rocks.pkb.plektra.core.suggestions.CurrentWordTrackerTest",

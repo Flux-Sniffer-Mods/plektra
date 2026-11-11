@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Запам’ятовувати пошту й номери телефонів</string>
+    <string name="learn_contact_details_description">Адреси пошти й номери телефонів, які ви набираєте самі, зберігаються у словнику та знову пропонуються в полях пошти й телефону. Ніколи не вставлений текст і нічого з полів паролів та приватних полів.</string>
+</resources>

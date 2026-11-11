@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Remember emails and phone numbers</string>
+    <string name="learn_contact_details_description">Emails and phone numbers you type yourself are kept in your dictionary and offered again in email and phone fields. Never anything pasted, nor from password or private fields.</string>
+</resources>
