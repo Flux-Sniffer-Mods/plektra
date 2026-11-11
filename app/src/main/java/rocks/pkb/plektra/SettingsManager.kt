@@ -16,6 +16,7 @@ import rocks.pkb.plektra.commands.PlektraCommandSource
 import rocks.pkb.plektra.core.Punctuation
 import rocks.pkb.plektra.data.layout.BundledLayoutAssets
 import rocks.pkb.plektra.inputmethod.DeviceSpecific
+import rocks.pkb.plektra.inputmethod.SuggestionKeys
 import rocks.pkb.plektra.inputmethod.subtype.AdditionalSubtypeUtils
 import rocks.pkb.plektra.inputmethod.subtype.AdditionalSubtypeUtils.localeString
 import rocks.pkb.plektra.inputmethod.ui.KeyboardThemeColors
@@ -405,6 +406,7 @@ object SettingsManager {
     private const val KEY_EXPERIMENTAL_CANDIDATES_VIEW_ENABLED = "experimental_candidates_view_enabled"
     private const val KEY_USE_KEYBOARD_PROXIMITY = "use_keyboard_proximity"
     private const val KEY_USE_EDIT_TYPE_RANKING = "use_edit_type_ranking"
+    private const val KEY_SUGGESTION_KEYS = "suggestion_keys"
 
     private const val DEFAULT_USE_KEYBOARD_PROXIMITY = false
     private const val DEFAULT_USE_EDIT_TYPE_RANKING = false
@@ -3334,6 +3336,16 @@ object SettingsManager {
         getPreferences(context).edit()
             .putBoolean(KEY_USE_EDIT_TYPE_RANKING, enabled)
             .apply()
+    }
+
+    /** Keys that pick a suggestion (a SuggestionKeys option; Ctrl+Shift+Q/W/E until chosen). */
+    fun getSuggestionKeys(context: Context): String =
+        getPreferences(context).getString(KEY_SUGGESTION_KEYS, null)
+            ?.takeIf { it in SuggestionKeys.OPTIONS }
+            ?: SuggestionKeys.CTRL_SHIFT_QWE
+
+    fun setSuggestionKeys(context: Context, option: String) {
+        getPreferences(context).edit().putString(KEY_SUGGESTION_KEYS, option).apply()
     }
 
     /**

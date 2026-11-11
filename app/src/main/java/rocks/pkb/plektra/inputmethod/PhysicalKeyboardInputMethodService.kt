@@ -182,6 +182,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     private var suppressNextLayoutReload: Boolean = false
     private var activeKeyboardLayoutName: String = "qwerty"
     private var consumeAltEnterUntilKeyUp: Boolean = false
+    // Key-up of a key that picked a suggestion (Ctrl+Shift+Q/W/E), still to be swallowed
+    private var suggestionKeyUpPending: Int = KeyEvent.KEYCODE_UNKNOWN
     private val consumedLanguageSwitchKeys = mutableSetOf<Int>()
     private var dispatchingSoftwareKeyboardKey: Boolean = false
     
@@ -5305,6 +5307,23 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             return true
         }
 
+        // A suggestion picked from the keyboard (Ctrl+Shift+Q/W/E until chosen): only while the bar
+        // shows suggestions, otherwise the keys do what they always did
+        if (hasEditableField && event != null && event.repeatCount == 0 && symPage == 0) {
+            val slot = SuggestionKeys.slotFor(
+                SettingsManager.getSuggestionKeys(this),
+                keyCode,
+                ctrl = event.isCtrlPressed || ctrlPhysicallyPressed,
+                shift = event.isShiftPressed || shiftPhysicallyPressed,
+                alt = event.isAltPressed || altPhysicallyPressed
+            )
+            if (slot != null && visibleSuggestionStrings().isNotEmpty()) {
+                suggestionKeyUpPending = keyCode
+                acceptSuggestionAtIndex(slot)
+                return true
+            }
+        }
+
         // Handle Alt+Enter for subtype cycling
         if (
             hasEditableField &&
@@ -5686,6 +5705,10 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         val event = remapped.event
         if (keyCode == KeyEvent.KEYCODE_ENTER && consumeAltEnterUntilKeyUp) {
             consumeAltEnterUntilKeyUp = false
+            return true
+        }
+        if (suggestionKeyUpPending != KeyEvent.KEYCODE_UNKNOWN && keyCode == suggestionKeyUpPending) {
+            suggestionKeyUpPending = KeyEvent.KEYCODE_UNKNOWN
             return true
         }
         clicksPowerShiftTapFilter.shouldConsumeKeyUp(keyCode, event)?.let { suppressed ->
