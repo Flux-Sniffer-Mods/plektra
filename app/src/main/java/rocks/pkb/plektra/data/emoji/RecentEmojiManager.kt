@@ -24,7 +24,7 @@ object RecentEmojiManager {
      * @return true if the list changed, false otherwise
      */
     fun addRecentEmoji(context: Context, emoji: String, moveToTopWhenExists: Boolean = true): Boolean {
-        if (emoji.isBlank()) return false
+        if (emoji.isBlank() || rocks.pkb.plektra.core.IncognitoTyping.active) return false
 
         val currentList = getRecentEmojis(context, MAX_RECENT_EMOJIS)
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Gõ ẩn danh</string>
+    <string name="incognito_always_description">Không học gì từ nội dung bạn gõ: không gợi ý mới, không emoji hay ký hiệu gần đây</string>
+    <string name="incognito_follow_apps_title">Ẩn danh khi ứng dụng yêu cầu</string>
+    <string name="incognito_follow_apps_description">Không học gì trong các ô yêu cầu bàn phím không học, như thẻ trình duyệt riêng tư</string>
+</resources>

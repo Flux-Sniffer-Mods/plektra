@@ -3821,6 +3821,11 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         val isEditable = state.isEditable
         val isReallyEditable = state.isReallyEditable
         isInputViewActive = isEditable
+        rocks.pkb.plektra.core.IncognitoTyping.active =
+            rocks.pkb.plektra.core.IncognitoTyping.isIncognitoField(this, info?.imeOptions ?: 0)
+        if (::suggestionController.isInitialized) {
+            suggestionController.incognito = rocks.pkb.plektra.core.IncognitoTyping.active
+        }
         softwareKeypadSession.onFieldStarted(state.inputType, restarting)
         if (!restarting) hardwareKeypadAutoOpen.settle()
         keyboardVisibilityController.onInputStarted(restarting)

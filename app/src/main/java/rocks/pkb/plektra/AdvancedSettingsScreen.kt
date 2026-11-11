@@ -87,6 +87,10 @@ fun AdvancedSettingsScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     val prefs = remember { SettingsManager.getPreferences(context) }
+    var incognitoAlways by remember { mutableStateOf(rocks.pkb.plektra.core.IncognitoTyping.isAlways(context)) }
+    var incognitoFollowApps by remember {
+        mutableStateOf(rocks.pkb.plektra.core.IncognitoTyping.followsApps(context))
+    }
 
     // Store the actual value (3 to 25), but display it inverted in the slider (25 to 3)
     var swipeIncrementalThreshold by remember {
@@ -383,6 +387,89 @@ fun AdvancedSettingsScreen(
                                             shizukuStatus == ShizukuStatus.Connected -> MaterialTheme.colorScheme.primary
                                             shizukuStatus == ShizukuStatus.NotAuthorized -> MaterialTheme.colorScheme.tertiary
                                             else -> MaterialTheme.colorScheme.error
+                                        }
+                                    )
+                                }
+                            }
+                        }
+
+                        // Incognito typing: always, or (by default) when the app asks
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .settingRow(SettingLinkIds.ADVANCED_INCOGNITO_ALWAYS) {
+                                    incognitoAlways = !incognitoAlways
+                                    rocks.pkb.plektra.core.IncognitoTyping.setAlways(context, incognitoAlways)
+                                }
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.incognito_always_title),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.incognito_always_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = incognitoAlways,
+                                    onCheckedChange = { enabled ->
+                                        incognitoAlways = enabled
+                                        rocks.pkb.plektra.core.IncognitoTyping.setAlways(context, enabled)
+                                    }
+                                )
+                            }
+                        }
+
+                        if (!incognitoAlways) {
+                            Surface(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .settingRow(SettingLinkIds.ADVANCED_INCOGNITO_FOLLOW_APPS) {
+                                        incognitoFollowApps = !incognitoFollowApps
+                                        rocks.pkb.plektra.core.IncognitoTyping.setFollowsApps(context, incognitoFollowApps)
+                                    }
+                            ) {
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    Column(
+                                        modifier = Modifier.weight(1f),
+                                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                                    ) {
+                                        Text(
+                                            text = stringResource(R.string.incognito_follow_apps_title),
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.Medium
+                                        )
+                                        Text(
+                                            text = stringResource(R.string.incognito_follow_apps_description),
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                    Switch(
+                                        checked = incognitoFollowApps,
+                                        onCheckedChange = { enabled ->
+                                            incognitoFollowApps = enabled
+                                            rocks.pkb.plektra.core.IncognitoTyping.setFollowsApps(context, enabled)
                                         }
                                     )
                                 }

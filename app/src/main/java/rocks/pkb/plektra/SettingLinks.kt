@@ -99,6 +99,8 @@ object SettingLinkIds {
     const val ADVANCED_EXPERIMENTAL_CANDIDATES_VIEW = "advanced.experimental_candidates_view"
     const val ADVANCED_SHOW_TUTORIAL = "advanced.show_tutorial"
     const val ADVANCED_SHOW_RELEASE_NOTES_TUTORIAL = "advanced.show_release_notes_tutorial"
+    const val ADVANCED_INCOGNITO_ALWAYS = "advanced.incognito_always"
+    const val ADVANCED_INCOGNITO_FOLLOW_APPS = "advanced.incognito_follow_apps"
 
     // Trackpad gesture screen
     const val TRACKPAD_GESTURES_ENABLED = "trackpad.gestures_enabled"
@@ -702,6 +704,20 @@ object SettingLinkRegistry {
             R.string.tutorial_show_release_notes,
             R.string.tutorial_show_release_notes_description,
             destination = SettingsDestination.Advanced
+        ),
+        entry(
+            SettingLinkIds.ADVANCED_INCOGNITO_ALWAYS,
+            R.string.incognito_always_title,
+            R.string.incognito_always_description,
+            destination = SettingsDestination.Advanced
+        ),
+        SettingEntry(
+            id = SettingLinkIds.ADVANCED_INCOGNITO_FOLLOW_APPS,
+            titleRes = R.string.incognito_follow_apps_title,
+            summaryRes = R.string.incognito_follow_apps_description,
+            route = SettingRoute(destination = SettingsDestination.Advanced),
+            unavailableFallbackId = SettingLinkIds.ADVANCED_INCOGNITO_ALWAYS,
+            availabilityCheck = { !rocks.pkb.plektra.core.IncognitoTyping.isAlways(it) }
         ),
 
         entry(

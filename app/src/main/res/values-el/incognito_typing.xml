@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Ανώνυμη πληκτρολόγηση</string>
+    <string name="incognito_always_description">Καμία εκμάθηση από ό,τι πληκτρολογείτε: ούτε νέες προβλέψεις, ούτε πρόσφατα emoji ή σύμβολα</string>
+    <string name="incognito_follow_apps_title">Ανώνυμα όταν το ζητά μια εφαρμογή</string>
+    <string name="incognito_follow_apps_description">Καμία εκμάθηση σε πεδία που το ζητούν από τα πληκτρολόγια, όπως ιδιωτικές καρτέλες προγράμματος περιήγησης</string>
+</resources>

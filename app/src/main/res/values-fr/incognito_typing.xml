@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Saisie incognito</string>
+    <string name="incognito_always_description">N’apprendre rien de ce que vous tapez : ni nouvelles prédictions, ni emoji ou symboles récents</string>
+    <string name="incognito_follow_apps_title">Incognito quand une app le demande</string>
+    <string name="incognito_follow_apps_description">N’apprendre rien dans les champs qui le demandent aux claviers, comme les onglets de navigation privée</string>
+</resources>
