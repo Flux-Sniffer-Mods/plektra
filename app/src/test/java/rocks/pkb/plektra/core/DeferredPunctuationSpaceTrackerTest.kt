@@ -147,6 +147,44 @@ class DeferredPunctuationSpaceTrackerTest {
         assertEquals("Hi. Thanks", inputConnection.text)
     }
 
+    @Test
+    fun emoticonsKeepTheirShape() {
+        SettingsManager.setSpaceAfterPunctuation(context, ":;,!?")
+
+        type("Hi :-) ok ;( fine :D yes :'( no")
+
+        assertEquals("Hi :-) ok ;( fine :D yes :'( no", inputConnection.text)
+    }
+
+    @Test
+    fun aLetterAfterAColonThatGoesOnIntoAWordGetsItsSpace() {
+        SettingsManager.setSpaceAfterPunctuation(context, ":")
+
+        type("Note:Done")
+
+        assertEquals("Note: Done", inputConnection.text)
+    }
+
+    @Test
+    fun fullStopsAndBracketsAfterACommaStillGetTheirSpace() {
+        SettingsManager.setSpaceAfterPunctuation(context, ".,")
+
+        type("Done.Then a,(b)")
+
+        assertEquals("Done. Then a, (b)", inputConnection.text)
+    }
+
+    @Test
+    fun emoticonsKeepTheirShapeByDefaultAndCanBeTurnedOff() {
+        SettingsManager.setSpaceAfterPunctuation(context, ":")
+        assertTrue(SettingsManager.getEmoticonPunctuation(context))
+
+        SettingsManager.setEmoticonPunctuation(context, false)
+        type("Hi :-)")
+
+        assertEquals("Hi : -)", inputConnection.text)
+    }
+
     private fun field(inputType: Int, hint: String? = null) = EditorInfo().apply {
         this.inputType = inputType
         hintText = hint
@@ -172,5 +210,10 @@ class DeferredPunctuationSpaceTrackerTest {
 
         override fun getTextBeforeCursor(n: Int, flags: Int): CharSequence =
             buffer.substring(maxOf(0, buffer.length - n))
+
+        override fun deleteSurroundingText(beforeLength: Int, afterLength: Int): Boolean {
+            buffer.setLength(maxOf(0, buffer.length - beforeLength))
+            return true
+        }
     }
 }

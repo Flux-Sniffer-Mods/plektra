@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Les émoticônes gardent leur forme</string>
+    <string name="emoticon_punctuation_description">La ponctuation tapée directement suivie d’autre chose, comme dans :-) ;( :D ou :\'(, n’a pas d’espace après. Si un mot suit (:Do), l’espace revient. Les points gardent toujours leur espace.</string>
+</resources>

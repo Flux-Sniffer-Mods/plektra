@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Смайлики зберігають форму</string>
+    <string name="emoticon_punctuation_description">Розділові знаки, за якими одразу йдуть інші, як у :-) ;( :D чи :\'(, не отримують пробілу після. Якщо далі йде слово (:Do), пробіл повертається. Крапки завжди зберігають пробіл.</string>
+</resources>

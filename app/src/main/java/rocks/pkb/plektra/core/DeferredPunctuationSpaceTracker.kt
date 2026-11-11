@@ -13,6 +13,9 @@ import rocks.pkb.plektra.SettingsManager
 object DeferredPunctuationSpaceTracker {
     private const val NO_SPACE_BEFORE: String = ".,;:!?/\\)]}»›"
 
+    /** Mouths that follow ":" or ";" straight away in emoticons such as :D ;P :O :3 */
+    private const val EMOTICON_LETTERS: String = "DPpOoXxSsbc3"
+
     /** Words in a single-line field's hint or name that mark it as an address or a sign-in. */
     private val ADDRESS_HINTS = listOf("email", "e-mail", "username", "user name", "login", "sign in", "url", "website")
 
@@ -32,6 +35,10 @@ object DeferredPunctuationSpaceTracker {
     /** The punctuation whose space is pending. */
     @Volatile
     private var pendingAfter: Char? = null
+
+    /** A letter or digit typed straight after ":" or ";", held back as a possible emoticon (":D"). */
+    @Volatile
+    private var heldEmoticonLetter: Char? = null
 
     /** Off in fields where a space after "." or "@" would break what is typed: see [appliesTo]. */
     @Volatile
@@ -69,19 +76,41 @@ object DeferredPunctuationSpaceTracker {
             clear()
             return false
         }
+        val held = heldEmoticonLetter
+        heldEmoticonLetter = null
         if (first.isWhitespace()) {
             clear()
             return false
+        }
+
+        var insertedSpace = false
+        // ":D" went on into a word (":Do"): it was a word after all, so it gets its space
+        if (held != null && first.isLetterOrDigit()) {
+            val before = inputConnection.getTextBeforeCursor(1, 0)
+            if (before?.length == 1 && before[0] == held) {
+                inputConnection.deleteSurroundingText(1, 0)
+                inputConnection.commitText(" $held", 1)
+                insertedSpace = true
+            }
         }
 
         val hadPending = pending
         val after = pendingAfter
         // Numbers, times and decimals (1,000  12:30  3.14) stay together
         if (hadPending && after != null && first.isDigit() && followsDigit(inputConnection, after)) {
-            clear()
-            return false
+            pending = false
+            pendingAfter = null
+            return insertedSpace
         }
-        var insertedSpace = false
+        if (hadPending && after != null && first !in NO_SPACE_BEFORE &&
+            SettingsManager.getEmoticonPunctuation(context) && continuesEmoticon(after, first)
+        ) {
+            // Punctuation typed straight into more, as in :-) ;( :D, keeps its shape
+            pending = false
+            pendingAfter = null
+            if (first.isLetterOrDigit()) heldEmoticonLetter = first
+            return insertedSpace
+        }
         if (hadPending && first !in NO_SPACE_BEFORE) {
             inputConnection.commitText(" ", 1)
             pending = false
@@ -111,6 +140,23 @@ object DeferredPunctuationSpaceTracker {
     fun clear() {
         pending = false
         pendingAfter = null
+        heldEmoticonLetter = null
+    }
+
+    /**
+     * Whether [next], typed straight after [punctuation], makes an emoticon rather than starting
+     * the next word. Never after a full stop; opening quotes and brackets only after ":" and ";".
+     */
+    internal fun continuesEmoticon(punctuation: Char, next: Char): Boolean {
+        if (punctuation == '.' || next.isWhitespace()) return false
+        val face = punctuation == ':' || punctuation == ';'
+        // Any letter after ":" or ";" waits: the key after it tells a word (": Do") from a face
+        // (":v", ":T"), so the space only goes in once it is a word
+        if (next.isLetter()) return face
+        if (next.isDigit()) return face && next in EMOTICON_LETTERS
+        if (next in "\"“”«„") return false
+        if (!face && next in "([{'‘") return false
+        return true
     }
 
     fun onTextCommitted(context: Context, text: CharSequence) {

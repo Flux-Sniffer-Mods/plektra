@@ -103,6 +103,9 @@ fun TextInputSettingsScreen(
     var spaceAfterPunctuation by remember {
         mutableStateOf(SettingsManager.getSpaceAfterPunctuation(context))
     }
+    var emoticonPunctuation by remember {
+        mutableStateOf(SettingsManager.getEmoticonPunctuation(context))
+    }
 
     var autoSpacePunctuationDialogVisible by remember { mutableStateOf(false) }
     var autoSpacePunctuationHelpVisible by remember { mutableStateOf(false) }
@@ -401,6 +404,19 @@ fun TextInputSettingsScreen(
                 linkId = SettingLinkIds.TEXT_INPUT_AUTO_SPACE_PUNCTUATION,
                 onClick = { autoSpacePunctuationDialogVisible = true }
             )
+            AnimatedVisibility(visible = spaceAfterPunctuation.isNotEmpty()) {
+                SettingsSwitchRow(
+                    title = stringResource(R.string.emoticon_punctuation_title),
+                    description = stringResource(R.string.emoticon_punctuation_description),
+                    checked = emoticonPunctuation,
+                    inset = 52.dp,
+                    linkId = SettingLinkIds.TEXT_INPUT_EMOTICON_PUNCTUATION,
+                    onCheckedChange = { enabled ->
+                        emoticonPunctuation = enabled
+                        SettingsManager.setEmoticonPunctuation(context, enabled)
+                    }
+                )
+            }
             SettingsSwitchRow(
                 title = stringResource(R.string.comma_space_title),
                 description = stringResource(R.string.comma_space_description),
