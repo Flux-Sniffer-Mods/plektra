@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Proposer de coller ce que vous avez copié</string>
+    <string name="paste_suggestion_description">Pendant une minute après avoir copié du texte, un nouveau champ de texte le propose comme suggestion ; taper l’écarte. Le texte marqué sensible (celui d’un gestionnaire de mots de passe) n’est proposé que dans les champs de mot de passe</string>
+    <string name="paste_in_password_fields_title">Aussi dans les champs de mot de passe</string>
+    <string name="paste_in_password_fields_description">Un champ de mot de passe propose ce que vous venez de copier, y compris depuis un gestionnaire de mots de passe, sous la forme ⎘ •••••••• (jamais le texte lui-même). Il est gardé en mémoire uniquement, jamais dans l’historique du presse-papiers</string>
+</resources>

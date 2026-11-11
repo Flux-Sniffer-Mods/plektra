@@ -151,6 +151,8 @@
     "suggestions": [
       "rocks.pkb.plektra.AutoCorrectEditScreenTest",
       "rocks.pkb.plektra.AutoCorrectionSubstitutionStoreTest",
+      "rocks.pkb.plektra.clipboard.PasteSuggestionTest",
+      "rocks.pkb.plektra.clipboard.RecentCopyTrackerTest",
       "rocks.pkb.plektra.core.AutoCorrectionManagerTest",
       "rocks.pkb.plektra.core.suggestions.AutoReplaceControllerLogicTest",
       "rocks.pkb.plektra.core.suggestions.CasingHelperTest",

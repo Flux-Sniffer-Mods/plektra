@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Առաջարկել տեղադրել պատճենվածը</string>
+    <string name="paste_suggestion_description">Տեքստը պատճենելուց հետո մեկ րոպե նոր տեքստային դաշտն այն առաջարկում է որպես առաջարկ․ մուտքագրելը հեռացնում է այն։ Զգայուն նշված տեքստը (գաղտնաբառերի կառավարչից) առաջարկվում է միայն գաղտնաբառի դաշտերում</string>
+    <string name="paste_in_password_fields_title">Նաև գաղտնաբառի դաշտերում</string>
+    <string name="paste_in_password_fields_description">Գաղտնաբառի դաշտն առաջարկում է հենց նոր պատճենվածը, այդ թվում գաղտնաբառերի կառավարչից, որպես ⎘ •••••••• (երբեք ինքը տեքստը)։ Պահվում է միայն հիշողության մեջ, երբեք սեղմատախտակի պատմության մեջ</string>
+</resources>

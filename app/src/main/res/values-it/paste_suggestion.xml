@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Suggerisci di incollare ciò che hai copiato</string>
+    <string name="paste_suggestion_description">Per un minuto dopo aver copiato del testo, un nuovo campo lo propone come suggerimento; scrivere lo nasconde. Mai nei campi password o per testo segnato come sensibile</string>
+    <string name="paste_in_password_fields_title">Anche nei campi password</string>
+    <string name="paste_in_password_fields_description">Un campo password propone ciò che hai appena copiato, anche da un gestore di password, come ⎘ •••••••• (mai il testo stesso). Viene tenuto solo in memoria, mai nella cronologia degli appunti</string>
+</resources>

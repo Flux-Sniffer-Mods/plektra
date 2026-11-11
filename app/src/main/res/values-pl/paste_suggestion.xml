@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Proponuj wklejenie skopiowanego</string>
+    <string name="paste_suggestion_description">Przez minutę po skopiowaniu tekstu nowe pole tekstowe proponuje go jako podpowiedź; pisanie ją odrzuca. Tekst oznaczony jako poufny (z menedżera haseł) jest proponowany tylko w polach haseł</string>
+    <string name="paste_in_password_fields_title">Także w polach haseł</string>
+    <string name="paste_in_password_fields_description">Pole hasła proponuje to, co właśnie skopiowałeś, także z menedżera haseł, jako ⎘ •••••••• (nigdy sam tekst). Jest trzymane tylko w pamięci, nigdy w historii schowka</string>
+</resources>

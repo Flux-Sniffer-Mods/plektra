@@ -158,6 +158,8 @@ object SettingsManager {
     private const val KEY_ADDITIONAL_IME_SUBTYPES = "additional_ime_subtypes" // Comma-separated list of language codes for additional IME subtypes
     private const val KEY_CLIPBOARD_HISTORY_ENABLED = "clipboard_history_enabled" // Whether clipboard history is enabled
     private const val KEY_SENSITIVE_CLIPBOARD_RETENTION_TIME = "sensitive_clipboard_retention_time"
+    private const val KEY_PASTE_SUGGESTION = "paste_suggestion_enabled"
+    private const val KEY_PASTE_SUGGESTION_PASSWORD_FIELDS = "paste_suggestion_password_fields"
     private const val KEY_CLIPBOARD_RETENTION_TIME = "clipboard_retention_time" // How long to keep clipboard entries (in minutes)
     private const val KEY_TRACKPAD_GESTURES_ENABLED = "trackpad_gestures_enabled" // Whether trackpad gesture suggestions are enabled
     private const val KEY_TRACKPAD_GESTURE_ADD_WORD_ENABLED = "trackpad_gesture_add_word_enabled" // Whether suggestion gestures can trigger add-word
@@ -5543,6 +5545,22 @@ object SettingsManager {
         getPreferences(context).edit()
             .putLong(KEY_SENSITIVE_CLIPBOARD_RETENTION_TIME, minutes.coerceIn(1L, 120L))
             .apply()
+    }
+
+    /** Paste suggestion: a new text field offers what was copied in the last minute (on by default). */
+    fun getPasteSuggestionEnabled(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_PASTE_SUGGESTION, true)
+
+    fun setPasteSuggestionEnabled(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_PASTE_SUGGESTION, enabled).apply()
+    }
+
+    /** Paste suggestion in password fields too, masked (on by default). */
+    fun getPasteSuggestionInPasswordFields(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_PASTE_SUGGESTION_PASSWORD_FIELDS, true)
+
+    fun setPasteSuggestionInPasswordFields(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_PASTE_SUGGESTION_PASSWORD_FIELDS, enabled).apply()
     }
 
     /**

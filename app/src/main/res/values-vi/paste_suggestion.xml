@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Đề xuất dán nội dung bạn đã sao chép</string>
+    <string name="paste_suggestion_description">Trong một phút sau khi bạn sao chép văn bản, ô văn bản mới đề xuất nó như một gợi ý; gõ phím sẽ bỏ qua. Văn bản được đánh dấu nhạy cảm (từ trình quản lý mật khẩu) chỉ được đề xuất trong ô mật khẩu</string>
+    <string name="paste_in_password_fields_title">Cả trong ô mật khẩu</string>
+    <string name="paste_in_password_fields_description">Ô mật khẩu đề xuất nội dung bạn vừa sao chép, kể cả từ trình quản lý mật khẩu, dưới dạng ⎘ •••••••• (không bao giờ hiện văn bản). Chỉ được giữ trong bộ nhớ, không bao giờ trong lịch sử bảng nhớ tạm</string>
+</resources>

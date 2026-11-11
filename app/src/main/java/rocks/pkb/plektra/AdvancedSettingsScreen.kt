@@ -95,6 +95,8 @@ fun AdvancedSettingsScreen(
     var clipboardRetentionTime by remember {
         mutableStateOf(SettingsManager.getClipboardRetentionTime(context))
     }
+    var pasteSuggestion by remember { mutableStateOf(SettingsManager.getPasteSuggestionEnabled(context)) }
+    var pasteInPasswordFields by remember { mutableStateOf(SettingsManager.getPasteSuggestionInPasswordFields(context)) }
     var sensitiveClipboardRetentionTime by remember {
         mutableStateOf(SettingsManager.getSensitiveClipboardRetentionTime(context))
     }
@@ -530,6 +532,28 @@ fun AdvancedSettingsScreen(
                             }
                         }
 
+                        PasteSuggestionSwitchRow(
+                            title = stringResource(R.string.paste_suggestion_title),
+                            description = stringResource(R.string.paste_suggestion_description),
+                            checked = pasteSuggestion,
+                            linkId = SettingLinkIds.ADVANCED_PASTE_SUGGESTION
+                        ) {
+                            pasteSuggestion = it
+                            SettingsManager.setPasteSuggestionEnabled(context, it)
+                        }
+                        if (pasteSuggestion) {
+                            PasteSuggestionSwitchRow(
+                                title = stringResource(R.string.paste_in_password_fields_title),
+                                description = stringResource(R.string.paste_in_password_fields_description),
+                                checked = pasteInPasswordFields,
+                                linkId = SettingLinkIds.ADVANCED_PASTE_IN_PASSWORD_FIELDS,
+                                indent = true
+                            ) {
+                                pasteInPasswordFields = it
+                                SettingsManager.setPasteSuggestionInPasswordFields(context, it)
+                            }
+                        }
+
                         ClipboardRetentionSetting(
                             title = stringResource(R.string.clipboard_retention_time_title),
                             description = stringResource(R.string.clipboard_retention_time_description),
@@ -746,6 +770,30 @@ private val TRACKPAD_SETTING_LINK_IDS = setOf(
     SettingLinkIds.TRACKPAD_DELETE_SWIPE_THRESHOLD,
     SettingLinkIds.TRACKPAD_DEBUG
 )
+
+@Composable
+private fun PasteSuggestionSwitchRow(
+    title: String,
+    description: String,
+    checked: Boolean,
+    linkId: String,
+    indent: Boolean = false,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Surface(modifier = Modifier.fillMaxWidth().settingRow(linkId) { onCheckedChange(!checked) }) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(start = if (indent) 32.dp else 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(text = title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Medium)
+                Text(text = description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            Switch(checked = checked, onCheckedChange = onCheckedChange)
+        }
+    }
+}
 
 @Composable
 private fun ClipboardRetentionSetting(
