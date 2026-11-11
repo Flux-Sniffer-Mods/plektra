@@ -17,4 +17,8 @@ The failures were intermittent: each passed three times in a row on its own on u
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 11 November 2026 against source commit `df56c7b1` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 185 classes, 1,417 tests, no failures, errors or skips, the same counts as upstream alone (the change adds no tests); both tests pass in it.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
