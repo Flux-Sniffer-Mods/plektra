@@ -62,6 +62,9 @@ fun AutoCorrectionCategoryScreen(
     var accentMatchingEnabled by remember {
         mutableStateOf(SettingsManager.getAccentMatchingEnabled(context))
     }
+    var emojiSuggestionsEnabled by remember {
+        mutableStateOf(SettingsManager.getEmojiSuggestionsEnabled(context))
+    }
     var autoReplaceOnSpaceEnter by remember {
         mutableStateOf(SettingsManager.getAutoReplaceOnSpaceEnter(context))
     }
@@ -494,6 +497,48 @@ fun AutoCorrectionCategoryScreen(
                                     onCheckedChange = { enabled ->
                                         accentMatchingEnabled = enabled
                                         SettingsManager.setAccentMatchingEnabled(context, enabled)
+                                    },
+                                    enabled = experimentalSuggestionsEnabled
+                                )
+                            }
+                        }
+
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .settingRow(SettingLinkIds.AUTO_CORRECTION_EMOJI_SUGGESTIONS)
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Filled.TextFields,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.emoji_suggestions_title),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Medium,
+                                        maxLines = 1
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.emoji_suggestions_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = emojiSuggestionsEnabled,
+                                    onCheckedChange = { enabled ->
+                                        emojiSuggestionsEnabled = enabled
+                                        SettingsManager.setEmojiSuggestionsEnabled(context, enabled)
                                     },
                                     enabled = experimentalSuggestionsEnabled
                                 )

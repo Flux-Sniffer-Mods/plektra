@@ -560,6 +560,9 @@ class SuggestionController(
         nextWordPredictor.flushLearningForTests()
     }
 
+    /** The word being typed, as far as the suggestions know it. */
+    fun currentWord(): String = tracker.currentWord
+
     fun destroy() {
         currentLoadJob?.cancel()
         suggestionJob?.cancel()

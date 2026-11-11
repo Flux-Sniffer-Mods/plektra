@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_suggestions_title">Suggerimenti emoji</string>
+    <string name="emoji_suggestions_description">Un\'emoji per la parola che scrivi, es. 🍕 per pizza. Sceglierla aggiunge l\'emoji dopo la parola.</string>
+</resources>
