@@ -58,6 +58,9 @@ fun TextInputSettingsScreen(
     var autoCapitalizeAfterPeriod by remember {
         mutableStateOf(SettingsManager.getAutoCapitalizeAfterPeriod(context))
     }
+    var autoCapAfterEmoticon by remember {
+        mutableStateOf(SettingsManager.getAutoCapAfterEmoticon(context))
+    }
 
     var autoCapitalizeRespectManualShiftOff by remember {
         mutableStateOf(SettingsManager.getAutoCapitalizeRespectManualShiftOff(context))
@@ -375,6 +378,16 @@ fun TextInputSettingsScreen(
                 onCheckedChange = { enabled ->
                     autoCapitalizeAfterPeriod = enabled
                     SettingsManager.setAutoCapitalizeAfterPeriod(context, enabled)
+                }
+            )
+            SettingsSwitchRow(
+                title = stringResource(R.string.auto_cap_after_emoticon_title),
+                description = stringResource(R.string.auto_cap_after_emoticon_description),
+                checked = autoCapAfterEmoticon,
+                linkId = SettingLinkIds.TEXT_INPUT_AUTO_CAP_AFTER_EMOTICON,
+                onCheckedChange = { enabled ->
+                    autoCapAfterEmoticon = enabled
+                    SettingsManager.setAutoCapAfterEmoticon(context, enabled)
                 }
             )
 

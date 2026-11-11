@@ -13,6 +13,7 @@ import rocks.pkb.plektra.commands.CommandLaunchSpec
 import rocks.pkb.plektra.commands.CommandSourceId
 import rocks.pkb.plektra.commands.CommandSurface
 import rocks.pkb.plektra.commands.PlektraCommandSource
+import rocks.pkb.plektra.core.EmoticonSentences
 import rocks.pkb.plektra.core.Punctuation
 import rocks.pkb.plektra.data.layout.BundledLayoutAssets
 import rocks.pkb.plektra.inputmethod.DeviceSpecific
@@ -97,6 +98,7 @@ object SettingsManager {
     private const val KEY_AUTO_REPLACE_ON_SPACE_ENTER = "auto_replace_on_space_enter"
     private const val KEY_MAX_AUTO_REPLACE_DISTANCE = "max_auto_replace_distance"
     private const val KEY_AUTO_CAPITALIZE_AFTER_PERIOD = "auto_capitalize_after_period"
+    private const val KEY_AUTO_CAP_AFTER_EMOTICON = "auto_cap_after_emoticon"
     private const val KEY_LONG_PRESS_MODIFIER = "long_press_modifier" // "alt", "shift", "variations", or "sym"
     private const val KEY_KEYBOARD_LAYOUT = "keyboard_layout" // "qwerty", "azerty", etc.
     private const val KEY_KEYBOARD_LAYOUT_AUTO_BY_LOCALE = "keyboard_layout_auto_by_locale" // If true, resolve layout from subtype/locale mapping
@@ -2064,6 +2066,15 @@ object SettingsManager {
         getPreferences(context).edit()
             .putBoolean(KEY_AUTO_CAPITALIZE_AFTER_PERIOD, enabled)
             .apply()
+    }
+
+    /** A text emoticon (:) ;D <3) ends a sentence, so the next word gets a capital (on by default). */
+    fun getAutoCapAfterEmoticon(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_AUTO_CAP_AFTER_EMOTICON, true)
+
+    fun setAutoCapAfterEmoticon(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_AUTO_CAP_AFTER_EMOTICON, enabled).apply()
+        EmoticonSentences.enabled = enabled
     }
 
     /**

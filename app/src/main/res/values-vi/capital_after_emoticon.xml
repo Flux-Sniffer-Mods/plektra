@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auto_cap_after_emoticon_title">Viết hoa sau biểu tượng cảm xúc</string>
+    <string name="auto_cap_after_emoticon_description">Biểu tượng cảm xúc dạng chữ như :) ;D hay &lt;3 kết thúc câu như dấu chấm, nên từ tiếp theo được viết hoa.</string>
+</resources>

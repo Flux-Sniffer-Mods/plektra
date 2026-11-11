@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auto_cap_after_emoticon_title">Mayúscula tras un emoticono</string>
+    <string name="auto_cap_after_emoticon_description">Un emoticono de texto como :) ;D o &lt;3 termina una frase como un punto, así la siguiente palabra empieza con mayúscula.</string>
+</resources>
