@@ -26,7 +26,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*PasteSuggestionT
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 11 November 2026 against source commit `dbcd879f` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 187 classes, 1,425 tests, no failures, errors or skips (upstream alone: 185 classes, 1,417 tests). New: 5 in `PasteSuggestionTest`, 3 in `RecentCopyTrackerTest`; `SettingLinkCoverageTest` and `BackupPreferenceContractIntegrationTest` pass with the new links and preferences.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new classes are in the `suggestions` topic.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
 
 ## Device check (still to do)
 
