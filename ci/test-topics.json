@@ -162,6 +162,7 @@
       "rocks.pkb.plektra.core.suggestions.SuggestionDictionaryReloadTest",
       "rocks.pkb.plektra.core.suggestions.SuggestionEngineTest",
       "rocks.pkb.plektra.core.suggestions.SymSpellTest",
+      "rocks.pkb.plektra.core.suggestions.UserNGramStoreFailureTest",
       "rocks.pkb.plektra.core.suggestions.UserNGramStoreTest",
       "rocks.pkb.plektra.core.suggestions.UserOnlyDictionaryTest",
       "rocks.pkb.plektra.core.suggestions.WordNormalizationTest",
