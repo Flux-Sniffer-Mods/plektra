@@ -35,6 +35,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import rocks.pkb.plektra.R
+import rocks.pkb.plektra.core.writeBytesAtomically
+import rocks.pkb.plektra.core.writeTextAtomically
 import android.content.Intent
 import android.content.Context
 import org.json.JSONArray
@@ -952,13 +954,11 @@ private class DefaultUserDefaultsStore(private val context: Context) {
         val file = context.getFileStreamPath(fileName)
         if (!file.exists()) {
             try {
-                context.assets.open(assetPath).use { input ->
-                    file.outputStream().use { output -> input.copyTo(output) }
-                }
+                file.writeBytesAtomically(context.assets.open(assetPath).use { it.readBytes() })
             } catch (_: Exception) {
                 // Asset missing; create empty file
                 file.parentFile?.mkdirs()
-                file.writeText("[]")
+                file.writeTextAtomically("[]")
             }
         }
         return file
@@ -1018,7 +1018,7 @@ private class DefaultUserDefaultsStore(private val context: Context) {
                 obj.put("f", entry.frequency)
                 array.put(obj)
             }
-            file.writeText(array.toString())
+            file.writeTextAtomically(array.toString())
         } catch (_: Exception) {
             // Ignore persistence errors; UI will just not reflect changes
         }

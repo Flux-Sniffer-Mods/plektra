@@ -14,6 +14,8 @@ import rocks.pkb.plektra.commands.CommandSourceId
 import rocks.pkb.plektra.commands.CommandSurface
 import rocks.pkb.plektra.commands.PlektraCommandSource
 import rocks.pkb.plektra.core.Punctuation
+import rocks.pkb.plektra.core.writeBytesAtomically
+import rocks.pkb.plektra.core.writeTextAtomically
 import rocks.pkb.plektra.data.layout.BundledLayoutAssets
 import rocks.pkb.plektra.inputmethod.DeviceSpecific
 import rocks.pkb.plektra.inputmethod.subtype.AdditionalSubtypeUtils
@@ -25,7 +27,6 @@ import rocks.pkb.plektra.inputmethod.expansion.TextExpansionEngine
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
-import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.zip.ZipInputStream
@@ -4488,11 +4489,8 @@ object SettingsManager {
         }
         
         try {
-            val inputStream: InputStream = context.assets.open("common/ctrl/$NAV_MODE_MAPPINGS_FILE_NAME")
-            val outputStream = FileOutputStream(mappingsFile)
-            inputStream.copyTo(outputStream)
-            inputStream.close()
-            outputStream.close()
+            val bytes = context.assets.open("common/ctrl/$NAV_MODE_MAPPINGS_FILE_NAME").use { it.readBytes() }
+            mappingsFile.writeBytesAtomically(bytes)
             migrateNavModeMappingsFileIfNeeded(context)
             Log.d(TAG, "Nav mode mappings file initialized from assets")
         } catch (e: Exception) {
@@ -4544,7 +4542,7 @@ object SettingsManager {
                 )
             }
 
-            mappingsFile.writeText(jsonObject.toString())
+            mappingsFile.writeTextAtomically(jsonObject.toString())
             prefs.edit()
                 .putInt(KEY_NAV_MODE_DEFAULT_MAPPINGS_VERSION, CURRENT_NAV_MODE_DEFAULT_MAPPINGS_VERSION)
                 .putLong(KEY_NAV_MODE_MAPPINGS_UPDATED, System.currentTimeMillis())
@@ -4619,7 +4617,7 @@ object SettingsManager {
             jsonObject.put("mappings", mappingsObject)
             
             val mappingsFile = getNavModeMappingsFile(context)
-            mappingsFile.writeText(jsonObject.toString())
+            mappingsFile.writeTextAtomically(jsonObject.toString())
             
             // Update timestamp in SharedPreferences to notify the service
             getPreferences(context).edit()
@@ -5735,9 +5733,7 @@ object SettingsManager {
             staticVariationsAlt.forEach { altArray.put(it) }
             jsonObject.put("staticVariationsAlt", altArray)
 
-            FileOutputStream(getVariationsFile(context)).use { outputStream ->
-                outputStream.write(jsonObject.toString(2).toByteArray())
-            }
+            getVariationsFile(context).writeTextAtomically(jsonObject.toString(2))
         } catch (e: Exception) {
             Log.e(TAG, "Error saving static variation rows", e)
         }
@@ -5792,9 +5788,7 @@ object SettingsManager {
                 jsonObject.put("staticVariationsAlt", staticArray)
             }
             
-            FileOutputStream(getVariationsFile(context)).use { outputStream ->
-                outputStream.write(jsonObject.toString(2).toByteArray(Charsets.UTF_8))
-            }
+            getVariationsFile(context).writeTextAtomically(jsonObject.toString(2))
             
             notifyVariationsUpdated(context)
             
@@ -5811,9 +5805,7 @@ object SettingsManager {
             staticVariations.forEach { staticArray.put(it) }
             jsonObject.put("staticVariations", staticArray)
 
-            FileOutputStream(getVariationsFile(context)).use { outputStream ->
-                outputStream.write(jsonObject.toString(2).toByteArray(Charsets.UTF_8))
-            }
+            getVariationsFile(context).writeTextAtomically(jsonObject.toString(2))
 
             notifyVariationsUpdated(context)
             Log.d(TAG, "Static variation base preset saved to ${getVariationsFile(context).absolutePath}")
@@ -5828,11 +5820,8 @@ object SettingsManager {
     fun resetVariationsToDefault(context: Context) {
         try {
             val variationsFile = getVariationsFile(context)
-            val inputStream = context.assets.open("common/variations/defaultvariations.json")
-            FileOutputStream(variationsFile).use { outputStream ->
-                inputStream.copyTo(outputStream)
-            }
-            inputStream.close()
+            val bytes = context.assets.open("common/variations/defaultvariations.json").use { it.readBytes() }
+            variationsFile.writeBytesAtomically(bytes)
             
             notifyVariationsUpdated(context)
             

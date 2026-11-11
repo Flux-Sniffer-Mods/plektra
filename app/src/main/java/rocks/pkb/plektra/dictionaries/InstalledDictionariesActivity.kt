@@ -58,6 +58,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import rocks.pkb.plektra.LocalizedComponentActivity
 import rocks.pkb.plektra.R
+import rocks.pkb.plektra.core.writeBytesAtomically
 import rocks.pkb.plektra.ui.theme.PlektraTheme
 import java.io.File
 import java.io.InputStream
@@ -622,17 +623,11 @@ private fun importDictionaryFromSaf(context: Context, uri: android.net.Uri): Imp
     val destFile = File(destDir, name)
 
     return try {
-        context.contentResolver.openInputStream(uri)?.use { input ->
-            // Validate by attempting to deserialize
+        // Read once and checked by deserialising; the same bytes are saved, whole or not at all
+        val bytes = context.contentResolver.openInputStream(uri)?.use { input ->
             validateDictionaryStream(input)
         } ?: return ImportResult.CopyError
-
-        // Copy once more because stream was consumed during validation
-        context.contentResolver.openInputStream(uri)?.use { input ->
-            destFile.outputStream().use { output ->
-                input.copyTo(output)
-            }
-        } ?: return ImportResult.CopyError
+        destFile.writeBytesAtomically(bytes)
 
         ImportResult.Success(destFile.name)
     } catch (e: SerializationException) {
@@ -645,7 +640,7 @@ private fun importDictionaryFromSaf(context: Context, uri: android.net.Uri): Imp
 }
 
 @OptIn(ExperimentalSerializationApi::class)
-private fun validateDictionaryStream(input: InputStream) {
+private fun validateDictionaryStream(input: InputStream): ByteArray {
     val bytes = input.readBytes()
     val isJson = bytes.isNotEmpty() && bytes[0] == '{'.code.toByte()
     if (isJson) {
@@ -654,6 +649,7 @@ private fun validateDictionaryStream(input: InputStream) {
     } else {
         Cbor.decodeFromByteArray<DictionaryIndex>(bytes)
     }
+    return bytes
 }
 
 private fun deleteDictionaryFile(context: Context, dictionary: UnifiedDictionaryItem): UninstallResult {

@@ -46,6 +46,7 @@ import rocks.pkb.plektra.inputmethod.subtype.AdditionalSubtypeUtils
 import rocks.pkb.plektra.SettingsManager
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.dictionaries.InstalledDictionariesActivity
+import rocks.pkb.plektra.core.writeTextAtomically
 import java.util.Locale
 import android.content.res.AssetManager
 
@@ -1316,7 +1317,7 @@ private fun migrateLegacyGermanSystemLayoutMapping(context: Context) {
             }
         }
         if (changed) {
-            file.writeText(json.toString(2))
+            file.writeTextAtomically(json.toString(2))
         }
         prefs.edit().putBoolean(migrationKey, true).apply()
     } catch (e: Exception) {
@@ -1645,7 +1646,7 @@ private fun updateLocaleLayoutMapping(context: Context, locale: String, layout: 
         json.put(locale, layout)
 
         // Save to custom file
-        customMappingFile.writeText(json.toString(2))
+        customMappingFile.writeTextAtomically(json.toString(2))
 
         android.util.Log.d("CustomInputStyles", "Updated locale-layout mapping: $locale -> $layout")
 
