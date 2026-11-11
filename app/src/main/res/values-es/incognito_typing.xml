@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Escritura de incógnito</string>
+    <string name="incognito_always_description">No aprender nada de lo que escribes: ni predicciones nuevas, ni emoji o símbolos recientes</string>
+    <string name="incognito_follow_apps_title">Incógnito cuando una app lo pide</string>
+    <string name="incognito_follow_apps_description">No aprender nada en campos que piden a los teclados no hacerlo, como las pestañas privadas del navegador</string>
+</resources>

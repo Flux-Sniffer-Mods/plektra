@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Inkognito-Tippen</string>
+    <string name="incognito_always_description">Nichts aus deinen Eingaben lernen: keine neuen Vorhersagen und keine zuletzt verwendeten Emoji oder Symbole</string>
+    <string name="incognito_follow_apps_title">Inkognito, wenn eine App darum bittet</string>
+    <string name="incognito_follow_apps_description">Nichts lernen in Feldern, die Tastaturen darum bitten, etwa in privaten Browser-Tabs</string>
+</resources>

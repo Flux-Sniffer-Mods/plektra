@@ -76,6 +76,7 @@ class UserDictionaryStore {
     }
 
     fun markUsed(context: Context, word: String) {
+        if (rocks.pkb.plektra.core.IncognitoTyping.active) return
         val cacheKey = word.lowercase()
         cache[cacheKey]?.let {
             cache[cacheKey] = it.copy(lastUsed = System.currentTimeMillis(), frequency = it.frequency + 1)
