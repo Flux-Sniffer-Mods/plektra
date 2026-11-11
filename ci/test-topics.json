@@ -43,6 +43,7 @@
       "rocks.pkb.plektra.NotesRepositoryTest",
       "rocks.pkb.plektra.ShowcaseReceiverNotesTest",
       "rocks.pkb.plektra.backup.BackupPreferenceContractIntegrationTest",
+      "rocks.pkb.plektra.backup.CleanCopiedLinksBackupTest",
       "rocks.pkb.plektra.backup.KeyboardTextScaleBackupTest",
       "rocks.pkb.plektra.backup.NotesAndDictionaryBackupTest",
       "rocks.pkb.plektra.backup.PastieraBackupImportTest",
@@ -51,7 +52,9 @@
       "rocks.pkb.plektra.backup.ThemePhotoBackgroundBackupTest",
       "rocks.pkb.plektra.backup.ZipHelperTest",
       "rocks.pkb.plektra.clipboard.ClipboardHistoryPrivacyTest",
-      "rocks.pkb.plektra.clipboard.ClipboardHistoryTest"
+      "rocks.pkb.plektra.clipboard.ClipboardHistoryTest",
+      "rocks.pkb.plektra.clipboard.CopiedLinkCleaningTest",
+      "rocks.pkb.plektra.clipboard.LinkCleanerTest"
     ],
     "ui-settings": [
       "rocks.pkb.plektra.CompactKeyHeightMigrationTest",

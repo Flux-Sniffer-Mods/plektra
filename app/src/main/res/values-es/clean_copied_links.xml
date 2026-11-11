@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="clean_copied_links_title">Limpiar enlaces copiados</string>
+    <string name="clean_copied_links_description">El rastreo se elimina de los enlaces copiados (utm_, fbclid, el si de YouTube y similares) en el propio portapapeles, para que queden limpios dondequiera que se peguen.</string>
+</resources>

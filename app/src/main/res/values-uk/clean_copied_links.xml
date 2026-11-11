@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="clean_copied_links_title">Очищати скопійовані посилання</string>
+    <string name="clean_copied_links_description">Відстеження вилучається зі скопійованих посилань (utm_, fbclid, si на YouTube тощо) прямо в буфері обміну, тож вони чисті, куди б їх не вставили.</string>
+</resources>
