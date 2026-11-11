@@ -39,8 +39,6 @@
     <string name="auto_capitalize_description">Κάνει κεφαλαίο το πρώτο γράμμα όταν ξεκινάτε σε κενό πεδίο κειμένου.</string>
     <string name="auto_capitalize_respect_manual_shift_off_title">Σεβασμός χειροκίνητου Shift off</string>
     <string name="auto_capitalize_respect_manual_shift_off_description">Διατηρεί απενεργοποιημένο το αυτόματο Shift όσο παραμένετε στο ίδιο πεδίο κειμένου.</string>
-    <string name="auto_capitalize_restricted_fields_title">Shift σε όλα τα πεδία κειμένου</string>
-    <string name="auto_capitalize_restricted_fields_description">Ξεκινά επίσης γραμμές διευθύνσεων, email και πεδία αναζήτησης με Shift. Τα πεδία κωδικού πρόσβασης δεν αλλάζουν.</string>
 
     <!-- Auto Capitalize After Period Section -->
     <string name="auto_capitalize_after_period_title">Κεφαλαίο μετά το τέλος πρότασης</string>

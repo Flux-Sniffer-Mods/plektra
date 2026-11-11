@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shift_field_types_title">Автоматический Shift</string>
+    <string name="shift_field_types_description">Выберите, какие типы текстовых полей начинаются с Shift. Поля паролей — никогда.</string>
+    <string name="shift_field_text">Сообщения, заметки и другой текст</string>
+    <string name="shift_field_names">Имена</string>
+    <string name="shift_field_addresses">Почтовые адреса</string>
+    <string name="shift_field_search">Строки поиска</string>
+    <string name="shift_field_links">Ссылки и веб-адреса</string>
+    <string name="shift_field_email">Адреса электронной почты</string>
+    <string name="shift_field_other">Другие поля (которые не сообщают, что они такое)</string>
+    <string name="shift_field_none">Нигде</string>
+</resources>

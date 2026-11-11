@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shift_field_types_title">Shift σε όλα τα πεδία κειμένου</string>
+    <string name="shift_field_types_description">Ξεκινά επίσης γραμμές διευθύνσεων, email και πεδία αναζήτησης με Shift. Τα πεδία κωδικού πρόσβασης δεν αλλάζουν.</string>
+    <string name="shift_field_text">Μηνύματα, σημειώσεις και άλλο κείμενο</string>
+    <string name="shift_field_names">Ονόματα</string>
+    <string name="shift_field_addresses">Ταχυδρομικές διευθύνσεις</string>
+    <string name="shift_field_search">Γραμμές αναζήτησης</string>
+    <string name="shift_field_links">Σύνδεσμοι και διευθύνσεις ιστού</string>
+    <string name="shift_field_email">Διευθύνσεις email</string>
+    <string name="shift_field_other">Άλλα πεδία (που δεν λένε τι είναι)</string>
+    <string name="shift_field_none">Κανένα πεδίο</string>
+</resources>

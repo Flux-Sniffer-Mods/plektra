@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shift_field_types_title">Automatyczny Shift</string>
+    <string name="shift_field_types_description">Wybierz, które rodzaje pól tekstowych zaczynają się od Shift. Pola haseł nigdy.</string>
+    <string name="shift_field_text">Wiadomości, notatki i inny tekst</string>
+    <string name="shift_field_names">Imiona i nazwiska</string>
+    <string name="shift_field_addresses">Adresy pocztowe</string>
+    <string name="shift_field_search">Pola wyszukiwania</string>
+    <string name="shift_field_links">Linki i adresy stron</string>
+    <string name="shift_field_email">Adresy e-mail</string>
+    <string name="shift_field_other">Inne pola (które nie mówią, czym są)</string>
+    <string name="shift_field_none">Nigdzie</string>
+</resources>

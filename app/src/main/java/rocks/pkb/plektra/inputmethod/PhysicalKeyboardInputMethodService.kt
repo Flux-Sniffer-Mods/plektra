@@ -263,14 +263,13 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     private val shouldDisableAutoCapitalize: Boolean
         get() {
             if (!LayoutMappingRepository.supportsAutoCapitalization) return true
-            if (!inputContextState.shouldDisableAutoCapitalize) return false
-            // Explicit app or field opt-outs take priority over the optional
-            // capitalization of restricted field types such as email and URL.
-            if (inputContextState.isAppRawMode ||
+            // Explicit app or field opt-outs take priority over the kinds of field chosen
+            if (inputContextState.isAppRawMode || inputContextState.isPasswordField ||
                 inputContextState.restrictedReason == InputContextState.RestrictedReason.LITERAL_ENTRY
             ) return true
-            val includeRestrictedFields = SettingsManager.getAutoCapitalizeRestrictedFields(this)
-            return !includeRestrictedFields || inputContextState.isPasswordField
+            // Automatic Shift by kind of field (Smart Features, Automatic Shift)
+            val type = ShiftFieldTypes.of(currentInputEditorInfo) ?: return inputContextState.shouldDisableAutoCapitalize
+            return type !in ShiftFieldTypes.enabled(this)
         }
     
     // Current package name

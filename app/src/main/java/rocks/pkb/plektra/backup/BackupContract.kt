@@ -215,6 +215,7 @@ internal object BackupPreferenceContract {
             "auto_capitalize_first_letter" to PreferenceValueType.BOOLEAN,
             "auto_capitalize_respect_manual_shift_off" to PreferenceValueType.BOOLEAN,
             "auto_capitalize_restricted_fields" to PreferenceValueType.BOOLEAN,
+            "auto_shift_field_types" to PreferenceValueType.STRING,
             "double_space_to_period" to PreferenceValueType.BOOLEAN,
             "spaced_hyphen_to_en_dash" to PreferenceValueType.BOOLEAN,
             "spaced_hyphen_dash_style" to PreferenceValueType.STRING,

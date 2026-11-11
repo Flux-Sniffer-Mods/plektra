@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shift_field_types_title">Shift automatique</string>
+    <string name="shift_field_types_description">Choisissez quels types de champ de texte commencent avec Shift. Jamais les champs de mot de passe.</string>
+    <string name="shift_field_text">Messages, notes et autres textes</string>
+    <string name="shift_field_names">Noms</string>
+    <string name="shift_field_addresses">Adresses postales</string>
+    <string name="shift_field_search">Barres de recherche</string>
+    <string name="shift_field_links">Liens et adresses web</string>
+    <string name="shift_field_email">Adresses e-mail</string>
+    <string name="shift_field_other">Autres champs (qui ne disent pas ce qu\'ils sont)</string>
+    <string name="shift_field_none">Aucun champ</string>
+</resources>
