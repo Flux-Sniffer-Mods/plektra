@@ -62,6 +62,7 @@ class SuggestionController(
     )
     private var autoReplaceController = createAutoReplaceController()
     private val nextWordPredictor = nextWordPredictorOverride ?: NextWordPredictor(UserNGramStore(appContext))
+    private val frequentWordLearner by lazy { FrequentWordLearner(rocks.pkb.plektra.SettingsManager.getPreferences(appContext)) }
     private val extraSuggestionEngines = mutableMapOf<String, SuggestionLanguageEngine>()
 
     private data class SuggestionLanguageEngine(
@@ -584,6 +585,7 @@ class SuggestionController(
             previousCompletedWord?.let { previous ->
                 nextWordPredictor.learn(currentLocale, previous, cleanWord)
             }
+            learnIfUsedOften(cleanWord)
         }
 
         when {
@@ -608,6 +610,14 @@ class SuggestionController(
                 suggestionsListener?.invoke(emptyList())
             }
         }
+    }
+
+    /** A word outside the dictionary, typed often enough, goes into it (Learn words you use often). */
+    private fun learnIfUsedOften(word: String) {
+        if (!rocks.pkb.plektra.SettingsManager.getLearnFrequentWords(appContext)) return
+        // Until the dictionary is loaded every word would look new
+        if (!dictionaryRepository.isReady || isKnownWordInActiveDictionaries(word)) return
+        frequentWordLearner.countUse(word)?.let(::addUserWord)
     }
 
     private fun publishNextWordPredictions(previousWord: String) {

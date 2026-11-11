@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Học các từ bạn hay dùng</string>
+    <string name="learn_frequent_words_description">Một từ chưa có trong từ điển sẽ được thêm vào sau khi bạn gõ nó ba lần, để được gợi ý và không bao giờ bị tự sửa.</string>
+</resources>

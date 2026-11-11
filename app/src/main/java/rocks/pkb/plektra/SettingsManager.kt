@@ -94,6 +94,7 @@ object SettingsManager {
     private const val KEY_EMOJI_SYMBOLS_ACCEPT_WITH_ENTER = "emoji_symbols_accept_with_enter"
     private const val KEY_EMOJI_SYMBOLS_EXACT_ON_CLOSE = "emoji_symbols_exact_on_close"
     private const val KEY_ACCENT_MATCHING_ENABLED = "accent_matching_enabled"
+    private const val KEY_LEARN_FREQUENT_WORDS = "learn_frequent_words"
     private const val KEY_AUTO_REPLACE_ON_SPACE_ENTER = "auto_replace_on_space_enter"
     private const val KEY_MAX_AUTO_REPLACE_DISTANCE = "max_auto_replace_distance"
     private const val KEY_AUTO_CAPITALIZE_AFTER_PERIOD = "auto_capitalize_after_period"
@@ -3205,6 +3206,14 @@ object SettingsManager {
      */
     fun getAccentMatchingEnabled(context: Context): Boolean {
         return getPreferences(context).getBoolean(KEY_ACCENT_MATCHING_ENABLED, DEFAULT_ACCENT_MATCHING_ENABLED)
+    }
+
+    /** A word outside the dictionary goes into it once typed three times (on by default). */
+    fun getLearnFrequentWords(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_LEARN_FREQUENT_WORDS, true)
+
+    fun setLearnFrequentWords(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_LEARN_FREQUENT_WORDS, enabled).apply()
     }
 
     /**

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Սովորել հաճախ օգտագործվող բառերը</string>
+    <string name="learn_frequent_words_description">Բառարանում չեղած բառը ավելացվում է, երբ այն երեք անգամ մուտքագրեք, որպեսզի առաջարկվի և երբեք ինքնաշտկված չլինի։</string>
+</resources>

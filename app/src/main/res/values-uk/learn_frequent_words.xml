@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Запам’ятовувати часто вживані слова</string>
+    <string name="learn_frequent_words_description">Слово, якого немає у словнику, додається до нього, коли ви наберете його тричі: воно пропонуватиметься й ніколи не виправлятиметься автоматично.</string>
+</resources>

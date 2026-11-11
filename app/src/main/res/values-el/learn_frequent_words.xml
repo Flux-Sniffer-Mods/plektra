@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Εκμάθηση λέξεων που χρησιμοποιείτε συχνά</string>
+    <string name="learn_frequent_words_description">Μια λέξη που δεν υπάρχει στο λεξικό προστίθεται μόλις την πληκτρολογήσετε τρεις φορές, ώστε να προτείνεται και να μη διορθώνεται ποτέ αυτόματα.</string>
+</resources>
