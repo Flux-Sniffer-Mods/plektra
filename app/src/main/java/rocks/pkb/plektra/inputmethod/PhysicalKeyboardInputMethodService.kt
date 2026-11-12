@@ -774,7 +774,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             return
         }
         
-        val provider = SpeechSettings.provider(this)
+        val provider = SpeechSettings.providerInUse(this)
         if (provider == SpeechProvider.FUTO) {
             startExternalSpeechRecognition()
             return

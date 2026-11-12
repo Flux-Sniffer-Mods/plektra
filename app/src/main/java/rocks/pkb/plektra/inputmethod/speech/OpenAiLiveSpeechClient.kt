@@ -26,6 +26,7 @@ class OpenAiLiveSpeechClient(
         onLevel: (Float, Long?) -> Unit, onPartial: (String) -> Unit,
         onRecordingFinished: () -> Unit): LiveSpeechResult = coroutineScope {
         require(request.provider == SpeechProvider.OPENAI && request.model.id == "gpt-live-transcribe")
+        if (rocks.pkb.plektra.OfflineMode.enabled) throw IOException("Offline mode is on")
         val events = Channel<JsonObject>(64)
         val socket = http.newWebSocket(Request.Builder().url(url)
             .header("Authorization", "Bearer ${request.apiKey}").build(), object : WebSocketListener() {

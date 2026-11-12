@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline_mode_title">Tryb offline</string>
+    <string name="offline_mode_description">Nic w Plektra nie łączy się z siecią: brak sprawdzania aktualizacji i informacji o wydaniu, nie można pobierać słowników ani układów, a wprowadzanie głosowe korzysta z funkcji Androida zamiast usługi online</string>
+</resources>

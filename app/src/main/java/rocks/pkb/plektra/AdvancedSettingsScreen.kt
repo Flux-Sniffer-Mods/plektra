@@ -110,6 +110,7 @@ fun AdvancedSettingsScreen(
     var pendingDeviceChangeRestore by remember {
         mutableStateOf<Pair<Uri, RestoreManager.DeviceChange>?>(null)
     }
+    var offlineMode by remember { mutableStateOf(OfflineMode.isOn(context)) }
     val currentDestination = remember { when (settingsChild(context, "advanced")) {
         "TrackpadGestures" -> AdvancedDestination.TrackpadGestures
         else -> if (context.settingsActivity().intent.data?.let(SettingLinkRegistry::parseSettingLinkUri) in TRACKPAD_SETTING_LINK_IDS) AdvancedDestination.TrackpadGestures else AdvancedDestination.Main
@@ -560,6 +561,47 @@ fun AdvancedSettingsScreen(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                                     contentDescription = null,
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+
+                        // Offline mode: nothing in the app goes online
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .settingRow(SettingLinkIds.ADVANCED_OFFLINE_MODE) {
+                                    offlineMode = !offlineMode
+                                    OfflineMode.set(context, offlineMode)
+                                }
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.offline_mode_title),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.offline_mode_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = offlineMode,
+                                    onCheckedChange = { enabled ->
+                                        offlineMode = enabled
+                                        OfflineMode.set(context, enabled)
+                                    }
                                 )
                             }
                         }
