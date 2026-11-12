@@ -25,7 +25,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*IncognitoTypingT
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 12 November 2026 against source commit `8cbef183` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 189 classes, 1,424 tests (upstream alone: 185 classes, 1,417 tests). New: 4 in `IncognitoTypingTest`, 1 each in `SuggestionControllerIncognitoTest`, `IncognitoFieldServiceTest` and `IncognitoTypingBackupTest`; `SettingLinkCoverageTest` and `BackupPreferenceContractIntegrationTest` pass with the new links and preferences. One failure, `ClipboardHistoryTest.startupShowsLoadingAndBlocksHistoryActionsUntilReady`: a race in that upstream test, unrelated to this change. The class passed when rerun on its own; `flux/test-races` fixes the race.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new classes are in the `suggestions`, `ime-integration` and `data-backup` topics.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
 
 ## Device check (still to do)
 
