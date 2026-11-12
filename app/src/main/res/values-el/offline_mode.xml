@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline_mode_title">Λειτουργία εκτός σύνδεσης</string>
+    <string name="offline_mode_description">Τίποτα στο Plektra δεν συνδέεται στο διαδίκτυο: κανένας έλεγχος ενημερώσεων ή σημειώσεις έκδοσης, δεν γίνεται λήψη λεξικών και διατάξεων, και η φωνητική πληκτρολόγηση χρησιμοποιεί αυτήν του Android αντί για διαδικτυακή υπηρεσία</string>
+</resources>

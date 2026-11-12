@@ -79,6 +79,10 @@ class SpeechApiClient(
         } else request
 
     private suspend fun execute(request: Request): String = suspendCancellableCoroutine { continuation ->
+        if (rocks.pkb.plektra.OfflineMode.enabled) {
+            continuation.resumeWithException(IOException("Offline mode is on"))
+            return@suspendCancellableCoroutine
+        }
         val call = http.newCall(request)
         continuation.invokeOnCancellation { call.cancel() }
         call.enqueue(object : Callback {
