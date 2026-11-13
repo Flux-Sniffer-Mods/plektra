@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Codici monouso</string>
+    <string name="one_time_codes_description">Propone un codice da un SMS o da un’email come chip nel prossimo campo in cui va. Richiede l’accesso alle notifiche; viene conservato solo il codice, in memoria, per 3 minuti.</string>
+    <string name="one_time_code_chip">Codice %1$s</string>
+    <string name="notification_access_title">Accesso alle notifiche</string>
+    <string name="notification_access_off">Disattivato: i codici monouso ne hanno bisogno. Tocca per attivarlo.</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Mã dùng một lần</string>
+    <string name="one_time_codes_description">Đề xuất mã từ SMS hoặc email dưới dạng chip trong ô tiếp theo cần nhập mã. Cần quyền truy cập thông báo; chỉ mã được giữ, trong bộ nhớ, trong 3 phút.</string>
+    <string name="one_time_code_chip">Mã %1$s</string>
+    <string name="notification_access_title">Quyền truy cập thông báo</string>
+    <string name="notification_access_off">Đang tắt: mã dùng một lần cần quyền này. Chạm để bật.</string>
+</resources>

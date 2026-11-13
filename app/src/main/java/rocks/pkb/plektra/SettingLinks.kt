@@ -692,6 +692,12 @@ object SettingLinkRegistry {
             destination = SettingsDestination.Advanced
         ),
         entry(
+            rocks.pkb.plektra.otp.OneTimeCodeSettings.LINK_ID,
+            R.string.one_time_codes_title,
+            R.string.one_time_codes_description,
+            destination = SettingsDestination.Advanced
+        ),
+        entry(
             SettingLinkIds.ADVANCED_SHOW_TUTORIAL,
             R.string.tutorial_show,
             R.string.tutorial_review_description,

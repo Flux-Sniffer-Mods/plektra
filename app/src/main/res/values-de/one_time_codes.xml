@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Einmalcodes</string>
+    <string name="one_time_codes_description">Bietet einen Code aus einer SMS oder E-Mail als Chip im nächsten Feld an, in das er gehört. Benötigt Benachrichtigungszugriff; nur der Code wird 3 Minuten lang im Speicher gehalten.</string>
+    <string name="one_time_code_chip">Code %1$s</string>
+    <string name="notification_access_title">Benachrichtigungszugriff</string>
+    <string name="notification_access_off">Aus: Einmalcodes benötigen ihn. Tippe, um ihn einzuschalten.</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Միանգամյա կոդեր</string>
+    <string name="one_time_codes_description">SMS-ից կամ էլ. նամակից կոդն առաջարկում է որպես չիպ հաջորդ դաշտում, որտեղ այն պետք է մուտքագրվի։ Պահանջում է ծանուցումների հասանելիություն․ պահվում է միայն կոդը, հիշողության մեջ, 3 րոպե։</string>
+    <string name="one_time_code_chip">Կոդ %1$s</string>
+    <string name="notification_access_title">Ծանուցումների հասանելիություն</string>
+    <string name="notification_access_off">Անջատված է․ այն անհրաժեշտ է միանգամյա կոդերի համար։ Հպեք՝ միացնելու համար։</string>
+</resources>

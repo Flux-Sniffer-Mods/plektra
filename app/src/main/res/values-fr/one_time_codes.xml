@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Codes à usage unique</string>
+    <string name="one_time_codes_description">Propose un code reçu par SMS ou e-mail sous forme de puce dans le prochain champ où il va. Nécessite l’accès aux notifications ; seul le code est conservé, en mémoire, pendant 3 minutes.</string>
+    <string name="one_time_code_chip">Code %1$s</string>
+    <string name="notification_access_title">Accès aux notifications</string>
+    <string name="notification_access_off">Désactivé : les codes à usage unique en ont besoin. Touchez pour l’activer.</string>
+</resources>
