@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_bar_waits_title">Որոնման դաշտերը սպասում են մուտքագրման</string>
+    <string name="search_bar_waits_description">Երբ հավելվածը բացվում է արդեն ակտիվ որոնման դաշտով, ստեղնաշարի գոտին հայտնվում է միայն մուտքագրելիս կամ դաշտին հպելիս։</string>
+</resources>

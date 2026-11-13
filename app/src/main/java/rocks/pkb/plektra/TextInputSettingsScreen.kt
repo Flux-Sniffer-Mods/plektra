@@ -123,6 +123,7 @@ fun TextInputSettingsScreen(
     var autoShowRespectAppVisibility by remember {
         mutableStateOf(SettingsManager.getAutoShowRespectAppVisibility(context))
     }
+    var searchBarWaits by remember { mutableStateOf(rocks.pkb.plektra.inputmethod.SearchBarWait.isEnabled(context)) }
 
     var experimentalSmoothCaret by remember {
         mutableStateOf(SettingsManager.getExperimentalSmoothCaret(context))
@@ -515,6 +516,16 @@ fun TextInputSettingsScreen(
                     }
                 )
             }
+            SettingsSwitchRow(
+                title = stringResource(R.string.search_bar_waits_title),
+                description = stringResource(R.string.search_bar_waits_description),
+                checked = searchBarWaits,
+                linkId = SettingLinkIds.TEXT_INPUT_SEARCH_BAR_WAITS,
+                onCheckedChange = { enabled ->
+                    searchBarWaits = enabled
+                    rocks.pkb.plektra.inputmethod.SearchBarWait.setEnabled(context, enabled)
+                }
+            )
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 SettingsSwitchRow(
                     title = stringResource(R.string.experimental_smooth_caret_title),

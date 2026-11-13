@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_bar_waits_title">Ô tìm kiếm chờ bạn gõ</string>
+    <string name="search_bar_waits_description">Khi một ứng dụng mở ra với ô tìm kiếm đã được kích hoạt, thanh bàn phím chỉ xuất hiện khi bạn gõ hoặc chạm vào ô.</string>
+</resources>

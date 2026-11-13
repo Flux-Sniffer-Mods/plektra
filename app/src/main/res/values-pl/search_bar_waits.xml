@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_bar_waits_title">Pola wyszukiwania czekają na pisanie</string>
+    <string name="search_bar_waits_description">Gdy aplikacja otwiera się z już aktywnym polem wyszukiwania, pasek klawiatury pojawia się dopiero, gdy piszesz lub dotkniesz pola.</string>
+</resources>
