@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="language_per_app_title">Zapamiętuj język dla każdej aplikacji</string>
+    <string name="language_per_app_description">Każda aplikacja dostaje język, którego ostatnio w niej używałeś.</string>
+</resources>

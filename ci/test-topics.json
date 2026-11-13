@@ -27,6 +27,7 @@
       "rocks.pkb.plektra.inputmethod.ClicksPowerButtonEventMapperTest",
       "rocks.pkb.plektra.inputmethod.DeviceSpecificTest",
       "rocks.pkb.plektra.inputmethod.FoldKeyboardHeightPolicyTest",
+      "rocks.pkb.plektra.inputmethod.LanguagePerAppTest",
       "rocks.pkb.plektra.inputmethod.PhysicalKeyPositionNormalizerTest",
       "rocks.pkb.plektra.inputmethod.PhysicalKeyResolverTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeyboardAutoDetectorTest",

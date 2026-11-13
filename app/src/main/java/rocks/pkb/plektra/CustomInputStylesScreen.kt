@@ -430,6 +430,9 @@ private fun LayoutSwitchShortcutsCard() {
     var toastOnLayoutSwitch by remember {
         mutableStateOf(SettingsManager.isToastOnLayoutSwitchEnabled(context))
     }
+    var languagePerApp by remember {
+        mutableStateOf(rocks.pkb.plektra.inputmethod.LanguagePerApp.isEnabled(context))
+    }
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -510,6 +513,17 @@ private fun LayoutSwitchShortcutsCard() {
                 onCheckedChange = { enabled ->
                     toastOnLayoutSwitch = enabled
                     SettingsManager.setToastOnLayoutSwitchEnabled(context, enabled)
+                }
+            )
+
+            LayoutSwitchShortcutRow(
+                title = stringResource(R.string.language_per_app_title),
+                description = stringResource(R.string.language_per_app_description),
+                checked = languagePerApp,
+                linkId = SettingLinkIds.CUSTOM_INPUT_STYLES_LANGUAGE_PER_APP,
+                onCheckedChange = { enabled ->
+                    languagePerApp = enabled
+                    rocks.pkb.plektra.inputmethod.LanguagePerApp.setEnabled(context, enabled)
                 }
             )
         }
