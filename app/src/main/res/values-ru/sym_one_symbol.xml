@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sym_sticky_title">Нажмите SYM для символа</string>
+    <string name="sym_sticky_description">Одно нажатие SYM заставляет следующую клавишу ввести свой символ, не открывая символы. Нажмите SYM дважды, чтобы открыть их. Удержание SYM работает как прежде.</string>
+</resources>

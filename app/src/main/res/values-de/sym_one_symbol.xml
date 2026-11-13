@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sym_sticky_title">SYM antippen für ein Symbol</string>
+    <string name="sym_sticky_description">Ein Tippen auf SYM lässt die nächste Taste ihr Symbol schreiben, ohne die Symbole zu öffnen. Tippe zweimal auf SYM, um sie zu öffnen. SYM halten funktioniert wie gewohnt.</string>
+</resources>

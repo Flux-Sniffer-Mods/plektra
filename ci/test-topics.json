@@ -179,7 +179,8 @@
       "rocks.pkb.plektra.inputmethod.InputEventRouterCtrlHoldNavModeTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterShortcutKeysTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterSoftwareCtrlTest",
-      "rocks.pkb.plektra.inputmethod.MultiTapControllerTest"
+      "rocks.pkb.plektra.inputmethod.MultiTapControllerTest",
+      "rocks.pkb.plektra.inputmethod.SymOneSymbolTest"
     ],
     "speech": [
       "rocks.pkb.plektra.inputmethod.NotificationHelperTest",

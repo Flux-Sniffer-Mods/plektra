@@ -170,6 +170,16 @@ fun ModifierSettingsScreen(
                 onClick = onOpenSymShortcuts,
                 onInfoClick = { showSymShortcutCompatibilityInfo = true }
             )
+            var symOneSymbol by remember { mutableStateOf(rocks.pkb.plektra.inputmethod.SymOneSymbol.isEnabled(context)) }
+            ModifierSwitchRow(
+                title = stringResource(R.string.sym_sticky_title),
+                description = stringResource(R.string.sym_sticky_description),
+                checked = symOneSymbol,
+                linkId = rocks.pkb.plektra.inputmethod.SymOneSymbol.LINK_ID
+            ) {
+                symOneSymbol = it
+                rocks.pkb.plektra.inputmethod.SymOneSymbol.setEnabled(context, it)
+            }
 
             SettingsSectionDivider(stringResource(R.string.modifiers_section_alt_modifier))
             ModifierDropdownRow(
