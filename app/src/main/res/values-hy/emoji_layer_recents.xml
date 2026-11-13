@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Վերջին էմոջիները շերտի սկզբում</string>
+    <string name="emoji_layer_recents_first_description">Վերջին օգտագործված էմոջիները զբաղեցնում են շերտի առաջին ստեղները, իսկ շերտինները տեղափոխվում են։ Հաշվվում են նաև շերտից մուտքագրվածները։</string>
+    <string name="emoji_layer_recents_count">Վերջին էմոջիներ՝ %1$d ստեղն</string>
+</resources>

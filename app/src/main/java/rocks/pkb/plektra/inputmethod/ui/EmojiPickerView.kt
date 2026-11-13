@@ -1136,6 +1136,7 @@ class EmojiPickerView(
                 PickerExtras.recordChosen(context, emoji, categoryId)
             }
         } else coroutineScope.launch(Dispatchers.IO, start = CoroutineStart.ATOMIC) {
+            rocks.pkb.plektra.data.emoji.EmojiLayerRecents.markUsed(context, emoji)
             val changed = RecentEmojiManager.addRecentEmoji(
                 context,
                 emoji,

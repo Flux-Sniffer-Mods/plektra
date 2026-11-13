@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Emoji gần đây lên đầu lớp</string>
+    <string name="emoji_layer_recents_first_description">Các emoji bạn dùng gần nhất chiếm các phím đầu của lớp, emoji của lớp dời sang sau. Emoji gõ từ lớp cũng được tính.</string>
+    <string name="emoji_layer_recents_count">Emoji gần đây: %1$d phím</string>
+</resources>

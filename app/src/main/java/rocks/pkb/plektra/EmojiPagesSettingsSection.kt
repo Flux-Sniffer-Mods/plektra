@@ -84,6 +84,8 @@ fun EmojiPagesSettingsSection() {
         emojiPages = it
         EmojiPagesSettings.setEmojiPagesEnabled(context, it)
     }
+    // The emoji pages have Recents of their own; the classic layer can put them first
+    if (!emojiPages) EmojiLayerRecentsSetting()
     SwitchRow(
         id = "sym.symbol_pages",
         title = stringResource(R.string.emoji_pages_symbols_title),

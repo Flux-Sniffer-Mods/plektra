@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Недавние эмодзи первыми на слое</string>
+    <string name="emoji_layer_recents_first_description">Последние использованные эмодзи занимают первые клавиши слоя, а его собственные сдвигаются. Считаются и набранные со слоя.</string>
+    <string name="emoji_layer_recents_count">Недавние эмодзи: %1$d клавиш</string>
+</resources>

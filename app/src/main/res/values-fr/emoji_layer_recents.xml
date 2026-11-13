@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Emoji récents en premier sur la couche</string>
+    <string name="emoji_layer_recents_first_description">Les emoji utilisés en dernier prennent les premières touches de la couche, les siens se décalent. Ceux tapés depuis la couche comptent aussi.</string>
+    <string name="emoji_layer_recents_count">Emoji récents : %1$d touches</string>
+</resources>
