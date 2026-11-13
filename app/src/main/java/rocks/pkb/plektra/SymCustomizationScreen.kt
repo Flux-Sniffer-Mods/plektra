@@ -643,7 +643,10 @@ fun SymCustomizationScreen(
                             statusBarController.createCustomizableEmojiKeyboard(symMappingsPage1, { keyCode, emoji ->
                                 selectedKeyCode = keyCode
                                 showEmojiPicker = true
-                            }, page = 1, navigationKeys = navigationKeys)
+                            }, page = 1, navigationKeys = navigationKeys, onSwap = { from, to ->
+                                symMappingsPage1 = swapKeys(symMappingsPage1, from, to)
+                                SettingsManager.saveSymMappings(context, symMappingsPage1)
+                            })
                         },
                         update = { _ ->
                             // The key(titan2LayoutEnabled) will trigger a full recomposition/re-factory
@@ -660,7 +663,10 @@ fun SymCustomizationScreen(
                             statusBarController.createCustomizableEmojiKeyboard(symMappingsPage2, { keyCode, character ->
                                 selectedKeyCode = keyCode
                                 showCharacterPicker = true
-                            }, page = 2, navigationKeys = navigationKeys)
+                            }, page = 2, navigationKeys = navigationKeys, onSwap = { from, to ->
+                                symMappingsPage2 = swapKeys(symMappingsPage2, from, to)
+                                SettingsManager.saveSymMappingsPage2(context, symMappingsPage2)
+                            })
                         },
                         update = { _ ->
                             // The key(titan2LayoutEnabled) will trigger a full recomposition/re-factory
