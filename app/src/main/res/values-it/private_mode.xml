@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Modalità privata</string>
+    <string name="private_mode_subtitle">Digitazione in incognito e modalità offline insieme</string>
+    <string name="private_mode_on">Modalità privata attiva: nulla viene imparato o ricordato e nulla va online</string>
+    <string name="private_mode_off">Modalità privata disattivata: digitazione e modalità offline tornano come prima</string>
+</resources>

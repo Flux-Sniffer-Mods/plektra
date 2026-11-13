@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Modo privado</string>
+    <string name="private_mode_subtitle">Escritura incógnito y modo sin conexión a la vez</string>
+    <string name="private_mode_on">Modo privado activado: no se aprende ni se recuerda nada, y nada sale a internet</string>
+    <string name="private_mode_off">Modo privado desactivado: la escritura y el modo sin conexión vuelven a como estaban</string>
+</resources>

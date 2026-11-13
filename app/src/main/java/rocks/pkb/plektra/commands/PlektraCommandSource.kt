@@ -33,6 +33,19 @@ class PlektraCommandSource : CommandSource {
                 defaultSurfaces = setOf(CommandSurface.AssignedKey, CommandSurface.NavMode),
                 searchTokens = listOf("Plektra", "Settings")
             ),
+            // Incognito typing and offline mode together, from a key or the quick launcher
+            CommandTarget(
+                id = COMMAND_TOGGLE_PRIVATE_MODE,
+                source = id,
+                kind = CommandKind.PlektraAction,
+                label = context.getString(R.string.private_mode_title),
+                subtitle = context.getString(R.string.private_mode_subtitle),
+                icon = CommandIcon.Settings,
+                launch = CommandLaunchSpec.InternalAction(ACTION_TOGGLE_PRIVATE_MODE),
+                capabilities = setOf(CommandCapability.AdjustsDeviceState),
+                defaultSurfaces = setOf(CommandSurface.AssignedKey, CommandSurface.QuickLauncher, CommandSurface.NavMode),
+                searchTokens = listOf("Private", "Incognito", "Offline", "Privacy")
+            ),
             CommandTarget(
                 id = COMMAND_TOGGLE_SOFTWARE_KEYBOARD_MODE,
                 source = id,
@@ -49,6 +62,8 @@ class PlektraCommandSource : CommandSource {
     }
 
     companion object {
+        const val COMMAND_TOGGLE_PRIVATE_MODE = "plektra.toggle_private_mode"
+        const val ACTION_TOGGLE_PRIVATE_MODE = "toggle_private_mode"
         const val COMMAND_QUICK_LAUNCHER = "plektra.quick_launcher"
         const val COMMAND_MAIN_ACTIVITY = "plektra.main"
         const val COMMAND_TOGGLE_SOFTWARE_KEYBOARD_MODE = "plektra.toggle_software_keyboard_mode"

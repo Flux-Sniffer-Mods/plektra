@@ -584,7 +584,7 @@ class SuggestionController(
         }
 
         val cleanWord = completedWord?.trim()?.takeIf { it.any { ch -> ch.isLetterOrDigit() } }
-        if (cleanWord != null && !incognito) {
+        if (cleanWord != null && !incognito && !rocks.pkb.plektra.core.IncognitoTyping.privateMode) {
             if (sentenceStartPending) {
                 nextWordPredictor.learnSentenceStart(currentLocale, cleanWord)
             }

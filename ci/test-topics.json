@@ -156,6 +156,7 @@
       "rocks.pkb.plektra.AutoCorrectionSubstitutionStoreTest",
       "rocks.pkb.plektra.core.AutoCorrectionManagerTest",
       "rocks.pkb.plektra.core.IncognitoTypingTest",
+      "rocks.pkb.plektra.core.PrivateModeTest",
       "rocks.pkb.plektra.core.suggestions.AutoReplaceControllerLogicTest",
       "rocks.pkb.plektra.core.suggestions.CasingHelperTest",
       "rocks.pkb.plektra.core.suggestions.CurrentWordTrackerTest",

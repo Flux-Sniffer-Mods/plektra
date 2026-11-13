@@ -56,6 +56,7 @@ class PlektraApplication : Application() {
         SettingsManager.enforceTitan2EliteRoundedCornersOnce(this)
         SettingsManager.migrateCompactSoftwareKeyHeightOnce(this)
         OfflineMode.load(this)
+        rocks.pkb.plektra.core.PrivateMode.load(this)
         AppPackageChangeMonitor.register(this)
         ClicksPowerKeyboardController.initialize(this)
         publishSoftwareKeyboardModeShortcut()

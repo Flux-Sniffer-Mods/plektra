@@ -15,9 +15,22 @@ object IncognitoTyping {
     const val KEY_ALWAYS = "incognito_always"
     const val KEY_FOLLOW_APPS = "incognito_follow_apps"
 
-    /** Whether the field being typed in is incognito. Set by the input method as each field starts. */
     @Volatile
-    var active: Boolean = false
+    private var fieldIncognito: Boolean = false
+
+    /** Private mode is on (see [PrivateMode]): every field is incognito, whatever it started as. */
+    @Volatile
+    var privateMode: Boolean = false
+
+    /**
+     * Whether the field being typed in is incognito. Set by the input method as each field
+     * starts; private mode makes it so in every field, from the moment it is turned on.
+     */
+    var active: Boolean
+        get() = fieldIncognito || privateMode
+        set(value) {
+            fieldIncognito = value
+        }
 
     fun isAlways(context: Context): Boolean =
         SettingsManager.getPreferences(context).getBoolean(KEY_ALWAYS, false)
