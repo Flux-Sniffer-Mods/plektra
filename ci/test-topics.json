@@ -165,7 +165,10 @@
       "rocks.pkb.plektra.core.suggestions.UserNGramStoreTest",
       "rocks.pkb.plektra.core.suggestions.UserOnlyDictionaryTest",
       "rocks.pkb.plektra.core.suggestions.WordNormalizationTest",
-      "rocks.pkb.plektra.inputmethod.AddWordCommitHelperTest"
+      "rocks.pkb.plektra.inputmethod.AddWordCommitHelperTest",
+      "rocks.pkb.plektra.spellcheck.KeyboardSpellCheckTest",
+      "rocks.pkb.plektra.spellcheck.SpellCheckRulesTest",
+      "rocks.pkb.plektra.spellcheck.SpellCheckWordsTest"
     ],
     "keys-modifiers": [
       "rocks.pkb.plektra.core.ModifierStateControllerTest",

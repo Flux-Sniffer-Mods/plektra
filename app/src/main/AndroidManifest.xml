@@ -216,6 +216,21 @@
             android:launchMode="singleInstance" />
 
         <!-- Servizio di immissione per tastiera fisica -->
+        <!-- Plektra as Android's spell checker (spellcheck/PlektraSpellCheckerService.kt): used
+             only once chosen in Android's spell checker settings -->
+        <service
+            android:name=".spellcheck.PlektraSpellCheckerService"
+            android:label="@string/spell_checker_name"
+            android:permission="android.permission.BIND_TEXT_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.textservice.SpellCheckerService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.textservice.scs"
+                android:resource="@xml/spellchecker" />
+        </service>
+
         <service
             android:name=".inputmethod.PhysicalKeyboardInputMethodService"
             android:label="${imeLabel}"

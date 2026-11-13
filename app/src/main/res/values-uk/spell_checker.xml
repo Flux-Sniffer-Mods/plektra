@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Перевірка правопису Plektra</string>
+    <string name="spell_checker_title">Перевірка правопису</string>
+    <string name="spell_checker_description">Підкреслює слова з помилками в усіх застосунках за словниками Plektra, зокрема додані вами слова. Торкніться, щоб вибрати Plektra в налаштуваннях перевірки правопису Android.</string>
+</resources>

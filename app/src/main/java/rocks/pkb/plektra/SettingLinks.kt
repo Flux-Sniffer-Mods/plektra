@@ -746,6 +746,12 @@ object SettingLinkRegistry {
             R.string.trackpad_debug_description,
             destination = SettingsDestination.Advanced
         ),
+        entry(
+            rocks.pkb.plektra.spellcheck.SPELL_CHECKER_LINK,
+            R.string.spell_checker_title,
+            R.string.spell_checker_description,
+            destination = SettingsDestination.Advanced
+        ),
 
         entry(
             SettingLinkIds.MODIFIERS_LONG_PRESS_MODIFIER,

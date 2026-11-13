@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Trình kiểm tra chính tả Plektra</string>
+    <string name="spell_checker_title">Kiểm tra chính tả</string>
+    <string name="spell_checker_description">Gạch chân từ sai chính tả trong mọi ứng dụng bằng từ điển của Plektra, bao gồm cả từ bạn đã thêm. Chạm để chọn Plektra trong cài đặt kiểm tra chính tả của Android.</string>
+</resources>

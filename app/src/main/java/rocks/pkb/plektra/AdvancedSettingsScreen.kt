@@ -618,6 +618,8 @@ fun AdvancedSettingsScreen(
 
                         DebugShowcaseExportSetting()
 
+                        rocks.pkb.plektra.spellcheck.SpellCheckerSetting()
+
                         // Show Tutorial
                         Surface(
                             modifier = Modifier

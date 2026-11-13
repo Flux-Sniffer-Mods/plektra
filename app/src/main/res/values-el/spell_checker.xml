@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Ορθογραφικός έλεγχος Plektra</string>
+    <string name="spell_checker_title">Ορθογραφικός έλεγχος</string>
+    <string name="spell_checker_description">Υπογραμμίζει ανορθόγραφες λέξεις σε κάθε εφαρμογή με τα λεξικά του Plektra, μαζί με λέξεις που προσθέσατε. Πατήστε για να επιλέξετε το Plektra στις ρυθμίσεις ορθογραφικού ελέγχου του Android.</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Plektra-ի ուղղագրության ստուգիչ</string>
+    <string name="spell_checker_title">Ուղղագրության ստուգիչ</string>
+    <string name="spell_checker_description">Ընդգծում է սխալ գրված բառերը բոլոր հավելվածներում Plektra-ի բառարաններով, ներառյալ ձեր ավելացրած բառերը։ Հպեք՝ Android-ի ուղղագրության ստուգիչի կարգավորումներում Plektra-ն ընտրելու համար։</string>
+</resources>

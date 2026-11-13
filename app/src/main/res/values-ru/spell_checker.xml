@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Проверка орфографии Plektra</string>
+    <string name="spell_checker_title">Проверка орфографии</string>
+    <string name="spell_checker_description">Подчёркивает слова с ошибками во всех приложениях по словарям Plektra, включая добавленные вами слова. Нажмите, чтобы выбрать Plektra в настройках проверки орфографии Android.</string>
+</resources>

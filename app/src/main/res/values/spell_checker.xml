@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Plektra spell checker</string>
+    <string name="spell_checker_title">Spell checker</string>
+    <string name="spell_checker_description">Underline misspelt words in every app using Plektra\'s dictionaries, including words you added. Tap to choose Plektra in Android\'s spell checker settings.</string>
+    <string name="spell_checker_subtype" translatable="false">%s</string>
+</resources>
