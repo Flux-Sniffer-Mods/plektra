@@ -79,7 +79,9 @@ fun TrackpadGestureSettingsScreen(
     LaunchedEffect(highlightedSettingId) {
         when (highlightedSettingId) {
             SettingLinkIds.TRACKPAD_SUGGESTION_SWIPE_THRESHOLD,
-            SettingLinkIds.TRACKPAD_DELETE_SWIPE_THRESHOLD -> showSensitivitySettings = true
+            SettingLinkIds.TRACKPAD_DELETE_SWIPE_THRESHOLD,
+            SWIPE_LEARNING_LINK,
+            SWIPE_IDLE_LINK -> showSensitivitySettings = true
             "trackpad.add_word",
             "trackpad.add_word_full_width",
             "trackpad.swipe_to_delete",
@@ -803,8 +805,63 @@ private fun TrackpadSensitivitySettings(
             linkId = SettingLinkIds.TRACKPAD_DELETE_SWIPE_THRESHOLD,
             onValueChange = onDeleteSwipeThresholdChange
         )
+        SuggestionSwipeLearningSettings()
     }
 }
+
+/** Suggestion swipes that learn from your picks and undos, and that scroll after a pause. */
+@Composable
+private fun SuggestionSwipeLearningSettings() {
+    val context = LocalContext.current
+    val learning = rocks.pkb.plektra.core.SuggestionSwipeLearning
+    var learn by remember { mutableStateOf(learning.enabled(context)) }
+    var idle by remember { mutableIntStateOf(learning.idleSeconds(context)) }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .settingRow(SWIPE_LEARNING_LINK) { learn = !learn; learning.setEnabled(context, learn) }
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Text(stringResource(R.string.suggestion_swipe_learning_title), style = MaterialTheme.typography.titleMedium)
+            Text(
+                stringResource(R.string.suggestion_swipe_learning_description),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+        Switch(checked = learn, onCheckedChange = { enabled -> learn = enabled; learning.setEnabled(context, enabled) })
+    }
+    if (learn) {
+        TextButton(
+            onClick = {
+                learning.resetLearned(context)
+                android.widget.Toast.makeText(context, R.string.suggestion_swipe_learning_reset_done, android.widget.Toast.LENGTH_SHORT).show()
+            },
+            modifier = Modifier.padding(horizontal = 8.dp)
+        ) { Text(stringResource(R.string.suggestion_swipe_learning_reset)) }
+    }
+    Column(modifier = Modifier.fillMaxWidth().settingRow(SWIPE_IDLE_LINK).padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Text(stringResource(R.string.suggestion_swipe_idle_title), style = MaterialTheme.typography.titleMedium)
+        Text(
+            if (idle == 0) stringResource(R.string.suggestion_swipe_idle_off)
+            else stringResource(R.string.suggestion_swipe_idle_value, idle),
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Slider(
+            value = idle.toFloat(),
+            onValueChange = { value -> idle = value.toInt(); learning.setIdleSeconds(context, idle) },
+            valueRange = 0f..30f,
+            steps = 29
+        )
+    }
+}
+
+internal const val SWIPE_LEARNING_LINK = "trackpad.swipe_learning"
+internal const val SWIPE_IDLE_LINK = "trackpad.swipe_idle"
 
 @Composable
 private fun TrackpadSensitivitySlider(

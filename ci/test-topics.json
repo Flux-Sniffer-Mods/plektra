@@ -16,6 +16,7 @@
       "rocks.pkb.plektra.SettingsManagerDeviceSymModelTest",
       "rocks.pkb.plektra.SettingsManagerLayoutSwitchTest",
       "rocks.pkb.plektra.T2eCornerCalibrationTest",
+      "rocks.pkb.plektra.core.SuggestionSwipeLearningTest",
       "rocks.pkb.plektra.data.layout.BundledLayoutAssetsTest",
       "rocks.pkb.plektra.data.layout.LayoutFileStoreImportTest",
       "rocks.pkb.plektra.data.layout.LayoutMappingRepositoryAutoCapTest",

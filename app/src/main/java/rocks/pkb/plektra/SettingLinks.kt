@@ -741,6 +741,17 @@ object SettingLinkRegistry {
             destination = SettingsDestination.Advanced
         ),
         entry(
+            SWIPE_LEARNING_LINK,
+            R.string.suggestion_swipe_learning_title,
+            R.string.suggestion_swipe_learning_description,
+            destination = SettingsDestination.Advanced
+        ),
+        entry(
+            SWIPE_IDLE_LINK,
+            R.string.suggestion_swipe_idle_title,
+            destination = SettingsDestination.Advanced
+        ),
+        entry(
             SettingLinkIds.TRACKPAD_DEBUG,
             R.string.trackpad_debug_title,
             R.string.trackpad_debug_description,

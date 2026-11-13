@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Apprendre de vos balayages</string>
+    <string name="suggestion_swipe_learning_description">Un choix annulé aussitôt demande un balayage un peu plus long ; un balayage trop court avant un choix, un peu moins.</string>
+    <string name="suggestion_swipe_learning_reset">Oublier ce qui a été appris</string>
+    <string name="suggestion_swipe_learning_reset_done">Balayages de suggestions revenus à votre réglage</string>
+    <string name="suggestion_swipe_idle_title">Après une pause, balayer fait défiler</string>
+    <string name="suggestion_swipe_idle_value">Après %1$d s sans taper, un balayage fait défiler au lieu de choisir</string>
+    <string name="suggestion_swipe_idle_off">Les balayages choisissent toujours</string>
+</resources>

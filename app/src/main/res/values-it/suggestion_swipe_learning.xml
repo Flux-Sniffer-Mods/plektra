@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Impara dai tuoi scorrimenti</string>
+    <string name="suggestion_swipe_learning_description">Una scelta annullata subito fa sì che gli scorrimenti richiedano un po\' di più; uno che non arriva prima di una scelta, un po\' di meno.</string>
+    <string name="suggestion_swipe_learning_reset">Dimentica ciò che ha imparato</string>
+    <string name="suggestion_swipe_learning_reset_done">Scorrimenti dei suggerimenti come da tua impostazione</string>
+    <string name="suggestion_swipe_idle_title">Dopo una pausa gli scorrimenti scorrono</string>
+    <string name="suggestion_swipe_idle_value">Dopo %1$d s senza scrivere, uno scorrimento fa scorrere invece di scegliere</string>
+    <string name="suggestion_swipe_idle_off">Gli scorrimenti scelgono sempre</string>
+</resources>

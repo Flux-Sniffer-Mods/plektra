@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Ucz się z moich przesunięć</string>
+    <string name="suggestion_swipe_learning_description">Wybór cofnięty od razu sprawia, że przesunięcie musi być trochę dłuższe; zbyt krótkie przed wyborem — trochę krótsze.</string>
+    <string name="suggestion_swipe_learning_reset">Zapomnij, czego się nauczył</string>
+    <string name="suggestion_swipe_learning_reset_done">Przesunięcia podpowiedzi znów według ustawienia</string>
+    <string name="suggestion_swipe_idle_title">Po przerwie przesunięcie przewija</string>
+    <string name="suggestion_swipe_idle_value">Po %1$d s bez pisania przesunięcie przewija zamiast wybierać</string>
+    <string name="suggestion_swipe_idle_off">Przesunięcia zawsze wybierają</string>
+</resources>
