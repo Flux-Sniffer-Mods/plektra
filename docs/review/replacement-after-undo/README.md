@@ -28,7 +28,12 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*ReplacementAfter
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 12 November 2026 against source commit `dcc9d951` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 187 classes, 1,423 tests, no failures, errors or skips (upstream alone: 185 classes, 1,417 tests). New: 4 in `ReplacementAfterUndoTest`, 2 in `ReplacementAfterUndoKeysTest`.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new classes are in the `suggestions` and `ime-integration` topics.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
+- On upstream alone, both `ReplacementAfterUndoKeysTest` tests fail (`expected:<so im e [I']m > but was:<so im e [i]m >`, and `expected:<so [I']m> but was:<so [i]m>`), as does `aFinishedWordEndsTheRejectionEvenWhenItsLettersWereNotReported`; the others pass there.
 
 ## Device check (still to do)
 
