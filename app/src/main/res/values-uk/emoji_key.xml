@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Шар емодзі</string>
+    <string name="emoji_key_target_picker">Панель емодзі</string>
+    <string name="emoji_key_target_title">Клавіша емодзі відкриває</string>
+    <string name="emoji_picker_key_current">Поточна клавіша: %1$s</string>
+    <string name="emoji_picker_key_description">Натисніть цю клавішу в текстовому полі, щоб відкрити чи закрити панель емодзі. Під час введення вона більше не виконує звичну функцію; поза текстовими полями не змінюється.</string>
+    <string name="emoji_picker_key_left_alt">Лівий Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Лівий Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Лівий Shift</string>
+    <string name="emoji_picker_key_off">Вимк.</string>
+    <string name="emoji_picker_key_press_prompt">Натисніть клавішу, яку хочете використовувати.</string>
+    <string name="emoji_picker_key_rejected">Ця клавіша вводить текст або потрібна під час введення. Спробуйте іншу.</string>
+    <string name="emoji_picker_key_right_alt">Правий Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Правий Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Правий Shift</string>
+    <string name="emoji_picker_key_title">Клавіша панелі емодзі</string>
+    <string name="emoji_picker_key_turn_off">Вимкнути</string>
+    <string name="emoji_sticky_description">Один дотик до клавіші емодзі змушує наступну клавішу ввести свій емодзі із шару емодзі. Торкніться двічі, щоб відкрити екран емодзі. Утримання клавіші емодзі з натисканням клавіші теж вводить її емодзі.</string>
+    <string name="emoji_sticky_title">Торкніться клавіші емодзі для емодзі</string>
+</resources>

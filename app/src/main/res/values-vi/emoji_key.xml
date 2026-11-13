@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Lớp emoji</string>
+    <string name="emoji_key_target_picker">Bộ chọn emoji</string>
+    <string name="emoji_key_target_title">Phím emoji mở</string>
+    <string name="emoji_picker_key_current">Phím hiện tại: %1$s</string>
+    <string name="emoji_picker_key_description">Nhấn phím này trong ô văn bản để mở hoặc đóng bộ chọn emoji. Khi đang gõ, nó không còn làm chức năng thường; ngoài ô văn bản thì không đổi.</string>
+    <string name="emoji_picker_key_left_alt">Alt trái</string>
+    <string name="emoji_picker_key_left_ctrl">Ctrl trái</string>
+    <string name="emoji_picker_key_left_shift">Shift trái</string>
+    <string name="emoji_picker_key_off">Tắt</string>
+    <string name="emoji_picker_key_press_prompt">Nhấn phím bạn muốn dùng ngay bây giờ.</string>
+    <string name="emoji_picker_key_rejected">Phím đó gõ văn bản hoặc cần khi gõ. Hãy thử phím khác.</string>
+    <string name="emoji_picker_key_right_alt">Alt phải</string>
+    <string name="emoji_picker_key_right_ctrl">Ctrl phải</string>
+    <string name="emoji_picker_key_right_shift">Shift phải</string>
+    <string name="emoji_picker_key_title">Phím bộ chọn emoji</string>
+    <string name="emoji_picker_key_turn_off">Tắt</string>
+    <string name="emoji_sticky_description">Một lần chạm phím emoji khiến phím tiếp theo gõ emoji của nó từ lớp emoji. Chạm hai lần để mở màn hình emoji. Giữ phím emoji và nhấn một phím cũng gõ emoji của phím đó.</string>
+    <string name="emoji_sticky_title">Chạm phím emoji để gõ emoji</string>
+</resources>

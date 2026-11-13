@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Warstwę emoji</string>
+    <string name="emoji_key_target_picker">Selektor emoji</string>
+    <string name="emoji_key_target_title">Klawisz emoji otwiera</string>
+    <string name="emoji_picker_key_current">Obecny klawisz: %1$s</string>
+    <string name="emoji_picker_key_description">Naciśnij ten klawisz w polu tekstowym, aby otworzyć lub zamknąć selektor emoji. Podczas pisania nie pełni już swojej zwykłej funkcji; poza polami tekstowymi działa bez zmian.</string>
+    <string name="emoji_picker_key_left_alt">Lewy Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Lewy Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Lewy Shift</string>
+    <string name="emoji_picker_key_off">Wył.</string>
+    <string name="emoji_picker_key_press_prompt">Naciśnij teraz klawisz, którego chcesz używać.</string>
+    <string name="emoji_picker_key_rejected">Ten klawisz wpisuje tekst lub jest potrzebny podczas pisania. Wybierz inny.</string>
+    <string name="emoji_picker_key_right_alt">Prawy Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Prawy Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Prawy Shift</string>
+    <string name="emoji_picker_key_title">Klawisz selektora emoji</string>
+    <string name="emoji_picker_key_turn_off">Wyłącz</string>
+    <string name="emoji_sticky_description">Jedno dotknięcie klawisza emoji sprawia, że następny klawisz wpisze swoje emoji z warstwy emoji. Dotknij dwa razy, aby otworzyć ekran emoji. Przytrzymanie klawisza emoji i naciśnięcie klawisza również wpisuje jego emoji.</string>
+    <string name="emoji_sticky_title">Dotknij klawisza emoji, aby wpisać emoji</string>
+</resources>

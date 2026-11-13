@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Emoji layer</string>
+    <string name="emoji_key_target_picker">Emoji picker</string>
+    <string name="emoji_key_target_title">Emoji key opens</string>
+    <string name="emoji_picker_key_current">Current key: %1$s</string>
+    <string name="emoji_picker_key_description">Press this key in a text field to open or close the emoji picker. While typing it no longer works as its usual key; outside text fields it is unchanged.</string>
+    <string name="emoji_picker_key_left_alt">Left Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Left Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Left Shift</string>
+    <string name="emoji_picker_key_off">Off</string>
+    <string name="emoji_picker_key_press_prompt">Press the key you want to use now.</string>
+    <string name="emoji_picker_key_rejected">That key types text or is needed while typing. Try another one.</string>
+    <string name="emoji_picker_key_right_alt">Right Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Right Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Right Shift</string>
+    <string name="emoji_picker_key_title">Emoji picker key</string>
+    <string name="emoji_picker_key_turn_off">Turn off</string>
+    <string name="emoji_sticky_description">A tap on the emoji key makes the next key type its emoji from the emoji layer. Tap it twice to open the emoji screen. Holding the emoji key and pressing a key types that key\'s emoji either way.</string>
+    <string name="emoji_sticky_title">Tap the emoji key for one emoji</string>
+</resources>

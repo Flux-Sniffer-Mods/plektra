@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Το επίπεδο emoji</string>
+    <string name="emoji_key_target_picker">Τον επιλογέα emoji</string>
+    <string name="emoji_key_target_title">Το πλήκτρο emoji ανοίγει</string>
+    <string name="emoji_picker_key_current">Τρέχον πλήκτρο: %1$s</string>
+    <string name="emoji_picker_key_description">Πατήστε αυτό το πλήκτρο σε ένα πεδίο κειμένου για να ανοίξει ή να κλείσει ο επιλογέας emoji. Κατά την πληκτρολόγηση δεν κάνει πλέον τη συνηθισμένη του λειτουργία· εκτός πεδίων κειμένου δεν αλλάζει.</string>
+    <string name="emoji_picker_key_left_alt">Αριστερό Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Αριστερό Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Αριστερό Shift</string>
+    <string name="emoji_picker_key_off">Ανενεργό</string>
+    <string name="emoji_picker_key_press_prompt">Πατήστε τώρα το πλήκτρο που θέλετε να χρησιμοποιήσετε.</string>
+    <string name="emoji_picker_key_rejected">Αυτό το πλήκτρο πληκτρολογεί κείμενο ή χρειάζεται κατά την πληκτρολόγηση. Δοκιμάστε άλλο.</string>
+    <string name="emoji_picker_key_right_alt">Δεξί Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Δεξί Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Δεξί Shift</string>
+    <string name="emoji_picker_key_title">Πλήκτρο επιλογέα emoji</string>
+    <string name="emoji_picker_key_turn_off">Απενεργοποίηση</string>
+    <string name="emoji_sticky_description">Ένα πάτημα στο πλήκτρο emoji κάνει το επόμενο πλήκτρο να πληκτρολογήσει το emoji του από το επίπεδο emoji. Πατήστε το δύο φορές για να ανοίξει η οθόνη emoji. Κρατώντας το πλήκτρο emoji και πατώντας ένα πλήκτρο πληκτρολογείται επίσης το emoji του.</string>
+    <string name="emoji_sticky_title">Πατήστε το πλήκτρο emoji για emoji</string>
+</resources>

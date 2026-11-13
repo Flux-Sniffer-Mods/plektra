@@ -602,6 +602,8 @@ fun SymCustomizationScreen(
             }
         }
 
+        EmojiKeySetting()
+
         EmojiPagesSettingsSection()
 
         HorizontalDivider()

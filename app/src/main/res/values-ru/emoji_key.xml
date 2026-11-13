@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Слой эмодзи</string>
+    <string name="emoji_key_target_picker">Панель эмодзи</string>
+    <string name="emoji_key_target_title">Клавиша эмодзи открывает</string>
+    <string name="emoji_picker_key_current">Текущая клавиша: %1$s</string>
+    <string name="emoji_picker_key_description">Нажмите эту клавишу в текстовом поле, чтобы открыть или закрыть панель эмодзи. Во время ввода она больше не выполняет свою обычную функцию; вне текстовых полей не меняется.</string>
+    <string name="emoji_picker_key_left_alt">Левый Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Левый Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Левый Shift</string>
+    <string name="emoji_picker_key_off">Выкл.</string>
+    <string name="emoji_picker_key_press_prompt">Нажмите клавишу, которую хотите использовать.</string>
+    <string name="emoji_picker_key_rejected">Эта клавиша вводит текст или нужна при вводе. Попробуйте другую.</string>
+    <string name="emoji_picker_key_right_alt">Правый Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Правый Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Правый Shift</string>
+    <string name="emoji_picker_key_title">Клавиша панели эмодзи</string>
+    <string name="emoji_picker_key_turn_off">Выключить</string>
+    <string name="emoji_sticky_description">Одно нажатие клавиши эмодзи заставляет следующую клавишу ввести свой эмодзи из слоя эмодзи. Нажмите дважды, чтобы открыть экран эмодзи. Удержание клавиши эмодзи с нажатием клавиши тоже вводит её эмодзи.</string>
+    <string name="emoji_sticky_title">Нажмите клавишу эмодзи для эмодзи</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">La couche emoji</string>
+    <string name="emoji_key_target_picker">Le sélecteur d’emoji</string>
+    <string name="emoji_key_target_title">La touche emoji ouvre</string>
+    <string name="emoji_picker_key_current">Touche actuelle : %1$s</string>
+    <string name="emoji_picker_key_description">Appuyez sur cette touche dans un champ de texte pour ouvrir ou fermer le sélecteur d’emoji. Pendant la saisie, elle ne fait plus son rôle habituel ; hors des champs de texte, rien ne change.</string>
+    <string name="emoji_picker_key_left_alt">Alt gauche</string>
+    <string name="emoji_picker_key_left_ctrl">Ctrl gauche</string>
+    <string name="emoji_picker_key_left_shift">Shift gauche</string>
+    <string name="emoji_picker_key_off">Désactivée</string>
+    <string name="emoji_picker_key_press_prompt">Appuyez maintenant sur la touche que vous voulez utiliser.</string>
+    <string name="emoji_picker_key_rejected">Cette touche tape du texte ou sert pendant la saisie. Essayez-en une autre.</string>
+    <string name="emoji_picker_key_right_alt">Alt droite</string>
+    <string name="emoji_picker_key_right_ctrl">Ctrl droite</string>
+    <string name="emoji_picker_key_right_shift">Shift droite</string>
+    <string name="emoji_picker_key_title">Touche du sélecteur d’emoji</string>
+    <string name="emoji_picker_key_turn_off">Désactiver</string>
+    <string name="emoji_sticky_description">Un appui sur la touche emoji fait taper à la touche suivante son emoji de la couche emoji. Touchez-la deux fois pour ouvrir l’écran des emoji. Maintenir la touche emoji en appuyant sur une touche tape aussi son emoji.</string>
+    <string name="emoji_sticky_title">Touchez la touche emoji pour un emoji</string>
+</resources>
