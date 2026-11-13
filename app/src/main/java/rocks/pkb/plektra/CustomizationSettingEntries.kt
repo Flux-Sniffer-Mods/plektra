@@ -640,6 +640,17 @@ internal fun customizationSettingEntries(): List<SettingEntry> = listOf(
         )
     ),
     SettingEntry(
+        id = WallpaperKeyboardColours.LINK_ID,
+        titleRes = R.string.keyboard_theme_wallpaper_colours_title,
+        summaryRes = R.string.keyboard_theme_wallpaper_colours_description,
+        route = SettingRoute(
+            destination = SettingsDestination.Customization,
+            customizationDestination = "keyboard_theme_assignment",
+            keyboardThemeTarget = SettingsManager.KeyboardThemeTarget.HARDWARE
+        ),
+        availabilityCheck = { android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S }
+    ),
+    SettingEntry(
         id = "keyboard_theme.hardware.light_theme",
         titleRes = R.string.setting_link_theme_hardware_light_theme,
         route = SettingRoute(

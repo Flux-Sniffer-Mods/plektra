@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keyboard_theme_wallpaper_colours_description">Klawiatura bierze kolory z Twojej tapety, w trybie jasnym lub ciemnym. Kształt i rozmiary motywu pozostają bez zmian.</string>
+    <string name="keyboard_theme_wallpaper_colours_title">Kolory tapety</string>
+</resources>

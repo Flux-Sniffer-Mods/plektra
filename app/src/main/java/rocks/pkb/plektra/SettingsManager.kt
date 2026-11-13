@@ -932,7 +932,8 @@ object SettingsManager {
         }
 
     fun isKeyboardThemePreferenceKey(key: String?): Boolean {
-        return key == KEY_KEYBOARD_THEME_HARDWARE || key == KEY_KEYBOARD_THEME_SOFTWARE
+        return key == KEY_KEYBOARD_THEME_HARDWARE || key == KEY_KEYBOARD_THEME_SOFTWARE ||
+            key == WallpaperKeyboardColours.KEY_ENABLED
     }
 
     fun isModifierIndicatorPreferenceKey(key: String?): Boolean {
@@ -1071,12 +1072,14 @@ object SettingsManager {
         locale: String?,
         layout: String?
     ): KeyboardThemeSettings {
-        findKeyboardThemeLayoutOverride(context, target, locale, layout)?.let { return it.theme }
-        return if (getKeyboardThemeAssignmentMode(context, target) == KEYBOARD_THEME_ASSIGNMENT_MODE_FOLLOW_SYSTEM) {
-            getKeyboardThemeSystemSlot(context, target, dark = isSystemDarkTheme(context))
-        } else {
-            getKeyboardTheme(context, target)
-        }
+        val theme = findKeyboardThemeLayoutOverride(context, target, locale, layout)?.theme
+            ?: if (getKeyboardThemeAssignmentMode(context, target) == KEYBOARD_THEME_ASSIGNMENT_MODE_FOLLOW_SYSTEM) {
+                getKeyboardThemeSystemSlot(context, target, dark = isSystemDarkTheme(context))
+            } else {
+                getKeyboardTheme(context, target)
+            }
+        // Colours from the wallpaper, over whichever theme applies
+        return WallpaperKeyboardColours.applyIfOn(context, theme)
     }
 
     fun getKeyboardThemeLayoutOverrides(
