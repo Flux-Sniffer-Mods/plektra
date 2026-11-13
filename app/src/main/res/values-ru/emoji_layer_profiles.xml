@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Праздники</string>
+    <string name="emoji_profile_chatting">Общение</string>
+    <string name="emoji_profile_everyday">На каждый день</string>
+    <string name="emoji_profile_food">Еда и напитки</string>
+    <string name="emoji_profile_gaming">Игры</string>
+    <string name="emoji_profile_love">Любовь</string>
+    <string name="emoji_profile_social">Соцсети</string>
+    <string name="emoji_profile_travel">Путешествия и природа</string>
+    <string name="emoji_profile_work">Работа</string>
+    <string name="emoji_profiles_applied">%1$s теперь ваш слой эмодзи</string>
+    <string name="emoji_profiles_apply">Сделать слоем эмодзи</string>
+    <string name="emoji_profiles_delete">Удалить</string>
+    <string name="emoji_profiles_description">Эмодзи для общения, работы, соцсетей, еды, путешествий и другого; или ваши собственные</string>
+    <string name="emoji_profiles_in_use">используется</string>
+    <string name="emoji_profiles_intro">Профиль размещает 26 эмодзи на слое эмодзи, по одному на буквенную клавишу, для определённой ситуации. Примените профиль, чтобы сделать его своим слоем эмодзи; отдельные клавиши меняются в разделе «Настроить слои SYM».</string>
+    <string name="emoji_profiles_name_title">Название профиля</string>
+    <string name="emoji_profiles_new_name">Мои эмодзи %1$d</string>
+    <string name="emoji_profiles_rename">Переименовать</string>
+    <string name="emoji_profiles_save_current_description">Сохраните текущий слой эмодзи, чтобы вернуться к нему позже.</string>
+    <string name="emoji_profiles_save_current_title">Сохранить слой эмодзи как профиль</string>
+    <string name="emoji_profiles_situations">Ситуации</string>
+    <string name="emoji_profiles_switch_by_app_description">Слой эмодзи следует за открытым приложением: «Общение» в мессенджерах, «Соцсети» в социальных приложениях, «Работа» в рабочих, «Еда и напитки» в приложениях о еде, «Путешествия» в картах и приложениях для поездок. Остальные приложения сохраняют ваш слой.</string>
+    <string name="emoji_profiles_switch_by_app_title">Переключать по приложению</string>
+    <string name="emoji_profiles_title">Профили слоя эмодзи</string>
+    <string name="emoji_profiles_update">Обновить из слоя эмодзи</string>
+    <string name="emoji_profiles_yours">Ваши профили</string>
+</resources>

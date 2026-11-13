@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Świętowanie</string>
+    <string name="emoji_profile_chatting">Czat</string>
+    <string name="emoji_profile_everyday">Na co dzień</string>
+    <string name="emoji_profile_food">Jedzenie i picie</string>
+    <string name="emoji_profile_gaming">Gry</string>
+    <string name="emoji_profile_love">Miłość</string>
+    <string name="emoji_profile_social">Media społecznościowe</string>
+    <string name="emoji_profile_travel">Podróże i natura</string>
+    <string name="emoji_profile_work">Praca</string>
+    <string name="emoji_profiles_applied">%1$s jest teraz Twoją warstwą emoji</string>
+    <string name="emoji_profiles_apply">Użyj jako warstwy emoji</string>
+    <string name="emoji_profiles_delete">Usuń</string>
+    <string name="emoji_profiles_description">Emoji do czatu, pracy, mediów społecznościowych, jedzenia, podróży i nie tylko; albo Twoje własne</string>
+    <string name="emoji_profiles_in_use">w użyciu</string>
+    <string name="emoji_profiles_intro">Profil umieszcza 26 emoji na warstwie emoji, po jednym na klawisz litery, dla danej sytuacji. Zastosuj profil, aby był Twoją warstwą emoji; pojedyncze klawisze edytujesz w Dostosuj warstwy SYM.</string>
+    <string name="emoji_profiles_name_title">Nazwa profilu</string>
+    <string name="emoji_profiles_new_name">Moje emoji %1$d</string>
+    <string name="emoji_profiles_rename">Zmień nazwę</string>
+    <string name="emoji_profiles_save_current_description">Zachowaj warstwę emoji w obecnej postaci, aby wrócić do niej później.</string>
+    <string name="emoji_profiles_save_current_title">Zapisz warstwę emoji jako profil</string>
+    <string name="emoji_profiles_situations">Sytuacje</string>
+    <string name="emoji_profiles_switch_by_app_description">Warstwa emoji podąża za aplikacją, w której jesteś: Czat w komunikatorach, Media społecznościowe w aplikacjach społecznościowych, Praca w aplikacjach do pracy, Jedzenie i picie w aplikacjach kulinarnych, Podróże w mapach i aplikacjach podróżnych. Inne aplikacje zachowują Twoją warstwę.</string>
+    <string name="emoji_profiles_switch_by_app_title">Przełączaj według aplikacji</string>
+    <string name="emoji_profiles_title">Profile warstwy emoji</string>
+    <string name="emoji_profiles_update">Aktualizuj z warstwy emoji</string>
+    <string name="emoji_profiles_yours">Twoje profile</string>
+</resources>

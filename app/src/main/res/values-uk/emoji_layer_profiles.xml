@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Свята</string>
+    <string name="emoji_profile_chatting">Спілкування</string>
+    <string name="emoji_profile_everyday">На щодень</string>
+    <string name="emoji_profile_food">Їжа й напої</string>
+    <string name="emoji_profile_gaming">Ігри</string>
+    <string name="emoji_profile_love">Кохання</string>
+    <string name="emoji_profile_social">Соцмережі</string>
+    <string name="emoji_profile_travel">Подорожі й природа</string>
+    <string name="emoji_profile_work">Робота</string>
+    <string name="emoji_profiles_applied">%1$s тепер ваш шар емодзі</string>
+    <string name="emoji_profiles_apply">Зробити шаром емодзі</string>
+    <string name="emoji_profiles_delete">Видалити</string>
+    <string name="emoji_profiles_description">Емодзі для спілкування, роботи, соцмереж, їжі, подорожей та іншого; або ваші власні</string>
+    <string name="emoji_profiles_in_use">використовується</string>
+    <string name="emoji_profiles_intro">Профіль розміщує 26 емодзі на шарі емодзі, по одному на літерну клавішу, для певної ситуації. Застосуйте профіль, щоб зробити його своїм шаром емодзі; окремі клавіші змінюються в розділі «Налаштувати шари SYM».</string>
+    <string name="emoji_profiles_name_title">Назва профілю</string>
+    <string name="emoji_profiles_new_name">Мої емодзі %1$d</string>
+    <string name="emoji_profiles_rename">Перейменувати</string>
+    <string name="emoji_profiles_save_current_description">Збережіть поточний шар емодзі, щоб повернутися до нього пізніше.</string>
+    <string name="emoji_profiles_save_current_title">Зберегти шар емодзі як профіль</string>
+    <string name="emoji_profiles_situations">Ситуації</string>
+    <string name="emoji_profiles_switch_by_app_description">Шар емодзі слідує за відкритим застосунком: «Спілкування» в месенджерах, «Соцмережі» в соціальних застосунках, «Робота» в робочих, «Їжа й напої» в застосунках про їжу, «Подорожі» в картах і застосунках для подорожей. Інші застосунки зберігають ваш шар.</string>
+    <string name="emoji_profiles_switch_by_app_title">Перемикати за застосунком</string>
+    <string name="emoji_profiles_title">Профілі шару емодзі</string>
+    <string name="emoji_profiles_update">Оновити з шару емодзі</string>
+    <string name="emoji_profiles_yours">Ваші профілі</string>
+</resources>

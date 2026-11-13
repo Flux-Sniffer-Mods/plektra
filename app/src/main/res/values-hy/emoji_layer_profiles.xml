@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Տոներ</string>
+    <string name="emoji_profile_chatting">Զրույց</string>
+    <string name="emoji_profile_everyday">Ամենօրյա</string>
+    <string name="emoji_profile_food">Սնունդ և խմիչք</string>
+    <string name="emoji_profile_gaming">Խաղեր</string>
+    <string name="emoji_profile_love">Սեր</string>
+    <string name="emoji_profile_social">Սոցցանցեր</string>
+    <string name="emoji_profile_travel">Ճամփորդություն և բնություն</string>
+    <string name="emoji_profile_work">Աշխատանք</string>
+    <string name="emoji_profiles_applied">%1$s-ն այժմ ձեր էմոջիի շերտն է</string>
+    <string name="emoji_profiles_apply">Օգտագործել որպես էմոջիի շերտ</string>
+    <string name="emoji_profiles_delete">Ջնջել</string>
+    <string name="emoji_profiles_description">Էմոջիներ զրույցի, աշխատանքի, սոցցանցերի, սննդի, ճամփորդության և այլնի համար, կամ ձերը</string>
+    <string name="emoji_profiles_in_use">օգտագործվում է</string>
+    <string name="emoji_profiles_intro">Պրոֆիլը էմոջիի շերտում տեղադրում է 26 էմոջի՝ մեկական յուրաքանչյուր տառային ստեղնին, որոշակի իրավիճակի համար։ Կիրառեք մեկը՝ այն ձեր էմոջիի շերտը դարձնելու համար․ առանձին ստեղները խմբագրեք «Հարմարեցնել SYM շերտերը» բաժնում։</string>
+    <string name="emoji_profiles_name_title">Պրոֆիլի անուն</string>
+    <string name="emoji_profiles_new_name">Իմ էմոջիները %1$d</string>
+    <string name="emoji_profiles_rename">Վերանվանել</string>
+    <string name="emoji_profiles_save_current_description">Պահեք էմոջիի շերտն այնպես, ինչպես հիմա է, որ հետո վերադառնաք դրան։</string>
+    <string name="emoji_profiles_save_current_title">Պահել էմոջիի շերտը որպես պրոֆիլ</string>
+    <string name="emoji_profiles_situations">Իրավիճակներ</string>
+    <string name="emoji_profiles_switch_by_app_description">Էմոջիի շերտը հետևում է այն հավելվածին, որում եք․ Զրույց՝ մեսենջերներում, Սոցցանցեր՝ սոցիալական հավելվածներում, Աշխատանք՝ աշխատանքային հավելվածներում, Սնունդ և խմիչք՝ սննդի հավելվածներում, Ճամփորդություն՝ քարտեզներում և ճամփորդական հավելվածներում։ Մյուս հավելվածները պահում են ձեր սեփական շերտը։</string>
+    <string name="emoji_profiles_switch_by_app_title">Փոխել ըստ հավելվածի</string>
+    <string name="emoji_profiles_title">Էմոջիի շերտի պրոֆիլներ</string>
+    <string name="emoji_profiles_update">Թարմացնել էմոջիի շերտից</string>
+    <string name="emoji_profiles_yours">Ձեր պրոֆիլները</string>
+</resources>

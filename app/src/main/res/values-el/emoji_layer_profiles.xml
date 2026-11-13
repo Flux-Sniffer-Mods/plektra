@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Γιορτές</string>
+    <string name="emoji_profile_chatting">Συνομιλία</string>
+    <string name="emoji_profile_everyday">Καθημερινά</string>
+    <string name="emoji_profile_food">Φαγητό και ποτό</string>
+    <string name="emoji_profile_gaming">Παιχνίδια</string>
+    <string name="emoji_profile_love">Αγάπη</string>
+    <string name="emoji_profile_social">Κοινωνικά δίκτυα</string>
+    <string name="emoji_profile_travel">Ταξίδια και ύπαιθρος</string>
+    <string name="emoji_profile_work">Εργασία</string>
+    <string name="emoji_profiles_applied">Το %1$s είναι τώρα το επίπεδο emoji σας</string>
+    <string name="emoji_profiles_apply">Χρήση ως επίπεδο emoji</string>
+    <string name="emoji_profiles_delete">Διαγραφή</string>
+    <string name="emoji_profiles_description">Emoji για συνομιλία, εργασία, κοινωνικά δίκτυα, φαγητό, ταξίδια και άλλα· ή τα δικά σας</string>
+    <string name="emoji_profiles_in_use">σε χρήση</string>
+    <string name="emoji_profiles_intro">Ένα προφίλ βάζει 26 emoji στο επίπεδο emoji, ένα ανά πλήκτρο γράμματος, για μια περίσταση. Εφαρμόστε ένα για να γίνει το επίπεδο emoji σας· επεξεργαστείτε μεμονωμένα πλήκτρα στην Προσαρμογή επιπέδων SYM.</string>
+    <string name="emoji_profiles_name_title">Όνομα προφίλ</string>
+    <string name="emoji_profiles_new_name">Τα emoji μου %1$d</string>
+    <string name="emoji_profiles_rename">Μετονομασία</string>
+    <string name="emoji_profiles_save_current_description">Κρατήστε το επίπεδο emoji όπως είναι τώρα, για να επιστρέψετε σε αυτό αργότερα.</string>
+    <string name="emoji_profiles_save_current_title">Αποθήκευση του επιπέδου emoji ως προφίλ</string>
+    <string name="emoji_profiles_situations">Περιστάσεις</string>
+    <string name="emoji_profiles_switch_by_app_description">Το επίπεδο emoji ακολουθεί την εφαρμογή στην οποία βρίσκεστε: Συνομιλία σε εφαρμογές μηνυμάτων, Κοινωνικά δίκτυα σε κοινωνικές εφαρμογές, Εργασία σε εφαρμογές εργασίας, Φαγητό και ποτό σε εφαρμογές φαγητού, Ταξίδια σε χάρτες και ταξιδιωτικές εφαρμογές. Οι άλλες εφαρμογές κρατούν το δικό σας επίπεδο.</string>
+    <string name="emoji_profiles_switch_by_app_title">Εναλλαγή ανά εφαρμογή</string>
+    <string name="emoji_profiles_title">Προφίλ επιπέδου emoji</string>
+    <string name="emoji_profiles_update">Ενημέρωση από το επίπεδο emoji</string>
+    <string name="emoji_profiles_yours">Τα προφίλ σας</string>
+</resources>

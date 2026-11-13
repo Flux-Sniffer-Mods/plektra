@@ -606,6 +606,8 @@ fun SymCustomizationScreen(
 
         HorizontalDivider()
 
+        EmojiLayerProfilesSection(onApplied = { symMappingsPage1 = it })
+
         }
 
         if (editingLayerPage != null) {

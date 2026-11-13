@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Fêtes</string>
+    <string name="emoji_profile_chatting">Discussion</string>
+    <string name="emoji_profile_everyday">Quotidien</string>
+    <string name="emoji_profile_food">Nourriture et boissons</string>
+    <string name="emoji_profile_gaming">Jeux vidéo</string>
+    <string name="emoji_profile_love">Amour</string>
+    <string name="emoji_profile_social">Réseaux sociaux</string>
+    <string name="emoji_profile_travel">Voyage et plein air</string>
+    <string name="emoji_profile_work">Travail</string>
+    <string name="emoji_profiles_applied">%1$s est maintenant votre couche emoji</string>
+    <string name="emoji_profiles_apply">Utiliser comme couche emoji</string>
+    <string name="emoji_profiles_delete">Supprimer</string>
+    <string name="emoji_profiles_description">Des emoji pour discuter, le travail, les réseaux sociaux, la cuisine, les voyages et plus ; ou les vôtres</string>
+    <string name="emoji_profiles_in_use">utilisé</string>
+    <string name="emoji_profiles_intro">Un profil place 26 emoji sur la couche emoji, un par touche de lettre, pour une situation. Appliquez-en un pour en faire votre couche emoji ; modifiez des touches individuelles dans Personnaliser les couches SYM.</string>
+    <string name="emoji_profiles_name_title">Nom du profil</string>
+    <string name="emoji_profiles_new_name">Mes emoji %1$d</string>
+    <string name="emoji_profiles_rename">Renommer</string>
+    <string name="emoji_profiles_save_current_description">Conservez la couche emoji telle qu’elle est, pour y revenir plus tard.</string>
+    <string name="emoji_profiles_save_current_title">Enregistrer la couche emoji comme profil</string>
+    <string name="emoji_profiles_situations">Situations</string>
+    <string name="emoji_profiles_switch_by_app_description">La couche emoji suit l’app dans laquelle vous êtes : Discussion dans les messageries, Réseaux sociaux dans les apps sociales, Travail dans les apps de travail, Nourriture et boissons dans les apps culinaires, Voyage dans les cartes et apps de voyage. Les autres apps gardent votre propre couche.</string>
+    <string name="emoji_profiles_switch_by_app_title">Changer selon l’app</string>
+    <string name="emoji_profiles_title">Profils de la couche emoji</string>
+    <string name="emoji_profiles_update">Mettre à jour depuis la couche emoji</string>
+    <string name="emoji_profiles_yours">Vos profils</string>
+</resources>

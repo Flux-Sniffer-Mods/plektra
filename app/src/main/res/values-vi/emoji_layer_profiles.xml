@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Lễ hội</string>
+    <string name="emoji_profile_chatting">Trò chuyện</string>
+    <string name="emoji_profile_everyday">Hằng ngày</string>
+    <string name="emoji_profile_food">Đồ ăn và thức uống</string>
+    <string name="emoji_profile_gaming">Chơi game</string>
+    <string name="emoji_profile_love">Tình yêu</string>
+    <string name="emoji_profile_social">Mạng xã hội</string>
+    <string name="emoji_profile_travel">Du lịch và ngoài trời</string>
+    <string name="emoji_profile_work">Công việc</string>
+    <string name="emoji_profiles_applied">%1$s giờ là lớp emoji của bạn</string>
+    <string name="emoji_profiles_apply">Dùng làm lớp emoji</string>
+    <string name="emoji_profiles_delete">Xóa</string>
+    <string name="emoji_profiles_description">Emoji cho trò chuyện, công việc, mạng xã hội, đồ ăn, du lịch và hơn nữa; hoặc của riêng bạn</string>
+    <string name="emoji_profiles_in_use">đang dùng</string>
+    <string name="emoji_profiles_intro">Một hồ sơ đặt 26 emoji lên lớp emoji, mỗi phím chữ một emoji, cho một tình huống. Áp dụng một hồ sơ để biến nó thành lớp emoji của bạn; sửa từng phím trong Tùy chỉnh lớp SYM.</string>
+    <string name="emoji_profiles_name_title">Tên hồ sơ</string>
+    <string name="emoji_profiles_new_name">Emoji của tôi %1$d</string>
+    <string name="emoji_profiles_rename">Đổi tên</string>
+    <string name="emoji_profiles_save_current_description">Giữ lớp emoji như hiện tại, để chuyển lại sau.</string>
+    <string name="emoji_profiles_save_current_title">Lưu lớp emoji thành hồ sơ</string>
+    <string name="emoji_profiles_situations">Tình huống</string>
+    <string name="emoji_profiles_switch_by_app_description">Lớp emoji theo ứng dụng bạn đang dùng: Trò chuyện trong ứng dụng nhắn tin, Mạng xã hội trong ứng dụng xã hội, Công việc trong ứng dụng làm việc, Đồ ăn và thức uống trong ứng dụng ẩm thực, Du lịch trong bản đồ và ứng dụng du lịch. Các ứng dụng khác giữ lớp của riêng bạn.</string>
+    <string name="emoji_profiles_switch_by_app_title">Chuyển theo ứng dụng</string>
+    <string name="emoji_profiles_title">Hồ sơ lớp emoji</string>
+    <string name="emoji_profiles_update">Cập nhật từ lớp emoji</string>
+    <string name="emoji_profiles_yours">Hồ sơ của bạn</string>
+</resources>
