@@ -26,7 +26,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*OneTimeCodesTest
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 13 November 2026 against source commit `28b9b0e7` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 188 classes, 1,431 tests, no failures, errors or skips (upstream alone: 185 classes, 1,417 tests). Of these, 14 are new: 9 in `OneTimeCodesTest`, 4 in `OneTimeCodeFieldsTest` and one in `OneTimeCodesBackupTest`.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new classes are in the `suggestions` and `data-backup` topics.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
 
 ## Device check (still to do)
 
