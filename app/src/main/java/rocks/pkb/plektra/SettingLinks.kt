@@ -578,6 +578,12 @@ object SettingLinkRegistry {
             destination = SettingsDestination.AutoCorrection
         ),
         entry(
+            rocks.pkb.plektra.spellcheck.PhoneSpellChecker.LINK_ID,
+            R.string.phone_spell_checker_title,
+            R.string.phone_spell_checker_description,
+            destination = SettingsDestination.AutoCorrection
+        ),
+        entry(
             SettingLinkIds.AUTO_CORRECTION_EDIT_TYPE_RANKING,
             R.string.auto_correct_edit_type_ranking_title,
             R.string.auto_correct_edit_type_ranking_description,

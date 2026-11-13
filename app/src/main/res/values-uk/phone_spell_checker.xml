@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_spell_checker_title">Перевірка правопису телефона в підказках</string>
+    <string name="phone_spell_checker_description">Якщо перевірка правопису Android від іншого застосунку (наприклад, Gboard), її виправлення для слова з помилкою додаються до панелі підказок.</string>
+</resources>

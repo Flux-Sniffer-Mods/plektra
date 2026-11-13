@@ -544,6 +544,8 @@ fun AutoCorrectionCategoryScreen(
                             }
                         }
 
+                        rocks.pkb.plektra.spellcheck.PhoneSpellCheckerSetting(enabled = experimentalSuggestionsEnabled)
+
                         Surface(
                             modifier = Modifier
                                 .fillMaxWidth()

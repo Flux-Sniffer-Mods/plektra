@@ -351,6 +351,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     private var dispatchingClicksAccessibilityKeyEvent = false
     private var replayingProtectedNumberKey = false
     private val uiHandler = Handler(Looper.getMainLooper())
+    private val phoneSpellChecker by lazy { rocks.pkb.plektra.spellcheck.PhoneSpellChecker(this) }
     // Modifier badge beside the text cursor, and the state of its cursor-update request
     private val caretBadgeController by lazy {
         CaretBadgeController(this) { candidatesBarController.modifierIndicatorColors() }
@@ -1955,7 +1956,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             onSuggestionsUpdated = { suggestions -> handleSuggestionsUpdated(suggestions) },
             currentLocale = initialLocale,
             keyboardLayoutProvider = { SettingsManager.getKeyboardLayout(this) },
-            activeSuggestionLocalesProvider = { getAdditionalSuggestionLocalesForActiveInputStyle() }
+            activeSuggestionLocalesProvider = { getAdditionalSuggestionLocalesForActiveInputStyle() },
+            // The phone's own spell checker (Gboard's, say) as a second opinion on misspelt words
+            externalSuggestions = { word, locale, onResult -> phoneSpellChecker.suggest(word, locale, onResult) }
         )
         inputEventRouter.suggestionController = suggestionController
         
@@ -3054,6 +3057,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         rocks.pkb.plektra.ThemeTextureStore.removeAvailabilityListener(themeImageAvailabilityListener)
         
         cancelSpeechRecognition()
+        phoneSpellChecker.close()
         speechScope.cancel()
         // Cleanup SpeechRecognitionManager
         speechRecognitionManager?.destroy()

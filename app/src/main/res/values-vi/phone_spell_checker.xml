@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_spell_checker_title">Trình kiểm tra chính tả của điện thoại trong gợi ý</string>
+    <string name="phone_spell_checker_description">Khi trình kiểm tra chính tả của Android thuộc ứng dụng khác (như Gboard), các sửa lỗi của nó cho từ sai sẽ có trong thanh gợi ý.</string>
+</resources>

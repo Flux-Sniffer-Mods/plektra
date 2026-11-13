@@ -37,7 +37,13 @@ class SuggestionController(
         Boolean
     ) -> DictionaryRepository)? = null,
     nextWordPredictorOverride: NextWordPredictor? = null,
-    private val activeSuggestionLocalesProvider: (() -> List<Locale>)? = null
+    private val activeSuggestionLocalesProvider: (() -> List<Locale>)? = null,
+    /**
+     * Another spell checker's corrections for a word the dictionary doesn't know as typed (the
+     * phone's, see [rocks.pkb.plektra.spellcheck.PhoneSpellChecker]): given the word and
+     * language, it answers with corrections, or not at all.
+     */
+    private val externalSuggestions: ((word: String, locale: Locale, onResult: (List<String>) -> Unit) -> Unit)? = null
 ) {
 
     private val appContext = context.applicationContext
@@ -256,6 +262,20 @@ class SuggestionController(
                 pendingAddUserWord = pendingCandidate
                 latestSuggestions.set(next)
                 suggestionsListener?.invoke(next)
+                // Not a word the dictionary knows as typed: the phone's spell checker's corrections join in
+                val exact = next.firstOrNull()?.let { it.distance == 0 && it.candidate.equals(wordSnapshot, ignoreCase = true) } == true
+                if (!exact) externalSuggestions?.invoke(wordSnapshot, localeSnapshot) { extra ->
+                    cursorHandler.post {
+                        if (!isEnabled() || generation != suggestionGeneration || tracker.currentWord != wordSnapshot) return@post
+                        val fresh = extra.filter { candidate -> next.none { it.candidate.equals(candidate, ignoreCase = true) } }
+                            .map { SuggestionResult(it, 1, 0.5, SuggestionSource.MAIN) }
+                        if (fresh.isEmpty()) return@post
+                        // Second, after the dictionary's best, within the bar's slots
+                        val merged = (next.take(1) + fresh + next.drop(1)).take(maxOf(settings.maxSuggestions, 3))
+                        latestSuggestions.set(merged)
+                        suggestionsListener?.invoke(merged)
+                    }
+                }
             }
         }
     }
