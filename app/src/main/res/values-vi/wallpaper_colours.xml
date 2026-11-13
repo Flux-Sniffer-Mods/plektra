@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="keyboard_theme_wallpaper_colours_description">Bàn phím lấy màu từ hình nền của bạn, ở chế độ sáng hoặc tối. Hình dạng và kích thước của chủ đề được giữ nguyên.</string>
+    <string name="keyboard_theme_wallpaper_colours_title">Màu hình nền</string>
+</resources>
