@@ -165,7 +165,8 @@
       "rocks.pkb.plektra.core.suggestions.UserNGramStoreTest",
       "rocks.pkb.plektra.core.suggestions.UserOnlyDictionaryTest",
       "rocks.pkb.plektra.core.suggestions.WordNormalizationTest",
-      "rocks.pkb.plektra.inputmethod.AddWordCommitHelperTest"
+      "rocks.pkb.plektra.inputmethod.AddWordCommitHelperTest",
+      "rocks.pkb.plektra.inputmethod.InlineAutofillTest"
     ],
     "keys-modifiers": [
       "rocks.pkb.plektra.core.ModifierStateControllerTest",

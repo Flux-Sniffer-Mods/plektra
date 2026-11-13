@@ -265,6 +265,7 @@ internal object BackupPreferenceContract {
             "accessibility_live_announcements_enabled" to PreferenceValueType.BOOLEAN,
             "accessibility_read_second_row_enabled" to PreferenceValueType.BOOLEAN,
             "accessibility_suggestions_announcement_delay_ms" to PreferenceValueType.LONG,
+            "inline_autofill_enabled" to PreferenceValueType.BOOLEAN,
             "bounce_keys_enabled" to PreferenceValueType.BOOLEAN,
             "bounce_keys_delay_ms" to PreferenceValueType.LONG,
             "bounce_keys_character_keys_enabled" to PreferenceValueType.BOOLEAN,

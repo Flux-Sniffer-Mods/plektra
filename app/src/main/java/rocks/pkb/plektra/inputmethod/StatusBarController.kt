@@ -413,7 +413,7 @@ class StatusBarController(
         get() = slimModeActive && buttonRegistry.getEnabledSlimButtons(context).isNotEmpty()
     private var hasTransientSurface: Boolean = false
     val hasTransientContent: Boolean
-        get() = hasTransientSurface || expansionSuggestions.isNotEmpty()
+        get() = hasTransientSurface || expansionSuggestions.isNotEmpty() || inlineAutofill.views.isNotEmpty()
     private var fullSuggestionsBar: FullSuggestionsBar? = null
     private var expansionSuggestions: List<String> = emptyList()
     private var onExpansionSuggestionSelected: ((String) -> Unit)? = null
@@ -926,6 +926,23 @@ class StatusBarController(
     fun clearExpansionSuggestions() {
         expansionSuggestions = emptyList()
         onExpansionSuggestionSelected = null
+    }
+
+    // Inline autofill: the password manager's chips in the middle of the bar
+    private val inlineAutofill = InlineAutofillStrip(context)
+
+    /** The colours of the bar's suggestion buttons, for the password manager's chips. */
+    fun suggestionChipColours(): Pair<Int, Int> = activeThemeColors().let { it.suggestion to it.textAndIcons }
+
+    /** The height of the bar's suggestion buttons, for the password manager's chips. */
+    fun suggestionChipHeight(): Int? = fullSuggestionsBar?.centerAccessoryHost()?.layoutParams?.height?.takeIf { it > 0 }
+
+    fun showInlineAutofill(views: List<View>) {
+        inlineAutofill.set(views)
+    }
+
+    fun clearInlineAutofill() {
+        inlineAutofill.clear(fullSuggestionsBar)
     }
 
     fun cancelSoftwareKeyboardTouchState() {
@@ -3278,6 +3295,7 @@ class StatusBarController(
         val showSlimMenuButtons = hasConfiguredMenuButtons && !isFullSoftwareKeyboardMode &&
             snapshot.symPage == 0 && !snapshot.clipboardOverlay
         val expansionActive = expansionSuggestions.isNotEmpty()
+        val autofillActive = inlineAutofill.views.isNotEmpty() && snapshot.symPage == 0 && !snapshot.clipboardOverlay
         val suggestionsAvailable = barPresentation.suggestions && !snapshot.shouldDisableSuggestions &&
             (SettingsManager.isExperimentalSuggestionsEnabled(context) || isFullSoftwareKeyboardMode || snapshot.speechPreviewActive) &&
             (snapshot.suggestions.isNotEmpty() || !snapshot.addWordCandidate.isNullOrBlank())
@@ -3368,9 +3386,9 @@ class StatusBarController(
             suggestionsAvailable -> snapshot.suggestions
             else -> emptyList()
         }
-        fullSuggestionsBar?.setContentEnabled(suggestionsEnabledSetting || expansionActive || sharedVariations.isNotEmpty(),
+        fullSuggestionsBar?.setContentEnabled(suggestionsEnabledSetting || expansionActive || autofillActive || sharedVariations.isNotEmpty(),
             menuButtons = showSlimMenuButtons || (sharedRow && barPresentation.actions))
-        val showFullBar = expansionActive || (sharedRow && barPresentation.actions) || (
+        val showFullBar = expansionActive || autofillActive || (sharedRow && barPresentation.actions) || (
             suggestionsEnabledSetting &&
                 (experimentalEnabled || isFullSoftwareKeyboardMode || snapshot.speechPreviewActive) &&
                 (isFullSoftwareKeyboardMode || !snapshot.shouldDisableSuggestions) &&
@@ -3410,6 +3428,7 @@ class StatusBarController(
             continuousPreview = snapshot.speechPreviewActive && !expansionActive && sharedVariations.isEmpty() &&
                 rocks.pkb.plektra.inputmethod.speech.SpeechSettings.continuousPreview(context)
         )
+        inlineAutofill.render(fullSuggestionsBar, autofillActive, activeThemeColors().suggestion, suggestionChipHeight())
         ledStatusView.compactOnly = fullSuggestionsBar?.ensureView()?.visibility != View.VISIBLE && !barPresentation.actions && !hasTransientSurface
         val ledOnly = ledStatusView.compactOnly && showLedStrip
         (statusBarLayout as? ImeChromeLayout)?.ledOnlyReservedHeightPx =

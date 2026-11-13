@@ -60,6 +60,8 @@ class FullSuggestionsBar(
 
     private var container: LinearLayout? = null
     private var frameContainer: FrameLayout? = null
+    private var centerAccessoryHost: FrameLayout? = null
+    private var centerAccessoryActive = false
     private var minimalLeftButtonsContainer: LinearLayout? = null
     private var minimalRightButtonsContainer: LinearLayout? = null
     private var hamburgerMenuView: HamburgerMenuView? = null
@@ -192,7 +194,16 @@ class FullSuggestionsBar(
                 }
             }
 
+            centerAccessoryHost = FrameLayout(context).apply {
+                visibility = View.GONE
+                layoutParams = FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    targetHeightPx
+                )
+            }
+
             frameContainer?.addView(container)
+            centerAccessoryHost?.let { frameContainer?.addView(it) }
             minimalLeftButtonsContainer?.let { frameContainer?.addView(it) }
             minimalRightButtonsContainer?.let { frameContainer?.addView(it) }
             
@@ -298,6 +309,23 @@ class FullSuggestionsBar(
         buttonHost.refreshLanguageText()
     }
 
+    /** Space between the menu buttons for a view shown in place of the suggestions. */
+    fun centerAccessoryHost(): FrameLayout? = centerAccessoryHost
+
+    /** Shows the hosted view in place of the suggestions (the host's content is the caller's). */
+    fun setCenterAccessoryActive(active: Boolean) {
+        if (centerAccessoryActive == active) return
+        centerAccessoryActive = active
+        centerAccessoryHost?.visibility = if (active) View.VISIBLE else View.GONE
+        if (active) {
+            container?.visibility = View.GONE
+            frameContainer?.visibility = View.VISIBLE
+            applyContainerInsetsForMinimalButtons()
+        } else {
+            lastSlots = emptyList() // re-render suggestions on the next update
+        }
+    }
+
     fun setMinimalUiActive(isActive: Boolean) {
         lastMinimalUiActive = isActive
         renderMinimalUiButtons()
@@ -389,7 +417,7 @@ class FullSuggestionsBar(
         }
         val canShowSuggestions = contentEnabled && shouldShow && !shouldDisableSuggestions &&
             (suggestions.isNotEmpty() || !addWordCandidate.isNullOrBlank())
-        if (!canShowSuggestions && !hasMenuButtons && !reserveEmptyRow) {
+        if (!canShowSuggestions && !hasMenuButtons && !reserveEmptyRow && !centerAccessoryActive) {
             cancelPendingSuggestionsAccessibilityEnable()
             suggestionButtons.clear()
             frame.visibility = View.GONE
@@ -408,6 +436,12 @@ class FullSuggestionsBar(
         bar.alpha = 1f
         renderMinimalUiButtons()
         applyContainerInsetsForMinimalButtons()
+
+        if (centerAccessoryActive) {
+            // A hosted view (autofill chips) owns the middle of the bar
+            bar.visibility = View.GONE
+            return
+        }
 
         if (!canShowSuggestions && !reserveEmptyRow) {
             cancelPendingSuggestionsAccessibilityEnable()
@@ -588,6 +622,18 @@ class FullSuggestionsBar(
         } ?: 0
         val leftInset = buttonsInset(minimalLeftButtonsContainer)
         val rightInset = buttonsInset(minimalRightButtonsContainer)
+        centerAccessoryHost?.let { host ->
+            val hostParams = (host.layoutParams as? FrameLayout.LayoutParams)
+                ?: FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, targetHeightPx)
+            if (hostParams.marginStart != leftInset || hostParams.marginEnd != rightInset ||
+                hostParams.height != targetHeightPx || host.layoutParams !is FrameLayout.LayoutParams
+            ) {
+                hostParams.marginStart = leftInset
+                hostParams.marginEnd = rightInset
+                hostParams.height = targetHeightPx
+                host.layoutParams = hostParams
+            }
+        }
         val params = (bar.layoutParams as? FrameLayout.LayoutParams)
             ?: FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,

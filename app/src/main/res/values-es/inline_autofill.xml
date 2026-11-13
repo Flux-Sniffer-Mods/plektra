@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Autocompletar en la barra de sugerencias</string>
+    <string name="inline_autofill_description">Los inicios de sesión guardados, códigos de un solo uso y direcciones de tu gestor de contraseñas aparecen como chips en la barra de sugerencias; toca uno para rellenar el campo.</string>
+</resources>

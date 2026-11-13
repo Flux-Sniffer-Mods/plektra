@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Автозаповнення в рядку підказок</string>
+    <string name="inline_autofill_description">Збережені логіни, одноразові коди й адреси з менеджера паролів з’являються чипами в рядку підказок; торкніться чипа, щоб заповнити поле.</string>
+</resources>

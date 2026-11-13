@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Autofill in the suggestion bar</string>
+    <string name="inline_autofill_description">Your password manager\'s saved logins, one-time codes and addresses appear as chips in the suggestion bar; tap one to fill the field.</string>
+</resources>

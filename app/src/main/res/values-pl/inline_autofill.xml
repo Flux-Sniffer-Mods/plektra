@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Autouzupełnianie na pasku podpowiedzi</string>
+    <string name="inline_autofill_description">Zapisane loginy, kody jednorazowe i adresy z menedżera haseł pojawiają się jako chipy na pasku podpowiedzi; dotknij jednego, aby wypełnić pole.</string>
+</resources>
