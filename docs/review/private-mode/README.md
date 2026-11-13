@@ -27,7 +27,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*PrivateModeTest'
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 13 November 2026 against source commit `327bcd00` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 193 classes, 1,435 tests, no failures, errors or skips (upstream alone: 185 classes, 1,417 tests). Of these, 4 are new in `PrivateModeTest`; the rest are the incognito typing and offline mode tests this branch carries (192 classes and 1,431 tests without it).
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new class is in the `suggestions` topic.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
 
 ## Device check (still to do)
 
