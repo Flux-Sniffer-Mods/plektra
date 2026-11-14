@@ -675,7 +675,8 @@ internal fun customizationSettingEntries(): List<SettingEntry> = listOf(
             customizationDestination = "keyboard_theme_assignment",
             keyboardThemeTarget = SettingsManager.KeyboardThemeTarget.HARDWARE
         ),
-        availabilityCheck = { android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S }
+        availabilityCheck = { android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S },
+        unavailableFallbackId = "keyboard_theme.hardware.assignment"
     ),
     SettingEntry(
         id = "keyboard_theme.hardware.light_theme",

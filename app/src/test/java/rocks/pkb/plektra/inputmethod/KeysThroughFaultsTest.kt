@@ -84,7 +84,8 @@ class KeysThroughFaultsTest {
         service.onStartInput(editorInfo, false)
         setField("mInputConnection", connection())
         press(KeyEvent.KEYCODE_Q)
-        assertEquals("q", text)
+        // The field set up this time, so it starts with a capital
+        assertEquals("Q", text)
     }
 
     @Test
