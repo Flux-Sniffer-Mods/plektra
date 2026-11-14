@@ -3787,6 +3787,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     override fun onStartInput(info: EditorInfo?, restarting: Boolean) {
         pendingKeyboardSurfaceTransition?.let(uiHandler::removeCallbacks)
         pendingKeyboardSurfaceTransition = null
+        // Terminal apps get no microphone button
+        TerminalApps.onAppInFront(info?.packageName)
         if (!restarting) {
             cancelSpeechRecognition()
             ++speechEditorSession

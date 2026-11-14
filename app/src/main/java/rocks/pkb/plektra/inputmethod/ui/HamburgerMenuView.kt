@@ -39,6 +39,9 @@ class HamburgerMenuView(
         StatusBarButtonId.Settings
     )
 
+    // No microphone in terminal apps
+    private fun shownMenuButtonIds() = rocks.pkb.plektra.inputmethod.TerminalApps.withoutUnused(menuButtonIds) { it }
+
     private var root: FrameLayout? = null
     private var row: LinearLayout? = null
     private val buttonHost = StatusBarButtonHost(context, buttonRegistry)
@@ -202,7 +205,7 @@ class HamburgerMenuView(
         rowView.addView(closeButtonView)
         val fallbackWidth = buttonHeight
         val hostedButtons = mutableListOf<StatusBarButtonHost.HostedButton>()
-        menuButtonIds.forEach { id ->
+        shownMenuButtonIds().forEach { id ->
             val hosted = buttonHost.getOrCreateButton(
                 id,
                 buttonHeight,
@@ -228,7 +231,7 @@ class HamburgerMenuView(
     }
 
     private fun updateButtonSizes(rowView: LinearLayout) {
-        val expectedButtons = menuButtonIds.size + 1
+        val expectedButtons = shownMenuButtonIds().size + 1
         val totalButtons = rowView.childCount
         if (totalButtons != expectedButtons) {
             return

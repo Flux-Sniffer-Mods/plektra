@@ -173,7 +173,9 @@ class StatusBarButtonRegistry {
         ))
     }
 
-    private fun withContextualButtons(buttons: List<StatusBarButtonConfig>): List<StatusBarButtonConfig> {
+    private fun withContextualButtons(configured: List<StatusBarButtonConfig>): List<StatusBarButtonConfig> {
+        // No microphone in terminal apps
+        val buttons = rocks.pkb.plektra.inputmethod.TerminalApps.withoutUnused(configured) { it.id }
         if (!keypadAccessAvailable) return buttons
         return listOf(StatusBarButtonConfig(StatusBarButtonId.Keypad, StatusBarButtonPosition.RIGHT, order = Int.MIN_VALUE)) + buttons
     }
