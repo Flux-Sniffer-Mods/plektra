@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Приватний режим</string>
+    <string name="private_mode_subtitle">Інкогніто-набір і офлайн-режим разом</string>
+    <string name="private_mode_on">Приватний режим увімкнено: нічого не запам’ятовується і нічого не йде в мережу</string>
+    <string name="private_mode_off">Приватний режим вимкнено: набір і офлайн-режим як були</string>
+</resources>

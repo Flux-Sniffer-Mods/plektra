@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Գաղտնի ռեժիմ</string>
+    <string name="private_mode_subtitle">Ինկոգնիտո մուտքագրում և անցանց ռեժիմ միասին</string>
+    <string name="private_mode_on">Գաղտնի ռեժիմը միացված է․ ոչինչ չի սովորվում կամ հիշվում, և ոչինչ առցանց չի գնում</string>
+    <string name="private_mode_off">Գաղտնի ռեժիմն անջատված է․ մուտքագրումն ու անցանց ռեժիմը վերադարձան նախկինին</string>
+</resources>

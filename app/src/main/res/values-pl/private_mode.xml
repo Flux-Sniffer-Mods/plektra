@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Tryb prywatny</string>
+    <string name="private_mode_subtitle">Pisanie incognito i tryb offline razem</string>
+    <string name="private_mode_on">Tryb prywatny włączony: nic nie jest zapamiętywane i nic nie trafia do sieci</string>
+    <string name="private_mode_off">Tryb prywatny wyłączony: pisanie i tryb offline wracają do poprzedniego stanu</string>
+</resources>

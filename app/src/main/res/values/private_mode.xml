@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Private mode</string>
+    <string name="private_mode_subtitle">Incognito typing and offline mode together</string>
+    <string name="private_mode_on">Private mode on: nothing is learned or remembered, and nothing goes online</string>
+    <string name="private_mode_off">Private mode off: typing and offline mode are back as they were</string>
+</resources>

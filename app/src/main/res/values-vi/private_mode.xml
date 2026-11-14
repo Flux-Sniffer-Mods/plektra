@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Chế độ riêng tư</string>
+    <string name="private_mode_subtitle">Gõ ẩn danh và chế độ ngoại tuyến cùng lúc</string>
+    <string name="private_mode_on">Đã bật chế độ riêng tư: không học, không ghi nhớ và không gì lên mạng</string>
+    <string name="private_mode_off">Đã tắt chế độ riêng tư: việc gõ và chế độ ngoại tuyến trở lại như trước</string>
+</resources>

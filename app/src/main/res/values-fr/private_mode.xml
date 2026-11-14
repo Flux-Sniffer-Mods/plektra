@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Mode privé</string>
+    <string name="private_mode_subtitle">Saisie incognito et mode hors ligne ensemble</string>
+    <string name="private_mode_on">Mode privé activé : rien n’est appris ni retenu, et rien ne va en ligne</string>
+    <string name="private_mode_off">Mode privé désactivé : la saisie et le mode hors ligne reviennent comme avant</string>
+</resources>

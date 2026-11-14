@@ -112,6 +112,10 @@ class CommandExecutor(
 
     private fun executeInternalAction(actionId: String): CommandExecutionResult {
         return when (actionId) {
+            PlektraCommandSource.ACTION_TOGGLE_PRIVATE_MODE -> {
+                rocks.pkb.plektra.core.PrivateMode.toggle(context, announce = showToast)
+                CommandExecutionResult.Success
+            }
             PlektraCommandSource.ACTION_OPEN_QUICK_LAUNCHER -> {
                 try {
                     val intent = QuickLauncherActivity.createOpenIntent(context)

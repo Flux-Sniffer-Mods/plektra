@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Privatmodus</string>
+    <string name="private_mode_subtitle">Inkognito-Tippen und Offlinemodus zusammen</string>
+    <string name="private_mode_on">Privatmodus an: Nichts wird gelernt oder gemerkt, und nichts geht online</string>
+    <string name="private_mode_off">Privatmodus aus: Tippen und Offlinemodus sind wieder wie vorher</string>
+</resources>

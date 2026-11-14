@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="private_mode_title">Ιδιωτική λειτουργία</string>
+    <string name="private_mode_subtitle">Ανώνυμη πληκτρολόγηση και λειτουργία εκτός σύνδεσης μαζί</string>
+    <string name="private_mode_on">Ιδιωτική λειτουργία ενεργή: τίποτα δεν μαθαίνεται ή δεν θυμάται, και τίποτα δεν πάει online</string>
+    <string name="private_mode_off">Ιδιωτική λειτουργία ανενεργή: η πληκτρολόγηση και η λειτουργία εκτός σύνδεσης επιστρέφουν όπως ήταν</string>
+</resources>
