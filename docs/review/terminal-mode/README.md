@@ -28,7 +28,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*TerminalModeTest
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 14 November 2026 against source commit `e48fb5be` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 187 classes, 1,423 tests, no failures, errors or skips (upstream alone: 185 classes, 1,417 tests). Of these, 4 are new, in `TerminalModeTest`; the other 2 are `TerminalAppsTest`, from `flux/terminal-no-microphone`, which this branch is built on (186 classes and 1,419 tests without this change).
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new class is in the `keys-modifiers` topic.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
 
 ## Device check (still to do)
 
