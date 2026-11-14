@@ -82,6 +82,7 @@
       "rocks.pkb.plektra.ThemePhotoPickerRecreationTest",
       "rocks.pkb.plektra.ThemeTextureRenderingTest",
       "rocks.pkb.plektra.TransparentKeyboardExportTest",
+      "rocks.pkb.plektra.WallpaperKeyboardColoursTest",
       "rocks.pkb.plektra.core.SymPagedLayerControllerTest",
       "rocks.pkb.plektra.core.SymPagedLayerTest",
       "rocks.pkb.plektra.core.SymPagedLayerVariantsTest",

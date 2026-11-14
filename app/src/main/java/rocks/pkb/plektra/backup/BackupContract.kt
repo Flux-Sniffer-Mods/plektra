@@ -256,6 +256,7 @@ internal object BackupPreferenceContract {
             "keyboard_theme_light_software" to PreferenceValueType.STRING,
             "keyboard_theme_dark_hardware" to PreferenceValueType.STRING,
             "keyboard_theme_dark_software" to PreferenceValueType.STRING,
+            "keyboard_wallpaper_colours" to PreferenceValueType.BOOLEAN,
             "keyboard_theme_layout_overrides_hardware" to PreferenceValueType.STRING,
             "keyboard_theme_layout_overrides_software" to PreferenceValueType.STRING,
             "modifier_indicator_mode" to PreferenceValueType.STRING,

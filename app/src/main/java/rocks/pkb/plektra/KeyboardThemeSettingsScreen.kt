@@ -1268,6 +1268,8 @@ private fun KeyboardThemeAssignmentSection(
                     onClick = onPickDarkTheme
                 )
             }
+            // Either way, the colours can come from the wallpaper (Android 12+)
+            WallpaperColoursSetting()
         }
     }
 
