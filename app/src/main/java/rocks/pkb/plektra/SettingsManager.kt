@@ -54,6 +54,7 @@ object SettingsManager {
         "auto_capitalize_respect_manual_shift_off"
     private const val KEY_AUTO_CAPITALIZE_RESTRICTED_FIELDS =
         "auto_capitalize_restricted_fields"
+    private const val KEY_AUTO_SHIFT_FIELD_TYPES = "auto_shift_field_types"
     private const val KEY_DOUBLE_SPACE_TO_PERIOD = "double_space_to_period"
     private const val KEY_SPACED_HYPHEN_TO_EN_DASH = "spaced_hyphen_to_en_dash"
     private const val KEY_SPACED_HYPHEN_DASH_STYLE = "spaced_hyphen_dash_style"
@@ -2060,6 +2061,15 @@ object SettingsManager {
         getPreferences(context).edit()
             .putBoolean(KEY_AUTO_CAPITALIZE_RESTRICTED_FIELDS, enabled)
             .apply()
+    }
+
+    /** The kinds of field with automatic Shift (see ShiftFieldTypes); null until chosen. */
+    fun getAutoShiftFieldTypes(context: Context): Set<String>? =
+        getPreferences(context).getString(KEY_AUTO_SHIFT_FIELD_TYPES, null)
+            ?.split(',')?.filter { it.isNotBlank() }?.toSet()
+
+    fun setAutoShiftFieldTypes(context: Context, ids: Set<String>) {
+        getPreferences(context).edit().putString(KEY_AUTO_SHIFT_FIELD_TYPES, ids.sorted().joinToString(",")).apply()
     }
 
     /**

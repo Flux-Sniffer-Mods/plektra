@@ -981,6 +981,22 @@ class PhysicalKeyboardInputMethodServiceDeviceBehaviorTest {
     }
 
     @Test
+    fun autoCap_fieldTypes_chooseWhichKindsStartWithShift() {
+        val context = RuntimeEnvironment.getApplication()
+        ShiftFieldTypes.setEnabled(context, setOf(ShiftFieldTypes.Type.EMAIL))
+
+        focusNewField(RecordingInputConnection(), inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+        assertTrue("A kind that is ticked starts with Shift", modifierController().shiftOneShot)
+
+        focusNewField(RecordingInputConnection())
+        assertFalse("One that isn't gets none, even when the app asks for capitals", modifierController().shiftOneShot)
+
+        ShiftFieldTypes.setEnabled(context, setOf(ShiftFieldTypes.Type.TEXT))
+        focusNewField(RecordingInputConnection())
+        assertTrue(modifierController().shiftOneShot)
+    }
+
+    @Test
     fun literalEditorOptOutSurvivesRestrictedCapitalizationAndAllowsManualShift() {
         val context = RuntimeEnvironment.getApplication()
         SettingsManager.setAutoCapitalizeRestrictedFields(context, true)

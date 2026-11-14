@@ -22,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import rocks.pkb.plektra.inputmethod.ShiftFieldTypes
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -64,10 +65,6 @@ fun TextInputSettingsScreen(
 
     var autoCapitalizeRespectManualShiftOff by remember {
         mutableStateOf(SettingsManager.getAutoCapitalizeRespectManualShiftOff(context))
-    }
-
-    var autoCapitalizeRestrictedFields by remember {
-        mutableStateOf(SettingsManager.getAutoCapitalizeRestrictedFields(context))
     }
 
     var doubleSpaceToPeriod by remember {
@@ -361,17 +358,7 @@ fun TextInputSettingsScreen(
                             SettingsManager.setAutoCapitalizeRespectManualShiftOff(context, enabled)
                         }
                     )
-                    SettingsSwitchRow(
-                        title = stringResource(R.string.auto_capitalize_restricted_fields_title),
-                        description = stringResource(R.string.auto_capitalize_restricted_fields_description),
-                        checked = autoCapitalizeRestrictedFields,
-                        inset = 52.dp,
-                        linkId = SettingLinkIds.TEXT_INPUT_AUTO_CAPITALIZE_RESTRICTED_FIELDS,
-                        onCheckedChange = { enabled ->
-                            autoCapitalizeRestrictedFields = enabled
-                            SettingsManager.setAutoCapitalizeRestrictedFields(context, enabled)
-                        }
-                    )
+                    AutoShiftFieldTypesRow()
                 }
             }
             SettingsSwitchRow(
@@ -985,5 +972,58 @@ internal fun toggleAutoSpacePunctuation(current: String, punctuation: Char): Str
         current.filterNot { it == punctuation }
     } else {
         addAutoSpacePunctuation(current, punctuation)
+    }
+}
+
+/** Automatic Shift by kind of field: a summary row, and a dialog to tick the kinds. */
+@Composable
+private fun AutoShiftFieldTypesRow() {
+    val context = LocalContext.current
+    var types by remember { mutableStateOf(ShiftFieldTypes.enabled(context)) }
+    var picking by remember { mutableStateOf(false) }
+    val all = ShiftFieldTypes.Type.entries
+    val summary = all.filter { it in types }
+        .map { stringResource(it.labelRes) }
+        .ifEmpty { listOf(stringResource(R.string.shift_field_none)) }
+        .joinToString(", ")
+    SettingsNavigationRow(
+        title = stringResource(R.string.shift_field_types_title),
+        description = summary,
+        iconInset = 52.dp,
+        linkId = SettingLinkIds.TEXT_INPUT_AUTO_CAPITALIZE_RESTRICTED_FIELDS,
+        onClick = { picking = true }
+    )
+    if (picking) {
+        AlertDialog(
+            onDismissRequest = { picking = false },
+            title = { Text(stringResource(R.string.shift_field_types_title)) },
+            text = {
+                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    Text(
+                        stringResource(R.string.shift_field_types_description),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+                    all.forEach { type ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .heightIn(min = 48.dp)
+                                .clickable {
+                                    types = if (type in types) types - type else types + type
+                                    ShiftFieldTypes.setEnabled(context, types)
+                                },
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Checkbox(checked = type in types, onCheckedChange = null)
+                            Text(stringResource(type.labelRes), style = MaterialTheme.typography.bodyLarge)
+                        }
+                    }
+                }
+            },
+            confirmButton = { TextButton(onClick = { picking = false }) { Text(stringResource(R.string.close)) } }
+        )
     }
 }

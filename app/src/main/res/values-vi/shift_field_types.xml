@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shift_field_types_title">Shift tự động</string>
+    <string name="shift_field_types_description">Chọn loại ô văn bản nào bắt đầu với Shift. Ô mật khẩu thì không bao giờ.</string>
+    <string name="shift_field_text">Tin nhắn, ghi chú và văn bản khác</string>
+    <string name="shift_field_names">Tên</string>
+    <string name="shift_field_addresses">Địa chỉ bưu chính</string>
+    <string name="shift_field_search">Ô tìm kiếm</string>
+    <string name="shift_field_links">Liên kết và địa chỉ web</string>
+    <string name="shift_field_email">Địa chỉ email</string>
+    <string name="shift_field_other">Trường khác (không cho biết là loại gì)</string>
+    <string name="shift_field_none">Không ô nào</string>
+</resources>

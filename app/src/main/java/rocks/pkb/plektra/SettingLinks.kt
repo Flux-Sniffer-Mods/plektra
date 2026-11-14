@@ -388,8 +388,8 @@ object SettingLinkRegistry {
         ),
         entry(
             SettingLinkIds.TEXT_INPUT_AUTO_CAPITALIZE_RESTRICTED_FIELDS,
-            R.string.auto_capitalize_restricted_fields_title,
-            R.string.auto_capitalize_restricted_fields_description,
+            R.string.shift_field_types_title,
+            R.string.shift_field_types_description,
             destination = SettingsDestination.TextInput,
             availability = SettingAvailability.AutoCapitalizeEnabled,
             unavailableFallbackId = SettingLinkIds.TEXT_INPUT_AUTO_CAPITALIZE

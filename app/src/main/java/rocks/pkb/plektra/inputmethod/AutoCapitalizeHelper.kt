@@ -214,6 +214,13 @@ object AutoCapitalizeHelper {
             return
         }
 
+        // A kind of field without automatic Shift (Automatic Shift) gets none, even when the app
+        // asks for capitals; all capitals (CAP_CHARACTERS) is handled below as before
+        if (shouldDisableAutoCapitalize && inputContextState?.requiresCapCharacters != true) {
+            clearSmartShift(disableShift, onUpdateStatusBar)
+            return
+        }
+
         // Check field-specific capitalization flags first.
         if (inputContextState != null) {
             // CAP_CHARACTERS is handled separately (caps lock)
