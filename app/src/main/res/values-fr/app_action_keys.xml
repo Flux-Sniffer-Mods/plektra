@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Raccourcis des applis sur les touches</string>
+    <string name="app_action_keys_description">Ctrl + Alt + 1 à 4 ouvrent les raccourcis de l\'appli (ceux que son icône affiche par un appui long), et Ctrl + , ses paramètres.</string>
+</resources>

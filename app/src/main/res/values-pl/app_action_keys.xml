@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Skróty aplikacji na klawiszach</string>
+    <string name="app_action_keys_description">Ctrl + Alt + 1–4 otwierają skróty aplikacji (te, które jej ikona pokazuje po przytrzymaniu), a Ctrl + , jej ustawienia.</string>
+</resources>

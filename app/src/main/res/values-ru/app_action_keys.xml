@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Ярлыки приложений на клавишах</string>
+    <string name="app_action_keys_description">Ctrl + Alt + 1–4 открывают собственные ярлыки приложения (те, что показывает его значок при долгом нажатии), а Ctrl + , — его настройки.</string>
+</resources>

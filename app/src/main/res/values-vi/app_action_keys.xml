@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Lối tắt ứng dụng trên phím</string>
+    <string name="app_action_keys_description">Ctrl + Alt + 1 đến 4 mở các lối tắt riêng của ứng dụng (những lối tắt hiện khi nhấn giữ biểu tượng), và Ctrl + , mở phần cài đặt của ứng dụng.</string>
+</resources>
