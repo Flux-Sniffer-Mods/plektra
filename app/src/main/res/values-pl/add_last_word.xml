@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Proponuj dodanie nowych słów</string>
+    <string name="show_add_word_suggestion_description">Pokazuj podpowiedź „dodaj do słownika”, gdy wpiszesz słowo, którego słownik nie zna. Po wyłączeniu nadal możesz dodawać słowa przez Ctrl + Shift + D lub w ustawieniach słownika.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D dodaje ostatnie słowo</string>
+    <string name="add_last_word_shortcut_description">Dodaje słowo przed kursorem do słownika, aby było podpowiadane i nigdy automatycznie poprawiane.</string>
+    <string name="add_last_word_added">Dodano „%1$s” do słownika</string>
+    <string name="add_last_word_known">„%1$s” jest już w słowniku</string>
+    <string name="add_last_word_none">Brak słowa przed kursorem do dodania</string>
+</resources>

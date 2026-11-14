@@ -66,6 +66,8 @@ object SettingLinkIds {
 
     // Auto-correction category screen
     const val AUTO_CORRECTION_TEXT_REPLACEMENTS = "auto_correction.text_replacements"
+    const val AUTO_CORRECTION_SHOW_ADD_WORD = "auto_correction.show_add_word"
+    const val AUTO_CORRECTION_ADD_LAST_WORD_SHORTCUT = "auto_correction.add_last_word_shortcut"
     const val AUTO_CORRECTION_LANGUAGES = "auto_correction.languages"
     const val AUTO_CORRECTION_AUTO_REPLACE = "auto_correction.auto_replace"
     const val AUTO_CORRECTION_MAX_DISTANCE = "auto_correction.max_distance"
@@ -524,6 +526,18 @@ object SettingLinkRegistry {
             SettingLinkIds.AUTO_CORRECTION_TEXT_REPLACEMENTS,
             R.string.auto_correct_title,
             R.string.auto_correct_title_description,
+            destination = SettingsDestination.AutoCorrection
+        ),
+        entry(
+            SettingLinkIds.AUTO_CORRECTION_SHOW_ADD_WORD,
+            R.string.show_add_word_suggestion_title,
+            R.string.show_add_word_suggestion_description,
+            destination = SettingsDestination.AutoCorrection
+        ),
+        entry(
+            SettingLinkIds.AUTO_CORRECTION_ADD_LAST_WORD_SHORTCUT,
+            R.string.add_last_word_shortcut_title,
+            R.string.add_last_word_shortcut_description,
             destination = SettingsDestination.AutoCorrection
         ),
         entry(

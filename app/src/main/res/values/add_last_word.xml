@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Offer to add new words</string>
+    <string name="show_add_word_suggestion_description">Show an “add to dictionary” suggestion when you type a word the dictionary doesn’t know. Off, you can still add words with Ctrl + Shift + D or from the dictionary settings.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D adds the last word</string>
+    <string name="add_last_word_shortcut_description">Adds the word before the cursor to your dictionary, so it’s suggested and never auto-corrected.</string>
+    <string name="add_last_word_added">Added “%1$s” to the dictionary</string>
+    <string name="add_last_word_known">“%1$s” is already in the dictionary</string>
+    <string name="add_last_word_none">No word before the cursor to add</string>
+</resources>

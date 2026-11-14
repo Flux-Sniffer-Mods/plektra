@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Ofrecer añadir palabras nuevas</string>
+    <string name="show_add_word_suggestion_description">Muestra una sugerencia de “añadir al diccionario” cuando escribes una palabra que el diccionario no conoce. Desactivado, puedes añadir palabras con Ctrl + Shift + D o desde los ajustes del diccionario.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D añade la última palabra</string>
+    <string name="add_last_word_shortcut_description">Añade la palabra antes del cursor a tu diccionario, para que se sugiera y nunca se autocorrija.</string>
+    <string name="add_last_word_added">“%1$s” añadida al diccionario</string>
+    <string name="add_last_word_known">“%1$s” ya está en el diccionario</string>
+    <string name="add_last_word_none">No hay ninguna palabra antes del cursor para añadir</string>
+</resources>

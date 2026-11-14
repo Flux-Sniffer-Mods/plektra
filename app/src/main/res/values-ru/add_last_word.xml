@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="show_add_word_suggestion_title">Предлагать добавить новые слова</string>
+    <string name="show_add_word_suggestion_description">Показывать подсказку «добавить в словарь», когда вы вводите слово, которого нет в словаре. Если выключено, слова можно добавить через Ctrl + Shift + D или в настройках словаря.</string>
+    <string name="add_last_word_shortcut_title">Ctrl + Shift + D добавляет последнее слово</string>
+    <string name="add_last_word_shortcut_description">Добавляет слово перед курсором в ваш словарь, чтобы оно подсказывалось и никогда не исправлялось автоматически.</string>
+    <string name="add_last_word_added">«%1$s» добавлено в словарь</string>
+    <string name="add_last_word_known">«%1$s» уже есть в словаре</string>
+    <string name="add_last_word_none">Перед курсором нет слова для добавления</string>
+</resources>

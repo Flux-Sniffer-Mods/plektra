@@ -3446,7 +3446,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         
         val modifierSnapshot = modifierStateController.snapshot()
         val state = inputContextState
+        // The suggestions' "add to dictionary" chip, unless it's switched off
         val addWordCandidate = if (state.shouldDisableSuggestions || isSpeechRecognitionActive) null else suggestionController.pendingAddWord()
+            ?.takeIf { SettingsManager.getShowAddWordSuggestion(this) }
         val suggestionsEnabled = SettingsManager.isExperimentalSuggestionsEnabled(this) && rocks.pkb.plektra.KeyboardBarConfiguration.read(this)
             .presentation(SettingsManager.getSlimModeActive(this)).suggestions
         val suggestionsStart = ImePerfLogger.mark()
@@ -5330,6 +5332,22 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             return true
         }
 
+        // Ctrl + Shift + D: add the last word typed to the dictionary
+        if (
+            hasEditableField &&
+            keyCode == KeyEvent.KEYCODE_D &&
+            event?.repeatCount == 0 &&
+            (event.isCtrlPressed || ctrlPressed || ctrlLatchActive || ctrlOneShot) &&
+            (event.isShiftPressed || shiftPhysicallyPressed) &&
+            SettingsManager.getAddLastWordShortcut(this)
+        ) {
+            modifierStateController.clearCtrlState(resetPressedState = true)
+            modifierStateController.clearShiftState(resetPressedState = true)
+            addLastWordToDictionary()
+            updateStatusBarText()
+            return true
+        }
+
         // Handle Ctrl+Space for subtype cycling
         if (
             hasEditableField &&
@@ -5903,6 +5921,25 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     /**
      * Aggiunge una nuova mappatura Alt+tasto -> carattere.
      */
+    /**
+     * Adds the word before the cursor (or the unknown word the suggestions offered) to the
+     * dictionary, and says what happened.
+     */
+    private fun addLastWordToDictionary() {
+        val before = currentInputConnection?.getTextBeforeCursor(64, 0)?.toString().orEmpty()
+        val word = lastWordIn(before) ?: suggestionController.pendingAddWord()
+        val message = when {
+            word.isNullOrBlank() -> getString(R.string.add_last_word_none)
+            suggestionController.isKnownWordInActiveDictionaries(word) -> getString(R.string.add_last_word_known, word)
+            else -> {
+                suggestionController.addUserWord(word)
+                suggestionController.clearPendingAddWord()
+                getString(R.string.add_last_word_added, word)
+            }
+        }
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
     fun addAltKeyMapping(keyCode: Int, character: String) {
         alternateCharacterManager.addAltKeyMapping(keyCode, character)
     }
@@ -6479,3 +6516,14 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         LEFT
     }
 }
+
+/** The last word in [text] (before the cursor), for Ctrl + Shift + D; null when there is none. */
+internal fun lastWordIn(text: String): String? {
+    fun wordChar(c: Char) = c.isLetterOrDigit() || c == '\'' || c == '’' || c == '-'
+    var end = text.length
+    while (end > 0 && !text[end - 1].isLetterOrDigit()) end--
+    var start = end
+    while (start > 0 && wordChar(text[start - 1])) start--
+    return text.substring(start, end).trim('\'', '’', '-').takeIf { word -> word.any { it.isLetter() } }
+}
+

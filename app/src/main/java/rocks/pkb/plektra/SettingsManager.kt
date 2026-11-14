@@ -77,6 +77,8 @@ object SettingsManager {
     private const val KEY_AUTO_CORRECT_ENABLED_LANGUAGES = "auto_correct_enabled_languages"
     private const val KEY_SUGGESTIONS_ENABLED = "suggestions_enabled"
     private const val KEY_SUGGESTIONS_BOLD = "suggestions_bold"
+    private const val KEY_SHOW_ADD_WORD_SUGGESTION = "show_add_word_suggestion"
+    private const val KEY_ADD_LAST_WORD_SHORTCUT = "add_last_word_shortcut"
     private const val KEY_SNIPPETS_ENABLED = "snippets_enabled"
     private const val KEY_SNIPPETS_PREFIX = "snippets_prefix"
     private const val KEY_SNIPPETS = "snippets_v1"
@@ -3198,6 +3200,22 @@ object SettingsManager {
 
     fun setSuggestionsBold(context: Context, enabled: Boolean) {
         getPreferences(context).edit().putBoolean(KEY_SUGGESTIONS_BOLD, enabled).apply()
+    }
+
+    /** The suggestions' "add to dictionary" chip for an unknown word (on by default). */
+    fun getShowAddWordSuggestion(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_SHOW_ADD_WORD_SUGGESTION, true)
+
+    fun setShowAddWordSuggestion(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_SHOW_ADD_WORD_SUGGESTION, enabled).apply()
+    }
+
+    /** Ctrl + Shift + D adds the last word typed to the dictionary (on by default). */
+    fun getAddLastWordShortcut(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_ADD_LAST_WORD_SHORTCUT, true)
+
+    fun setAddLastWordShortcut(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_ADD_LAST_WORD_SHORTCUT, enabled).apply()
     }
 
     /**
