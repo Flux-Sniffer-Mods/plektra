@@ -69,6 +69,7 @@
       "rocks.pkb.plektra.KeyboardThemeImportTest",
       "rocks.pkb.plektra.KeyboardThemeModelTest",
       "rocks.pkb.plektra.KeyboardThemeTextureTest",
+      "rocks.pkb.plektra.LayerKeySwapTest",
       "rocks.pkb.plektra.MainBackgroundTest",
       "rocks.pkb.plektra.SettingLinkCoverageTest",
       "rocks.pkb.plektra.SettingLinkRegistryTest",
