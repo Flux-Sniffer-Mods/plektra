@@ -247,6 +247,7 @@
       "rocks.pkb.plektra.inputmethod.DisabledSmartFeaturesRegressionTest",
       "rocks.pkb.plektra.inputmethod.IncognitoFieldServiceTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterModifierE2ETest",
+      "rocks.pkb.plektra.inputmethod.KeysThroughFaultsTest",
       "rocks.pkb.plektra.inputmethod.LanguageSwitchServiceE2ETest",
       "rocks.pkb.plektra.inputmethod.PhysicalKeyboardInputMethodServiceDeviceBehaviorTest",
       "rocks.pkb.plektra.inputmethod.ReplacementAfterUndoKeysTest",

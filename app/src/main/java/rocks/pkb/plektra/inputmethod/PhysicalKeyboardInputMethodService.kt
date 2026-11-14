@@ -3914,7 +3914,18 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         traceImeVisibility("onBindInput")
     }
 
+    // A new field: a fault in setting up for one is logged and that field typed in plainly,
+    // never the keyboard ending (and ending again each time the field is touched)
     override fun onStartInput(info: EditorInfo?, restarting: Boolean) {
+        try {
+            receiveStartInput(info, restarting)
+        } catch (e: Exception) {
+            Log.w(TAG, "field start in ${info?.packageName}", e)
+            rocks.pkb.plektra.CrashLog.record(this, "field start", e)
+        }
+    }
+
+    private fun receiveStartInput(info: EditorInfo?, restarting: Boolean) {
         pendingKeyboardSurfaceTransition?.let(uiHandler::removeCallbacks)
         pendingKeyboardSurfaceTransition = null
         // Terminal apps get no microphone button
@@ -4067,6 +4078,15 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     }
 
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
+        try {
+            receiveStartInputView(info, restarting)
+        } catch (e: Exception) {
+            Log.w(TAG, "keyboard start in ${info?.packageName}", e)
+            rocks.pkb.plektra.CrashLog.record(this, "keyboard start", e)
+        }
+    }
+
+    private fun receiveStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         beginCursorAnchorMonitoring()
         if (terminalModeActive) TerminalMode.apply(this, info)
@@ -4906,8 +4926,25 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         candidatesStart: Int,
         candidatesEnd: Int
     ) {
-        val perfStart = ImePerfLogger.mark()
         super.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd)
+        // Every move of the cursor comes here: a fault in following one is logged, never the keyboard's end
+        try {
+            receiveSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd)
+        } catch (e: Exception) {
+            Log.w(TAG, "selection $newSelStart-$newSelEnd", e)
+            rocks.pkb.plektra.CrashLog.record(this, "selection", e)
+        }
+    }
+
+    private fun receiveSelection(
+        oldSelStart: Int,
+        oldSelEnd: Int,
+        newSelStart: Int,
+        newSelEnd: Int,
+        candidatesStart: Int,
+        candidatesEnd: Int
+    ) {
+        val perfStart = ImePerfLogger.mark()
         if (contactChips.isNotEmpty() || contactFieldKind() != null) refreshContactSuggestions()
         liveSpeechEditor?.let { editor ->
             val expected = if (candidatesEnd >= 0) candidatesEnd else editor.expectedCursor
@@ -5197,7 +5234,29 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
     }
 
-    override fun onKeyLongPress(keyCode_: Int, event_: KeyEvent?): Boolean {
+    /**
+     * The keys' way in. Typing must survive a fault in handling one key: it's logged (here and
+     * in the crash log) and the key goes to the app as a plain key, instead of the keyboard
+     * ending (and ending again at the next press of it).
+     */
+    private inline fun keySafely(what: String, keyCode: Int, fallback: () -> Boolean, handle: () -> Boolean): Boolean = try {
+        handle()
+    } catch (e: Exception) {
+        Log.w(TAG, "$what $keyCode", e)
+        rocks.pkb.plektra.CrashLog.record(this, "$what $keyCode", e)
+        runCatching(fallback).getOrDefault(false)
+    }
+
+    override fun onKeyLongPress(keyCode_: Int, event_: KeyEvent?): Boolean =
+        keySafely("long press", keyCode_, { super.onKeyLongPress(keyCode_, event_) }) { receiveKeyLongPress(keyCode_, event_) }
+
+    override fun onKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean =
+        keySafely("key down", keyCode_, { super.onKeyDown(keyCode_, event_) }) { receiveKeyDown(keyCode_, event_) }
+
+    override fun onKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean =
+        keySafely("key up", keyCode_, { super.onKeyUp(keyCode_, event_) }) { receiveKeyUp(keyCode_, event_) }
+
+    private fun receiveKeyLongPress(keyCode_: Int, event_: KeyEvent?): Boolean {
         if (!replayingProtectedNumberKey) {
             val accidentalInput = accidentalKeyInput(keyCode_, event_)
             accidentalKeyPressFilter.shouldConsumeKeyDown(
@@ -5262,7 +5321,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (::candidatesBarController.isInitialized) candidatesBarController.clearExpansionSuggestions()
     }
 
-    override fun onKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean {
+    private fun receiveKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean {
         if ((event_?.repeatCount ?: 0) == 0) {
             when (keyCode_) {
                 KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_TAB -> learnContactDetails(endOfEntry = true)
@@ -6268,7 +6327,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         sendNext()
     }
 
-    override fun onKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean {
+    private fun receiveKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean {
         // Typing in the field: the one-time code chip goes away
         if (oneTimeCodeShown && !KeyEvent.isModifierKey(keyCode_)) clearOneTimeCodeChip()
         if (!replayingProtectedNumberKey) {

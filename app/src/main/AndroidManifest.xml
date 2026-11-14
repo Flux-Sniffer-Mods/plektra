@@ -54,6 +54,7 @@
         android:label="${appLabel}"
         android:roundIcon="${appRoundIcon}"
         android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="false"
         android:theme="@style/Theme.Plektra">
         <activity
             android:name=".TutorialActivity"
