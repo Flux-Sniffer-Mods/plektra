@@ -270,6 +270,7 @@ internal object BackupPreferenceContract {
             "bounce_keys_character_keys_enabled" to PreferenceValueType.BOOLEAN,
             "bounce_keys_modifier_keys_enabled" to PreferenceValueType.BOOLEAN,
             "bounce_keys_space_enabled" to PreferenceValueType.BOOLEAN,
+            "terminal_mode_enabled" to PreferenceValueType.BOOLEAN,
             "bounce_keys_enter_enabled" to PreferenceValueType.BOOLEAN,
             "bounce_keys_backspace_enabled" to PreferenceValueType.BOOLEAN,
             "overlapping_keys_enabled" to PreferenceValueType.BOOLEAN,

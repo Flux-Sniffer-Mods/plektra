@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_mode_description">Termux և այլ տերմինալներ․ Alt-ն ու SYM-ը մուտքագրում են նշաններ, Ctrl-ն մնում է Ctrl</string>
+    <string name="terminal_mode_title">Տերմինալի ռեժիմ</string>
+</resources>

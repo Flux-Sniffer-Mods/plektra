@@ -794,6 +794,12 @@ object SettingLinkRegistry {
             destination = SettingsDestination.Modifiers
         ),
         entry(
+            rocks.pkb.plektra.inputmethod.TerminalMode.LINK_ID,
+            R.string.terminal_mode_title,
+            R.string.terminal_mode_description,
+            destination = SettingsDestination.Modifiers
+        ),
+        entry(
             SettingLinkIds.MODIFIERS_SHIFT_TAP_LATCHES,
             R.string.shift_tap_latches_title,
             R.string.shift_tap_latches_description,
