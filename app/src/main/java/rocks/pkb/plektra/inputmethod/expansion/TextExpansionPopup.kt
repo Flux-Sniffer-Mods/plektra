@@ -4,9 +4,11 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.text.TextUtils
 import android.widget.LinearLayout
 import android.widget.PopupWindow
@@ -19,6 +21,7 @@ class TextExpansionPopup(
     private val onDismissed: () -> Unit
 ) {
     companion object {
+        private const val TAG = "TextExpansionPopup"
         private const val MAX_VISIBLE_ROWS = 5
         private const val ROW_HEIGHT_DP = 44
 
@@ -56,7 +59,13 @@ class TextExpansionPopup(
         window.height = popupHeight
         val top = popupOffsetY(popupHeight)
         if (!window.isShowing) {
-            window.showAtLocation(anchor.rootView, Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, top)
+            // The keyboard's window is gone (hidden mid-word): there is nothing to show over
+            if (!anchor.isAttachedToWindow) return
+            try {
+                window.showAtLocation(anchor.rootView, Gravity.TOP or Gravity.CENTER_HORIZONTAL, 0, top)
+            } catch (e: WindowManager.BadTokenException) {
+                Log.w(TAG, "Expansion popup not shown: the keyboard window closed", e)
+            }
         } else {
             window.update(0, top, dp(300), popupHeight)
         }
