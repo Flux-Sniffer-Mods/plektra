@@ -488,6 +488,21 @@ class SuggestionController(
             .forEach { repository -> repository.markUsed(word) }
     }
 
+    /**
+     * The keyboard's own dictionary as Android's spell checker sees it ([rocks.pkb.plektra.spellcheck.PlektraSpellCheckerService]):
+     * whether [word] is known in [language], and suggestions if not. Null unless that is the
+     * language being typed in and its dictionary is loaded.
+     */
+    fun spellCheck(language: String, word: String, limit: Int): SpellCheckResult? {
+        if (!currentLocale.language.equals(language, ignoreCase = true)) return null
+        val repository = dictionaryRepository
+        if (!repository.isReady) return null
+        if (repository.isKnownWord(word)) return SpellCheckResult(true, emptyList())
+        return SpellCheckResult(false, suggestionEngine.suggest(word, limit).map { it.candidate })
+    }
+
+    data class SpellCheckResult(val known: Boolean, val suggestions: List<String>)
+
     fun isKnownWordInActiveDictionaries(word: String): Boolean {
         if (!isEnabled()) return false
         val candidate = word.trim()

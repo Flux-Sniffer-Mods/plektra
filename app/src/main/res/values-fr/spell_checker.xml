@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Correcteur orthographique Plektra</string>
+    <string name="spell_checker_title">Correcteur orthographique</string>
+    <string name="spell_checker_description">Souligne les mots mal orthographiés dans toutes les apps avec les dictionnaires de Plektra, y compris les mots que vous avez ajoutés. Touchez pour choisir Plektra dans les paramètres du correcteur orthographique d’Android.</string>
+</resources>

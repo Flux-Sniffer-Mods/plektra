@@ -2054,6 +2054,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         
         // Preload dictionary in background so it's ready when user focuses a field
         suggestionController.preloadDictionary()
+        // Android's spell checker (Plektra's) uses the dictionary already loaded for typing
+        rocks.pkb.plektra.spellcheck.PlektraSpellCheckerService.keyboardController =
+            java.lang.ref.WeakReference(suggestionController)
 
         // Initialize clipboard history manager first (needed by candidatesBarController)
         clipboardHistoryManager = ClipboardHistoryManager(this)
@@ -3165,6 +3168,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         // Cleanup ClipboardHistoryManager
         if (::suggestionController.isInitialized) {
             suggestionController.destroy()
+            rocks.pkb.plektra.spellcheck.PlektraSpellCheckerService.keyboardController = null
         }
         clipboardHistoryManager.onDestroy()
         if (::recentCopyTracker.isInitialized) recentCopyTracker.stop()

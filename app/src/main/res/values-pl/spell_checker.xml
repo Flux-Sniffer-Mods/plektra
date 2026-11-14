@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Sprawdzanie pisowni Plektra</string>
+    <string name="spell_checker_title">Sprawdzanie pisowni</string>
+    <string name="spell_checker_description">Podkreśla błędnie napisane słowa w każdej aplikacji, korzystając ze słowników Plektra, w tym dodanych przez Ciebie słów. Dotknij, aby wybrać Plektra w ustawieniach sprawdzania pisowni Androida.</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="spell_checker_name">Plektra-Rechtschreibprüfung</string>
+    <string name="spell_checker_title">Rechtschreibprüfung</string>
+    <string name="spell_checker_description">Unterstreicht falsch geschriebene Wörter in jeder App mit den Wörterbüchern von Plektra, einschließlich deiner hinzugefügten Wörter. Tippe, um Plektra in den Rechtschreibprüfungs-Einstellungen von Android auszuwählen.</string>
+</resources>

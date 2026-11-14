@@ -201,7 +201,10 @@
       "rocks.pkb.plektra.inputmethod.InlineAutofillTest",
       "rocks.pkb.plektra.otp.OneTimeCodeFieldsTest",
       "rocks.pkb.plektra.otp.OneTimeCodesTest",
-      "rocks.pkb.plektra.spellcheck.PhoneSpellCheckerTest"
+      "rocks.pkb.plektra.spellcheck.KeyboardSpellCheckTest",
+      "rocks.pkb.plektra.spellcheck.PhoneSpellCheckerTest",
+      "rocks.pkb.plektra.spellcheck.SpellCheckRulesTest",
+      "rocks.pkb.plektra.spellcheck.SpellCheckWordsTest"
     ],
     "keys-modifiers": [
       "rocks.pkb.plektra.core.ModifierStateControllerTest",
