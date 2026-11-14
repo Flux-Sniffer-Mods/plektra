@@ -188,6 +188,7 @@
       "rocks.pkb.plektra.inputmethod.AccidentalKeyPressPolicyTest",
       "rocks.pkb.plektra.inputmethod.AlternateCharacterManagerTest",
       "rocks.pkb.plektra.inputmethod.BounceKeyFilterTest",
+      "rocks.pkb.plektra.inputmethod.EmojiKeyTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterCtrlHoldNavModeTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterShortcutKeysTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterSoftwareCtrlTest",

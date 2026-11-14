@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Livello emoji</string>
+    <string name="emoji_key_target_picker">Selettore emoji</string>
+    <string name="emoji_key_target_title">Il tasto emoji apre</string>
+    <string name="emoji_picker_key_current">Tasto attuale: %1$s</string>
+    <string name="emoji_picker_key_description">Premi questo tasto in un campo di testo per aprire o chiudere il selettore emoji. Durante la scrittura non svolge più la sua funzione abituale; fuori dai campi di testo resta invariato.</string>
+    <string name="emoji_picker_key_left_alt">Alt sinistro</string>
+    <string name="emoji_picker_key_left_ctrl">Ctrl sinistro</string>
+    <string name="emoji_picker_key_left_shift">Shift sinistro</string>
+    <string name="emoji_picker_key_off">Disattivato</string>
+    <string name="emoji_picker_key_press_prompt">Premi ora il tasto che vuoi usare.</string>
+    <string name="emoji_picker_key_rejected">Quel tasto scrive testo o serve durante la digitazione. Provane un altro.</string>
+    <string name="emoji_picker_key_right_alt">Alt destro</string>
+    <string name="emoji_picker_key_right_ctrl">Ctrl destro</string>
+    <string name="emoji_picker_key_right_shift">Shift destro</string>
+    <string name="emoji_picker_key_title">Tasto selettore emoji</string>
+    <string name="emoji_picker_key_turn_off">Disattiva</string>
+    <string name="emoji_sticky_description">Un tocco sul tasto emoji fa scrivere al tasto successivo la sua emoji dal livello emoji. Toccalo due volte per aprire la schermata emoji. Tenendo premuto il tasto emoji e premendo un tasto si scrive comunque la sua emoji.</string>
+    <string name="emoji_sticky_title">Tocca il tasto emoji per un’emoji</string>
+</resources>

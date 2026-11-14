@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Emoji-Ebene</string>
+    <string name="emoji_key_target_picker">Emoji-Auswahl</string>
+    <string name="emoji_key_target_title">Emoji-Taste öffnet</string>
+    <string name="emoji_picker_key_current">Aktuelle Taste: %1$s</string>
+    <string name="emoji_picker_key_description">Drücke diese Taste in einem Textfeld, um die Emoji-Auswahl zu öffnen oder zu schließen. Beim Tippen hat sie ihre übliche Funktion nicht mehr; außerhalb von Textfeldern bleibt sie unverändert.</string>
+    <string name="emoji_picker_key_left_alt">Linkes Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Linkes Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Linkes Shift</string>
+    <string name="emoji_picker_key_off">Aus</string>
+    <string name="emoji_picker_key_press_prompt">Drücke jetzt die Taste, die du verwenden möchtest.</string>
+    <string name="emoji_picker_key_rejected">Diese Taste schreibt Text oder wird beim Tippen gebraucht. Versuche eine andere.</string>
+    <string name="emoji_picker_key_right_alt">Rechtes Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Rechtes Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Rechtes Shift</string>
+    <string name="emoji_picker_key_title">Taste für die Emoji-Auswahl</string>
+    <string name="emoji_picker_key_turn_off">Ausschalten</string>
+    <string name="emoji_sticky_description">Ein Tippen auf die Emoji-Taste lässt die nächste Taste ihr Emoji aus der Emoji-Ebene schreiben. Tippe zweimal, um den Emoji-Bildschirm zu öffnen. Emoji-Taste halten und eine Taste drücken schreibt ebenfalls ihr Emoji.</string>
+    <string name="emoji_sticky_title">Emoji-Taste antippen für ein Emoji</string>
+</resources>

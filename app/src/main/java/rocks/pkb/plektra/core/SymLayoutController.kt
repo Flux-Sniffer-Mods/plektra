@@ -747,6 +747,14 @@ class SymLayoutController(
 
     fun emojiMapTextForLayout(): String = alternateCharacterManager.buildEmojiMapText()
 
+    /** A key's emoji on the emoji layer, for the emoji key held or tapped. */
+    fun resolveEmojiLayerSymbol(keyCode: Int, shiftPressed: Boolean): String? =
+        if (shiftPressed) {
+            alternateCharacterManager.getSymMappingsUppercase()[keyCode] ?: alternateCharacterManager.getSymMappings()[keyCode]
+        } else {
+            alternateCharacterManager.getSymMappings()[keyCode]
+        }
+
     private fun closeSymAndUpdate(updateStatusBar: () -> Unit) {
         if (closeSymPage()) {
             updateStatusBar()

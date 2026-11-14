@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Էմոջիների շերտ</string>
+    <string name="emoji_key_target_picker">Էմոջիների ընտրիչ</string>
+    <string name="emoji_key_target_title">Էմոջիի ստեղնը բացում է</string>
+    <string name="emoji_picker_key_current">Ընթացիկ ստեղն․ %1$s</string>
+    <string name="emoji_picker_key_description">Սեղմեք այս ստեղնը տեքստային դաշտում՝ էմոջիի ընտրիչը բացելու կամ փակելու համար։ Մուտքագրելիս այն այլևս իր սովորական գործառույթը չի կատարում․ տեքստային դաշտերից դուրս անփոփոխ է։</string>
+    <string name="emoji_picker_key_left_alt">Ձախ Alt</string>
+    <string name="emoji_picker_key_left_ctrl">Ձախ Ctrl</string>
+    <string name="emoji_picker_key_left_shift">Ձախ Shift</string>
+    <string name="emoji_picker_key_off">Անջատված</string>
+    <string name="emoji_picker_key_press_prompt">Սեղմեք այն ստեղնը, որը ցանկանում եք օգտագործել։</string>
+    <string name="emoji_picker_key_rejected">Այդ ստեղնը տեքստ է մուտքագրում կամ անհրաժեշտ է մուտքագրելիս։ Փորձեք մեկ ուրիշը։</string>
+    <string name="emoji_picker_key_right_alt">Աջ Alt</string>
+    <string name="emoji_picker_key_right_ctrl">Աջ Ctrl</string>
+    <string name="emoji_picker_key_right_shift">Աջ Shift</string>
+    <string name="emoji_picker_key_title">Էմոջիի ընտրիչի ստեղն</string>
+    <string name="emoji_picker_key_turn_off">Անջատել</string>
+    <string name="emoji_sticky_description">Էմոջիի ստեղնին մեկ հպումը ստիպում է հաջորդ ստեղնին մուտքագրել իր էմոջին էմոջիի շերտից։ Հպեք երկու անգամ՝ էմոջիի էկրանը բացելու համար։ Էմոջիի ստեղնը պահելով և ստեղն սեղմելով նույնպես մուտքագրվում է դրա էմոջին։</string>
+    <string name="emoji_sticky_title">Հպեք էմոջիի ստեղնին՝ էմոջիի համար</string>
+</resources>

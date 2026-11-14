@@ -61,7 +61,13 @@ internal fun inputDeviceSettingEntries(): List<SettingEntry> = listOf(
     SettingEntry("sym.auto_close", R.string.sym_auto_close_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.auto_close_touch", R.string.sym_auto_close_touch_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.emoji_height", R.string.emoji_picker_expanded_height_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
-    SettingEntry("sym.emoji_style", R.string.emoji_style_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
+    SettingEntry(rocks.pkb.plektra.inputmethod.EmojiKey.LINK_ID, R.string.emoji_picker_key_title, R.string.emoji_picker_key_description, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
+    SettingEntry(
+        rocks.pkb.plektra.inputmethod.EmojiKey.STICKY_LINK_ID, R.string.emoji_sticky_title, R.string.emoji_sticky_description,
+        route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true),
+        unavailableFallbackId = rocks.pkb.plektra.inputmethod.EmojiKey.LINK_ID,
+        availabilityCheck = { rocks.pkb.plektra.inputmethod.EmojiKey.keyCode(it) != android.view.KeyEvent.KEYCODE_UNKNOWN }
+    ),
     SettingEntry("sym.emoji_skin_tone", R.string.emoji_skin_tone_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.emoji_pages", R.string.emoji_pages_emoji_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.symbol_pages", R.string.emoji_pages_symbols_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),

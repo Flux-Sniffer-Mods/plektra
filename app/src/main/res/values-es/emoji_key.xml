@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_key_target_layer">Capa de emoji</string>
+    <string name="emoji_key_target_picker">Selector de emoji</string>
+    <string name="emoji_key_target_title">La tecla de emoji abre</string>
+    <string name="emoji_picker_key_current">Tecla actual: %1$s</string>
+    <string name="emoji_picker_key_description">Pulsa esta tecla en un campo de texto para abrir o cerrar el selector de emoji. Mientras escribes ya no hace su función habitual; fuera de los campos de texto no cambia.</string>
+    <string name="emoji_picker_key_left_alt">Alt izquierdo</string>
+    <string name="emoji_picker_key_left_ctrl">Ctrl izquierdo</string>
+    <string name="emoji_picker_key_left_shift">Shift izquierdo</string>
+    <string name="emoji_picker_key_off">Desactivada</string>
+    <string name="emoji_picker_key_press_prompt">Pulsa ahora la tecla que quieres usar.</string>
+    <string name="emoji_picker_key_rejected">Esa tecla escribe texto o se necesita al escribir. Prueba con otra.</string>
+    <string name="emoji_picker_key_right_alt">Alt derecho</string>
+    <string name="emoji_picker_key_right_ctrl">Ctrl derecho</string>
+    <string name="emoji_picker_key_right_shift">Shift derecho</string>
+    <string name="emoji_picker_key_title">Tecla del selector de emoji</string>
+    <string name="emoji_picker_key_turn_off">Desactivar</string>
+    <string name="emoji_sticky_description">Un toque en la tecla de emoji hace que la siguiente tecla escriba su emoji de la capa de emoji. Tócala dos veces para abrir la pantalla de emoji. Mantener la tecla de emoji y pulsar una tecla escribe su emoji igualmente.</string>
+    <string name="emoji_sticky_title">Toca la tecla de emoji para un emoji</string>
+</resources>

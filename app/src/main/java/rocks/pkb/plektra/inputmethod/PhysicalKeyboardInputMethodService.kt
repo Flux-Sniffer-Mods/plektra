@@ -173,6 +173,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
 
     // Keycode for the SYM key
     private val KEYCODE_SYM = 63
+    // The emoji key chosen in the SYM settings, if any
+    private val emojiKey = EmojiKey()
 
     // Minimal Phone (MP01) custom hardware keycodes
     private val KEYCODE_EM = 666  // Emoji key
@@ -3296,6 +3298,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
      * @param preserveNavMode If true, keeps Ctrl latch active when nav mode is enabled.
      */
     private fun resetModifierStates(preserveNavMode: Boolean = false) {
+        emojiKey.reset()
         shiftLayerLatched = false
         altModifierLayerLatched = false
         lastShiftTapUpTime = 0L
@@ -4772,6 +4775,52 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         updateStatusBarText()
     }
 
+    /** The emoji key opens or closes the emoji picker, or the emoji layer (its setting). */
+    private fun toggleEmojiKeyScreen() {
+        if (!EmojiKey.opensLayer(this)) return toggleEmojiPicker()
+        ensureImeSurfaceVisible()
+        symLayoutController.openEmojiPage()
+        updateStatusBarText()
+    }
+
+    /**
+     * The emoji key going down, or a key pressed while it's held or after a tap for one emoji
+     * (that key types its emoji from the emoji layer). True when the key was the emoji key's.
+     */
+    private fun handleEmojiKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        val emojiKeyCode = EmojiKey.keyCode(this)
+        if (emojiKeyCode == KeyEvent.KEYCODE_UNKNOWN && !emojiKey.armed) return false
+        val ctrlOrAlt = event?.isCtrlPressed == true || event?.isAltPressed == true ||
+            ctrlPhysicallyPressed || altPhysicallyPressed
+        if (keyCode == emojiKeyCode) {
+            if (emojiKey.onKeyDown(keyCode, event, ctrlOrAlt) == EmojiKey.Press.OPEN) toggleEmojiKeyScreen()
+            updateStatusBarText()
+            return true
+        }
+        emojiKey.onOtherKeyDown()
+        // Back cancels a tap for one emoji, as it closes a page
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (!emojiKey.disarm()) return false
+            updateStatusBarText()
+            return true
+        }
+        if ((event?.repeatCount ?: 0) != 0 || isPureModifierKey(keyCode) || keyCode == KEYCODE_SYM) return false
+        if (!emojiKey.typesEmoji(ctrlOrAlt)) return false
+        // A Shift that is the emoji key doesn't count as Shift for the emoji it picks
+        val meta = event?.metaState ?: 0
+        val shift = when (emojiKeyCode) {
+            KeyEvent.KEYCODE_SHIFT_RIGHT -> meta and KeyEvent.META_SHIFT_LEFT_ON != 0
+            KeyEvent.KEYCODE_SHIFT_LEFT -> meta and KeyEvent.META_SHIFT_RIGHT_ON != 0
+            else -> event?.isShiftPressed == true
+        } || shiftOneShot || capsLockEnabled
+        val text = symLayoutController.resolveEmojiLayerSymbol(keyCode, shift)
+        updateStatusBarText()
+        if (text.isNullOrEmpty()) return false
+        val inputConnection = currentInputConnection
+        if (!handleBoundaryTextBeforeCommit(text, inputConnection)) inputConnection?.commitText(text, 1)
+        return true
+    }
+
     private data class AccidentalKeyInput(
         val resolution: PhysicalKeyResolver.Resolution,
         val configuration: AccidentalKeyPressFilter.Configuration
@@ -4988,6 +5037,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (hasEditableField && ::candidatesBarController.isInitialized) {
             candidatesBarController.resetSuggestionActionMode()
         }
+        // The emoji key: consumed in text fields, so it never reaches the modifiers
+        if (hasEditableField && handleEmojiKeyDown(keyCode, event)) return true
 
         if (shouldPlayTypingSound(hasEditableField, keyCode, event)) {
             typingSoundPlayer.play(keyCode)
@@ -5790,6 +5841,15 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         val ic = currentInputConnection
         val inputType = info?.inputType ?: EditorInfo.TYPE_NULL
         val hasEditableField = ic != null && inputType != EditorInfo.TYPE_NULL
+
+        // The emoji key coming up: a modifier's tap opens its screen (or waits for one emoji)
+        if (emojiKey.isHeld(keyCode)) {
+            if (emojiKey.onKeyUp(this, keyCode, event, screenOpen = symPage != 0) == EmojiKey.Press.OPEN) {
+                toggleEmojiKeyScreen()
+            }
+            updateStatusBarText()
+            return true
+        }
 
         if (
             hasEditableField &&
