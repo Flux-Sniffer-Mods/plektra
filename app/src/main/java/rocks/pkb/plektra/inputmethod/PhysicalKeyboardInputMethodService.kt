@@ -3784,7 +3784,17 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         traceImeVisibility("onBindInput")
     }
 
+    // A new field: a fault in setting up for one is logged and that field typed in plainly,
+    // never the keyboard ending (and ending again each time the field is touched)
     override fun onStartInput(info: EditorInfo?, restarting: Boolean) {
+        try {
+            receiveStartInput(info, restarting)
+        } catch (e: Exception) {
+            Log.w(TAG, "field start in ${info?.packageName}", e)
+        }
+    }
+
+    private fun receiveStartInput(info: EditorInfo?, restarting: Boolean) {
         pendingKeyboardSurfaceTransition?.let(uiHandler::removeCallbacks)
         pendingKeyboardSurfaceTransition = null
         if (!restarting) {
@@ -3907,6 +3917,14 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     }
 
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
+        try {
+            receiveStartInputView(info, restarting)
+        } catch (e: Exception) {
+            Log.w(TAG, "keyboard start in ${info?.packageName}", e)
+        }
+    }
+
+    private fun receiveStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         beginCursorAnchorMonitoring()
         if (::textExpansionController.isInitialized) textExpansionController.clear()
@@ -4570,8 +4588,24 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         candidatesStart: Int,
         candidatesEnd: Int
     ) {
-        val perfStart = ImePerfLogger.mark()
         super.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd)
+        // Every move of the cursor comes here: a fault in following one is logged, never the keyboard's end
+        try {
+            receiveSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd)
+        } catch (e: Exception) {
+            Log.w(TAG, "selection $newSelStart-$newSelEnd", e)
+        }
+    }
+
+    private fun receiveSelection(
+        oldSelStart: Int,
+        oldSelEnd: Int,
+        newSelStart: Int,
+        newSelEnd: Int,
+        candidatesStart: Int,
+        candidatesEnd: Int
+    ) {
+        val perfStart = ImePerfLogger.mark()
         liveSpeechEditor?.let { editor ->
             val expected = if (candidatesEnd >= 0) candidatesEnd else editor.expectedCursor
             if ((oldSelStart != newSelStart || oldSelEnd != newSelEnd) &&
@@ -4795,7 +4829,28 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
     }
 
-    override fun onKeyLongPress(keyCode_: Int, event_: KeyEvent?): Boolean {
+    /**
+     * The keys' way in. Typing must survive a fault in handling one key: it's logged and the key
+     * goes to the app as a plain key, instead of the keyboard ending (and ending again at the
+     * next press of it).
+     */
+    private inline fun keySafely(what: String, keyCode: Int, fallback: () -> Boolean, handle: () -> Boolean): Boolean = try {
+        handle()
+    } catch (e: Exception) {
+        Log.w(TAG, "$what $keyCode", e)
+        runCatching(fallback).getOrDefault(false)
+    }
+
+    override fun onKeyLongPress(keyCode_: Int, event_: KeyEvent?): Boolean =
+        keySafely("long press", keyCode_, { super.onKeyLongPress(keyCode_, event_) }) { receiveKeyLongPress(keyCode_, event_) }
+
+    override fun onKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean =
+        keySafely("key down", keyCode_, { super.onKeyDown(keyCode_, event_) }) { receiveKeyDown(keyCode_, event_) }
+
+    override fun onKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean =
+        keySafely("key up", keyCode_, { super.onKeyUp(keyCode_, event_) }) { receiveKeyUp(keyCode_, event_) }
+
+    private fun receiveKeyLongPress(keyCode_: Int, event_: KeyEvent?): Boolean {
         if (!replayingProtectedNumberKey) {
             val accidentalInput = accidentalKeyInput(keyCode_, event_)
             accidentalKeyPressFilter.shouldConsumeKeyDown(
@@ -4832,7 +4887,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         return super.onKeyLongPress(keyCode, event)
     }
 
-    override fun onKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean {
+    private fun receiveKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean {
         if (liveSpeechEditor != null && (event_?.unicodeChar?.let { it != 0 } == true ||
             keyCode_ in listOf(KeyEvent.KEYCODE_DEL, KeyEvent.KEYCODE_FORWARD_DEL, KeyEvent.KEYCODE_ENTER,
                 KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN))) {
@@ -5659,7 +5714,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
     }
 
-    override fun onKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean {
+    private fun receiveKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean {
         if (!replayingProtectedNumberKey) {
             when (val result = accidentalKeyPressFilter.onKeyUp(keyCode_, event_)) {
                 is AccidentalKeyPressFilter.KeyUpResult.Suppressed -> {

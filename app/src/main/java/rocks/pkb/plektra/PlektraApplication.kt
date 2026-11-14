@@ -22,6 +22,7 @@ class PlektraApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        keepBackgroundFailuresApart()
         if (!DirectBootKeyboardConfig.isUserUnlocked(this)) {
             val receiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
@@ -40,6 +41,10 @@ class PlektraApplication : Application() {
             return
         }
         initializeUnlockedApplication()
+    }
+
+    private fun keepBackgroundFailuresApart() {
+        Thread.setDefaultUncaughtExceptionHandler(BackgroundFailures.handler(Thread.getDefaultUncaughtExceptionHandler()))
     }
 
     private fun initializeUnlockedApplication() {
@@ -86,4 +91,20 @@ class PlektraApplication : Application() {
     companion object {
         private const val SOFTWARE_KEYBOARD_MODE_SHORTCUT_ID = "software_keyboard_mode_toggle"
     }
+}
+
+/**
+ * A failure on a background thread (a download, say) is logged and ends that thread alone: the
+ * keyboard, in the same process, stays up. The main thread's failures, and running out of
+ * memory, end the app as before.
+ */
+internal object BackgroundFailures {
+    fun handler(previous: Thread.UncaughtExceptionHandler?): Thread.UncaughtExceptionHandler =
+        Thread.UncaughtExceptionHandler { thread, error ->
+            if (thread === Looper.getMainLooper().thread || error is OutOfMemoryError || previous == null) {
+                previous?.uncaughtException(thread, error)
+            } else {
+                runCatching { android.util.Log.e("PlektraCrash", "thread ${thread.name}", error) }
+            }
+        }
 }

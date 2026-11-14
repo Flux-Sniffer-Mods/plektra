@@ -14,7 +14,20 @@ import rocks.pkb.plektra.SettingsManager
 class ClicksLauncherButtonAccessibilityService : AccessibilityService() {
     private val mapper = ClicksLauncherAccessibilityKeyMapper()
 
-    override fun onKeyEvent(event: KeyEvent): Boolean {
+    /**
+     * Every key comes through here while the service is on: a failure in handling one lets the
+     * key through to the app as it is (and is logged), rather than ending the service and the
+     * keyboard with it, which could also leave Android turning the service off.
+     */
+    override fun onKeyEvent(event: KeyEvent): Boolean = try {
+        handleKey(event)
+    } catch (e: Exception) {
+        android.util.Log.w("PlektraA11y", "key ${event.keyCode}", e)
+        runCatching { mapper.resetDevice(event.deviceId) }
+        false
+    }
+
+    private fun handleKey(event: KeyEvent): Boolean {
         val device = event.device
         val result = mapper.map(
             event = event,
