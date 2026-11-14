@@ -258,7 +258,10 @@ class SymLayoutController(
 
     private fun recordTyped(kind: SymPagedLayer.Kind, text: String) {
         when (kind) {
-            SymPagedLayer.Kind.EMOJI -> RecentEmojiManager.addRecentEmoji(context, text)
+            SymPagedLayer.Kind.EMOJI -> {
+                RecentEmojiManager.addRecentEmoji(context, text)
+                rocks.pkb.plektra.data.emoji.EmojiLayerRecents.markUsed(context, text)
+            }
             SymPagedLayer.Kind.SYMBOLS -> SymbolSearch.recents.add(context, text)
             SymPagedLayer.Kind.KAOMOJI -> Kaomoji.recents.add(context, text)
         }
@@ -632,9 +635,9 @@ class SymLayoutController(
         return when (pageToUse) {
             SymPage.DEVICE -> alternateCharacterManager.getDeviceSymMappings()
             SymPage.EMOJI -> if (shiftPressed) {
-                alternateCharacterManager.getSymMappings() + alternateCharacterManager.getSymMappingsUppercase()
+                emojiLayer() + alternateCharacterManager.getSymMappingsUppercase()
             } else {
-                alternateCharacterManager.getSymMappings()
+                emojiLayer()
             }
             SymPage.SYMBOLS -> if (shiftPressed) {
                 alternateCharacterManager.getSymMappings2() + alternateCharacterManager.getSymMappings2Uppercase()
@@ -643,6 +646,19 @@ class SymLayoutController(
             }
             else -> emptyMap()
         }
+    }
+
+    /** The classic emoji layer's keys, with the recent emoji first when that's on. */
+    private fun emojiLayer(): Map<Int, String> =
+        rocks.pkb.plektra.data.emoji.EmojiLayerRecents.layer(context, alternateCharacterManager.getSymMappings())
+
+    /** A symbol typed with a SYM chord: an emoji from the emoji layer counts as used. */
+    fun chordSymbolTyped(text: String) {
+        val pageUsed = when (currentPageType()) {
+            SymPage.DEVICE, SymPage.EMOJI, SymPage.SYMBOLS -> currentPageType()
+            else -> preferredChordPage()
+        }
+        if (pageUsed == SymPage.EMOJI) rocks.pkb.plektra.data.emoji.EmojiLayerRecents.markUsed(context, text)
     }
 
     /**
@@ -660,9 +676,9 @@ class SymLayoutController(
             SymPage.DEVICE -> alternateCharacterManager.getDeviceSymMappings()[keyCode]
             SymPage.EMOJI -> {
                 if (shiftPressed) {
-                    alternateCharacterManager.getSymMappingsUppercase()[keyCode] ?: alternateCharacterManager.getSymMappings()[keyCode]
+                    alternateCharacterManager.getSymMappingsUppercase()[keyCode] ?: emojiLayer()[keyCode]
                 } else {
-                    alternateCharacterManager.getSymMappings()[keyCode]
+                    emojiLayer()[keyCode]
                 }
             }
             SymPage.SYMBOLS -> {
@@ -729,6 +745,7 @@ class SymLayoutController(
                     rocks.pkb.plektra.core.Punctuation.commitFrenchSpacedPunctuation(inputConnection, symChar[0])) ||
                 inputConnection.commitText(symChar, 1)
             if (committed) {
+                if (page == SymPage.EMOJI) rocks.pkb.plektra.data.emoji.EmojiLayerRecents.markUsed(context, symChar)
                 onSymbolCommitted()
                 updateStatusBar()
             }

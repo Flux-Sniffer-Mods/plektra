@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Recent emoji first on the layer</string>
+    <string name="emoji_layer_recents_first_description">The emoji you used last take the layer\'s first keys, and its own emoji move along. Emoji you type from the layer count too.</string>
+    <string name="emoji_layer_recents_count">Recent emoji: %1$d keys</string>
+</resources>

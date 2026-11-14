@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Недавні емодзі першими на шарі</string>
+    <string name="emoji_layer_recents_first_description">Останні використані емодзі займають перші клавіші шару, а його власні зсуваються. Враховуються й набрані з шару.</string>
+    <string name="emoji_layer_recents_count">Недавні емодзі: %1$d клавіш</string>
+</resources>

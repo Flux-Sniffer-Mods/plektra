@@ -70,6 +70,14 @@ internal fun inputDeviceSettingEntries(): List<SettingEntry> = listOf(
     ),
     SettingEntry("sym.emoji_skin_tone", R.string.emoji_skin_tone_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.emoji_pages", R.string.emoji_pages_emoji_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
+    SettingEntry(
+        rocks.pkb.plektra.data.emoji.EmojiLayerRecents.LINK_ID,
+        R.string.emoji_layer_recents_first_title,
+        R.string.emoji_layer_recents_first_description,
+        route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true),
+        unavailableFallbackId = "sym.emoji_pages",
+        availabilityCheck = { !EmojiPagesSettings.emojiPagesEnabled(it) }
+    ),
     SettingEntry("sym.symbol_pages", R.string.emoji_pages_symbols_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.kaomoji_pages", R.string.kaomoji_placement_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.picker_symbols_kaomoji", R.string.emoji_picker_extras_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),

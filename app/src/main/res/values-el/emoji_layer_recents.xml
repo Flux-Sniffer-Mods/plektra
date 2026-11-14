@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Πρόσφατα emoji πρώτα στο επίπεδο</string>
+    <string name="emoji_layer_recents_first_description">Τα emoji που χρησιμοποίησες τελευταία παίρνουν τα πρώτα πλήκτρα του επιπέδου και τα δικά του μετακινούνται. Μετράνε και όσα πληκτρολογείς από το επίπεδο.</string>
+    <string name="emoji_layer_recents_count">Πρόσφατα emoji: %1$d πλήκτρα</string>
+</resources>

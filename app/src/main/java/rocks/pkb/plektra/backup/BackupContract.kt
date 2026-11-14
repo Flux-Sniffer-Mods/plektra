@@ -342,6 +342,8 @@ internal object BackupPreferenceContract {
             "symbols_layer_pages" to PreferenceValueType.BOOLEAN,
             "kaomoji_pages_placement" to PreferenceValueType.STRING,
             "emoji_picker_symbols_kaomoji" to PreferenceValueType.BOOLEAN,
+            "emoji_layer_recents_first" to PreferenceValueType.BOOLEAN,
+            "emoji_layer_recents_count" to PreferenceValueType.INT,
             "keyboard_bar_text_scale" to PreferenceValueType.FLOAT,
             "swipe_incremental_threshold" to PreferenceValueType.FLOAT,
             "static_variation_bar_mode" to PreferenceValueType.BOOLEAN,
@@ -519,7 +521,8 @@ internal object BackupPreferenceContract {
         "field_scoped_virtual_previous_override" to "runtime-derived state",
         "typing_sound_updated_at" to "runtime refresh marker",
         "clicks_bluetooth_permission_explained" to "permission UI state",
-        "clicks_manual_charging_until" to "transient runtime state"
+        "clicks_manual_charging_until" to "transient runtime state",
+        "emoji_layer_used" to "usage history, like the recent emoji"
     )
 
     fun expectedExportType(prefName: String, key: String): PreferenceValueType? {

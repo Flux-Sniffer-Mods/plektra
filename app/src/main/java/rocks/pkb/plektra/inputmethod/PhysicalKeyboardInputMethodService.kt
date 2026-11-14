@@ -5427,7 +5427,10 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
                 val inputConnection = currentInputConnection
                 val committed = handleBoundaryTextBeforeCommit(symChar, inputConnection) ||
                     inputConnection?.commitText(symChar, 1) == true
-                if (committed) modifierStateController.consumeShiftOneShot()
+                if (committed) {
+                    modifierStateController.consumeShiftOneShot()
+                    symLayoutController.chordSymbolTyped(symChar)
+                }
                 updateStatusBarText()
                 return true
             }

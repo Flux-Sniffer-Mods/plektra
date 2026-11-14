@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Emoji recientes primero en la capa</string>
+    <string name="emoji_layer_recents_first_description">Los emoji que usaste por última vez ocupan las primeras teclas de la capa y los suyos se desplazan. También cuentan los que escribes desde la capa.</string>
+    <string name="emoji_layer_recents_count">Emoji recientes: %1$d teclas</string>
+</resources>

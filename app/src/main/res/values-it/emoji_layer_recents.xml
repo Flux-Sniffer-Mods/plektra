@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Emoji recenti per prime sul livello</string>
+    <string name="emoji_layer_recents_first_description">Le emoji usate per ultime occupano i primi tasti del livello e le sue scorrono avanti. Contano anche quelle digitate dal livello.</string>
+    <string name="emoji_layer_recents_count">Emoji recenti: %1$d tasti</string>
+</resources>

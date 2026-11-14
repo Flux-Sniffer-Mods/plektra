@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Ostatnie emoji na początku warstwy</string>
+    <string name="emoji_layer_recents_first_description">Ostatnio użyte emoji zajmują pierwsze klawisze warstwy, a jej własne się przesuwają. Liczą się też wpisane z warstwy.</string>
+    <string name="emoji_layer_recents_count">Ostatnie emoji: %1$d klawiszy</string>
+</resources>

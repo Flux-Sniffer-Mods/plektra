@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_layer_recents_first_title">Zuletzt benutzte Emoji zuerst auf der Ebene</string>
+    <string name="emoji_layer_recents_first_description">Die zuletzt benutzten Emoji belegen die ersten Tasten der Ebene, ihre eigenen rücken weiter. Auch auf der Ebene getippte zählen.</string>
+    <string name="emoji_layer_recents_count">Zuletzt benutzte Emoji: %1$d Tasten</string>
+</resources>
