@@ -82,6 +82,7 @@ object SettingLinkIds {
     const val AUTO_CORRECTION_EMOJI_SUGGESTIONS = "auto_correction.emoji_suggestions"
     const val AUTO_CORRECTION_KEYBOARD_PROXIMITY = "auto_correction.keyboard_proximity"
     const val AUTO_CORRECTION_EDIT_TYPE_RANKING = "auto_correction.edit_type_ranking"
+    const val AUTO_CORRECTION_SUGGESTION_KEYS = "auto_correction.suggestion_keys"
     const val AUTO_CORRECTION_EXACT_TYPING = "auto_correction.exact_typing"
     const val AUTO_CORRECTION_LEARN_CONTACT_DETAILS = "auto_correction.learn_contact_details"
 
@@ -654,6 +655,11 @@ object SettingLinkRegistry {
             SettingLinkIds.AUTO_CORRECTION_EDIT_TYPE_RANKING,
             R.string.auto_correct_edit_type_ranking_title,
             R.string.auto_correct_edit_type_ranking_description,
+            destination = SettingsDestination.AutoCorrection
+        ),
+        entry(
+            SettingLinkIds.AUTO_CORRECTION_SUGGESTION_KEYS,
+            R.string.suggestion_keys_title,
             destination = SettingsDestination.AutoCorrection
         ),
         entry(

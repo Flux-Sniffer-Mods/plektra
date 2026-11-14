@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
+import rocks.pkb.plektra.inputmethod.SuggestionKeys
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.core.writeBytesAtomically
 import rocks.pkb.plektra.core.writeTextAtomically
@@ -752,6 +753,8 @@ fun AutoCorrectionCategoryScreen(
                             }
                         }
 
+                        SuggestionKeysRow()
+
                     }
                 }
             }
@@ -1216,3 +1219,60 @@ private fun DictionarySwitchRow(
         }
     }
 }
+
+/** Pick suggestions from the keyboard: Ctrl+Shift+Q/W/E, Ctrl+1/2/3 or off, in a dialog. */
+@Composable
+private fun SuggestionKeysRow() {
+    val context = LocalContext.current
+    var option by remember { mutableStateOf(SettingsManager.getSuggestionKeys(context)) }
+    var picking by remember { mutableStateOf(false) }
+    val labels = mapOf(
+        SuggestionKeys.CTRL_SHIFT_QWE to stringResource(R.string.suggestion_keys_ctrl_shift_qwe),
+        SuggestionKeys.CTRL_DIGITS to stringResource(R.string.suggestion_keys_ctrl_digits),
+        SuggestionKeys.OFF to stringResource(R.string.suggestion_keys_off)
+    )
+    Surface(modifier = Modifier.fillMaxWidth().settingRow(SettingLinkIds.AUTO_CORRECTION_SUGGESTION_KEYS) { picking = true }) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Filled.TextFields,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(24.dp)
+            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(stringResource(R.string.suggestion_keys_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Medium)
+                Text(labels[option].orEmpty(), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+        }
+    }
+    if (picking) {
+        AlertDialog(
+            onDismissRequest = { picking = false },
+            title = { Text(stringResource(R.string.suggestion_keys_title)) },
+            text = {
+                Column {
+                    SuggestionKeys.OPTIONS.forEach { choice ->
+                        Row(
+                            modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable {
+                                option = choice
+                                SettingsManager.setSuggestionKeys(context, choice)
+                                picking = false
+                            },
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            RadioButton(selected = option == choice, onClick = null)
+                            Text(labels[choice].orEmpty(), style = MaterialTheme.typography.bodyLarge)
+                        }
+                    }
+                }
+            },
+            confirmButton = { TextButton(onClick = { picking = false }) { Text(stringResource(R.string.close)) } }
+        )
+    }
+}
+

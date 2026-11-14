@@ -434,6 +434,7 @@ internal object BackupPreferenceContract {
             "smart_ctrl_off_after_shortcut" to PreferenceValueType.BOOLEAN,
             "use_keyboard_proximity" to PreferenceValueType.BOOLEAN,
             "use_edit_type_ranking" to PreferenceValueType.BOOLEAN,
+            "suggestion_keys" to PreferenceValueType.STRING,
             "custom_input_styles" to PreferenceValueType.STRING,
             "titan2_layout_enabled" to PreferenceValueType.BOOLEAN,
             "titan2_elite_rounded_corner_insets" to PreferenceValueType.BOOLEAN,
