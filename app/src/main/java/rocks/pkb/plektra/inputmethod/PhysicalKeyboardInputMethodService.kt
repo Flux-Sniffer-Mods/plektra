@@ -164,6 +164,19 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     private lateinit var smoothCaretOverlayController: SmoothCaretOverlayController
     private var smoothCaretEditorHidden = false
     private lateinit var candidatesBarController: CandidatesBarController
+    // The extra keys row: Esc, Tab, arrows and the like in the bar's place (terminals: their own set)
+    private val extraKeys = rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysController(
+        connection = { currentInputConnection },
+        packageName = { currentInputEditorInfo?.packageName },
+        inTerminal = { TerminalApps.inTerminal },
+        render = { row ->
+            if (::candidatesBarController.isInitialized) {
+                candidatesBarController.setExtraKeys(row)
+                invalidateRenderedStatusSnapshot()
+                updateStatusBarText()
+            }
+        }
+    )
     private lateinit var textExpansionController: TextExpansionController
     private lateinit var emojiShortcodeSource: EmojiShortcodeSource
     private lateinit var symbolShortcodeSource: SymbolShortcodeSource
@@ -3029,6 +3042,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     }
     
     override fun onDestroy() {
+        rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.handler = null
         disableSmoothCaretExperiment()
         if (::smoothCaretOverlayController.isInitialized) smoothCaretOverlayController.release()
         caretBadgeController.destroy()
@@ -3838,6 +3852,10 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (info != null && isEditable) {
             info.inputType = info.inputType or android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
         }
+        // The extra keys row stays open in the same app, and closes in another; a shortcut
+        // or the quick launcher opens it
+        extraKeys.onFieldStarted(info?.packageName)
+        rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.handler = { uiHandler.post { extraKeys.toggle() } }
         
         if (isEditable && isReallyEditable && !restarting && isInputViewActive) {
             val respectAppVisibility = SettingsManager.getAutoShowRespectAppVisibility(this)
@@ -4936,6 +4954,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (shouldPlayTypingSound(hasEditableField, keyCode, event)) {
             typingSoundPlayer.play(keyCode)
         }
+        // The extra keys row open: Back closes it and the top-row letters press its keys
+        if (hasEditableField && extraKeys.onKeyDown(keyCode, event)) return true
 
         val emojiSearchCtrlActive = event?.isCtrlPressed == true ||
             ctrlPressed ||
@@ -5744,6 +5764,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             handleAltModifierKeyUp(keyCode, event, allowVisualLayer = false)
             return true
         }
+
+        // A key the extra keys row pressed: its release is the row's too
+        if (extraKeys.onKeyUp(keyCode)) return true
 
         // If NO editable field is active, handle ONLY nav mode Ctrl release
         if (!hasEditableField) {

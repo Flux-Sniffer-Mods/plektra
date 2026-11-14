@@ -104,6 +104,9 @@ class CommandExecutor(
                     fail("Could not open Plektra")
                 }
             }
+            rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.ACTION_ID ->
+                if (rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.toggle()) CommandExecutionResult.Success
+                else fail("Keyboard not active")
             PlektraCommandSource.ACTION_TOGGLE_SOFTWARE_KEYBOARD_MODE -> toggleSoftwareKeyboardMode()
             DeviceControlCommandSource.ACTION_HOME_SCREEN -> goHome()
             DeviceControlCommandSource.ACTION_MEDIA_PLAY_PAUSE -> dispatchMediaKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)

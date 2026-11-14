@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="extra_keys_close">Zusatztasten schließen</string>
+    <string name="extra_keys_command_subtitle">Die Zusatztastenleiste ein- oder ausblenden</string>
+    <string name="extra_keys_title">Zusatztasten</string>
+</resources>

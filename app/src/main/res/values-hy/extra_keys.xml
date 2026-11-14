@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="extra_keys_close">Փակել լրացուցիչ ստեղները</string>
+    <string name="extra_keys_command_subtitle">Ցույց տալ կամ թաքցնել լրացուցիչ ստեղների շարքը</string>
+    <string name="extra_keys_title">Լրացուցիչ ստեղներ</string>
+</resources>

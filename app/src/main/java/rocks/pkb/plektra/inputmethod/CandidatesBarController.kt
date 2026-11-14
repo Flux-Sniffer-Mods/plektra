@@ -330,7 +330,15 @@ class CandidatesBarController(
         candidatesStatusBar.setSlimModeActive(active)
     }
 
-    fun hasTransientContent(): Boolean = inputStatusBar.hasTransientContent ||
+    fun setExtraKeys(row: rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysRow?) {
+        extraKeysOpen = row != null
+        inputStatusBar.setExtraKeys(row)
+        candidatesStatusBar.setExtraKeys(row)
+    }
+
+    private var extraKeysOpen = false
+
+    fun hasTransientContent(): Boolean = extraKeysOpen || inputStatusBar.hasTransientContent ||
         (candidatesSurfaceActive && candidatesStatusBar.hasTransientContent)
 
     fun handleBackPressed(): Boolean {

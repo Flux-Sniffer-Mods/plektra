@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="extra_keys_close">Đóng phím bổ sung</string>
+    <string name="extra_keys_command_subtitle">Hiện hoặc ẩn hàng phím bổ sung</string>
+    <string name="extra_keys_title">Phím bổ sung</string>
+</resources>

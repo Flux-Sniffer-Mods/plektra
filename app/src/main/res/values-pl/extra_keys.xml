@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="extra_keys_close">Zamknij dodatkowe klawisze</string>
+    <string name="extra_keys_command_subtitle">Pokaż lub ukryj rząd dodatkowych klawiszy</string>
+    <string name="extra_keys_title">Dodatkowe klawisze</string>
+</resources>

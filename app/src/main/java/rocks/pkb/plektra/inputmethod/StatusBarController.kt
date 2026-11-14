@@ -827,6 +827,7 @@ class StatusBarController(
             if (assets != null && imeServiceClass != null) {
                 fullSuggestionsBar?.setSubtypeCyclingParams(assets, imeServiceClass)
             }
+            extraKeysRow?.let { row -> fullSuggestionsBar?.apply { ensureView(); setExtraKeys(row) } }
 
             symSurfaceStack = LinearLayout(context).apply {
                 setTag(R.id.keyboard_artwork_container, true)
@@ -916,6 +917,18 @@ class StatusBarController(
 
     fun resetSuggestionActionMode() {
         fullSuggestionsBar?.resetActionMode()
+    }
+
+    private var extraKeysRow: rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysRow? = null
+
+    /** The extra keys row in the bar's place (null: the bar). */
+    fun setExtraKeys(row: rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysRow?) {
+        extraKeysRow = row
+        if (row != null) hideHamburgerMenu()
+        fullSuggestionsBar?.apply {
+            if (row != null) ensureView()
+            setExtraKeys(row)
+        }
     }
 
     fun showExpansionSuggestions(suggestions: List<String>, onSelected: (String) -> Unit) {
@@ -3405,7 +3418,8 @@ class StatusBarController(
                 }
                 else -> null
             },
-            reserveEmptyRow = isFullSoftwareKeyboardMode && suggestionsEnabledSetting,
+            // The extra keys row sits over the bar: the row stays up while it's open
+            reserveEmptyRow = (isFullSoftwareKeyboardMode && suggestionsEnabledSetting) || extraKeysRow != null,
             displayOnly = snapshot.speechPreviewActive && !expansionActive && sharedVariations.isEmpty(),
             continuousPreview = snapshot.speechPreviewActive && !expansionActive && sharedVariations.isEmpty() &&
                 rocks.pkb.plektra.inputmethod.speech.SpeechSettings.continuousPreview(context)
