@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_launcher_app_shortcuts_description">Die eigenen Verknüpfungen von Apps, die ihr Symbol bei langem Drücken zeigt (\"Neue Nachricht\", \"QR-Code scannen\"), sind Ergebnisse, die du direkt öffnen kannst.</string>
+    <string name="quick_launcher_app_shortcuts_title">App-Verknüpfungen in den Ergebnissen</string>
+</resources>

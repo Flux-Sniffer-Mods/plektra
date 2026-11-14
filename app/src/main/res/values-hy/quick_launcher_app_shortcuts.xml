@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_launcher_app_shortcuts_description">Հավելվածների սեփական դյուրանցումները, որոնք ցույց է տալիս դրանց պատկերակը երկար սեղմելիս («Նոր հաղորդագրություն», «Սկանավորել QR կոդ»), արդյունքներ են, որոնք կարող եք բացել անմիջապես։</string>
+    <string name="quick_launcher_app_shortcuts_title">Հավելվածների դյուրանցումներն արդյունքներում</string>
+</resources>

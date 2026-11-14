@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_launcher_app_shortcuts_description">Les raccourcis propres aux apps, ceux qu’affiche leur icône par appui long (\"Nouveau message\", \"Scanner un code QR\"), sont des résultats que vous pouvez ouvrir directement.</string>
+    <string name="quick_launcher_app_shortcuts_title">Raccourcis d’apps dans les résultats</string>
+</resources>

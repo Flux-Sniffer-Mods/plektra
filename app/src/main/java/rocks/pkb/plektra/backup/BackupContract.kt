@@ -345,6 +345,7 @@ internal object BackupPreferenceContract {
             "launcher_shortcuts" to PreferenceValueType.STRING,
             "launcher_shortcuts_enabled" to PreferenceValueType.BOOLEAN,
             "quick_launcher_auto_start_single" to PreferenceValueType.BOOLEAN,
+            "quick_launcher_app_shortcuts" to PreferenceValueType.BOOLEAN,
             "quick_launcher_limit_results" to PreferenceValueType.BOOLEAN,
             "quick_launcher_text_field_shortcuts" to PreferenceValueType.BOOLEAN,
             "quick_launcher_alt_space_in_text_fields" to PreferenceValueType.BOOLEAN,

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_launcher_app_shortcuts_description">Apps\' own shortcuts, the ones their icon shows on a long press (\"New message\", \"Scan QR code\"), are results you can open straight away.</string>
+    <string name="quick_launcher_app_shortcuts_title">App shortcuts in results</string>
+</resources>

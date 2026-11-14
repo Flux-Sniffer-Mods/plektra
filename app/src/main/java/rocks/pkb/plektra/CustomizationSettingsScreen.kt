@@ -977,6 +977,7 @@ private fun StarterLauncherBehaviorScreen(
             checked = quickLauncherLimitResults,
             onCheckedChange = onQuickLauncherLimitResultsChanged
         )
+        QuickLauncherAppShortcutsSetting()
         LauncherShortcutTriggerRow(
             icon = { SettingsRowKeyboardIcon() },
             linkId = "quick_launcher.respect_keyboard_layout",
@@ -2252,4 +2253,22 @@ private fun customizationDestination(destination: String?): CustomizationDestina
     "display_geometry" -> CustomizationDestination.DisplayGeometry
     "sounds" -> CustomizationDestination.Sounds
     else -> CustomizationDestination.Main
+}
+
+/** Apps' own long-press shortcuts as quick launcher results (off by default). */
+@Composable
+private fun QuickLauncherAppShortcutsSetting() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    var on by remember { mutableStateOf(rocks.pkb.plektra.commands.AppShortcutCommandSource.isEnabled(context)) }
+    LauncherShortcutTriggerRow(
+        icon = { SettingsRowKeyboardIcon() },
+        linkId = rocks.pkb.plektra.commands.AppShortcutCommandSource.LINK_ID,
+        title = stringResource(R.string.quick_launcher_app_shortcuts_title),
+        description = stringResource(R.string.quick_launcher_app_shortcuts_description),
+        checked = on,
+        onCheckedChange = {
+            on = it
+            rocks.pkb.plektra.commands.AppShortcutCommandSource.setEnabled(context, it)
+        }
+    )
 }
