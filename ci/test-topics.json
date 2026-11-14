@@ -49,6 +49,7 @@
       "rocks.pkb.plektra.backup.KeyboardTextScaleBackupTest",
       "rocks.pkb.plektra.backup.NotesAndDictionaryBackupTest",
       "rocks.pkb.plektra.backup.OfflineModeBackupTest",
+      "rocks.pkb.plektra.backup.OneTimeCodesBackupTest",
       "rocks.pkb.plektra.backup.PastieraBackupImportTest",
       "rocks.pkb.plektra.backup.RestoreManagerAndBackupContractTest",
       "rocks.pkb.plektra.backup.RestoreManagerIntegrationTest",
@@ -190,7 +191,9 @@
       "rocks.pkb.plektra.core.suggestions.WordNormalizationTest",
       "rocks.pkb.plektra.inputmethod.AddLastWordTest",
       "rocks.pkb.plektra.inputmethod.AddWordCommitHelperTest",
-      "rocks.pkb.plektra.inputmethod.InlineAutofillTest"
+      "rocks.pkb.plektra.inputmethod.InlineAutofillTest",
+      "rocks.pkb.plektra.otp.OneTimeCodeFieldsTest",
+      "rocks.pkb.plektra.otp.OneTimeCodesTest"
     ],
     "keys-modifiers": [
       "rocks.pkb.plektra.core.ModifierStateControllerTest",

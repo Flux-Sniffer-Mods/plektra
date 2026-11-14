@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Одноразовые коды</string>
+    <string name="one_time_codes_description">Предлагает код из SMS или письма в виде чипа в следующем поле, куда он вводится. Нужен доступ к уведомлениям; хранится только код, в памяти, 3 минуты.</string>
+    <string name="one_time_code_chip">Код %1$s</string>
+    <string name="notification_access_title">Доступ к уведомлениям</string>
+    <string name="notification_access_off">Выключен: он нужен для одноразовых кодов. Нажмите, чтобы включить.</string>
+</resources>

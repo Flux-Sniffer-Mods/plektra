@@ -93,6 +93,10 @@ import rikka.shizuku.Shizuku
 class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibilityKeyBridge.Target {
 
     companion object {
+        // A one-time code's pace: checked every step, a short settle after focus moves, at most a wait per character
+        private const val ONE_TIME_CODE_STEP_MS = 30L
+        private const val ONE_TIME_CODE_SETTLE_MS = 60L
+        private const val ONE_TIME_CODE_WAIT_MS = 450L
         private const val TAG = "PlektraInputMethod"
         // How often and how soon to re-ask an editor that refused cursor updates.
         private const val MAX_CURSOR_UPDATE_ATTEMPTS = 8
@@ -2036,6 +2040,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             activeSuggestionLocalesProvider = { getAdditionalSuggestionLocalesForActiveInputStyle() }
         )
         inputEventRouter.suggestionController = suggestionController
+        // A one-time code arriving while a field is open is offered at once
+        rocks.pkb.plektra.otp.OneTimeCodes.onNewCode = { if (isInputViewShown || isInputViewActive) offerOneTimeCode() }
         
         // Preload dictionary in background so it's ready when user focuses a field
         suggestionController.preloadDictionary()
@@ -3143,6 +3149,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         // Cleanup SpeechRecognitionManager
         speechRecognitionManager?.destroy()
         speechRecognitionManager = null
+        rocks.pkb.plektra.otp.OneTimeCodes.onNewCode = null
 
         // Cleanup ClipboardHistoryManager
         if (::suggestionController.isInitialized) {
@@ -4043,6 +4050,10 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         // Always reset shift one-shot when entering a field (both restarting and new field)
         // Then let auto-cap logic decide if it should be enabled
         modifierStateController.clearFieldCapsLockRequest()
+        if (!restarting) {
+            clearOneTimeCodeChip()
+            offerOneTimeCode()
+        }
         if (isEditable) {
             modifierStateController.consumeShiftOneShot()
             
@@ -5922,7 +5933,79 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
     }
 
+    /** A one-time code chip is in the bar (see offerOneTimeCode). */
+    private var oneTimeCodeShown = false
+
+    /** A code from a notification, in a field a code goes in, offered as a chip; a tap types it. */
+    private fun offerOneTimeCode() {
+        if (!::candidatesBarController.isInitialized || !rocks.pkb.plektra.otp.OneTimeCodeSettings.isEnabled(this)) return
+        if (!inputContextState.isReallyEditable) return
+        val code = rocks.pkb.plektra.otp.OneTimeCodes.current() ?: return
+        if (!rocks.pkb.plektra.otp.OneTimeCodeFields.takesACode(currentInputEditorInfo)) return
+        oneTimeCodeShown = true
+        candidatesBarController.showExpansionSuggestions(listOf(getString(R.string.one_time_code_chip, code))) { _ ->
+            clearOneTimeCodeChip()
+            // The newest code by then, if another arrived since the chip was shown
+            typeOneTimeCode(rocks.pkb.plektra.otp.OneTimeCodes.current() ?: code)
+            rocks.pkb.plektra.otp.OneTimeCodes.consume()
+        }
+    }
+
+    private fun clearOneTimeCodeChip() {
+        if (!oneTimeCodeShown) return
+        oneTimeCodeShown = false
+        if (::candidatesBarController.isInitialized) candidatesBarController.clearExpansionSuggestions()
+    }
+
+    /**
+     * Types a code one character at a time, each once the last has landed: a single field takes
+     * the whole code, and codes split over a box per digit (each moving on to the next as it
+     * fills) fill every box. Digits go as key presses, which those boxes listen for.
+     */
+    private fun typeOneTimeCode(code: CharSequence) {
+        val chars = code.toList()
+        var index = 0
+        fun sendNext() {
+            if (index >= chars.size) return
+            val ic = currentInputConnection ?: return
+            val field = currentInputEditorInfo?.fieldId
+            val char = chars[index++]
+            if (char in '0'..'9') {
+                val keyCode = KeyEvent.KEYCODE_0 + (char - '0')
+                val now = android.os.SystemClock.uptimeMillis()
+                ic.sendKeyEvent(KeyEvent(now, now, KeyEvent.ACTION_DOWN, keyCode, 0))
+                ic.sendKeyEvent(KeyEvent(now, now, KeyEvent.ACTION_UP, keyCode, 0))
+            } else {
+                ic.commitText(char.toString(), 1)
+            }
+            if (index >= chars.size) return
+            var waited = 0L
+            val check = object : Runnable {
+                override fun run() {
+                    waited += ONE_TIME_CODE_STEP_MS
+                    val current = currentInputConnection
+                    val moved = current !== ic || currentInputEditorInfo?.fieldId != field
+                    // A box holding one character is full: the next goes once focus moves on
+                    val length = runCatching {
+                        (current?.getTextBeforeCursor(16, 0)?.length ?: 0) + (current?.getTextAfterCursor(16, 0)?.length ?: 0)
+                    }.getOrDefault(0)
+                    val perDigitBox = !moved && length == 1
+                    when {
+                        moved -> uiHandler.postDelayed({ sendNext() }, ONE_TIME_CODE_SETTLE_MS)
+                        length > 0 && !perDigitBox -> uiHandler.postDelayed({ sendNext() }, ONE_TIME_CODE_STEP_MS)
+                        waited >= ONE_TIME_CODE_WAIT_MS -> sendNext()
+                        else -> uiHandler.postDelayed(this, ONE_TIME_CODE_STEP_MS)
+                    }
+                }
+            }
+            uiHandler.postDelayed(check, ONE_TIME_CODE_STEP_MS)
+        }
+        sendNext()
+    }
+
     override fun onKeyUp(keyCode_: Int, event_: KeyEvent?): Boolean {
+        // Typing in the field: the one-time code chip goes away
+        if (oneTimeCodeShown && !KeyEvent.isModifierKey(keyCode_)) clearOneTimeCodeChip()
         if (!replayingProtectedNumberKey) {
             when (val result = accidentalKeyPressFilter.onKeyUp(keyCode_, event_)) {
                 is AccidentalKeyPressFilter.KeyUpResult.Suppressed -> {

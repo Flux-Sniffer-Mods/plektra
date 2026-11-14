@@ -233,6 +233,7 @@ internal object BackupPreferenceContract {
             "tap_haptic_duration_ms" to PreferenceValueType.LONG,
             "offline_mode" to PreferenceValueType.BOOLEAN,
             "typing_sound_mode" to PreferenceValueType.STRING,
+            "one_time_codes" to PreferenceValueType.BOOLEAN,
             "typing_sound_output_mode" to PreferenceValueType.STRING,
             "typing_sound_custom_file_name" to PreferenceValueType.STRING,
             "typing_sound_custom_display_name" to PreferenceValueType.STRING,

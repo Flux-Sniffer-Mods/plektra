@@ -230,6 +230,18 @@
                 android:resource="@xml/method" />
         </service>
 
+        <!-- One-time codes from notifications (otp/OneTimeCodeListener.kt): reads nothing until the
+             user grants notification access and turns the option on -->
+        <service
+            android:name=".otp.OneTimeCodeListener"
+            android:exported="true"
+            android:label="@string/one_time_codes_title"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
         <service
             android:name=".inputmethod.ClicksLauncherButtonAccessibilityService"
             android:exported="true"

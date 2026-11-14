@@ -779,6 +779,8 @@ fun AdvancedSettingsScreen(
                             }
                         }
 
+                        OneTimeCodesSetting()
+
                         Surface(modifier = Modifier.fillMaxWidth().settingRow("advanced.notes") {
                             context.startActivity(Intent(context, NotesActivity::class.java))
                         }) {
@@ -947,6 +949,96 @@ private fun ClipboardRetentionSetting(
                         })
                     }
                 }
+            }
+        }
+    }
+}
+
+/** One-time codes from notifications, and the notification access they need. */
+@Composable
+private fun OneTimeCodesSetting() {
+    val context = LocalContext.current
+    var oneTimeCodes by remember { mutableStateOf(rocks.pkb.plektra.otp.OneTimeCodeSettings.isEnabled(context)) }
+    // Notification access, read again on coming back from Android's settings
+    var notificationAccess by remember {
+        mutableStateOf(rocks.pkb.plektra.otp.OneTimeCodeSettings.hasNotificationAccess(context))
+    }
+    val accessLifecycle = androidx.lifecycle.compose.LocalLifecycleOwner.current
+    androidx.compose.runtime.DisposableEffect(accessLifecycle) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                notificationAccess = rocks.pkb.plektra.otp.OneTimeCodeSettings.hasNotificationAccess(context)
+            }
+        }
+        accessLifecycle.lifecycle.addObserver(observer)
+        onDispose { accessLifecycle.lifecycle.removeObserver(observer) }
+    }
+    // One-time codes from notifications, and the access they need
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .settingRow(rocks.pkb.plektra.otp.OneTimeCodeSettings.LINK_ID) {
+                oneTimeCodes = !oneTimeCodes
+                rocks.pkb.plektra.otp.OneTimeCodeSettings.setEnabled(context, oneTimeCodes)
+            }
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.one_time_codes_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium
+                )
+                Text(
+                    text = stringResource(R.string.one_time_codes_description),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            Switch(
+                checked = oneTimeCodes,
+                onCheckedChange = { enabled ->
+                    oneTimeCodes = enabled
+                    rocks.pkb.plektra.otp.OneTimeCodeSettings.setEnabled(context, enabled)
+                    // Android's own switch lets the app read notifications
+                    if (enabled && !notificationAccess) {
+                        rocks.pkb.plektra.otp.OneTimeCodeSettings.openNotificationAccess(context)
+                    }
+                }
+            )
+        }
+    }
+    if (oneTimeCodes && !notificationAccess) {
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { rocks.pkb.plektra.otp.OneTimeCodeSettings.openNotificationAccess(context) }
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.notification_access_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium
+                )
+                Text(
+                    text = stringResource(R.string.notification_access_off),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.error
+                )
             }
         }
     }

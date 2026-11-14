@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Kody jednorazowe</string>
+    <string name="one_time_codes_description">Proponuje kod z SMS-a lub e-maila jako chip w następnym polu, do którego pasuje. Wymaga dostępu do powiadomień; przechowywany jest tylko kod, w pamięci, przez 3 minuty.</string>
+    <string name="one_time_code_chip">Kod %1$s</string>
+    <string name="notification_access_title">Dostęp do powiadomień</string>
+    <string name="notification_access_off">Wyłączony: potrzebują go kody jednorazowe. Dotknij, aby włączyć.</string>
+</resources>

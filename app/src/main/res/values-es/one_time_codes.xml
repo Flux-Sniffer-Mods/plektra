@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="one_time_codes_title">Códigos de un solo uso</string>
+    <string name="one_time_codes_description">Ofrece un código de un SMS o correo como chip en el siguiente campo donde va. Necesita acceso a las notificaciones; solo se guarda el código, en memoria, durante 3 minutos.</string>
+    <string name="one_time_code_chip">Código %1$s</string>
+    <string name="notification_access_title">Acceso a las notificaciones</string>
+    <string name="notification_access_off">Desactivado: los códigos de un solo uso lo necesitan. Toca para activarlo.</string>
+</resources>
