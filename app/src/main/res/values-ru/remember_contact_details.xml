@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Запоминать почту и номера телефонов</string>
+    <string name="learn_contact_details_description">Адреса почты и номера телефонов, которые вы набираете сами, сохраняются в словаре и снова предлагаются в полях почты и телефона. Никогда не вставленный текст и ничего из полей паролей и приватных полей.</string>
+</resources>

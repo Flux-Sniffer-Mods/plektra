@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Recordar correos y teléfonos</string>
+    <string name="learn_contact_details_description">Los correos y números de teléfono que escribes tú mismo se guardan en tu diccionario y se ofrecen de nuevo en los campos de correo y teléfono. Nunca lo que pegas, ni lo de campos de contraseña o privados.</string>
+</resources>

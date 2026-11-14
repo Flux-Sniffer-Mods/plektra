@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">E-Mails und Telefonnummern merken</string>
+    <string name="learn_contact_details_description">Selbst getippte E-Mail-Adressen und Telefonnummern werden in deinem Wörterbuch gespeichert und in E-Mail- und Telefonfeldern wieder angeboten. Nie Eingefügtes und nichts aus Passwort- oder privaten Feldern.</string>
+</resources>

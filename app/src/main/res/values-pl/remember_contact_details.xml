@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Zapamiętuj e-maile i numery telefonów</string>
+    <string name="learn_contact_details_description">Adresy e-mail i numery telefonów wpisane przez Ciebie są zapisywane w słowniku i ponownie proponowane w polach e-mail i telefonu. Nigdy nic wklejonego ani z pól haseł i pól prywatnych.</string>
+</resources>

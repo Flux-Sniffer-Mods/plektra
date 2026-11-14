@@ -82,6 +82,7 @@ object SettingLinkIds {
     const val AUTO_CORRECTION_KEYBOARD_PROXIMITY = "auto_correction.keyboard_proximity"
     const val AUTO_CORRECTION_EDIT_TYPE_RANKING = "auto_correction.edit_type_ranking"
     const val AUTO_CORRECTION_EXACT_TYPING = "auto_correction.exact_typing"
+    const val AUTO_CORRECTION_LEARN_CONTACT_DETAILS = "auto_correction.learn_contact_details"
 
     // Accessibility screen
     const val ACCESSIBILITY_LIVE_READ = "accessibility.live_read"
@@ -650,6 +651,12 @@ object SettingLinkRegistry {
             SettingLinkIds.AUTO_CORRECTION_EXACT_TYPING,
             R.string.app_raw_mode_title,
             R.string.app_raw_mode_row_description,
+            destination = SettingsDestination.AutoCorrection
+        ),
+        entry(
+            SettingLinkIds.AUTO_CORRECTION_LEARN_CONTACT_DETAILS,
+            R.string.learn_contact_details_title,
+            R.string.learn_contact_details_description,
             destination = SettingsDestination.AutoCorrection
         ),
 

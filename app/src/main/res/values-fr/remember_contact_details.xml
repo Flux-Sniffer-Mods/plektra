@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_contact_details_title">Mémoriser e-mails et numéros de téléphone</string>
+    <string name="learn_contact_details_description">Les e-mails et numéros de téléphone que vous tapez vous-même sont gardés dans votre dictionnaire et proposés à nouveau dans les champs e-mail et téléphone. Jamais ce que vous collez, ni ce qui vient des champs de mot de passe ou privés.</string>
+</resources>

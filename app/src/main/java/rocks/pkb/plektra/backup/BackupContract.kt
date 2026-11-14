@@ -300,6 +300,7 @@ internal object BackupPreferenceContract {
             "auto_correct_enabled" to PreferenceValueType.BOOLEAN,
             "auto_correct_enabled_languages" to PreferenceValueType.STRING,
             "suggestions_enabled" to PreferenceValueType.BOOLEAN,
+            "learn_contact_details" to PreferenceValueType.BOOLEAN,
             "snippets_enabled" to PreferenceValueType.BOOLEAN,
             "snippets_prefix" to PreferenceValueType.STRING,
             "snippets_v1" to PreferenceValueType.STRING,
