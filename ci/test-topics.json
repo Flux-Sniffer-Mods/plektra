@@ -201,7 +201,8 @@
       "rocks.pkb.plektra.inputmethod.PhysicalKeyboardInputMethodServiceDeviceBehaviorTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeypadPolicyTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeypadServiceIntegrationTest",
-      "rocks.pkb.plektra.shortcuts.AppShortcutCommandsTest"
+      "rocks.pkb.plektra.shortcuts.AppShortcutCommandsTest",
+      "rocks.pkb.plektra.shortcuts.UserShortcutsTest"
     ]
   },
   "instrumented": {

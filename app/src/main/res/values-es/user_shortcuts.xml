@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Añadir desde</string>
+    <string name="user_shortcuts_added">%1$s está en el lanzador rápido</string>
+    <string name="user_shortcuts_description">Pon un atajo de una app, como la marcación directa de un contacto, un marcador o una página de ajustes, en los resultados del lanzador rápido.</string>
+    <string name="user_shortcuts_intro">Solo la app de pantalla de inicio puede leer los atajos que ya tienes en la pantalla de inicio, así que añade aquí una vez los que quieras. Elige una app abajo y escoge el atajo en su propia pantalla.</string>
+    <string name="user_shortcuts_none">Ninguna app de este teléfono ofrece atajos para añadir.</string>
+    <string name="user_shortcuts_remove">Quitar %1$s</string>
+    <string name="user_shortcuts_title">Añadir un atajo</string>
+    <string name="user_shortcuts_unsupported">El atajo de esta app solo se puede abrir desde la pantalla de inicio.</string>
+    <string name="user_shortcuts_yours">Tus atajos</string>
+</resources>

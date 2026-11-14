@@ -57,6 +57,7 @@ class CommandRegistry(
                 PlektraCommandSource(),
                 AppActionCommandSource(),
                 AppShortcutCommandSource(),
+                UserShortcutCommandSource(),
                 DeviceControlCommandSource(),
                 NavCommandSource()
             )

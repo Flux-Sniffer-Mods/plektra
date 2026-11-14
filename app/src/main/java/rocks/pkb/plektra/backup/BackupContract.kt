@@ -473,6 +473,8 @@ internal object BackupPreferenceContract {
 
     internal val deliberatelyExcludedPlektraKeys = mapOf(
         "alt_shift_default_initialized" to "default-initialization marker",
+        "quick_launcher_user_shortcuts" to "this phone's apps' shortcuts, started as their apps made them",
+        "quick_launcher_unsupported_shortcut_screens" to "this phone's apps' shortcut screens",
         "keyboard_layout_auto_mapping_updated" to "mapping refresh marker",
         "legacy_german_qwertz_default_migrated" to "migration marker",
         "titan2_elite_rounded_corners_enforced_v1" to "migration marker",

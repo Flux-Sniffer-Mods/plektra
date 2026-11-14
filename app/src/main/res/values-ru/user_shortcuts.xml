@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Добавить из</string>
+    <string name="user_shortcuts_added">%1$s теперь в быстром запуске</string>
+    <string name="user_shortcuts_description">Поместите ярлык приложения, например быстрый вызов контакта, закладку или страницу настроек, в результаты быстрого запуска.</string>
+    <string name="user_shortcuts_intro">Только приложение главного экрана может прочитать ярлыки, которые уже есть на главном экране, поэтому добавьте нужные здесь один раз. Выберите приложение ниже и укажите ярлык на его собственном экране.</string>
+    <string name="user_shortcuts_none">Ни одно приложение на этом телефоне не предлагает ярлыков для добавления.</string>
+    <string name="user_shortcuts_remove">Удалить %1$s</string>
+    <string name="user_shortcuts_title">Добавить ярлык</string>
+    <string name="user_shortcuts_unsupported">Ярлык этого приложения можно открыть только с главного экрана.</string>
+    <string name="user_shortcuts_yours">Ваши ярлыки</string>
+</resources>

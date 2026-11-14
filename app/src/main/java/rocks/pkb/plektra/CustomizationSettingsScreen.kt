@@ -978,6 +978,7 @@ private fun StarterLauncherBehaviorScreen(
             onCheckedChange = onQuickLauncherLimitResultsChanged
         )
         QuickLauncherAppShortcutsSetting()
+        AddAShortcutRow()
         LauncherShortcutTriggerRow(
             icon = { SettingsRowKeyboardIcon() },
             linkId = "quick_launcher.respect_keyboard_layout",
@@ -2271,4 +2272,26 @@ private fun QuickLauncherAppShortcutsSetting() {
             rocks.pkb.plektra.commands.AppShortcutCommandSource.setEnabled(context, it)
         }
     )
+}
+
+/** Opens Add a shortcut: an app's home screen shortcut as a quick launcher result. */
+@Composable
+private fun AddAShortcutRow() {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    Surface(
+        modifier = Modifier.fillMaxWidth().settingRow(rocks.pkb.plektra.shortcuts.UserShortcuts.LINK_ID) {
+            context.startActivity(android.content.Intent(context, UserShortcutsActivity::class.java))
+        },
+        tonalElevation = 1.dp,
+        shape = MaterialTheme.shapes.medium
+    ) {
+        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp)) {
+            Text(stringResource(R.string.user_shortcuts_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Medium)
+            Text(
+                stringResource(R.string.user_shortcuts_description),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
 }
