@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auto_cap_after_emoticon_title">Capital after an emoticon</string>
+    <string name="auto_cap_after_emoticon_description">A text emoticon such as :) ;D or &lt;3 ends a sentence like a full stop, so the next word starts with a capital.</string>
+</resources>

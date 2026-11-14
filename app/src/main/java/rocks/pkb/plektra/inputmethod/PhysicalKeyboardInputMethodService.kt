@@ -39,6 +39,7 @@ import android.widget.Toast
 import rocks.pkb.plektra.BuildConfig
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.inputmethod.NotificationHelper
+import rocks.pkb.plektra.core.EmoticonSentences
 import rocks.pkb.plektra.core.AutoCorrectionManager
 import rocks.pkb.plektra.core.DeferredPunctuationSpaceTracker
 import rocks.pkb.plektra.core.InputContextState
@@ -3817,6 +3818,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         // Reset clipboard overlay when starting new input
 
         updateInputContextState(info)
+        EmoticonSentences.enabled = SettingsManager.getAutoCapAfterEmoticon(this)
         beginCursorAnchorMonitoring()
         uiHandler.post { refreshSmoothCaretExperiment() }
         val state = inputContextState

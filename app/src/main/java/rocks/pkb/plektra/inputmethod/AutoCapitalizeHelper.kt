@@ -6,6 +6,7 @@ import android.view.inputmethod.ExtractedTextRequest
 import android.view.inputmethod.InputConnection
 import rocks.pkb.plektra.SettingsManager
 import rocks.pkb.plektra.core.InputContextState
+import rocks.pkb.plektra.core.EmoticonSentences
 
 /**
  * Central helper for smart auto-capitalization rules.
@@ -115,7 +116,12 @@ object AutoCapitalizeHelper {
         
         val lastNonWhitespaceIndex = textBeforeCursor.indexOfLast { !it.isWhitespace() }
         if (lastNonWhitespaceIndex < 0) return false
-        
+
+        // A text emoticon (:) ;D <3) ends a sentence too ("Capital after an emoticon")
+        if (EmoticonSentences.endsWithEmoticon(textBeforeCursor.subSequence(0, lastNonWhitespaceIndex + 1))) {
+            return !requireWhitespaceAfter || lastNonWhitespaceIndex < textBeforeCursor.length - 1
+        }
+
         val lastNonWhitespaceChar = textBeforeCursor[lastNonWhitespaceIndex]
         val isSentencePunctuation = when (lastNonWhitespaceChar) {
             '.' -> {
