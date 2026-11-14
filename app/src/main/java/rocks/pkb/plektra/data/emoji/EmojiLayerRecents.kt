@@ -52,7 +52,7 @@ object EmojiLayerRecents {
 
     /** An emoji was typed. Nothing is kept while the option is off. */
     fun markUsed(context: Context, emoji: String) {
-        if (emoji.isBlank() || !enabled(context)) return
+        if (emoji.isBlank() || !enabled(context) || rocks.pkb.plektra.core.IncognitoTyping.active) return
         val updated = (listOf(emoji) + used(context).filter { it != emoji }).take(MAX_USED)
         SettingsManager.getPreferences(context).edit().putString(KEY_USED, updated.joinToString("\n")).apply()
     }

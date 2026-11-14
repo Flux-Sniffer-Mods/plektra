@@ -4186,6 +4186,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     /** Whether this field may offer saved emails and numbers: never password fields. */
     private fun contactDetailsAllowed(): Boolean {
         if (!SettingsManager.getLearnContactDetails(this)) return false
+        // Incognito typing (or private mode): nothing typed is kept
+        if (rocks.pkb.plektra.core.IncognitoTyping.active) return false
         val info = currentInputEditorInfo ?: return false
         val state = inputContextState
         return state.isReallyEditable && !state.isPasswordField && info.packageName != null
@@ -5152,6 +5154,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (text.isNullOrEmpty()) return false
         val inputConnection = currentInputConnection
         if (!handleBoundaryTextBeforeCommit(text, inputConnection)) inputConnection?.commitText(text, 1)
+        rocks.pkb.plektra.data.emoji.EmojiLayerRecents.markUsed(this, text)
         return true
     }
 
@@ -5679,7 +5682,10 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
                 val inputConnection = currentInputConnection
                 val committed = handleBoundaryTextBeforeCommit(symChar, inputConnection) ||
                     inputConnection?.commitText(symChar, 1) == true
-                if (committed) modifierStateController.consumeShiftOneShot()
+                if (committed) {
+                    modifierStateController.consumeShiftOneShot()
+                    symLayoutController.chordSymbolTyped(symChar)
+                }
                 updateStatusBarText()
                 return true
             }

@@ -272,7 +272,8 @@ class SuggestionController(
                 suggestionsListener?.invoke(next)
                 // Not a word the dictionary knows as typed: the phone's spell checker's corrections join in
                 val exact = next.firstOrNull()?.let { it.distance == 0 && it.candidate.equals(wordSnapshot, ignoreCase = true) } == true
-                if (!exact) externalSuggestions?.invoke(wordSnapshot, localeSnapshot) { extra ->
+                // Incognito typing: the word isn't sent to another app's spell checker
+                if (!exact && !incognito && !rocks.pkb.plektra.core.IncognitoTyping.privateMode) externalSuggestions?.invoke(wordSnapshot, localeSnapshot) { extra ->
                     cursorHandler.post {
                         if (!isEnabled() || generation != suggestionGeneration || tracker.currentWord != wordSnapshot) return@post
                         val fresh = extra.filter { candidate -> next.none { it.candidate.equals(candidate, ignoreCase = true) } }
