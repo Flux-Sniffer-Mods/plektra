@@ -168,6 +168,13 @@ class SuggestionController(
     private val cursorDebounceMs = 120L
     private var pendingAddUserWord: String? = null
     private var previousCompletedWord: String? = null
+
+    /**
+     * Incognito typing: next words and sentence starts are not learned; predictions already
+     * learned are still offered. Set per field by the input method.
+     */
+    @Volatile
+    var incognito: Boolean = false
     private var pendingInitialContextConnection: InputConnection? = null
     @Volatile private var pendingPrimaryRefreshAfterLoad: Boolean = false
     @Volatile private var pendingExtraRefreshAfterLoad: Boolean = false
@@ -591,7 +598,7 @@ class SuggestionController(
         }
 
         val cleanWord = completedWord?.trim()?.takeIf { it.any { ch -> ch.isLetterOrDigit() } }
-        if (cleanWord != null) {
+        if (cleanWord != null && !incognito) {
             if (sentenceStartPending) {
                 nextWordPredictor.learnSentenceStart(currentLocale, cleanWord)
             }

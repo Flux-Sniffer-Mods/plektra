@@ -18,7 +18,7 @@ class RecentItems(private val key: String, private val max: Int) {
     }
 
     fun add(context: Context, item: String) {
-        if (item.isBlank()) return
+        if (item.isBlank() || rocks.pkb.plektra.core.IncognitoTyping.active) return
         val updated = (listOf(item) + get(context).filter { it != item }).take(max)
         prefs(context).edit().putString(key, JSONArray(updated).toString()).apply()
     }

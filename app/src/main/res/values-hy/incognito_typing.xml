@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Ինկոգնիտո մուտքագրում</string>
+    <string name="incognito_always_description">Ոչինչ չսովորել մուտքագրածից՝ ոչ նոր կանխատեսումներ, ոչ վերջին էմոջիներ կամ նշաններ</string>
+    <string name="incognito_follow_apps_title">Ինկոգնիտո, երբ հավելվածը խնդրում է</string>
+    <string name="incognito_follow_apps_description">Ոչինչ չսովորել այն դաշտերում, որոնք դա խնդրում են ստեղնաշարերից, օրինակ՝ դիտարկիչի գաղտնի ներդիրներում</string>
+</resources>

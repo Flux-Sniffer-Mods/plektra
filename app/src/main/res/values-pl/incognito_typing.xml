@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Pisanie incognito</string>
+    <string name="incognito_always_description">Nie ucz się niczego z tego, co piszesz: żadnych nowych podpowiedzi, ani ostatnich emoji czy symboli</string>
+    <string name="incognito_follow_apps_title">Incognito, gdy aplikacja o to prosi</string>
+    <string name="incognito_follow_apps_description">Nie ucz się niczego w polach, które o to proszą, np. w prywatnych kartach przeglądarki</string>
+</resources>

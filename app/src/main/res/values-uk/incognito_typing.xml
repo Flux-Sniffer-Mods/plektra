@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Режим інкогніто</string>
+    <string name="incognito_always_description">Нічого не запам’ятовувати з набраного: ні нових підказок, ні нещодавніх емодзі й символів</string>
+    <string name="incognito_follow_apps_title">Інкогніто на прохання застосунку</string>
+    <string name="incognito_follow_apps_description">Нічого не вивчати в полях, які просять про це клавіатури, як-от приватні вкладки браузера</string>
+</resources>

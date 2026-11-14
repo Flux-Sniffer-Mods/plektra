@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="incognito_always_title">Incognito typing</string>
+    <string name="incognito_always_description">Learn nothing from anything you type: no new predictions, and no recent emoji or symbols</string>
+    <string name="incognito_follow_apps_title">Incognito when an app asks</string>
+    <string name="incognito_follow_apps_description">Learn nothing in fields that ask keyboards not to, such as private browser tabs</string>
+</resources>
