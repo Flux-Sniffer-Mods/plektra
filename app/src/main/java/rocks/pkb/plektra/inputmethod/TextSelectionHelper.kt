@@ -24,6 +24,27 @@ object TextSelectionHelper {
 
     private var selectionAnchorState: SelectionAnchorState? = null
 
+    /**
+     * The field's text and selection. An app may hand over only part of a long field ([text]
+     * starting at [offset]); the selection is given in the whole field's positions, as
+     * setSelection takes them.
+     */
+    private class Extracted(val text: String?, val offset: Int, val selectionStart: Int, val selectionEnd: Int) {
+        val end: Int get() = offset + (text?.length ?: 0)
+        /** [position] in the whole field, as a position in [text]. */
+        fun local(position: Int): Int = (position - offset).coerceIn(0, text?.length ?: 0)
+    }
+
+    private fun extract(inputConnection: InputConnection): Extracted? {
+        val extracted = inputConnection.getExtractedText(
+            ExtractedTextRequest().apply { flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING },
+            0
+        ) ?: return null
+        val offset = extracted.startOffset.coerceAtLeast(0)
+        fun whole(position: Int) = if (position < 0) position else position + offset
+        return Extracted(extracted.text?.toString(), offset, whole(extracted.selectionStart), whole(extracted.selectionEnd))
+    }
+
     private fun clearSelectionAnchor() {
         selectionAnchorState = null
     }
@@ -111,12 +132,7 @@ object TextSelectionHelper {
     fun expandSelectionLeft(inputConnection: InputConnection): Boolean {
         try {
             // Ottieni la selezione corrente usando ExtractedTextRequest
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            )
+            val extractedText = extract(inputConnection)
             
             if (extractedText == null) {
                 // Fallback: usa getTextBeforeCursor e getTextAfterCursor per stimare la posizione
@@ -172,12 +188,7 @@ object TextSelectionHelper {
     fun expandSelectionRight(inputConnection: InputConnection): Boolean {
         try {
             // Ottieni la selezione corrente usando ExtractedTextRequest
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            )
+            val extractedText = extract(inputConnection)
             
             if (extractedText == null) {
                 // Fallback: usa getTextBeforeCursor e getTextAfterCursor per stimare la posizione
@@ -206,9 +217,8 @@ object TextSelectionHelper {
                 return false
             }
             
-            // Verify total text length
-            val fullText = extractedText.text?.toString() ?: ""
-            val textLength = fullText.length
+            // Where the field ends (an app may hand over only part of it)
+            val textLength = extractedText.end
             
             val anchor = selectionAnchor(selectionStart, selectionEnd, SelectionDirection.Right)
             val movingEdge = movingSelectionEdge(selectionStart, selectionEnd, anchor)
@@ -238,12 +248,7 @@ object TextSelectionHelper {
         if (SelectFromCursor.active) return expandSelectionLeft(inputConnection)
         try {
             // Get current cursor position using ExtractedTextRequest
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            )
+            val extractedText = extract(inputConnection)
             
             if (extractedText == null) {
                 // Fallback: use getTextBeforeCursor to estimate position
@@ -308,12 +313,7 @@ object TextSelectionHelper {
         if (SelectFromCursor.active) return expandSelectionRight(inputConnection)
         try {
             // Get current cursor position using ExtractedTextRequest
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            )
+            val extractedText = extract(inputConnection)
             
             if (extractedText == null) {
                 // Fallback: use getTextBeforeCursor and getTextAfterCursor to estimate position
@@ -341,9 +341,8 @@ object TextSelectionHelper {
                 return false
             }
             
-            // Verify total text length
-            val fullText = extractedText.text?.toString() ?: ""
-            val textLength = fullText.length
+            // Where the field ends (an app may hand over only part of it)
+            val textLength = extractedText.end
             
             // If there's a selection, collapse it to the end position first
             val currentPos = if (selectionStart != selectionEnd) {
@@ -373,12 +372,7 @@ object TextSelectionHelper {
 
     fun moveCursorWordLeft(inputConnection: InputConnection): Boolean {
         try {
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            )
+            val extractedText = extract(inputConnection)
 
             if (extractedText == null) {
                 val textBefore = inputConnection.getTextBeforeCursor(1000, 0)?.toString() ?: return false
@@ -393,9 +387,9 @@ object TextSelectionHelper {
             val selectionEnd = extractedText.selectionEnd
             if (selectionStart < 0 || selectionEnd < 0) return false
 
-            val text = extractedText.text?.toString() ?: return false
+            val text = extractedText.text ?: return false
             val currentPosition = if (selectionStart != selectionEnd) selectionStart else selectionStart
-            val newPosition = previousWordStart(text, currentPosition)
+            val newPosition = extractedText.offset + previousWordStart(text, extractedText.local(currentPosition))
             if (newPosition == currentPosition) return false
             inputConnection.setSelection(newPosition, newPosition)
             clearSelectionAnchor()
@@ -409,12 +403,7 @@ object TextSelectionHelper {
 
     fun moveCursorWordRight(inputConnection: InputConnection): Boolean {
         try {
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            )
+            val extractedText = extract(inputConnection)
 
             if (extractedText == null) {
                 val textBefore = inputConnection.getTextBeforeCursor(1000, 0)?.toString() ?: ""
@@ -432,9 +421,9 @@ object TextSelectionHelper {
             val selectionEnd = extractedText.selectionEnd
             if (selectionStart < 0 || selectionEnd < 0) return false
 
-            val text = extractedText.text?.toString() ?: return false
+            val text = extractedText.text ?: return false
             val currentPosition = if (selectionStart != selectionEnd) selectionEnd else selectionEnd
-            val newPosition = nextWordStart(text, currentPosition)
+            val newPosition = extractedText.offset + nextWordStart(text, extractedText.local(currentPosition))
             if (newPosition == currentPosition) return false
             inputConnection.setSelection(newPosition, newPosition)
             clearSelectionAnchor()
@@ -448,21 +437,16 @@ object TextSelectionHelper {
 
     fun expandSelectionWordLeft(inputConnection: InputConnection): Boolean {
         try {
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            ) ?: return false
+            val extractedText = extract(inputConnection) ?: return false
 
             val selectionStart = extractedText.selectionStart
             val selectionEnd = extractedText.selectionEnd
             if (selectionStart < 0 || selectionEnd < 0) return false
 
-            val text = extractedText.text?.toString() ?: return false
+            val text = extractedText.text ?: return false
             val anchor = selectionAnchor(selectionStart, selectionEnd, SelectionDirection.Left)
             val movingEdge = movingSelectionEdge(selectionStart, selectionEnd, anchor)
-            val newMovingEdge = previousWordStart(text, movingEdge)
+            val newMovingEdge = extractedText.offset + previousWordStart(text, extractedText.local(movingEdge))
             if (newMovingEdge == movingEdge) return false
             val handled = applySelectionMove(inputConnection, anchor, newMovingEdge)
             Log.d(TAG, "expandSelectionWordLeft: selection moved from [$selectionStart, $selectionEnd] to edge $newMovingEdge with anchor $anchor")
@@ -475,21 +459,16 @@ object TextSelectionHelper {
 
     fun expandSelectionWordRight(inputConnection: InputConnection): Boolean {
         try {
-            val extractedText = inputConnection.getExtractedText(
-                ExtractedTextRequest().apply {
-                    flags = android.view.inputmethod.ExtractedText.FLAG_SELECTING
-                },
-                0
-            ) ?: return false
+            val extractedText = extract(inputConnection) ?: return false
 
             val selectionStart = extractedText.selectionStart
             val selectionEnd = extractedText.selectionEnd
             if (selectionStart < 0 || selectionEnd < 0) return false
 
-            val text = extractedText.text?.toString() ?: return false
+            val text = extractedText.text ?: return false
             val anchor = selectionAnchor(selectionStart, selectionEnd, SelectionDirection.Right)
             val movingEdge = movingSelectionEdge(selectionStart, selectionEnd, anchor)
-            val newMovingEdge = nextWordEnd(text, movingEdge)
+            val newMovingEdge = extractedText.offset + nextWordEnd(text, extractedText.local(movingEdge))
             if (newMovingEdge == movingEdge) return false
             val handled = applySelectionMove(inputConnection, anchor, newMovingEdge)
             Log.d(TAG, "expandSelectionWordRight: selection moved from [$selectionStart, $selectionEnd] to edge $newMovingEdge with anchor $anchor")
