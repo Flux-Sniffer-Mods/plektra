@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Τα emoticon κρατούν το σχήμα τους</string>
+    <string name="emoticon_punctuation_description">Τα σημεία στίξης που ακολουθούνται αμέσως από άλλα, όπως στα :-) ;( :D ή :\'(, δεν παίρνουν κενό μετά. Αν ακολουθεί λέξη (:Do), το κενό επιστρέφει. Οι τελείες κρατούν πάντα το κενό τους.</string>
+</resources>

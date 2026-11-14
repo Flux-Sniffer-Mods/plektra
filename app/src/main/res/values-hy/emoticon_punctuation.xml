@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Էմոտիկոնները պահում են իրենց ձևը</string>
+    <string name="emoticon_punctuation_description">Կետադրական նշանը, որին անմիջապես հաջորդում է ևս մեկը, ինչպես :-) ;( :D կամ :\'(-ում, դրանից հետո բացատ չի ստանում։ Եթե հաջորդում է բառ (:Do), բացատը վերադառնում է։ Վերջակետերը միշտ պահում են իրենց բացատը։</string>
+</resources>

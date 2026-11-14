@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Emoticons behalten ihre Form</string>
+    <string name="emoticon_punctuation_description">Satzzeichen, auf die direkt weitere Zeichen folgen, wie bei :-) ;( :D oder :\'(, bekommen kein Leerzeichen danach. Folgt ein Wort (:Do), kommt das Leerzeichen zurück. Punkte behalten immer ihr Leerzeichen.</string>
+</resources>

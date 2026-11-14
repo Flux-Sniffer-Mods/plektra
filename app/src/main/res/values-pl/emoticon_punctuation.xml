@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Emotikony zachowują kształt</string>
+    <string name="emoticon_punctuation_description">Znaki interpunkcyjne, po których od razu następują kolejne, jak w :-) ;( :D lub :\'(, nie dostają spacji po sobie. Jeśli następuje słowo (:Do), spacja wraca. Kropki zawsze zachowują spację.</string>
+</resources>

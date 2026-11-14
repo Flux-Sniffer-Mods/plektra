@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Смайлики сохраняют форму</string>
+    <string name="emoticon_punctuation_description">Знаки препинания, за которыми сразу идут другие, как в :-) ;( :D или :\'(, не получают пробела после. Если дальше идёт слово (:Do), пробел возвращается. Точки всегда сохраняют пробел.</string>
+</resources>

@@ -63,6 +63,7 @@ object SettingsManager {
     private const val KEY_COMMA_SPACE = "comma_space"
     private const val KEY_AUTO_SPACE_PUNCTUATION = "auto_space_punctuation"
     private const val KEY_SPACE_AFTER_PUNCTUATION = "space_after_punctuation"
+    private const val KEY_EMOTICON_PUNCTUATION = "emoticon_punctuation"
     private const val KEY_SMART_QUOTES = "smart_quotes"
     private const val KEY_SMART_QUOTES_STYLE = "smart_quotes_style"
     private const val KEY_SWIPE_TO_DELETE = "swipe_to_delete"
@@ -346,6 +347,7 @@ object SettingsManager {
     private const val DEFAULT_COMMA_SPACE = false
     private const val DEFAULT_AUTO_SPACE_PUNCTUATION = Punctuation.DEFAULT_AUTO_SPACE
     private const val DEFAULT_SPACE_AFTER_PUNCTUATION = ""
+    private const val DEFAULT_EMOTICON_PUNCTUATION = true
     private const val DEFAULT_SMART_QUOTES = false
     const val SMART_QUOTES_STYLE_GERMAN_GUILLEMETS = "german_guillemets"
     const val SMART_QUOTES_STYLE_FRENCH_GUILLEMETS = "french_guillemets"
@@ -2237,6 +2239,14 @@ object SettingsManager {
         getPreferences(context).edit()
             .putString(KEY_SPACE_AFTER_PUNCTUATION, normalizeAutoSpacePunctuation(punctuation))
             .apply()
+    }
+
+    /** Punctuation typed straight into more (":-)", ":D") gets no space after it, so emoticons keep their shape. */
+    fun getEmoticonPunctuation(context: Context): Boolean =
+        getPreferences(context).getBoolean(KEY_EMOTICON_PUNCTUATION, DEFAULT_EMOTICON_PUNCTUATION)
+
+    fun setEmoticonPunctuation(context: Context, enabled: Boolean) {
+        getPreferences(context).edit().putBoolean(KEY_EMOTICON_PUNCTUATION, enabled).apply()
     }
 
     private fun normalizeAutoSpacePunctuation(punctuation: String): String =

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoticon_punctuation_title">Le emoticon mantengono la forma</string>
+    <string name="emoticon_punctuation_description">La punteggiatura seguita subito da altro, come in :-) ;( :D o :\'(, non riceve lo spazio dopo. Se segue una parola (:Do), lo spazio torna. I punti mantengono sempre lo spazio.</string>
+</resources>
