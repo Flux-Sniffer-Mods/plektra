@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Thêm từ</string>
+    <string name="user_shortcuts_added">%1$s đã có trong trình khởi chạy nhanh</string>
+    <string name="user_shortcuts_description">Đưa lối tắt từ một ứng dụng, như quay số trực tiếp một liên hệ, dấu trang hoặc trang cài đặt, vào kết quả của trình khởi chạy nhanh.</string>
+    <string name="user_shortcuts_intro">Chỉ ứng dụng màn hình chính mới đọc được các lối tắt đã có trên màn hình chính, nên hãy thêm những lối tắt bạn muốn ở đây một lần. Chọn một ứng dụng bên dưới và chọn lối tắt trong màn hình của ứng dụng đó.</string>
+    <string name="user_shortcuts_none">Không có ứng dụng nào trên điện thoại này cung cấp lối tắt để thêm.</string>
+    <string name="user_shortcuts_remove">Xóa %1$s</string>
+    <string name="user_shortcuts_title">Thêm lối tắt</string>
+    <string name="user_shortcuts_unsupported">Lối tắt của ứng dụng này chỉ mở được từ màn hình chính.</string>
+    <string name="user_shortcuts_yours">Lối tắt của bạn</string>
+</resources>

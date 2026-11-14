@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Ajouter depuis</string>
+    <string name="user_shortcuts_added">%1$s est dans le lanceur rapide</string>
+    <string name="user_shortcuts_description">Placer un raccourci d’app, comme l’appel direct d’un contact, un favori ou une page de réglages, dans les résultats du lanceur rapide.</string>
+    <string name="user_shortcuts_intro">Seule l’app d’écran d’accueil peut lire les raccourcis déjà présents sur votre écran d’accueil ; ajoutez donc ici une fois ceux que vous voulez. Choisissez une app ci-dessous et sélectionnez le raccourci dans son propre écran.</string>
+    <string name="user_shortcuts_none">Aucune app de ce téléphone ne propose de raccourcis à ajouter.</string>
+    <string name="user_shortcuts_remove">Retirer %1$s</string>
+    <string name="user_shortcuts_title">Ajouter un raccourci</string>
+    <string name="user_shortcuts_unsupported">Le raccourci de cette app ne peut s’ouvrir que depuis l’écran d’accueil.</string>
+    <string name="user_shortcuts_yours">Vos raccourcis</string>
+</resources>

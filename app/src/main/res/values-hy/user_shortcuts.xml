@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Ավելացնել՝</string>
+    <string name="user_shortcuts_added">%1$s-ն արագ գործարկիչում է</string>
+    <string name="user_shortcuts_description">Տեղադրեք հավելվածի դյուրանցում, օրինակ՝ կոնտակտի ուղիղ զանգ, էջանիշ կամ կարգավորումների էջ, արագ գործարկիչի արդյունքներում։</string>
+    <string name="user_shortcuts_intro">Հիմնական էկրանի դյուրանցումները կարող է կարդալ միայն հիմնական էկրանի հավելվածը, ուստի ձեր ուզածներն այստեղ ավելացրեք մեկ անգամ։ Ներքևում ընտրեք հավելված և ընտրեք դյուրանցումը նրա էկրանում։</string>
+    <string name="user_shortcuts_none">Այս հեռախոսում ոչ մի հավելված ավելացնելու դյուրանցումներ չի առաջարկում։</string>
+    <string name="user_shortcuts_remove">Հեռացնել %1$s</string>
+    <string name="user_shortcuts_title">Ավելացնել դյուրանցում</string>
+    <string name="user_shortcuts_unsupported">Այս հավելվածի դյուրանցումը կարելի է բացել միայն հիմնական էկրանից։</string>
+    <string name="user_shortcuts_yours">Ձեր դյուրանցումները</string>
+</resources>

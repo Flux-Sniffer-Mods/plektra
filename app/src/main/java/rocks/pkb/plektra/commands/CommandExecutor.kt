@@ -53,6 +53,8 @@ class CommandExecutor(
     }
 
     private fun startIntent(spec: CommandLaunchSpec.IntentUri): CommandExecutionResult {
+        if (spec.action == rocks.pkb.plektra.shortcuts.UserShortcuts.LAUNCH_ACTION) return startUserShortcut(spec.intentUri)
+        spec.intentUri?.let { uri -> return startAppShortcut(spec.packageName, uri) }
         return try {
             val intent = Intent(spec.action, spec.data?.let(Uri::parse)).apply {
                 spec.packageName?.let(::setPackage)
@@ -76,6 +78,34 @@ class CommandExecutor(
             fail("Command blocked")
         } catch (error: Exception) {
             Log.e(TAG, "Failed to start command intent", error)
+            fail("Command failed")
+        }
+    }
+
+    /** A shortcut added by hand: started as the app that made it built it. */
+    private fun startUserShortcut(uri: String?): CommandExecutionResult {
+        val intent = uri?.let { rocks.pkb.plektra.shortcuts.UserShortcuts.startableIntent(context, it) }
+            ?: return fail("Command not available")
+        return try {
+            context.startActivity(intent)
+            CommandExecutionResult.Success
+        } catch (error: Exception) {
+            Log.e(TAG, "Failed to start a hand-added shortcut", error)
+            fail("Command failed")
+        }
+    }
+
+    /** An app's own shortcut: only if the app still lets other apps open it. */
+    private fun startAppShortcut(packageName: String?, uri: String): CommandExecutionResult {
+        packageName ?: return fail("Command not available")
+        val action = rocks.pkb.plektra.shortcuts.DiscoveredAction("", "", uri)
+        val intent = rocks.pkb.plektra.shortcuts.AppActionDiscovery.intentFor(context, packageName, action)
+            ?: return fail("Command not available")
+        return try {
+            context.startActivity(intent)
+            CommandExecutionResult.Success
+        } catch (error: Exception) {
+            Log.e(TAG, "Failed to start app shortcut", error)
             fail("Command failed")
         }
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Hinzufügen aus</string>
+    <string name="user_shortcuts_added">%1$s ist im Schnellstarter</string>
+    <string name="user_shortcuts_description">Eine Verknüpfung aus einer App, etwa die Direktwahl eines Kontakts, ein Lesezeichen oder eine Einstellungsseite, in die Ergebnisse des Schnellstarters aufnehmen.</string>
+    <string name="user_shortcuts_intro">Nur die Startbildschirm-App kann die Verknüpfungen lesen, die schon auf deinem Startbildschirm liegen, also füge die gewünschten hier einmal hinzu. Wähle unten eine App und dann die Verknüpfung in ihrem eigenen Bildschirm.</string>
+    <string name="user_shortcuts_none">Keine App auf diesem Telefon bietet Verknüpfungen zum Hinzufügen an.</string>
+    <string name="user_shortcuts_remove">%1$s entfernen</string>
+    <string name="user_shortcuts_title">Verknüpfung hinzufügen</string>
+    <string name="user_shortcuts_unsupported">Die Verknüpfung dieser App lässt sich nur vom Startbildschirm aus öffnen.</string>
+    <string name="user_shortcuts_yours">Deine Verknüpfungen</string>
+</resources>

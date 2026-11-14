@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Aggiungi da</string>
+    <string name="user_shortcuts_added">%1$s è nel lanciatore rapido</string>
+    <string name="user_shortcuts_description">Metti una scorciatoia di un’app, come la chiamata diretta a un contatto, un segnalibro o una pagina di impostazioni, tra i risultati del lanciatore rapido.</string>
+    <string name="user_shortcuts_intro">Solo l’app della schermata home può leggere le scorciatoie già presenti nella schermata home, quindi aggiungi qui una volta quelle che vuoi. Scegli un’app qui sotto e seleziona la scorciatoia nella sua schermata.</string>
+    <string name="user_shortcuts_none">Nessuna app su questo telefono offre scorciatoie da aggiungere.</string>
+    <string name="user_shortcuts_remove">Rimuovi %1$s</string>
+    <string name="user_shortcuts_title">Aggiungi una scorciatoia</string>
+    <string name="user_shortcuts_unsupported">La scorciatoia di questa app si può aprire solo dalla schermata home.</string>
+    <string name="user_shortcuts_yours">Le tue scorciatoie</string>
+</resources>

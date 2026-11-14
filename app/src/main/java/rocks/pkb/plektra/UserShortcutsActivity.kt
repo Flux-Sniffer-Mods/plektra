@@ -1,0 +1,216 @@
+package rocks.pkb.plektra
+
+import android.content.ComponentName
+import android.content.Intent
+import android.graphics.drawable.Drawable
+import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.core.graphics.drawable.toBitmap
+import rocks.pkb.plektra.shortcuts.UserShortcuts
+import rocks.pkb.plektra.ui.theme.PlektraTheme
+
+/**
+ * Add a shortcut: apps that offer shortcuts for the home screen (a contact's direct dial, a
+ * bookmark, a settings page) hand one over here, and it becomes a quick launcher result.
+ */
+class UserShortcutsActivity : LocalizedComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            PlektraTheme {
+                UserShortcutsScreen(onBack = { finish() })
+            }
+        }
+    }
+}
+
+private data class ShortcutProvider(val component: ComponentName, val label: String, val appName: String, val icon: Drawable?)
+
+@Composable
+private fun UserShortcutsScreen(onBack: () -> Unit) {
+    val context = LocalContext.current
+    var shortcuts by remember { mutableStateOf(UserShortcuts.all(context)) }
+    var providersRevision by remember { mutableStateOf(0) }
+    val providers = remember(providersRevision) {
+        val pm = context.packageManager
+        pm.queryIntentActivities(Intent(Intent.ACTION_CREATE_SHORTCUT), 0)
+            .filter { it.activityInfo.exported && it.activityInfo.packageName != context.packageName }
+            .filterNot { UserShortcuts.isUnsupported(context, ComponentName(it.activityInfo.packageName, it.activityInfo.name).flattenToString()) }
+            .map {
+                ShortcutProvider(
+                    ComponentName(it.activityInfo.packageName, it.activityInfo.name),
+                    it.loadLabel(pm).toString(),
+                    runCatching { pm.getApplicationLabel(it.activityInfo.applicationInfo).toString() }.getOrDefault(""),
+                    runCatching { it.loadIcon(pm) }.getOrNull()
+                )
+            }
+            .sortedBy { it.label.lowercase() }
+    }
+    var pendingPackage by rememberSaveable { mutableStateOf<String?>(null) }
+    var pendingComponent by rememberSaveable { mutableStateOf<String?>(null) }
+    val picker = rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val packageName = pendingPackage ?: return@rememberLauncherForActivityResult
+        pendingPackage = null
+        if (result.resultCode != android.app.Activity.RESULT_OK) return@rememberLauncherForActivityResult
+        val added = UserShortcuts.addFromResult(context, packageName, result.data)
+        if (added == null) {
+            // It pins to the home screen instead: not offered again
+            pendingComponent?.let { UserShortcuts.markUnsupported(context, it) }
+            providersRevision++
+            Toast.makeText(context, R.string.user_shortcuts_unsupported, Toast.LENGTH_LONG).show()
+        } else {
+            shortcuts = UserShortcuts.all(context)
+            Toast.makeText(context, context.getString(R.string.user_shortcuts_added, added.label), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .windowInsetsPadding(WindowInsets.statusBars)
+            .windowInsetsPadding(WindowInsets.navigationBars)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = onBack) {
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.settings_back_content_description))
+            }
+            Text(
+                stringResource(R.string.user_shortcuts_title),
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier.padding(start = 8.dp)
+            )
+        }
+        Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
+            Note(stringResource(R.string.user_shortcuts_intro))
+            if (shortcuts.isNotEmpty()) {
+                Label(stringResource(R.string.user_shortcuts_yours))
+                shortcuts.forEach { shortcut ->
+                    val icon = remember(shortcut.id) { UserShortcuts.icon(context, shortcut) }
+                    val appName = remember(shortcut.packageName) {
+                        runCatching {
+                            context.packageManager.getApplicationLabel(context.packageManager.getApplicationInfo(shortcut.packageName, 0)).toString()
+                        }.getOrDefault(shortcut.packageName)
+                    }
+                    ShortcutRow(icon = icon, title = shortcut.label, description = appName, onClick = null) {
+                        IconButton(onClick = {
+                            UserShortcuts.remove(context, shortcut.id)
+                            shortcuts = UserShortcuts.all(context)
+                        }) {
+                            Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.user_shortcuts_remove, shortcut.label))
+                        }
+                    }
+                }
+            }
+            Label(stringResource(R.string.user_shortcuts_add_from))
+            if (providers.isEmpty()) Note(stringResource(R.string.user_shortcuts_none))
+            providers.forEach { provider ->
+                ShortcutRow(icon = provider.icon, title = provider.label, description = provider.appName, onClick = {
+                    pendingPackage = provider.component.packageName
+                    pendingComponent = provider.component.flattenToString()
+                    runCatching {
+                        picker.launch(Intent(Intent.ACTION_CREATE_SHORTCUT).setComponent(provider.component))
+                    }.onFailure {
+                        pendingPackage = null
+                        Toast.makeText(context, R.string.user_shortcuts_unsupported, Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
+        }
+    }
+}
+
+@Composable
+private fun Note(text: String) {
+    Text(
+        text,
+        style = MaterialTheme.typography.bodyMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
+    )
+}
+
+@Composable
+private fun Label(text: String) {
+    Text(
+        text,
+        style = MaterialTheme.typography.labelLarge,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 4.dp)
+    )
+}
+
+/** A row with an icon, title and description, and an optional action at the end. */
+@Composable
+private fun ShortcutRow(
+    icon: Drawable?,
+    title: String,
+    description: String,
+    onClick: (() -> Unit)?,
+    trailing: @Composable () -> Unit = {}
+) {
+    Surface(modifier = Modifier.fillMaxWidth().let { if (onClick != null) it.clickable(onClick = onClick) else it }) {
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            val bitmap = remember(icon) { icon?.let { runCatching { it.toBitmap(96, 96).asImageBitmap() }.getOrNull() } }
+            Box(modifier = Modifier.size(36.dp)) {
+                if (bitmap != null) Image(bitmap = bitmap, contentDescription = null, modifier = Modifier.size(36.dp))
+            }
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Medium)
+                if (description.isNotBlank()) {
+                    Text(description, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
+            }
+            trailing()
+        }
+    }
+}

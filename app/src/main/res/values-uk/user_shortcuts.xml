@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Додати з</string>
+    <string name="user_shortcuts_added">%1$s тепер у швидкому запуску</string>
+    <string name="user_shortcuts_description">Помістіть ярлик застосунку, як-от швидкий виклик контакту, закладку чи сторінку налаштувань, у результати швидкого запуску.</string>
+    <string name="user_shortcuts_intro">Лише застосунок головного екрана може прочитати ярлики, які вже є на головному екрані, тож додайте потрібні тут один раз. Виберіть застосунок нижче й укажіть ярлик на його власному екрані.</string>
+    <string name="user_shortcuts_none">Жоден застосунок на цьому телефоні не пропонує ярликів для додавання.</string>
+    <string name="user_shortcuts_remove">Вилучити %1$s</string>
+    <string name="user_shortcuts_title">Додати ярлик</string>
+    <string name="user_shortcuts_unsupported">Ярлик цього застосунку можна відкрити лише з головного екрана.</string>
+    <string name="user_shortcuts_yours">Ваші ярлики</string>
+</resources>

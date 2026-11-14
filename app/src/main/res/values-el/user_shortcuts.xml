@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Προσθήκη από</string>
+    <string name="user_shortcuts_added">Το %1$s είναι στον γρήγορο εκκινητή</string>
+    <string name="user_shortcuts_description">Βάλτε μια συντόμευση από εφαρμογή, όπως την άμεση κλήση μιας επαφής, έναν σελιδοδείκτη ή μια σελίδα ρυθμίσεων, στα αποτελέσματα του γρήγορου εκκινητή.</string>
+    <string name="user_shortcuts_intro">Μόνο η εφαρμογή αρχικής οθόνης μπορεί να διαβάσει τις συντομεύσεις που υπάρχουν ήδη στην αρχική σας οθόνη, οπότε προσθέστε εδώ μία φορά όσες θέλετε. Επιλέξτε μια εφαρμογή παρακάτω και διαλέξτε τη συντόμευση στη δική της οθόνη.</string>
+    <string name="user_shortcuts_none">Καμία εφαρμογή σε αυτό το τηλέφωνο δεν προσφέρει συντομεύσεις για προσθήκη.</string>
+    <string name="user_shortcuts_remove">Αφαίρεση του %1$s</string>
+    <string name="user_shortcuts_title">Προσθήκη συντόμευσης</string>
+    <string name="user_shortcuts_unsupported">Η συντόμευση αυτής της εφαρμογής ανοίγει μόνο από την αρχική οθόνη.</string>
+    <string name="user_shortcuts_yours">Οι συντομεύσεις σας</string>
+</resources>

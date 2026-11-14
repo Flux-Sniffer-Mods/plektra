@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_launcher_app_shortcuts_description">Lối tắt riêng của ứng dụng, những lối tắt hiện khi nhấn giữ biểu tượng (\"Tin nhắn mới\", \"Quét mã QR\"), là kết quả bạn có thể mở trực tiếp.</string>
+    <string name="quick_launcher_app_shortcuts_title">Lối tắt ứng dụng trong kết quả</string>
+</resources>

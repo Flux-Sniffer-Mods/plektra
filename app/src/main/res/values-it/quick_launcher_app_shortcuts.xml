@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_launcher_app_shortcuts_description">Le scorciatoie proprie delle app, quelle mostrate tenendo premuta la loro icona (\"Nuovo messaggio\", \"Scansiona codice QR\"), sono risultati che puoi aprire direttamente.</string>
+    <string name="quick_launcher_app_shortcuts_title">Scorciatoie delle app nei risultati</string>
+</resources>

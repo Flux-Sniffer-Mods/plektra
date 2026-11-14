@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="user_shortcuts_add_from">Dodaj z</string>
+    <string name="user_shortcuts_added">%1$s jest w szybkim uruchamianiu</string>
+    <string name="user_shortcuts_description">Umieść skrót z aplikacji, np. bezpośrednie połączenie z kontaktem, zakładkę lub stronę ustawień, w wynikach szybkiego uruchamiania.</string>
+    <string name="user_shortcuts_intro">Tylko aplikacja ekranu głównego może odczytać skróty, które już są na ekranie głównym, więc dodaj tu raz te, które chcesz. Wybierz aplikację poniżej i wskaż skrót na jej własnym ekranie.</string>
+    <string name="user_shortcuts_none">Żadna aplikacja na tym telefonie nie oferuje skrótów do dodania.</string>
+    <string name="user_shortcuts_remove">Usuń %1$s</string>
+    <string name="user_shortcuts_title">Dodaj skrót</string>
+    <string name="user_shortcuts_unsupported">Skrót tej aplikacji można otworzyć tylko z ekranu głównego.</string>
+    <string name="user_shortcuts_yours">Twoje skróty</string>
+</resources>
