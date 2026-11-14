@@ -583,6 +583,12 @@ object SettingLinkRegistry {
             unavailableFallbackId = SettingLinkIds.AUTO_CORRECTION_AUTO_REPLACE
         ),
         entry(
+            rocks.pkb.plektra.inputmethod.InlineAutofillSettings.LINK_ID,
+            R.string.inline_autofill_title,
+            R.string.inline_autofill_description,
+            destination = SettingsDestination.AutoCorrection
+        ),
+        entry(
             SettingLinkIds.AUTO_CORRECTION_USER_DICTIONARY,
             R.string.auto_correct_manage_user_dict_title,
             R.string.auto_correct_manage_user_dict_description,

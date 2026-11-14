@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Tự động điền trên thanh gợi ý</string>
+    <string name="inline_autofill_description">Thông tin đăng nhập, mã dùng một lần và địa chỉ đã lưu trong trình quản lý mật khẩu xuất hiện dưới dạng chip trên thanh gợi ý; chạm vào một chip để điền ô.</string>
+</resources>

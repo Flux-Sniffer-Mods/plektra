@@ -455,6 +455,26 @@ class CandidatesBarController(
         candidatesStatusBar.clearExpansionSuggestions()
     }
 
+    /** Autofill chips for the bar on screen: a chip can only be in one place. */
+    fun showInlineAutofill(views: List<android.view.View>) {
+        if (candidatesSurfaceActive) {
+            inputStatusBar.clearInlineAutofill()
+            candidatesStatusBar.showInlineAutofill(views)
+        } else {
+            candidatesStatusBar.clearInlineAutofill()
+            inputStatusBar.showInlineAutofill(views)
+        }
+    }
+
+    fun clearInlineAutofill() {
+        inputStatusBar.clearInlineAutofill()
+        candidatesStatusBar.clearInlineAutofill()
+    }
+
+    fun suggestionChipColours(): Pair<Int, Int> = inputStatusBar.suggestionChipColours()
+
+    fun suggestionChipHeight(): Int? = inputStatusBar.suggestionChipHeight()
+
     fun cancelSoftwareKeyboardTouchState() {
         inputStatusBar.cancelSoftwareKeyboardTouchState()
         candidatesStatusBar.cancelSoftwareKeyboardTouchState()

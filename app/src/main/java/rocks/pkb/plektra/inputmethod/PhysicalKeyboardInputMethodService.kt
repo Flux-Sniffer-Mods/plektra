@@ -4099,6 +4099,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         caretBadgeController.onEditorGone()
         if (::textExpansionController.isInitialized) textExpansionController.clear()
         keyboardVisibilityController.cancelPendingSurfaceTransition()
+        clearInlineAutofill()
         hardwareKeypadAutoOpen.settle()
         endTemporaryKeypad()
         softwareKeypadSession.onFieldFinished()
@@ -4121,6 +4122,51 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
     }
     
+    // Inline autofill (Android 11+): the password manager's chips in the suggestion bar
+    private var inlineAutofillGeneration = 0
+
+    @androidx.annotation.RequiresApi(android.os.Build.VERSION_CODES.R)
+    override fun onCreateInlineSuggestionsRequest(uiExtras: android.os.Bundle): android.view.inputmethod.InlineSuggestionsRequest? {
+        if (!InlineAutofillSettings.isEnabled(this) || !::candidatesBarController.isInitialized) return null
+        val colours = runCatching { candidatesBarController.suggestionChipColours() }.getOrNull()
+        return InlineAutofill.request(this, colours?.first, colours?.second, candidatesBarController.suggestionChipHeight())
+    }
+
+    @androidx.annotation.RequiresApi(android.os.Build.VERSION_CODES.R)
+    override fun onInlineSuggestionsResponse(response: android.view.inputmethod.InlineSuggestionsResponse): Boolean {
+        val suggestions = response.inlineSuggestions
+        val generation = ++inlineAutofillGeneration
+        if (suggestions.isEmpty() || !::candidatesBarController.isInitialized) {
+            clearInlineAutofill()
+            return false
+        }
+        InlineAutofill.inflate(this, suggestions, candidatesBarController.suggestionChipHeight()) { views ->
+            // A newer response (another field) replaced this one while it was inflating
+            if (generation != inlineAutofillGeneration) return@inflate
+            if (views.isEmpty()) {
+                clearInlineAutofill()
+            } else {
+                candidatesBarController.showInlineAutofill(views)
+                refreshBarChips()
+            }
+        }
+        return true
+    }
+
+    private fun clearInlineAutofill() {
+        inlineAutofillGeneration++
+        if (::candidatesBarController.isInitialized) {
+            candidatesBarController.clearInlineAutofill()
+            refreshBarChips()
+        }
+    }
+
+    /** The chips aren't part of the status the bar is redrawn for: showing or clearing one forces the redraw. */
+    private fun refreshBarChips() {
+        invalidateRenderedStatusSnapshot()
+        updateStatusBarText()
+    }
+
     override fun onFinishInputView(finishingInput: Boolean) {
         super.onFinishInputView(finishingInput)
         caretBadgeController.onEditorGone()

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Saisie automatique dans la barre de suggestions</string>
+    <string name="inline_autofill_description">Les identifiants enregistrés, codes à usage unique et adresses de votre gestionnaire de mots de passe apparaissent comme puces dans la barre de suggestions ; touchez-en une pour remplir le champ.</string>
+</resources>

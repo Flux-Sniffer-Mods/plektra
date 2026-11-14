@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Αυτόματη συμπλήρωση στη γραμμή προτάσεων</string>
+    <string name="inline_autofill_description">Οι αποθηκευμένες συνδέσεις, οι κωδικοί μίας χρήσης και οι διευθύνσεις του διαχειριστή κωδικών σας εμφανίζονται ως chip στη γραμμή προτάσεων· πατήστε ένα για να συμπληρωθεί το πεδίο.</string>
+</resources>

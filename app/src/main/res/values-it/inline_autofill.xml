@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="inline_autofill_title">Compilazione automatica nella barra</string>
+    <string name="inline_autofill_description">Gli accessi salvati, i codici monouso e gli indirizzi del tuo gestore password compaiono come chip nella barra dei suggerimenti; toccane uno per compilare il campo.</string>
+</resources>

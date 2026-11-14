@@ -320,6 +320,8 @@ fun AutoCorrectionCategoryScreen(
                             }
                         }
 
+                        rocks.pkb.plektra.inputmethod.InlineAutofillSetting()
+
                         Surface(
                             modifier = Modifier
                                 .fillMaxWidth()

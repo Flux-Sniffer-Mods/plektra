@@ -507,6 +507,8 @@ dependencies {
     implementation("androidx.emoji2:emoji2:1.4.0")
     implementation("androidx.emoji2:emoji2-views:1.4.0")
     implementation("androidx.emoji2:emoji2-views-helper:1.4.0")
+    // Inline autofill chips (passwords, one-time codes, addresses) in the suggestion bar
+    implementation("androidx.autofill:autofill:1.1.0")
     // Kotlinx Serialization for dictionary optimization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-cbor:1.6.3")
