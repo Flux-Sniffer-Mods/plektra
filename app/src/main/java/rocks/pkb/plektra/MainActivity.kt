@@ -695,6 +695,7 @@ fun KeyboardSetupScreen(
                             onClick = {
                                 recordedEvents.clear()
                                 DebugCaptureStore.clearAll()
+                                CrashLog.clear(context)
                                 recordStartedAtMs = null
                                 lastRecordedAtMs = null
                                 isRecording = false
@@ -1188,6 +1189,9 @@ private fun buildKeyboardDebugReport(
         appendLine("resolved_comma_space=${SettingsManager.getCommaSpace(context)}")
         appendLine("resolved_auto_space_punctuation=${SettingsManager.getAutoSpacePunctuation(context)}")
         appendLine("resolved_space_after_punctuation=${SettingsManager.getSpaceAfterPunctuation(context)}")
+        appendLine()
+        appendLine("[crash_log]")
+        appendLine(CrashLog.read(context).trimEnd().ifBlank { "(no crashes recorded)" })
         appendLine()
         appendLine("[autocorrections]")
         if (autoCorrections.isEmpty()) {

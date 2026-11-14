@@ -141,6 +141,7 @@
     ],
     "app-distribution": [
       "rocks.pkb.plektra.AppPackageChangeMonitorTest",
+      "rocks.pkb.plektra.CrashLogTest",
       "rocks.pkb.plektra.ExampleUnitTest",
       "rocks.pkb.plektra.FlavorBuildConfigTest",
       "rocks.pkb.plektra.ImeIdentityTest",
