@@ -2451,7 +2451,13 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         // Register listener for SharedPreferences changes
         prefsListener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPrefs, key ->
             Log.d(TRACKPAD_DEBUG_TAG, "SharedPrefs changed: key=$key")
-            if (key == "sym_mappings_custom") {
+            if (key == rocks.pkb.plektra.data.mappings.EmojiLayerProfiles.PREF_SWITCH_BY_APP) {
+                // Switched on or off: the layer follows the app in front, or is your own again
+                alternateCharacterManager.setEmojiLayerOverride(
+                    rocks.pkb.plektra.data.mappings.EmojiLayerProfiles.overrideFor(this, currentInputEditorInfo?.packageName)
+                )
+                Handler(Looper.getMainLooper()).post { updateStatusBarText() }
+            } else if (key == "sym_mappings_custom") {
                 Log.d(TAG, "SYM mappings page 1 changed, reloading...")
                 // Reload SYM mappings for page 1
                 alternateCharacterManager.reloadSymMappings()
@@ -3871,6 +3877,12 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         
         if (restarting) {
             enforceSmartFeatureDisabledState()
+        }
+        // Emoji layer profiles: the layer follows the app while switching by app
+        if (::alternateCharacterManager.isInitialized) {
+            alternateCharacterManager.setEmojiLayerOverride(
+                rocks.pkb.plektra.data.mappings.EmojiLayerProfiles.overrideFor(this, info?.packageName)
+            )
         }
         
         if (info != null && isEditable) {

@@ -74,6 +74,7 @@ internal fun inputDeviceSettingEntries(): List<SettingEntry> = listOf(
     SettingEntry("sym.kaomoji_pages", R.string.kaomoji_placement_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.picker_symbols_kaomoji", R.string.emoji_picker_extras_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("sym.pages", R.string.sym_swap_pages_title, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
+    SettingEntry(rocks.pkb.plektra.data.mappings.EmojiLayerProfiles.LINK_ID, R.string.emoji_profiles_title, R.string.emoji_profiles_description, route = SettingRoute(SettingsDestination.Modifiers, symCustomization = true)),
     SettingEntry("clicks.charging_reserve", R.string.clicks_charging_reserve_title, route = SettingRoute(SettingsDestination.KeyboardsDevices, keyboardsDevicesDestination = KeyboardsDevicesDestination.PowerKeyboard)),
     SettingEntry("clicks.manual_wireless_charging", R.string.clicks_manual_wireless_charging_title, route = SettingRoute(SettingsDestination.KeyboardsDevices, keyboardsDevicesDestination = KeyboardsDevicesDestination.PowerKeyboard)),
 ).filter { BuildConfig.ENABLE_ACCESSIBILITY_SERVICE || it.id != "clicks.buttons.launcher_button" }

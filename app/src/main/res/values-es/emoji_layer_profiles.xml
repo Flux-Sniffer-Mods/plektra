@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Celebraciones</string>
+    <string name="emoji_profile_chatting">Chat</string>
+    <string name="emoji_profile_everyday">Diario</string>
+    <string name="emoji_profile_food">Comida y bebida</string>
+    <string name="emoji_profile_gaming">Videojuegos</string>
+    <string name="emoji_profile_love">Amor</string>
+    <string name="emoji_profile_social">Redes sociales</string>
+    <string name="emoji_profile_travel">Viajes y aire libre</string>
+    <string name="emoji_profile_work">Trabajo</string>
+    <string name="emoji_profiles_applied">%1$s es ahora tu capa de emoji</string>
+    <string name="emoji_profiles_apply">Usar como capa de emoji</string>
+    <string name="emoji_profiles_delete">Eliminar</string>
+    <string name="emoji_profiles_description">Emoji para chatear, trabajo, redes sociales, comida, viajes y más; o los tuyos</string>
+    <string name="emoji_profiles_in_use">en uso</string>
+    <string name="emoji_profiles_intro">Un perfil pone 26 emoji en la capa de emoji, uno por tecla de letra, para una situación. Aplica uno para convertirlo en tu capa de emoji; edita teclas sueltas en Personalizar capas SYM.</string>
+    <string name="emoji_profiles_name_title">Nombre del perfil</string>
+    <string name="emoji_profiles_new_name">Mis emoji %1$d</string>
+    <string name="emoji_profiles_rename">Cambiar nombre</string>
+    <string name="emoji_profiles_save_current_description">Conserva la capa de emoji como está ahora, para volver a ella más tarde.</string>
+    <string name="emoji_profiles_save_current_title">Guardar la capa de emoji como perfil</string>
+    <string name="emoji_profiles_situations">Situaciones</string>
+    <string name="emoji_profiles_switch_by_app_description">La capa de emoji sigue a la app en la que estás: Chat en mensajería, Redes sociales en apps sociales, Trabajo en apps de trabajo, Comida y bebida en apps de comida, Viajes en mapas y apps de viaje. Las demás apps mantienen tu propia capa.</string>
+    <string name="emoji_profiles_switch_by_app_title">Cambiar según la app</string>
+    <string name="emoji_profiles_title">Perfiles de la capa de emoji</string>
+    <string name="emoji_profiles_update">Actualizar desde la capa de emoji</string>
+    <string name="emoji_profiles_yours">Tus perfiles</string>
+</resources>

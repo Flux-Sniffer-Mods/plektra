@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_profile_celebrations">Feiern</string>
+    <string name="emoji_profile_chatting">Chatten</string>
+    <string name="emoji_profile_everyday">Alltag</string>
+    <string name="emoji_profile_food">Essen und Trinken</string>
+    <string name="emoji_profile_gaming">Gaming</string>
+    <string name="emoji_profile_love">Liebe</string>
+    <string name="emoji_profile_social">Soziale Medien</string>
+    <string name="emoji_profile_travel">Reisen und Natur</string>
+    <string name="emoji_profile_work">Arbeit</string>
+    <string name="emoji_profiles_applied">%1$s ist jetzt deine Emoji-Ebene</string>
+    <string name="emoji_profiles_apply">Als Emoji-Ebene verwenden</string>
+    <string name="emoji_profiles_delete">Löschen</string>
+    <string name="emoji_profiles_description">Emoji für Chats, Arbeit, soziale Medien, Essen, Reisen und mehr; oder deine eigenen</string>
+    <string name="emoji_profiles_in_use">in Verwendung</string>
+    <string name="emoji_profiles_intro">Ein Profil legt 26 Emoji auf die Emoji-Ebene, eines pro Buchstabentaste, für eine Situation. Wende eines an, um es zu deiner Emoji-Ebene zu machen; einzelne Tasten bearbeitest du unter SYM-Ebenen anpassen.</string>
+    <string name="emoji_profiles_name_title">Profilname</string>
+    <string name="emoji_profiles_new_name">Meine Emoji %1$d</string>
+    <string name="emoji_profiles_rename">Umbenennen</string>
+    <string name="emoji_profiles_save_current_description">Behalte die Emoji-Ebene so, wie sie jetzt ist, um später zurückzuwechseln.</string>
+    <string name="emoji_profiles_save_current_title">Emoji-Ebene als Profil speichern</string>
+    <string name="emoji_profiles_situations">Situationen</string>
+    <string name="emoji_profiles_switch_by_app_description">Die Emoji-Ebene folgt der App, in der du bist: Chatten in Messengern, Soziale Medien in sozialen Apps, Arbeit in Arbeits-Apps, Essen und Trinken in Food-Apps, Reisen in Karten- und Reise-Apps. Andere Apps behalten deine eigene Ebene.</string>
+    <string name="emoji_profiles_switch_by_app_title">Je nach App wechseln</string>
+    <string name="emoji_profiles_title">Profile der Emoji-Ebene</string>
+    <string name="emoji_profiles_update">Aus der Emoji-Ebene aktualisieren</string>
+    <string name="emoji_profiles_yours">Deine Profile</string>
+</resources>

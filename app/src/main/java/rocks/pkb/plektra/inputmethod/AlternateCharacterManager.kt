@@ -114,7 +114,22 @@ class AlternateCharacterManager(
     /**
      * Ricarica le mappature SYM, controllando prima le personalizzazioni.
      */
+    // The emoji layer for the app in use (emoji layer profiles, "switch by app"); null: your own
+    private var emojiLayerOverride: Map<Int, String>? = null
+
+    fun setEmojiLayerOverride(mappings: Map<Int, String>?) {
+        if (mappings == emojiLayerOverride) return
+        emojiLayerOverride = mappings
+        reloadSymMappings()
+    }
+
     fun reloadSymMappings() {
+        emojiLayerOverride?.let { override ->
+            symKeyMap.clear()
+            symKeyMap.putAll(override)
+            symKeyMapUppercase.clear()
+            return
+        }
         if (context != null) {
             val customMappings = rocks.pkb.plektra.SettingsManager.getSymMappings(context)
             if (customMappings.isNotEmpty()) {
