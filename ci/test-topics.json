@@ -223,6 +223,7 @@
       "rocks.pkb.plektra.inputmethod.InputEventRouterSoftwareCtrlTest",
       "rocks.pkb.plektra.inputmethod.MultiTapControllerTest",
       "rocks.pkb.plektra.inputmethod.SuggestionKeysTest",
+      "rocks.pkb.plektra.inputmethod.SymOneSymbolTest",
       "rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysTest",
       "rocks.pkb.plektra.shortcuts.AppActionKeysTest"
     ],

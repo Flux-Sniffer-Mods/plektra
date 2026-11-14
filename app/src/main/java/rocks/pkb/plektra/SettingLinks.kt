@@ -924,6 +924,12 @@ object SettingLinkRegistry {
             destination = SettingsDestination.Modifiers
         ),
         entry(
+            rocks.pkb.plektra.inputmethod.SymOneSymbol.LINK_ID,
+            R.string.sym_sticky_title,
+            R.string.sym_sticky_description,
+            destination = SettingsDestination.Modifiers
+        ),
+        entry(
             SettingLinkIds.MODIFIERS_ALT_BINDING,
             R.string.alt_binding_title,
             R.string.alt_binding_description,

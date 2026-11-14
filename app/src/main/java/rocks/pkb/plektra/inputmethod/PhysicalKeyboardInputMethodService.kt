@@ -362,6 +362,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     private var symTogglePendingOnKeyUp: Boolean = false
     private var symChordUsedSinceKeyDown: Boolean = false
     private var symPhysicallyPressed: Boolean = false
+    private val symOneSymbol = SymOneSymbol()
     private var nativeTrackpadGestureStart: NativeTrackpadGestureStart? = null
     private var nativeTrackpadLastX: Float = 0f
     private var nativeTrackpadLastY: Float = 0f
@@ -3399,6 +3400,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         symTogglePendingOnKeyUp = false
         symChordUsedSinceKeyDown = false
         symPhysicallyPressed = false
+        symOneSymbol.disarm()
 
         modifierStateController.resetModifiers(
             preserveNavMode = preserveNavMode,
@@ -3597,7 +3599,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             altPhysicallyPressed = modifierSnapshot.altPhysicallyPressed,
             altOneShot = modifierSnapshot.altOneShot,
             symPage = symPage,
-            symPhysicallyPressed = symPhysicallyPressed,
+            symPhysicallyPressed = symPhysicallyPressed || symOneSymbol.armed,
             clipboardCount = clipboardCount,
             variations = variationSnapshot.variations,
             suggestions = baseSuggestions,
@@ -5573,6 +5575,31 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             }
         }
 
+        // SYM tapped for one symbol: the next key types its symbol, as if SYM were held
+        if (
+            hasEditableField &&
+            symOneSymbol.armed &&
+            keyCode != KEYCODE_SYM &&
+            keyCode != KeyEvent.KEYCODE_BACK &&
+            event?.repeatCount == 0 &&
+            !isPureModifierKey(keyCode)
+        ) {
+            symOneSymbol.disarm()
+            val symChar = symLayoutController.resolveChordSymbol(
+                keyCode = keyCode,
+                shiftPressed = event.isShiftPressed || shiftOneShot || capsLockEnabled
+            )
+            if (!symChar.isNullOrEmpty()) {
+                val inputConnection = currentInputConnection
+                val committed = handleBoundaryTextBeforeCommit(symChar, inputConnection) ||
+                    inputConnection?.commitText(symChar, 1) == true
+                if (committed) modifierStateController.consumeShiftOneShot()
+                updateStatusBarText()
+                return true
+            }
+            updateStatusBarText()
+        }
+
         // If any SYM page or clipboard overlay is open, close on BACK and consume
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (candidatesBarController.handleBackPressed()) {
@@ -5583,6 +5610,11 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
                     updateStatusBarText()
                     return true
                 }
+            }
+            // SYM tapped for one symbol: Back cancels it, as it closes a page
+            if (symOneSymbol.disarm()) {
+                updateStatusBarText()
+                return true
             }
             // A user dismissal wins over an in-flight backend switch or queued recovery.
             pendingKeyboardSurfaceTransition?.let(uiHandler::removeCallbacks)
@@ -6442,7 +6474,13 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             if (symTogglePendingOnKeyUp && !symChordUsedSinceKeyDown) {
                 // The on-screen SYM key arrives here as a synthetic soft-keyboard event.
                 val onScreen = event != null && event.flags and KeyEvent.FLAG_SOFT_KEYBOARD != 0
-                symLayoutController.toggleSymPage(onScreen)
+                val oneSymbol = !onScreen && SymOneSymbol.isEnabled(this)
+                when {
+                    // Held past a tap without choosing a symbol: SYM just lets go
+                    oneSymbol && SymOneSymbol.heldTooLong(event) -> symOneSymbol.disarm()
+                    oneSymbol && symOneSymbol.onSymTapped(this, symPage) -> Unit
+                    else -> symLayoutController.toggleSymPage(onScreen)
+                }
             }
             symTogglePendingOnKeyUp = false
             symChordUsedSinceKeyDown = false
