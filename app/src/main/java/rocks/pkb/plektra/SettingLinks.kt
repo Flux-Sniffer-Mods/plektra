@@ -97,6 +97,8 @@ object SettingLinkIds {
 
     // Advanced screen
     const val ADVANCED_TRACKPAD_GESTURES = "advanced.trackpad_gestures"
+    const val ADVANCED_PASTE_SUGGESTION = "advanced.paste_suggestion"
+    const val ADVANCED_PASTE_IN_PASSWORD_FIELDS = "advanced.paste_in_password_fields"
     const val ADVANCED_BACKUP = "advanced.backup"
     const val ADVANCED_RESTORE = "advanced.restore"
     const val ADVANCED_OFFLINE_MODE = "advanced.offline_mode"
@@ -733,6 +735,20 @@ object SettingLinkRegistry {
             SettingLinkIds.ADVANCED_SWIPE_INCREMENTAL_THRESHOLD,
             R.string.swipe_incremental_threshold_title,
             destination = SettingsDestination.Advanced
+        ),
+        entry(
+            SettingLinkIds.ADVANCED_PASTE_SUGGESTION,
+            R.string.paste_suggestion_title,
+            R.string.paste_suggestion_description,
+            destination = SettingsDestination.Advanced
+        ),
+        SettingEntry(
+            id = SettingLinkIds.ADVANCED_PASTE_IN_PASSWORD_FIELDS,
+            titleRes = R.string.paste_in_password_fields_title,
+            summaryRes = R.string.paste_in_password_fields_description,
+            route = SettingRoute(destination = SettingsDestination.Advanced),
+            unavailableFallbackId = SettingLinkIds.ADVANCED_PASTE_SUGGESTION,
+            availabilityCheck = { SettingsManager.getPasteSuggestionEnabled(it) }
         ),
         entry(
             SettingLinkIds.ADVANCED_CLIPBOARD_RETENTION_TIME,

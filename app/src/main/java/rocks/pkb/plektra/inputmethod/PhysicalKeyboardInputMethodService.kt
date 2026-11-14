@@ -83,6 +83,8 @@ import java.util.Locale
 import android.view.inputmethod.InputMethodManager
 import android.view.inputmethod.InputMethodSubtype
 import rocks.pkb.plektra.clipboard.ClipboardHistoryManager
+import rocks.pkb.plektra.clipboard.PasteSuggestion
+import rocks.pkb.plektra.clipboard.RecentCopyTracker
 import android.content.pm.PackageManager
 import rikka.shizuku.Shizuku
 
@@ -324,6 +326,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     private lateinit var keyboardVisibilityController: KeyboardVisibilityController
     private lateinit var launcherShortcutController: LauncherShortcutController
     private lateinit var clipboardHistoryManager: ClipboardHistoryManager
+    private lateinit var recentCopyTracker: RecentCopyTracker
+    /** A paste suggestion chip is in the bar (see offerPasteSuggestion). */
+    private var pasteSuggestionShown = false
     private var latestSuggestionResults: List<SuggestionResult> = emptyList()
     private var lastRenderedStatusSnapshot: StatusBarController.StatusSnapshot? = null
     private var lastRenderedEmojiMapText: String? = null
@@ -2049,6 +2054,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         // Initialize clipboard history manager first (needed by candidatesBarController)
         clipboardHistoryManager = ClipboardHistoryManager(this)
         clipboardHistoryManager.onCreate()
+        recentCopyTracker = RecentCopyTracker(this).also { it.start() }
 
         candidatesBarController = CandidatesBarController(this, clipboardHistoryManager, assets, PhysicalKeyboardInputMethodService::class.java)
         val snippetExpansionSource = SnippetExpansionSource {
@@ -3156,6 +3162,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             suggestionController.destroy()
         }
         clipboardHistoryManager.onDestroy()
+        if (::recentCopyTracker.isInitialized) recentCopyTracker.stop()
         typingSoundPlayer.release()
 
         // Unregister permission result receiver
@@ -4036,6 +4043,11 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         updateInputContextState(info)
         isInputViewActive = inputContextState.isEditable
         traceImeVisibility("onStartInputView restarting=$restarting")
+        // A new field: what was just copied is offered there, once per copy
+        if (!restarting) {
+            clearPasteSuggestion()
+            offerPasteSuggestion()
+        }
         initializeInputContext(restarting)
         suggestionController.onContextReset()
         
@@ -5084,11 +5096,44 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         return super.onKeyLongPress(keyCode, event)
     }
 
+    /** In a new text field, offer text copied within the last minute as a chip to paste it. */
+    private fun offerPasteSuggestion() {
+        if (!::recentCopyTracker.isInitialized || !::candidatesBarController.isInitialized) return
+        if (!SettingsManager.getPasteSuggestionEnabled(this)) return
+        val state = inputContextState
+        if (!state.isReallyEditable) return
+        val copy = recentCopyTracker.recentCopy ?: return
+        val label = PasteSuggestion.chipFor(
+            copy,
+            System.currentTimeMillis(),
+            passwordField = state.isPasswordField,
+            inPasswordFields = SettingsManager.getPasteSuggestionInPasswordFields(this)
+        ) ?: return
+        pasteSuggestionShown = true
+        candidatesBarController.showExpansionSuggestions(listOf(label)) { _ ->
+            clearPasteSuggestion()
+            // Pasted exactly as copied, in a password field too
+            currentInputConnection?.commitText(copy.text, 1)
+            recentCopyTracker.consume()
+        }
+    }
+
+    private fun clearPasteSuggestion() {
+        if (!pasteSuggestionShown) return
+        pasteSuggestionShown = false
+        if (::candidatesBarController.isInitialized) candidatesBarController.clearExpansionSuggestions()
+    }
+
     override fun onKeyDown(keyCode_: Int, event_: KeyEvent?): Boolean {
         if (liveSpeechEditor != null && (event_?.unicodeChar?.let { it != 0 } == true ||
             keyCode_ in listOf(KeyEvent.KEYCODE_DEL, KeyEvent.KEYCODE_FORWARD_DEL, KeyEvent.KEYCODE_ENTER,
                 KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_DPAD_UP, KeyEvent.KEYCODE_DPAD_DOWN))) {
             cancelSpeechRecognition()
+        }
+        if (pasteSuggestionShown && event_?.repeatCount == 0 && !KeyEvent.isModifierKey(keyCode_)) {
+            // Typing: the paste suggestion goes away (it is offered once per copy)
+            clearPasteSuggestion()
+            recentCopyTracker.consume()
         }
         val perfStart = ImePerfLogger.mark()
         try {

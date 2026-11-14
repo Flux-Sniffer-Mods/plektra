@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Suggest pasting what you copied</string>
+    <string name="paste_suggestion_description">For a minute after you copy text, a new text field offers it as a suggestion; typing dismisses it. Text marked sensitive (a password manager\'s) is only offered in password fields</string>
+    <string name="paste_in_password_fields_title">In password fields too</string>
+    <string name="paste_in_password_fields_description">A password field offers what you just copied, including from a password manager, as ⎘ •••••••• (never the text itself). It\'s kept in memory only, never in the clipboard history</string>
+</resources>

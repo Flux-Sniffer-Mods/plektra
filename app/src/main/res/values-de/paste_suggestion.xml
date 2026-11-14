@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Einfügen des Kopierten vorschlagen</string>
+    <string name="paste_suggestion_description">Eine Minute lang nach dem Kopieren bietet ein neues Textfeld den Text als Vorschlag an; Tippen verwirft ihn. Als sensibel markierter Text (aus einem Passwortmanager) wird nur in Passwortfeldern angeboten</string>
+    <string name="paste_in_password_fields_title">Auch in Passwortfeldern</string>
+    <string name="paste_in_password_fields_description">Ein Passwortfeld bietet an, was du gerade kopiert hast, auch aus einem Passwortmanager, als ⎘ •••••••• (nie den Text selbst). Es wird nur im Speicher gehalten, nie im Zwischenablageverlauf</string>
+</resources>

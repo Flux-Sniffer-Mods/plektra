@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Πρόταση επικόλλησης όσων αντιγράψατε</string>
+    <string name="paste_suggestion_description">Για ένα λεπτό μετά την αντιγραφή κειμένου, ένα νέο πεδίο κειμένου το προσφέρει ως πρόταση· η πληκτρολόγηση την απορρίπτει. Κείμενο που έχει σημανθεί ως ευαίσθητο (από διαχειριστή κωδικών) προσφέρεται μόνο σε πεδία κωδικών</string>
+    <string name="paste_in_password_fields_title">Και σε πεδία κωδικών</string>
+    <string name="paste_in_password_fields_description">Ένα πεδίο κωδικού προσφέρει ό,τι μόλις αντιγράψατε, ακόμα και από διαχειριστή κωδικών, ως ⎘ •••••••• (ποτέ το ίδιο το κείμενο). Κρατιέται μόνο στη μνήμη, ποτέ στο ιστορικό προχείρου</string>
+</resources>

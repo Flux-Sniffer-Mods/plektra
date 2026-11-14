@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Пропонувати вставити скопійоване</string>
+    <string name="paste_suggestion_description">Протягом хвилини після копіювання тексту нове текстове поле пропонує його як підказку; введення її прибирає. Текст, позначений як конфіденційний (з менеджера паролів), пропонується лише в полях паролів</string>
+    <string name="paste_in_password_fields_title">І в полях паролів</string>
+    <string name="paste_in_password_fields_description">Поле пароля пропонує щойно скопійоване, зокрема з менеджера паролів, як ⎘ •••••••• (ніколи сам текст). Зберігається лише в пам’яті, ніколи в історії буфера обміну</string>
+</resources>

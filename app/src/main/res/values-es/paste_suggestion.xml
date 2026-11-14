@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="paste_suggestion_title">Sugerir pegar lo que copiaste</string>
+    <string name="paste_suggestion_description">Durante un minuto tras copiar texto, un campo de texto nuevo lo ofrece como sugerencia; escribir la descarta. El texto marcado como sensible (el de un gestor de contraseñas) solo se ofrece en campos de contraseña</string>
+    <string name="paste_in_password_fields_title">También en campos de contraseña</string>
+    <string name="paste_in_password_fields_description">Un campo de contraseña ofrece lo que acabas de copiar, incluso desde un gestor de contraseñas, como ⎘ •••••••• (nunca el texto en sí). Se guarda solo en memoria, nunca en el historial del portapapeles</string>
+</resources>
