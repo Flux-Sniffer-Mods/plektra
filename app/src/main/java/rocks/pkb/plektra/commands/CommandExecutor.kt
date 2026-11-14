@@ -142,6 +142,11 @@ class CommandExecutor(
                 if (rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.toggle()) CommandExecutionResult.Success
                 else fail("Keyboard not active")
             PlektraCommandSource.ACTION_TOGGLE_SOFTWARE_KEYBOARD_MODE -> toggleSoftwareKeyboardMode()
+            PlektraCommandSource.ACTION_SELECT_FROM_CURSOR -> {
+                val controller = navModeController ?: return fail("Nav mode unavailable")
+                controller.startSelectingFromCursor()
+                CommandExecutionResult.Success
+            }
             DeviceControlCommandSource.ACTION_HOME_SCREEN -> goHome()
             DeviceControlCommandSource.ACTION_MEDIA_PLAY_PAUSE -> dispatchMediaKey(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE)
             DeviceControlCommandSource.ACTION_MEDIA_PREVIOUS -> dispatchMediaKey(KeyEvent.KEYCODE_MEDIA_PREVIOUS)

@@ -3,6 +3,7 @@ package rocks.pkb.plektra.inputmethod
 import android.view.inputmethod.ExtractedTextRequest
 import android.view.inputmethod.InputConnection
 import android.util.Log
+import rocks.pkb.plektra.core.SelectFromCursor
 
 /**
  * Helper for handling text selection operations.
@@ -233,6 +234,8 @@ object TextSelectionHelper {
      * @return true if cursor was moved, false if already at start or error occurred
      */
     fun moveCursorLeft(inputConnection: InputConnection): Boolean {
+        // Selecting from the cursor: moves extend the selection instead
+        if (SelectFromCursor.active) return expandSelectionLeft(inputConnection)
         try {
             // Get current cursor position using ExtractedTextRequest
             val extractedText = inputConnection.getExtractedText(
@@ -302,6 +305,7 @@ object TextSelectionHelper {
      * @return true if cursor was moved, false if already at end or error occurred
      */
     fun moveCursorRight(inputConnection: InputConnection): Boolean {
+        if (SelectFromCursor.active) return expandSelectionRight(inputConnection)
         try {
             // Get current cursor position using ExtractedTextRequest
             val extractedText = inputConnection.getExtractedText(
