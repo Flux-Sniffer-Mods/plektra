@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Learn from your swipes</string>
+    <string name="suggestion_swipe_learning_description">A pick you undo straight away makes swipes need a little more; a swipe that falls short before a pick makes them need a little less.</string>
+    <string name="suggestion_swipe_learning_reset">Forget what was learned</string>
+    <string name="suggestion_swipe_learning_reset_done">Suggestion swipes back to your setting</string>
+    <string name="suggestion_swipe_idle_title">Swipes scroll after a pause</string>
+    <string name="suggestion_swipe_idle_value">After %1$d s without typing, a swipe scrolls instead of picking</string>
+    <string name="suggestion_swipe_idle_off">Swipes always pick</string>
+</resources>

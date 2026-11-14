@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Սովորել ձեր սահեցումներից</string>
+    <string name="suggestion_swipe_learning_description">Անմիջապես չեղարկված ընտրությունը սահեցումը մի փոքր երկարացնում է, ընտրությունից առաջ կարճ մնացածը՝ մի փոքր կարճացնում։</string>
+    <string name="suggestion_swipe_learning_reset">Մոռանալ սովորածը</string>
+    <string name="suggestion_swipe_learning_reset_done">Առաջարկների սահեցումները՝ ըստ ձեր կարգավորման</string>
+    <string name="suggestion_swipe_idle_title">Դադարից հետո սահեցումը ոլորում է</string>
+    <string name="suggestion_swipe_idle_value">%1$d վ առանց մուտքագրման հետո սահեցումը ոլորում է, ոչ թե ընտրում</string>
+    <string name="suggestion_swipe_idle_off">Սահեցումը միշտ ընտրում է</string>
+</resources>

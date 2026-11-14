@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Μάθηση από τα σαρώματά σου</string>
+    <string name="suggestion_swipe_learning_description">Μια επιλογή που αναιρείς αμέσως κάνει τα σαρώματα να θέλουν λίγο περισσότερο· ένα που δεν φτάνει πριν από μια επιλογή, λίγο λιγότερο.</string>
+    <string name="suggestion_swipe_learning_reset">Ξέχασε όσα έμαθε</string>
+    <string name="suggestion_swipe_learning_reset_done">Τα σαρώματα προτάσεων στη ρύθμισή σου</string>
+    <string name="suggestion_swipe_idle_title">Μετά από παύση, το σάρωμα κάνει κύλιση</string>
+    <string name="suggestion_swipe_idle_value">Μετά από %1$d δ χωρίς πληκτρολόγηση, το σάρωμα κάνει κύλιση αντί να επιλέγει</string>
+    <string name="suggestion_swipe_idle_off">Τα σαρώματα επιλέγουν πάντα</string>
+</resources>

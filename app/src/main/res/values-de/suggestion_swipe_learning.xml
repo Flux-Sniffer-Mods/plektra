@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Aus deinen Wischgesten lernen</string>
+    <string name="suggestion_swipe_learning_description">Eine sofort rückgängig gemachte Auswahl lässt Wischgesten etwas länger sein müssen; eine zu kurze vor einer Auswahl etwas kürzer.</string>
+    <string name="suggestion_swipe_learning_reset">Gelerntes vergessen</string>
+    <string name="suggestion_swipe_learning_reset_done">Vorschlags-Wischgesten wieder auf deiner Einstellung</string>
+    <string name="suggestion_swipe_idle_title">Nach einer Pause scrollen Wischgesten</string>
+    <string name="suggestion_swipe_idle_value">Nach %1$d s ohne Tippen scrollt eine Wischgeste statt auszuwählen</string>
+    <string name="suggestion_swipe_idle_off">Wischgesten wählen immer</string>
+</resources>

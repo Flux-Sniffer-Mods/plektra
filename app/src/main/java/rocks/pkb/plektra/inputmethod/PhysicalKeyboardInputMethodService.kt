@@ -5298,6 +5298,11 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         }
         val keyCode = remapped.keyCode
         val event = remapped.event
+        // Suggestion swipes: typing keeps them picking; Backspace right after one undoes it
+        if ((event?.repeatCount ?: 0) == 0 && !KeyEvent.isModifierKey(keyCode)) {
+            if (keyCode == KeyEvent.KEYCODE_DEL) rocks.pkb.plektra.core.SuggestionSwipeLearning.onDeleted(this)
+            else rocks.pkb.plektra.core.SuggestionSwipeLearning.onTyped()
+        }
         clicksPowerShiftTapFilter.shouldConsumeKeyDown(
             isClicksPowerKeyboard = DeviceSpecific.resolveInputProfile(
                 event,
@@ -6723,14 +6728,18 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             "Native candidate[$phase]: startX=${start.x}, startY=${start.y}, x=$x, y=$y, dx=$deltaX, dy=$deltaY, up=$upwardDistance, left=$leftwardDistance, suggestionThreshold=$suggestionThreshold, deleteThreshold=$deleteThreshold, duration=${durationMs}ms, upVelocity=$upVelocity, leftVelocity=$leftVelocity, verticalEnough=$verticalEnough, mostlyVertical=$mostlyVertical, verticalFastEnough=$verticalFastEnough, leftEnough=$leftEnough, mostlyHorizontal=$mostlyHorizontal, horizontalFastEnough=$horizontalFastEnough"
         )
         val candidateThreshold = if (leftwardDistance > upwardDistance) deleteThreshold else suggestionThreshold
+        // After a pause in typing a swipe up is a scroll: it picks nothing (Swipes scroll after a pause)
+        val picksAllowed = rocks.pkb.plektra.core.SuggestionSwipeLearning.swipesPick(this)
         val direction = when {
-            verticalEnough && mostlyVertical && verticalFastEnough -> NativeTrackpadSwipeDirection.UP
+            picksAllowed && verticalEnough && mostlyVertical && verticalFastEnough -> NativeTrackpadSwipeDirection.UP
             leftEnough &&
                 mostlyHorizontal &&
                 horizontalFastEnough &&
                 SettingsManager.getSwipeToDelete(this) &&
                 SettingsManager.getSwipeToDeleteProvider(this) == SettingsManager.SWIPE_TO_DELETE_PROVIDER_NATIVE_IME -> NativeTrackpadSwipeDirection.LEFT
             else -> {
+                // A swipe up that nearly picked: if a pick follows soon, swipes need a little less
+                if (picksAllowed) rocks.pkb.plektra.core.SuggestionSwipeLearning.onMissed(reached = upwardDistance, needed = suggestionThreshold)
                 DebugCaptureStore.recordRawTrackpadEvent(
                     provider = SettingsManager.TRACKPAD_PROVIDER_NATIVE_IME,
                     origin = start.origin,
@@ -6805,6 +6814,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
                     source = start.source,
                     eventTimeUptimeMs = eventTimeUptimeMs
                 )
+                rocks.pkb.plektra.core.SuggestionSwipeLearning.onPicked(this)
                 acceptSuggestionAtIndex(third)
             }
             NativeTrackpadSwipeDirection.LEFT -> {
@@ -6837,7 +6847,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     }
 
     private fun nativeImeTrackpadSuggestionSwipeThreshold(): Float {
-        return SettingsManager.getTrackpadSuggestionSwipeThreshold(this)
+        // Your setting, scaled by what suggestion swipes learned from your picks and undos
+        return SettingsManager.getTrackpadSuggestionSwipeThreshold(this) * rocks.pkb.plektra.core.SuggestionSwipeLearning.scale(this)
     }
 
     private fun nativeImeTrackpadDeleteSwipeThreshold(): Float {
@@ -6875,6 +6886,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     }
 
     private fun deleteWordFromNativeTrackpadSwipe() {
+        rocks.pkb.plektra.core.SuggestionSwipeLearning.onDeleted(this)
         val ic = currentInputConnection
         if (ic == null) {
             Log.w(TRACKPAD_DEBUG_TAG, "Native swipe-to-delete ignored: no InputConnection")

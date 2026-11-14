@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Вчитися на ваших свайпах</string>
+    <string name="suggestion_swipe_learning_description">Одразу скасований вибір робить свайп трохи довшим; свайп, що не дотягнув перед вибором, — трохи коротшим.</string>
+    <string name="suggestion_swipe_learning_reset">Забути вивчене</string>
+    <string name="suggestion_swipe_learning_reset_done">Свайпи підказок знову за вашим налаштуванням</string>
+    <string name="suggestion_swipe_idle_title">Після паузи свайп прокручує</string>
+    <string name="suggestion_swipe_idle_value">Через %1$d с без набору свайп прокручує замість вибору</string>
+    <string name="suggestion_swipe_idle_off">Свайп завжди вибирає</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Học từ các lần vuốt</string>
+    <string name="suggestion_swipe_learning_description">Lựa chọn bị hoàn tác ngay khiến lần vuốt cần dài hơn một chút; lần vuốt thiếu trước một lựa chọn khiến nó cần ngắn hơn.</string>
+    <string name="suggestion_swipe_learning_reset">Quên những gì đã học</string>
+    <string name="suggestion_swipe_learning_reset_done">Vuốt gợi ý trở lại theo cài đặt của bạn</string>
+    <string name="suggestion_swipe_idle_title">Sau khi dừng gõ, vuốt để cuộn</string>
+    <string name="suggestion_swipe_idle_value">Sau %1$d giây không gõ, vuốt sẽ cuộn thay vì chọn</string>
+    <string name="suggestion_swipe_idle_off">Vuốt luôn chọn</string>
+</resources>

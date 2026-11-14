@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="suggestion_swipe_learning_title">Aprender de tus deslizamientos</string>
+    <string name="suggestion_swipe_learning_description">Una selección que deshaces enseguida hace que los deslizamientos necesiten algo más; uno que se queda corto antes de una selección, algo menos.</string>
+    <string name="suggestion_swipe_learning_reset">Olvidar lo aprendido</string>
+    <string name="suggestion_swipe_learning_reset_done">Deslizamientos de sugerencias según tu ajuste</string>
+    <string name="suggestion_swipe_idle_title">Tras una pausa, deslizar desplaza</string>
+    <string name="suggestion_swipe_idle_value">Tras %1$d s sin escribir, deslizar desplaza en vez de elegir</string>
+    <string name="suggestion_swipe_idle_off">Deslizar siempre elige</string>
+</resources>
