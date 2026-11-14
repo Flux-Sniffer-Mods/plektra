@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="snippets_placeholders_help">Συμπληρώνονται όταν επεκτείνεται το απόσπασμα: {date}, {time}, {datetime}, {isodate}, {day} και {clipboard}.</string>
+</resources>

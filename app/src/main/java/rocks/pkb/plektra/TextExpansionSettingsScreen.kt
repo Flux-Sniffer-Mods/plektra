@@ -397,6 +397,7 @@ private fun SnippetsScreen(onBack: () -> Unit) {
                         keyboardOptions = LiteralEntryKeyboardOptions,
                         onValueChange = { replacement = it },
                         label = { Text(stringResource(R.string.snippets_value_label)) },
+                        supportingText = { Text(stringResource(R.string.snippets_placeholders_help)) },
                         minLines = 4,
                         maxLines = 10
                     )

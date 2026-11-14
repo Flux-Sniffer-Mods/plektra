@@ -227,6 +227,92 @@ class TextExpansionControllerTest {
         verify(inputConnection).commitText("Regards ", 1)
     }
 
+    @Test
+    fun snippetPlaceholdersAreFilledAsTheSnippetExpands() {
+        val inputConnection = mock(InputConnection::class.java)
+        `when`(inputConnection.getTextBeforeCursor(TextExpansionEngine.MAX_CONTEXT_CHARS, 0))
+            .thenReturn("!link")
+        var committed: String? = null
+        val controller = prefixController(
+            inputConnection,
+            SnippetExpansionSource { mapOf("link" to "See {clipboard} ({name})") },
+            clipboard = { "https://example.org" },
+            onCommitted = { committed = it }
+        )
+
+        assertTrue(controller.handleKeyDown(KeyEvent.KEYCODE_SPACE))
+        verify(inputConnection).commitText("See https://example.org ({name}) ", 1)
+        assertEquals("See https://example.org ({name}) ", committed)
+    }
+
+    @Test
+    fun snippetsWithoutPlaceholdersNeverReadTheClipboard() {
+        val inputConnection = mock(InputConnection::class.java)
+        `when`(inputConnection.getTextBeforeCursor(TextExpansionEngine.MAX_CONTEXT_CHARS, 0))
+            .thenReturn("!sig")
+        var reads = 0
+        val controller = prefixController(
+            inputConnection,
+            SnippetExpansionSource { mapOf("sig" to "Regards") },
+            clipboard = { reads++; "unused" }
+        )
+
+        assertTrue(controller.handleKeyDown(KeyEvent.KEYCODE_SPACE))
+        verify(inputConnection).commitText("Regards ", 1)
+        assertEquals(0, reads)
+    }
+
+    @Test
+    fun onlySnippetsFillPlaceholders() {
+        val inputConnection = mock(InputConnection::class.java)
+        `when`(inputConnection.getTextBeforeCursor(TextExpansionEngine.MAX_CONTEXT_CHARS, 0))
+            .thenReturn("!sig")
+        val symbols = object : ExpansionSource {
+            override val provider = ExpansionProvider.SYMBOL
+            override fun matches(query: ExpansionQuery, limit: Int) =
+                listOf(ExpansionMatch(provider, "sig", "{clipboard}", query.token, query.tokenStart))
+        }
+        val controller = prefixController(inputConnection, symbols, clipboard = { "clip" })
+
+        assertTrue(controller.handleKeyDown(KeyEvent.KEYCODE_SPACE))
+        verify(inputConnection).commitText("{clipboard} ", 1)
+    }
+
+    private fun prefixController(
+        inputConnection: InputConnection,
+        source: ExpansionSource,
+        clipboard: () -> String?,
+        onCommitted: (String) -> Unit = {}
+    ) = TextExpansionController(
+        context = RuntimeEnvironment.getApplication(),
+        handler = Handler(Looper.getMainLooper()),
+        inputConnectionProvider = { inputConnection },
+        inputContextProvider = { editableState },
+        anchorProvider = { null },
+        configsProvider = {
+            listOf(
+                ExpansionRuntimeConfig(
+                    source = source,
+                    triggerKind = ExpansionTriggerKind.PREFIX,
+                    enabled = true,
+                    prefix = '!',
+                    presentation = ExpansionPresentation.OFF,
+                    activationPolicy = ExpansionActivationPolicy(
+                        exactOnSpace = true,
+                        acceptPrefixWithSpace = false,
+                        acceptWithTab = true,
+                        acceptWithEnter = false
+                    )
+                )
+            )
+        },
+        showSuggestionBar = { _, _ -> },
+        clearSuggestionBar = {},
+        requestSurfaceUpdate = {},
+        onCommitted = onCommitted,
+        clipboardTextProvider = clipboard
+    )
+
     private fun config(source: ExpansionSource, enabled: Boolean) = ExpansionRuntimeConfig(
         source = source,
         triggerKind = ExpansionTriggerKind.COLON_SHORTCODE,

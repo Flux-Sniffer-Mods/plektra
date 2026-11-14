@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="snippets_placeholders_help">Uzupełniane przy rozwinięciu fragmentu: {date}, {time}, {datetime}, {isodate}, {day} i {clipboard}.</string>
+</resources>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="snippets_placeholders_help">Compilati quando lo snippet viene espanso: {date}, {time}, {datetime}, {isodate}, {day} e {clipboard}.</string>
+</resources>
