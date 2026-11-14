@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="language_per_app_title">Запам’ятовувати мову для кожного застосунку</string>
+    <string name="language_per_app_description">Кожен застосунок отримує мову, якою ви користувалися в ньому востаннє.</string>
+</resources>

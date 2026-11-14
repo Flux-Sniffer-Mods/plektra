@@ -140,6 +140,7 @@ object SettingLinkIds {
     const val CUSTOM_INPUT_STYLES_CTRL_SPACE_LAYOUT_SWITCH =
         "custom_input_styles.ctrl_space_layout_switch"
     const val CUSTOM_INPUT_STYLES_LAYOUT_SWITCH_TOAST = "custom_input_styles.layout_switch_toast"
+    const val CUSTOM_INPUT_STYLES_LANGUAGE_PER_APP = "custom_input_styles.language_per_app"
 
     // About screen
     const val ABOUT_SUPPORT_KO_FI = "about.support_ko_fi"
@@ -931,6 +932,12 @@ object SettingLinkRegistry {
             SettingLinkIds.CUSTOM_INPUT_STYLES_LAYOUT_SWITCH_TOAST,
             R.string.toast_on_layout_switch_title,
             R.string.toast_on_layout_switch_description,
+            destination = SettingsDestination.CustomInputStyles
+        ),
+        entry(
+            SettingLinkIds.CUSTOM_INPUT_STYLES_LANGUAGE_PER_APP,
+            R.string.language_per_app_title,
+            R.string.language_per_app_description,
             destination = SettingsDestination.CustomInputStyles
         ),
 

@@ -124,6 +124,35 @@ object SubtypeCycler {
         }
     }
     
+    /** A language as [LanguagePerApp] keeps it: the locale and the input style it carries. */
+    fun subtypeKey(subtype: InputMethodSubtype): String = subtypeKey(subtype.localeString(), subtype.extraValue)
+
+    internal fun subtypeKey(locale: String, extraValue: String?): String = "$locale|${extraValue.orEmpty()}"
+
+    /**
+     * Switches to the enabled language whose [subtypeKey] is [key], if it isn't the current one,
+     * with its layout. Returns whether it switched; a language no longer enabled is skipped.
+     */
+    fun switchToSubtypeKey(context: Context, imeServiceClass: Class<*>, assets: AssetManager, key: String): Boolean {
+        return try {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager ?: return false
+            val current = imm.currentInputMethodSubtype
+            if (current != null && subtypeKey(current) == key) return false
+            val info = imm.getInputMethodList().firstOrNull {
+                it.packageName == context.packageName && it.serviceName == imeServiceClass.name
+            } ?: return false
+            val target = imm.getEnabledInputMethodSubtypeList(info, true).firstOrNull { subtypeKey(it) == key }
+                ?: return false
+            val layout = resolveSubtypeCycleLayout(assets, context, target)
+            val switched = trySwitchSubtype(imm, info.id, target, context)
+            if (switched) SettingsManager.setKeyboardLayout(context, layout)
+            switched
+        } catch (e: Exception) {
+            Log.w(TAG, "Couldn't switch to the app's language", e)
+            false
+        }
+    }
+
     /**
      * Attempts to switch to the specified subtype using setInputMethodAndSubtype.
      * This method requires the IME window token, which may not always be available.

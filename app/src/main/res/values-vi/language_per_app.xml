@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="language_per_app_title">Nhớ ngôn ngữ theo ứng dụng</string>
+    <string name="language_per_app_description">Mỗi ứng dụng nhận lại ngôn ngữ bạn dùng lần cuối trong ứng dụng đó.</string>
+</resources>

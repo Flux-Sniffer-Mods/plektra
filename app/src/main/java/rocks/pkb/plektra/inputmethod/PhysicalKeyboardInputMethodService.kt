@@ -3899,6 +3899,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         editorHasActiveSelection = false
         
         currentPackageName = info?.packageName
+        if (!restarting) restoreAppLanguage(info)
         updateDebugImeContextSnapshot(info)
         
         // Reset clipboard overlay when starting new input
@@ -4640,8 +4641,25 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
      * Called when the user switches IME subtypes (languages).
      * Reloads the dictionary for the new language and switches to the layout specified in the subtype or JSON mapping.
      */
+    // Language per app: the app whose language was last restored, so it is done once per visit
+    private var languageRestoredForPackage: String? = null
+
+    /** On entering another app, switches to the language last used there (Language per app). */
+    private fun restoreAppLanguage(info: EditorInfo?) {
+        val pkg = info?.packageName ?: return
+        if (pkg == packageName || pkg == languageRestoredForPackage) return
+        languageRestoredForPackage = pkg
+        if (!LanguagePerApp.isEnabled(this)) return
+        val key = LanguagePerApp.languageFor(this, pkg) ?: return
+        SubtypeCycler.switchToSubtypeKey(this, PhysicalKeyboardInputMethodService::class.java, assets, key)
+    }
+
     override fun onCurrentInputMethodSubtypeChanged(newSubtype: android.view.inputmethod.InputMethodSubtype) {
         super.onCurrentInputMethodSubtypeChanged(newSubtype)
+        // A language chosen while typing in an app becomes that app's language
+        currentInputEditorInfo?.packageName?.takeIf { it != packageName && LanguagePerApp.isEnabled(this) }?.let { pkg ->
+            LanguagePerApp.remember(this, pkg, SubtypeCycler.subtypeKey(newSubtype))
+        }
         
         if (::suggestionController.isInitialized) {
             val newLocale = getLocaleFromSubtype(newSubtype)

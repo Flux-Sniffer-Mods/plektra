@@ -237,6 +237,7 @@ internal object BackupPreferenceContract {
             "typing_sound_custom_display_name" to PreferenceValueType.STRING,
             "app_language_tag" to PreferenceValueType.STRING,
             "app_enter_behavior_enabled" to PreferenceValueType.BOOLEAN,
+            "language_per_app_enabled" to PreferenceValueType.BOOLEAN,
             "app_enter_behavior_preset" to PreferenceValueType.STRING,
             "app_enter_behavior_overrides" to PreferenceValueType.STRING,
             "app_raw_mode_packages" to PreferenceValueType.STRING_SET,
