@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="clean_copied_links_title">Kopierte Links bereinigen</string>
+    <string name="clean_copied_links_description">Tracking wird aus kopierten Links (utm_, fbclid, YouTubes si und Ähnliches) direkt in der Zwischenablage entfernt, sodass sie überall bereinigt eingefügt werden.</string>
+</resources>

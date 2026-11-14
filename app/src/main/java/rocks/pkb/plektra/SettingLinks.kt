@@ -99,6 +99,7 @@ object SettingLinkIds {
     const val ADVANCED_SWIPE_INCREMENTAL_THRESHOLD = "advanced.swipe_incremental_threshold"
     const val ADVANCED_SENSITIVE_CLIPBOARD_RETENTION_TIME = "advanced.sensitive_clipboard_retention_time"
     const val ADVANCED_CLIPBOARD_RETENTION_TIME = "advanced.clipboard_retention_time"
+    const val ADVANCED_CLEAN_COPIED_LINKS = "advanced.clean_copied_links"
     const val ADVANCED_EXPERIMENTAL_CANDIDATES_VIEW = "advanced.experimental_candidates_view"
     const val ADVANCED_SHOW_TUTORIAL = "advanced.show_tutorial"
     const val ADVANCED_SHOW_RELEASE_NOTES_TUTORIAL = "advanced.show_release_notes_tutorial"
@@ -704,6 +705,12 @@ object SettingLinkRegistry {
             SettingLinkIds.ADVANCED_SENSITIVE_CLIPBOARD_RETENTION_TIME,
             R.string.clipboard_sensitive_retention_title,
             R.string.clipboard_sensitive_retention_description,
+            destination = SettingsDestination.Advanced
+        ),
+        entry(
+            SettingLinkIds.ADVANCED_CLEAN_COPIED_LINKS,
+            R.string.clean_copied_links_title,
+            R.string.clean_copied_links_description,
             destination = SettingsDestination.Advanced
         ),
         entry(

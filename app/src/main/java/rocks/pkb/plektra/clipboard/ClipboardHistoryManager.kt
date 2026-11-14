@@ -121,6 +121,8 @@ class ClipboardHistoryManager internal constructor(
     }
 
     override fun onPrimaryClipChanged() {
+        // Clean copied links: the clean copy comes back here as a change of its own
+        if (runCatching { CopiedLinkCleaning.cleanClipboard(context, clipboardManager) }.getOrDefault(false)) return
         if (!isEnabled || !isHistoryAccessible()) return
         fetchPrimaryClip()
     }

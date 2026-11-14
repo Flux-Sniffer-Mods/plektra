@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="clean_copied_links_title">Làm sạch liên kết đã sao chép</string>
+    <string name="clean_copied_links_description">Thông tin theo dõi được xóa khỏi liên kết đã sao chép (utm_, fbclid, si của YouTube, v.v.) ngay trong bộ nhớ tạm, nên liên kết sạch ở bất cứ đâu được dán.</string>
+</resources>

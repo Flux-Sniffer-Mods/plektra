@@ -100,6 +100,9 @@ fun AdvancedSettingsScreen(
     }
     var shizukuStatus by remember { mutableStateOf(ShizukuStatus.NotConnected) }
     var trackpadProvider by remember { mutableStateOf(SettingsManager.getTrackpadProvider(context)) }
+    var cleanCopiedLinks by remember {
+        mutableStateOf(rocks.pkb.plektra.clipboard.CopiedLinkCleaning.isEnabled(context))
+    }
     var experimentalCandidatesViewEnabled by remember {
         mutableStateOf(SettingsManager.getExperimentalCandidatesViewEnabled(context))
     }
@@ -554,6 +557,46 @@ fun AdvancedSettingsScreen(
                             onSelected = { SettingsManager.setSensitiveClipboardRetentionTime(context, it) },
                             modifier = Modifier.settingRow(SettingLinkIds.ADVANCED_SENSITIVE_CLIPBOARD_RETENTION_TIME)
                         )
+
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .settingRow(SettingLinkIds.ADVANCED_CLEAN_COPIED_LINKS) {
+                                    cleanCopiedLinks = !cleanCopiedLinks
+                                    rocks.pkb.plektra.clipboard.CopiedLinkCleaning.setEnabled(context, cleanCopiedLinks)
+                                }
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.clean_copied_links_title),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.clean_copied_links_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = cleanCopiedLinks,
+                                    onCheckedChange = { enabled ->
+                                        cleanCopiedLinks = enabled
+                                        rocks.pkb.plektra.clipboard.CopiedLinkCleaning.setEnabled(context, enabled)
+                                    }
+                                )
+                            }
+                        }
 
                         Surface(
                             modifier = Modifier
