@@ -50,6 +50,7 @@ object SettingLinkIds {
     const val TEXT_INPUT_CLEAR_ALT_ON_SPACE = "text_input.clear_alt_on_space"
     const val TEXT_INPUT_AUTO_SHOW_KEYBOARD = "text_input.auto_show_keyboard"
     const val TEXT_INPUT_AUTO_SHOW_RESPECT_APP_VISIBILITY = "text_input.auto_show_respect_app_visibility"
+    const val TEXT_INPUT_SEARCH_BAR_WAITS = "text_input.search_bar_waits"
     const val TEXT_INPUT_EXPERIMENTAL_SMOOTH_CARET = "text_input.experimental_smooth_caret"
     const val TEXT_INPUT_ALT_CTRL_SPEECH_SHORTCUT = "text_input.alt_ctrl_speech_shortcut"
     const val TEXT_INPUT_SHIFT_BACKSPACE_DELETE = "text_input.shift_backspace_delete"
@@ -479,6 +480,12 @@ object SettingLinkRegistry {
             route = SettingRoute(destination = SettingsDestination.TextInput),
             unavailableFallbackId = SettingLinkIds.TEXT_INPUT_AUTO_SHOW_KEYBOARD,
             availabilityCheck = { SettingsManager.getAutoShowKeyboard(it) }
+        ),
+        entry(
+            SettingLinkIds.TEXT_INPUT_SEARCH_BAR_WAITS,
+            R.string.search_bar_waits_title,
+            R.string.search_bar_waits_description,
+            destination = SettingsDestination.TextInput
         ),
         entry(
             SettingLinkIds.TEXT_INPUT_EXPERIMENTAL_SMOOTH_CARET,

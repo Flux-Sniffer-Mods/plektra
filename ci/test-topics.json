@@ -239,6 +239,7 @@
       "rocks.pkb.plektra.inputmethod.LanguageSwitchServiceE2ETest",
       "rocks.pkb.plektra.inputmethod.PhysicalKeyboardInputMethodServiceDeviceBehaviorTest",
       "rocks.pkb.plektra.inputmethod.ReplacementAfterUndoKeysTest",
+      "rocks.pkb.plektra.inputmethod.SearchBarWaitTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeypadPolicyTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeypadServiceIntegrationTest",
       "rocks.pkb.plektra.inputmethod.TerminalAppsTest",

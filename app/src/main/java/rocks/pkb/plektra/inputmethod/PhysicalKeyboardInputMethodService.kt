@@ -3249,6 +3249,18 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         return resolvedShowInputView
     }
 
+    // The app whose text field last started, so a search bar can be told focused by an app as it
+    // opens from one the user went to in an app already open
+    private var lastTextFieldPackage: String? = null
+
+    /** An app opening on its search bar, with Search bars wait for typing on. */
+    private fun searchBarWaitsForTyping(info: EditorInfo?): Boolean {
+        val pkg = info?.packageName
+        val openedApp = pkg != null && pkg != lastTextFieldPackage
+        lastTextFieldPackage = pkg
+        return openedApp && pkg != packageName && SearchBarWait.isEnabled(this) && SearchBarWait.isSearchBar(info)
+    }
+
     override fun onShowInputRequested(flags: Int, configChange: Boolean): Boolean {
         if (!keyboardVisibilityController.allowsSurface()) return false
         // Decide before Plektra answers with its own show request, which settles an open decision.
@@ -3985,6 +3997,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
                     SettingsManager.getHardwareKeypadAutoOpen(this)
                 )
             when {
+                // Search bars wait for typing: the first key, a tap or the app's own request shows it
+                searchBarWaitsForTyping(info) -> traceImeVisibility("search bar waits for typing")
                 // No own show while the decision is open: the next show request is the app's.
                 autoOpenKeypad && respectAppVisibility -> hardwareKeypadAutoOpen.begin()
                 autoOpenKeypad -> openKeypadForCurrentField()

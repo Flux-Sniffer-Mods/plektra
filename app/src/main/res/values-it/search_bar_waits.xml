@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search_bar_waits_title">Le barre di ricerca aspettano che digiti</string>
+    <string name="search_bar_waits_description">Quando un’app si apre con la barra di ricerca già attiva, la barra della tastiera compare solo quando digiti o tocchi la barra.</string>
+</resources>

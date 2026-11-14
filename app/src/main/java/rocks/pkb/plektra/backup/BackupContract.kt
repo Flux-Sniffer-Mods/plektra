@@ -266,6 +266,7 @@ internal object BackupPreferenceContract {
             "auto_show_respect_app_visibility" to PreferenceValueType.BOOLEAN,
             "phone_spell_checker_suggestions" to PreferenceValueType.BOOLEAN,
             "hardware_keypad_auto_open" to PreferenceValueType.BOOLEAN,
+            "search_bar_waits_for_typing" to PreferenceValueType.BOOLEAN,
             "software_keyboard_emoji_page_in_cycle" to PreferenceValueType.BOOLEAN,
             "keyboard_bar_show_on_launcher" to PreferenceValueType.BOOLEAN,
             "keyboard_bar_hidden_apps" to PreferenceValueType.STRING_SET,
