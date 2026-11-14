@@ -190,6 +190,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             }
         }
     )
+    // Terminal mode in a terminal app's field (Modifiers settings)
+    private var terminalModeActive = false
+    private val terminalKeys = TerminalKeys { currentInputConnection }
     private lateinit var textExpansionController: TextExpansionController
     private lateinit var emojiShortcodeSource: EmojiShortcodeSource
     private lateinit var symbolShortcodeSource: SymbolShortcodeSource
@@ -3916,6 +3919,9 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         pendingKeyboardSurfaceTransition = null
         // Terminal apps get no microphone button
         TerminalApps.onAppInFront(info?.packageName)
+        // Terminal mode: a terminal's "no text field" typed into like a text field
+        terminalModeActive = TerminalMode.apply(this, info)
+        terminalKeys.reset()
         if (!restarting) {
             cancelSpeechRecognition()
             ++speechEditorSession
@@ -4063,6 +4069,7 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         beginCursorAnchorMonitoring()
+        if (terminalModeActive) TerminalMode.apply(this, info)
         if (::textExpansionController.isInitialized) textExpansionController.clear()
         updateDebugImeContextSnapshot(info)
         attachTrackpadDecorViewMotionHook("onStartInputView")
@@ -5366,6 +5373,26 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             updateStatusBarText()
             return true
         }
+        // Terminal mode: a real Ctrl and the terminal's own keys go to the terminal as they are
+        if (terminalModeActive && hasEditableField && event != null) {
+            val ctrl = event.isCtrlPressed || ctrlPressed || ctrlPhysicallyPressed || ctrlOneShot ||
+                (ctrlLatchActive && !ctrlLatchFromNavMode)
+            if (terminalKeys.sendCtrlCombo(event, ctrl, event.isAltPressed || altPhysicallyPressed,
+                    event.isShiftPressed || shiftPhysicallyPressed)
+            ) {
+                if (ctrlOneShot && event.repeatCount == 0) {
+                    ctrlOneShot = false
+                    updateStatusBarText()
+                }
+                return true
+            }
+            if (TerminalMode.isTerminalKey(keyCode) && symPage == 0 &&
+                !event.isAltPressed && !altLatchActive && !altOneShot
+            ) {
+                terminalKeys.passRaw(keyCode)
+                return super.onKeyDown(keyCode, event)
+            }
+        }
         if (hasEditableField && !isInputViewActive) {
             isInputViewActive = true
         }
@@ -6299,6 +6326,12 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             return true
         }
 
+        // Terminal mode: a key sent on to the terminal has its release sent the same way
+        when (terminalKeys.onKeyUp(event)) {
+            TerminalKeys.Release.SENT -> return true
+            TerminalKeys.Release.RAW -> return super.onKeyUp(keyCode, event)
+            TerminalKeys.Release.NONE -> Unit
+        }
         // Check if we have an editable field at the start (same logic as onKeyDown)
         val info = currentInputEditorInfo
         val ic = currentInputConnection

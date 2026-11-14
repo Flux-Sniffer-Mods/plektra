@@ -224,6 +224,7 @@
       "rocks.pkb.plektra.inputmethod.MultiTapControllerTest",
       "rocks.pkb.plektra.inputmethod.SuggestionKeysTest",
       "rocks.pkb.plektra.inputmethod.SymOneSymbolTest",
+      "rocks.pkb.plektra.inputmethod.TerminalModeTest",
       "rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysTest",
       "rocks.pkb.plektra.shortcuts.AppActionKeysTest"
     ],

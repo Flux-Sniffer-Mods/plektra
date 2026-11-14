@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_mode_description">Termux και άλλα τερματικά: τα Alt και SYM πληκτρολογούν σύμβολα, το Ctrl μένει Ctrl</string>
+    <string name="terminal_mode_title">Λειτουργία τερματικού</string>
+</resources>

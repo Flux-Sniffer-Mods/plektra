@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_mode_description">Termux và các terminal khác: Alt và SYM gõ ký hiệu, Ctrl vẫn là Ctrl</string>
+    <string name="terminal_mode_title">Chế độ terminal</string>
+</resources>

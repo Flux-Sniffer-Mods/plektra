@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_mode_description">Termux i inne terminale: Alt i SYM wpisują symbole, Ctrl pozostaje Ctrl</string>
+    <string name="terminal_mode_title">Tryb terminala</string>
+</resources>

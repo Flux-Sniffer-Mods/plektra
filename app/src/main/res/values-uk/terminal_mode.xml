@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="terminal_mode_description">Termux та інші термінали: Alt і SYM вводять символи, Ctrl лишається Ctrl</string>
+    <string name="terminal_mode_title">Режим термінала</string>
+</resources>

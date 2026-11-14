@@ -247,6 +247,17 @@ fun ModifierSettingsScreen(
                 onClick = onOpenNavMode
             )
 
+            var terminalMode by remember { mutableStateOf(rocks.pkb.plektra.inputmethod.TerminalMode.isEnabled(context)) }
+            ModifierSwitchRow(
+                title = stringResource(R.string.terminal_mode_title),
+                description = stringResource(R.string.terminal_mode_description),
+                checked = terminalMode,
+                linkId = rocks.pkb.plektra.inputmethod.TerminalMode.LINK_ID
+            ) {
+                terminalMode = it
+                rocks.pkb.plektra.inputmethod.TerminalMode.setEnabled(context, it)
+            }
+
             SettingsSectionDivider(stringResource(R.string.modifier_tap_behaviour_title))
             ModifierSwitchRow(
                 title = stringResource(R.string.shift_tap_latches_title),
