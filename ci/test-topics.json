@@ -172,6 +172,7 @@
       "rocks.pkb.plektra.core.suggestions.CasingHelperTest",
       "rocks.pkb.plektra.core.suggestions.CurrentWordTrackerTest",
       "rocks.pkb.plektra.core.suggestions.DictionaryRepositoryTest",
+      "rocks.pkb.plektra.core.suggestions.FrequentWordLearnerTest",
       "rocks.pkb.plektra.core.suggestions.NextWordPredictorAsyncLearningTest",
       "rocks.pkb.plektra.core.suggestions.ReplacementAfterUndoTest",
       "rocks.pkb.plektra.core.suggestions.SuggestionControllerIncognitoTest",

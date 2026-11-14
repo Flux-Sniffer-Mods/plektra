@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Запоминать часто используемые слова</string>
+    <string name="learn_frequent_words_description">Слово, которого нет в словаре, добавляется в него, когда вы наберёте его трижды: оно будет предлагаться и никогда не исправится автоматически.</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Impara le parole che usi spesso</string>
+    <string name="learn_frequent_words_description">Una parola che non è nel dizionario viene aggiunta dopo che l\'hai digitata tre volte, così viene suggerita e mai corretta automaticamente.</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Apprendre les mots que vous utilisez souvent</string>
+    <string name="learn_frequent_words_description">Un mot absent du dictionnaire y est ajouté une fois tapé trois fois, pour être suggéré et jamais corrigé automatiquement.</string>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="learn_frequent_words_title">Learn words you use often</string>
+    <string name="learn_frequent_words_description">A word that isn\'t in the dictionary goes into it once you\'ve typed it three times, so it\'s suggested and never auto-corrected.</string>
+</resources>

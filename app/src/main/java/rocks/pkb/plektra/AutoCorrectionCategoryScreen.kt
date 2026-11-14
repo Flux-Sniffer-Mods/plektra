@@ -67,6 +67,9 @@ fun AutoCorrectionCategoryScreen(
     var emojiSuggestionsEnabled by remember {
         mutableStateOf(SettingsManager.getEmojiSuggestionsEnabled(context))
     }
+    var learnFrequentWords by remember {
+        mutableStateOf(SettingsManager.getLearnFrequentWords(context))
+    }
     var autoReplaceOnSpaceEnter by remember {
         mutableStateOf(SettingsManager.getAutoReplaceOnSpaceEnter(context))
     }
@@ -364,6 +367,49 @@ fun AutoCorrectionCategoryScreen(
                                     )
                                 }
 	                            }
+
+                        Surface(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .settingRow(SettingLinkIds.AUTO_CORRECTION_LEARN_FREQUENT_WORDS) {
+                                    learnFrequentWords = !learnFrequentWords
+                                    SettingsManager.setLearnFrequentWords(context, learnFrequentWords)
+                                }
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Filled.Add,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = stringResource(R.string.learn_frequent_words_title),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.Medium
+                                    )
+                                    Text(
+                                        text = stringResource(R.string.learn_frequent_words_description),
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                Switch(
+                                    checked = learnFrequentWords,
+                                    onCheckedChange = { enabled ->
+                                        learnFrequentWords = enabled
+                                        SettingsManager.setLearnFrequentWords(context, enabled)
+                                    }
+                                )
+                            }
+                        }
 
                         // Exact Typing page: choose the apps where smart typing is off
                         Surface(
