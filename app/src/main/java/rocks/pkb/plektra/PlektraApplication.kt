@@ -45,6 +45,8 @@ class PlektraApplication : Application() {
     private fun initializeUnlockedApplication() {
         if (unlockedInitialized) return
         unlockedInitialized = true
+        // In the app's own storage, so only once the phone is unlocked
+        CrashLog.install(this)
         val preferences = SettingsManager.getPreferences(this)
         val config = DirectBootKeyboardConfig(this)
         config.refresh(preferences)
