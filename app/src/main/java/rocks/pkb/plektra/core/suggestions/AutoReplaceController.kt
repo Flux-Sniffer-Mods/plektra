@@ -322,6 +322,16 @@ class AutoReplaceController(
         val lookupWord = apostropheSplit?.root ?: word
         val wordLower = word.lowercase()
 
+        // A word whose replacement was undone stays as typed only until typing moves on: once
+        // another word is finished, it is replaced again. Not every way of typing reports its
+        // letters (SuggestionController.onCharacterCommitted), and an undone word that was only
+        // forgiven there was never replaced again until the keyboard restarted.
+        if (rejectedWords.isNotEmpty() &&
+            wordLower !in rejectedWords && lookupWord.lowercase() !in rejectedWords
+        ) {
+            rejectedWords.clear()
+        }
+
         val exactReplacement = if (settings.textReplacementsEnabled) {
             exactReplacementProvider?.invoke(word, boundaryChar)
         } else {
@@ -548,8 +558,9 @@ class AutoReplaceController(
         keyCode: Int,
         inputConnection: InputConnection?
     ): Boolean {
-        val settings = settingsProvider()
-        if (!settings.autoReplaceOnSpaceEnter || keyCode != KeyEvent.KEYCODE_DEL || inputConnection == null) {
+        // Any replacement can be undone: auto-replace, and text replacements (which apply with
+        // auto-replace off), so no settings check here
+        if (keyCode != KeyEvent.KEYCODE_DEL || inputConnection == null) {
             return false
         }
 
@@ -570,8 +581,10 @@ class AutoReplaceController(
             maxOf(0, textBeforeCursor.length - replacement.replacedWord.length - 1)
         )
 
+        // The word, then the space or punctuation typed after it (a comma too, not only a space)
         val matchesReplacement = lastChars.endsWith(replacement.replacedWord) ||
-            lastChars.trimEnd().endsWith(replacement.replacedWord)
+            lastChars.trimEnd { it.isWhitespace() || it in rocks.pkb.plektra.core.Punctuation.BOUNDARY }
+                .endsWith(replacement.replacedWord)
 
         if (!matchesReplacement) {
             return false
@@ -596,9 +609,12 @@ class AutoReplaceController(
             deleteCount
         }
 
+        // Keep the space (or punctuation) typed after the word: undo brings the word back, and
+        // typing carries on where it was (palsoftware/pastiera#316)
+        val trailing = textBeforeCursor.takeLast(charsToDelete - replacement.replacedWord.length)
         inputConnection.beginBatchEdit()
         inputConnection.deleteSurroundingText(charsToDelete, 0)
-        inputConnection.commitText(replacement.originalWord, 1)
+        inputConnection.commitText(replacement.originalWord + trailing, 1)
         inputConnection.endBatchEdit()
         
         // Mark word as rejected so it won't be auto-corrected again
