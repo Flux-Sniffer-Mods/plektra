@@ -27,7 +27,11 @@ LC_ALL=C.UTF-8 ./gradlew :app:testStableDebugUnitTest --tests '*AppActionKeysTes
 
 ## Validation
 
-VALIDATION_PLACEHOLDER
+Run on 14 November 2026 against source commit `837c8e80` (upstream `68ace8ab` plus this change), with a UTF-8 locale as on CI:
+
+- Full `testStableDebugUnitTest`: 187 classes, 1,425 tests (upstream alone: 185 classes, 1,417 tests). Of these, 4 are new, in `AppActionKeysTest`; the other 4 are `AppShortcutCommandsTest`, from `flux/quick-launcher-app-shortcuts`, which this branch is built on (186 classes and 1,421 tests without this change). One failure, `ClipboardHistoryTest.startupShowsLoadingAndBlocksHistoryActionsUntilReady`: a race in that upstream test, unrelated to this change. The class passed when rerun on its own; `flux/test-races` fixes the race.
+- `python3 scripts/ci-tests.py check` and the Python guard tests pass; the new class is in the `keys-modifiers` topic.
+- `lintStableDebug` then `scripts/check-lint.py`: 1,056 errors, no new errors against `ci/lint-errors.json`.
 
 ## Device check (still to do)
 
