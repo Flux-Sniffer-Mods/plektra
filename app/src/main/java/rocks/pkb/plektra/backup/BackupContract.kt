@@ -231,6 +231,7 @@ internal object BackupPreferenceContract {
             "swipe_to_delete_provider" to PreferenceValueType.STRING,
             "tap_haptic_use_system" to PreferenceValueType.BOOLEAN,
             "tap_haptic_duration_ms" to PreferenceValueType.LONG,
+            "offline_mode" to PreferenceValueType.BOOLEAN,
             "typing_sound_mode" to PreferenceValueType.STRING,
             "typing_sound_output_mode" to PreferenceValueType.STRING,
             "typing_sound_custom_file_name" to PreferenceValueType.STRING,

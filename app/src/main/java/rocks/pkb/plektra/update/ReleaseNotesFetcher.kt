@@ -88,7 +88,7 @@ fun fetchReleaseNotesForVersion(
     callback: (ReleaseNotesSummary?) -> Unit
 ) {
     val normalizedVersion = normalizeReleaseNotesVersion(version)
-    if (normalizedVersion.isBlank()) {
+    if (normalizedVersion.isBlank() || rocks.pkb.plektra.OfflineMode.enabled) {
         postReleaseNotes(callback, null)
         return
     }

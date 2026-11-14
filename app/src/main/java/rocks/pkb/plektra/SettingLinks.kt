@@ -99,6 +99,7 @@ object SettingLinkIds {
     const val ADVANCED_TRACKPAD_GESTURES = "advanced.trackpad_gestures"
     const val ADVANCED_BACKUP = "advanced.backup"
     const val ADVANCED_RESTORE = "advanced.restore"
+    const val ADVANCED_OFFLINE_MODE = "advanced.offline_mode"
     const val ADVANCED_SWIPE_INCREMENTAL_THRESHOLD = "advanced.swipe_incremental_threshold"
     const val ADVANCED_SENSITIVE_CLIPBOARD_RETENTION_TIME = "advanced.sensitive_clipboard_retention_time"
     const val ADVANCED_CLIPBOARD_RETENTION_TIME = "advanced.clipboard_retention_time"
@@ -720,6 +721,12 @@ object SettingLinkRegistry {
             SettingLinkIds.ADVANCED_RESTORE,
             R.string.restore_from_file,
             R.string.restore_from_file_description,
+            destination = SettingsDestination.Advanced
+        ),
+        entry(
+            SettingLinkIds.ADVANCED_OFFLINE_MODE,
+            R.string.offline_mode_title,
+            R.string.offline_mode_description,
             destination = SettingsDestination.Advanced
         ),
         entry(

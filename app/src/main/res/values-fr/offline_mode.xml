@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline_mode_title">Mode hors ligne</string>
+    <string name="offline_mode_description">Rien dans Plektra ne se connecte : aucune vérification de mise à jour ni note de version, les dictionnaires et dispositions ne peuvent pas être téléchargés, et la saisie vocale utilise celle d’Android au lieu d’un service en ligne</string>
+</resources>

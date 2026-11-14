@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline_mode_title">Modo sin conexión</string>
+    <string name="offline_mode_description">Nada de Plektra se conecta a internet: sin búsqueda de actualizaciones ni notas de versión, no se pueden descargar diccionarios ni distribuciones, y el dictado usa el de Android en lugar de un servicio en línea</string>
+</resources>

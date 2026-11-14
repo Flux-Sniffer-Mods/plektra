@@ -22,6 +22,11 @@ object SpeechSettings {
         it.name == prefs(context).getString("speech_provider", null)
     } ?: SpeechProvider.SYSTEM
 
+    /** The provider dictation uses now: Android's in place of an online one in offline mode. */
+    fun providerInUse(context: Context): SpeechProvider = provider(context).let {
+        if (it.isCloud && rocks.pkb.plektra.OfflineMode.enabled) SpeechProvider.SYSTEM else it
+    }
+
     fun setProvider(context: Context, provider: SpeechProvider) {
         prefs(context).edit().putString("speech_provider", provider.name).apply()
     }

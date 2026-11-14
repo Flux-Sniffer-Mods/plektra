@@ -57,6 +57,7 @@ class PlektraApplication : Application() {
         rocks.pkb.plektra.data.emoji.EmojiRendering.ensureInitialized(this)
         SettingsManager.enforceTitan2EliteRoundedCornersOnce(this)
         SettingsManager.migrateCompactSoftwareKeyHeightOnce(this)
+        OfflineMode.load(this)
         AppPackageChangeMonitor.register(this)
         ClicksPowerKeyboardController.initialize(this)
         publishSoftwareKeyboardModeShortcut()

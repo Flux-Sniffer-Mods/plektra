@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline_mode_title">Chế độ ngoại tuyến</string>
+    <string name="offline_mode_description">Không có gì trong Plektra kết nối mạng: không kiểm tra cập nhật hay ghi chú phát hành, không thể tải từ điển và bố cục, và nhập bằng giọng nói dùng tính năng của Android thay cho dịch vụ trực tuyến</string>
+</resources>

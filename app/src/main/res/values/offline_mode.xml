@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="offline_mode_title">Offline mode</string>
+    <string name="offline_mode_description">Nothing in Plektra goes online: no update checks or release notes, dictionaries and layouts can’t be downloaded, and voice input uses Android’s instead of an online service</string>
+</resources>
