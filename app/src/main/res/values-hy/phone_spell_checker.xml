@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_spell_checker_title">Հեռախոսի ուղղագրիչը առաջարկներում</string>
+    <string name="phone_spell_checker_description">Երբ Android-ի ուղղագրիչը այլ հավելվածինն է (օրինակ՝ Gboard-ինը), սխալ բառի նրա ուղղումները հայտնվում են առաջարկների գոտում։</string>
+</resources>

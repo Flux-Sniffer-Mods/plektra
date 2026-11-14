@@ -195,7 +195,8 @@
       "rocks.pkb.plektra.inputmethod.AddWordCommitHelperTest",
       "rocks.pkb.plektra.inputmethod.InlineAutofillTest",
       "rocks.pkb.plektra.otp.OneTimeCodeFieldsTest",
-      "rocks.pkb.plektra.otp.OneTimeCodesTest"
+      "rocks.pkb.plektra.otp.OneTimeCodesTest",
+      "rocks.pkb.plektra.spellcheck.PhoneSpellCheckerTest"
     ],
     "keys-modifiers": [
       "rocks.pkb.plektra.core.ModifierStateControllerTest",

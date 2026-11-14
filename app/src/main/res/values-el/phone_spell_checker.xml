@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_spell_checker_title">Ο ορθογραφικός έλεγχος του τηλεφώνου στις προτάσεις</string>
+    <string name="phone_spell_checker_description">Όταν ο ορθογραφικός έλεγχος του Android είναι άλλης εφαρμογής (π.χ. του Gboard), οι διορθώσεις του για μια λάθος λέξη μπαίνουν στη γραμμή προτάσεων.</string>
+</resources>

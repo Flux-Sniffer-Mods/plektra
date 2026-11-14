@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="phone_spell_checker_title">El corrector del teléfono en las sugerencias</string>
+    <string name="phone_spell_checker_description">Si el corrector de Android es de otra app (el de Gboard, por ejemplo), sus correcciones para una palabra mal escrita se suman a la barra de sugerencias.</string>
+</resources>
