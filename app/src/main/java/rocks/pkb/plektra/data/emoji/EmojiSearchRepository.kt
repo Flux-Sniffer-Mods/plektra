@@ -57,6 +57,45 @@ object EmojiSearchRepository {
     private val indexCache = LinkedHashMap<String, EmojiSearchIndex>()
     private const val MAX_CACHED_INDEXES = 3
 
+    /** The last index built, by locale chain: read without waiting (the typing path). */
+    @Volatile
+    private var lastBuilt: Pair<String, EmojiSearchIndex>? = null
+
+    /** The index for the device's languages if it is built already, else null. */
+    fun cachedSearchIndex(context: Context): EmojiSearchIndex? {
+        val built = lastBuilt ?: return null
+        return built.second.takeIf { built.first == getPreferredLocaleChain(context).joinToString("|") }
+    }
+
+    /** Words that name too many emoji, or none in particular, to suggest one for. */
+    private val GENERIC_WORDS = setOf(
+        "button", "symbol", "sign", "mark", "face", "hand", "up", "down", "left", "right", "arrow",
+        "time", "done", "double", "fast", "person", "man", "woman", "people", "light", "flag",
+        "small", "large", "big", "black", "white", "open", "closed", "square", "circle", "other",
+        "the", "and", "with", "for", "you", "not", "new", "top", "end", "back", "on", "off", "free", "ok"
+    )
+    private const val MAX_KEYWORD_EMOJI = 30
+
+    /**
+     * One emoji for a typed word, for the suggestion bar: one whose name is the word ("pizza",
+     * "rocket"), else the first in picker order of those with it as a keyword ("happy", "love"),
+     * unless the word is generic or names too many emoji. The index holds only emoji the
+     * device can draw.
+     */
+    fun suggestionFor(index: EmojiSearchIndex, word: String): String? {
+        if (word.length < 3) return null
+        val query = normalizeSearchText(word)
+        if (query.isEmpty() || query in GENERIC_WORDS) return null
+        index.items.firstOrNull { item ->
+            item.terms.any { it.kind == SearchScorer.Kind.NAME && it.text == query }
+        }?.let { return it.entry.base }
+        val byKeyword = index.items.filter { item ->
+            item.terms.any { it.kind == SearchScorer.Kind.KEYWORD && it.text == query }
+        }
+        if (byKeyword.isEmpty() || byKeyword.size > MAX_KEYWORD_EMOJI) return null
+        return byKeyword.minByOrNull { it.categoryOrder }?.entry?.base
+    }
+
     suspend fun getSearchIndex(context: Context): EmojiSearchIndex {
         val localeChain = getPreferredLocaleChain(context)
         val cacheKey = localeChain.joinToString("|")
@@ -76,6 +115,7 @@ object EmojiSearchRepository {
                 return existing
             }
             indexCache[cacheKey] = built
+            lastBuilt = cacheKey to built
             while (indexCache.size > MAX_CACHED_INDEXES) {
                 val firstKey = indexCache.entries.firstOrNull()?.key ?: break
                 indexCache.remove(firstKey)
@@ -120,6 +160,7 @@ object EmojiSearchRepository {
     }
 
     fun clearCache() {
+        lastBuilt = null
         indexCache.clear()
     }
 

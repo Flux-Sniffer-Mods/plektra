@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="emoji_suggestions_title">Προτάσεις emoji</string>
+    <string name="emoji_suggestions_description">Ένα emoji για τη λέξη που πληκτρολογείτε, π.χ. 🍕 για πίτσα. Η επιλογή του προσθέτει το emoji μετά τη λέξη.</string>
+</resources>

@@ -307,6 +307,7 @@ internal object BackupPreferenceContract {
             "emoji_symbols_accept_with_enter" to PreferenceValueType.BOOLEAN,
             "emoji_symbols_exact_on_close" to PreferenceValueType.BOOLEAN,
             "accent_matching_enabled" to PreferenceValueType.BOOLEAN,
+            "emoji_suggestions_enabled" to PreferenceValueType.BOOLEAN,
             "auto_replace_on_space_enter" to PreferenceValueType.BOOLEAN,
             "auto_capitalize_after_period" to PreferenceValueType.BOOLEAN,
             "auto_cap_after_emoticon" to PreferenceValueType.BOOLEAN,
