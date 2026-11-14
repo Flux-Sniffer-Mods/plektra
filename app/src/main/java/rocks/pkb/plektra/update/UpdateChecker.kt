@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import rocks.pkb.plektra.BuildConfig
+import rocks.pkb.plektra.ExternalLinks
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.SettingsManager
 import okhttp3.Call
@@ -233,7 +234,7 @@ private fun showPlektraStableUpdateDialog(
 private fun openUrl(context: Context, url: String) {
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    context.startActivity(intent)
+    ExternalLinks.start(context, intent)
 }
 
 internal fun showReleaseNotice(context: Context, result: UpdateCheckResult) {

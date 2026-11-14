@@ -595,7 +595,8 @@ private fun SettingsMainScreen(
                 title = stringResource(R.string.settings_support_open_collective),
                 description = stringResource(R.string.settings_support_open_collective_description),
                 onClick = {
-                    context.startActivity(
+                    ExternalLinks.start(
+                        context,
                         Intent(
                             Intent.ACTION_VIEW,
                             Uri.parse("https://pkb.rocks/donate")
