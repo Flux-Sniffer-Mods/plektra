@@ -10,6 +10,18 @@ class PlektraCommandSource : CommandSource {
     override fun getCommands(context: Context): List<CommandTarget> {
         return listOf(
             CommandTarget(
+                id = rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.COMMAND_ID,
+                source = id,
+                kind = CommandKind.PlektraAction,
+                label = context.getString(R.string.extra_keys_title),
+                subtitle = context.getString(R.string.extra_keys_command_subtitle),
+                icon = CommandIcon.DrawableIcon(ContextCompat.getDrawable(context, R.drawable.modifier_keys_24)),
+                launch = CommandLaunchSpec.InternalAction(rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysToggle.ACTION_ID),
+                capabilities = setOf(CommandCapability.AdjustsDeviceState),
+                defaultSurfaces = setOf(CommandSurface.AssignedKey, CommandSurface.QuickLauncher),
+                searchTokens = listOf("Extra keys", "Esc", "Tab", "Ctrl", "Alt", "Arrows", "Terminal")
+            ),
+            CommandTarget(
                 id = COMMAND_QUICK_LAUNCHER,
                 source = id,
                 kind = CommandKind.PlektraAction,

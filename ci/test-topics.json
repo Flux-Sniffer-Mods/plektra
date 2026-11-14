@@ -195,6 +195,7 @@
       "rocks.pkb.plektra.inputmethod.InputEventRouterShortcutKeysTest",
       "rocks.pkb.plektra.inputmethod.InputEventRouterSoftwareCtrlTest",
       "rocks.pkb.plektra.inputmethod.MultiTapControllerTest",
+      "rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysTest",
       "rocks.pkb.plektra.shortcuts.AppActionKeysTest"
     ],
     "speech": [
@@ -218,6 +219,7 @@
       "rocks.pkb.plektra.inputmethod.ReplacementAfterUndoKeysTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeypadPolicyTest",
       "rocks.pkb.plektra.inputmethod.SoftwareKeypadServiceIntegrationTest",
+      "rocks.pkb.plektra.inputmethod.TerminalAppsTest",
       "rocks.pkb.plektra.shortcuts.AppShortcutCommandsTest",
       "rocks.pkb.plektra.shortcuts.UserShortcutsTest"
     ]

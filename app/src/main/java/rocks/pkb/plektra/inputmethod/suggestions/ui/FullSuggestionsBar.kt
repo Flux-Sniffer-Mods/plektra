@@ -339,6 +339,23 @@ class FullSuggestionsBar(
 
     fun isHamburgerMenuVisible(): Boolean = hamburgerMenuView?.isVisible() == true
 
+    // The extra keys row, over the bar while it's open
+    private var extraKeysView: rocks.pkb.plektra.inputmethod.ui.ExtraKeysView? = null
+
+    /** The extra keys row in the bar's place, or null to put the bar back. */
+    fun setExtraKeys(row: rocks.pkb.plektra.inputmethod.extrakeys.ExtraKeysRow?) {
+        if (row == null) {
+            extraKeysView?.hide()
+            return
+        }
+        val frame = frameContainer ?: return
+        val view = extraKeysView ?: rocks.pkb.plektra.inputmethod.ui.ExtraKeysView(context).also { extraKeysView = it }
+        view.themeOverride = themeOverride
+        hamburgerMenuView?.hide()
+        view.attachTo(frame)
+        view.show(row)
+    }
+
     fun hideHamburgerMenu() {
         hamburgerMenuView?.hide()
     }
