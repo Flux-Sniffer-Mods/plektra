@@ -977,6 +977,7 @@ private fun StarterLauncherBehaviorScreen(
             checked = quickLauncherLimitResults,
             onCheckedChange = onQuickLauncherLimitResultsChanged
         )
+        AppActionKeysSetting()
         QuickLauncherAppShortcutsSetting()
         AddAShortcutRow()
         LauncherShortcutTriggerRow(

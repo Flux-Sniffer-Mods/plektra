@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Συντομεύσεις εφαρμογών στα πλήκτρα</string>
+    <string name="app_action_keys_description">Τα Ctrl + Alt + 1 έως 4 ανοίγουν τις συντομεύσεις της εφαρμογής (όσες δείχνει το εικονίδιό της με παρατεταμένο πάτημα) και το Ctrl + , τις ρυθμίσεις της.</string>
+</resources>

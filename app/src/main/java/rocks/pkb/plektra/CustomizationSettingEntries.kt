@@ -167,6 +167,15 @@ internal fun customizationSettingEntries(): List<SettingEntry> = listOf(
         )
     ),
     SettingEntry(
+        id = rocks.pkb.plektra.shortcuts.AppActionKeys.LINK_ID,
+        titleRes = R.string.app_action_keys_title,
+        summaryRes = R.string.app_action_keys_description,
+        route = SettingRoute(
+            destination = SettingsDestination.Customization,
+            customizationDestination = "launcher_shortcut_behavior"
+        )
+    ),
+    SettingEntry(
         id = rocks.pkb.plektra.commands.AppShortcutCommandSource.LINK_ID,
         titleRes = R.string.quick_launcher_app_shortcuts_title,
         summaryRes = R.string.quick_launcher_app_shortcuts_description,

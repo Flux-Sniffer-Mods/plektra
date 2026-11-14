@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Apps\' shortcuts on keys</string>
+    <string name="app_action_keys_description">Ctrl + Alt + 1 to 4 open the app\'s own shortcuts (the ones its icon shows on a long press), and Ctrl + , its settings.</string>
+</resources>

@@ -4712,6 +4712,24 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         return true
     }
 
+    // Keys that opened an app's own shortcut
+    private val appActionKeysDown = mutableSetOf<Int>()
+
+    private fun openAppActionKey(keyCode: Int, event: KeyEvent?): Boolean {
+        if (event == null || event.action != KeyEvent.ACTION_DOWN) return false
+        if (event.repeatCount > 0) return keyCode in appActionKeysDown
+        if (KeyEvent.isModifierKey(keyCode) || !rocks.pkb.plektra.shortcuts.AppActionKeys.isEnabled(this)) return false
+        val ctrl = event.isCtrlPressed || ctrlPressed || ctrlPhysicallyPressed
+        val alt = event.isAltPressed || altPhysicallyPressed
+        val altChar = if (ctrl && alt) alternateCharacterManager.getAltModifierMappings()[keyCode]?.singleOrNull() else null
+        val target = rocks.pkb.plektra.shortcuts.AppActionKeys.targetFor(keyCode, ctrl, alt, altChar) ?: return false
+        val packageName = currentInputEditorInfo?.packageName ?: currentPackageName ?: return false
+        if (packageName == this.packageName) return false
+        if (!rocks.pkb.plektra.shortcuts.AppActionKeys.open(this, packageName, target)) return false
+        appActionKeysDown += keyCode
+        return true
+    }
+
     private fun toggleEmojiPicker() {
         ensureImeSurfaceVisible()
         symLayoutController.openEmojiPickerPage()
@@ -4905,6 +4923,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
             event.flags and KeyEvent.FLAG_SOFT_KEYBOARD == 0) {
             hardwareKeypadAutoOpen.settle()
         }
+        // Apps' shortcuts on keys: Ctrl + Alt + 1 to 4 and Ctrl + , open the app's own screens
+        if (openAppActionKey(keyCode, event)) return true
         if (event_?.repeatCount == 0) consumedLanguageSwitchKeys.remove(keyCode_)
         else if (keyCode_ in consumedLanguageSwitchKeys) return true
         val languageCtrl = event?.isCtrlPressed == true || ctrlPressed || ctrlPhysicallyPressed ||
@@ -5702,6 +5722,8 @@ class PhysicalKeyboardInputMethodService : InputMethodService(), ClicksAccessibi
         if (remapped.consume) return true
         val keyCode = remapped.keyCode
         val event = remapped.event
+        // A key that opened an app's shortcut: its release is dropped too
+        if (appActionKeysDown.remove(keyCode)) return true
         if (keyCode == KeyEvent.KEYCODE_ENTER && consumeAltEnterUntilKeyUp) {
             consumeAltEnterUntilKeyUp = false
             return true

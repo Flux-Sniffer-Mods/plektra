@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">Հավելվածների դյուրանցումները ստեղներին</string>
+    <string name="app_action_keys_description">Ctrl + Alt + 1–4-ը բացում են հավելվածի սեփական դյուրանցումները (որոնք նրա պատկերակը ցույց է տալիս երկար սեղմելիս), իսկ Ctrl + ,-ը՝ նրա կարգավորումները։</string>
+</resources>

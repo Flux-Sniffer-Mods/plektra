@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_action_keys_title">App-Verknüpfungen auf Tasten</string>
+    <string name="app_action_keys_description">Strg + Alt + 1 bis 4 öffnen die eigenen Verknüpfungen der App (die ihr Symbol bei langem Drücken zeigt), Strg + , ihre Einstellungen.</string>
+</resources>
