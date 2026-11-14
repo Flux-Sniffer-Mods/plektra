@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.inputmethod.InputConnection
 import rocks.pkb.plektra.R
 import rocks.pkb.plektra.SettingsManager
+import rocks.pkb.plektra.core.EditHistory
 import rocks.pkb.plektra.core.NavModeController
 import rocks.pkb.plektra.data.mappings.KeyMappingLoader
 import android.os.Handler
@@ -1382,6 +1383,23 @@ class InputEventRouter(
                 ic.sendKeyEvent(down)
             }
             return true
+        }
+
+        // Ctrl+Z, Ctrl+Shift+Z and Ctrl+Y: the keyboard's own typing history, in any app (the
+        // app's own undo when the keyboard has nothing to undo)
+        if (!ctrlLatchFromNavMode && event?.repeatCount == 0 && inputConnection != null) {
+            val undoKey = shortcutKeyCode == KeyEvent.KEYCODE_Z
+            val redoKey = shortcutKeyCode == KeyEvent.KEYCODE_Y && isPhysicalCtrlCombo
+            val redo = redoKey || event?.isShiftPressed == true
+            if ((undoKey || redoKey) &&
+                (if (redo) EditHistory.redo(inputConnection) else EditHistory.undo(inputConnection))
+            ) {
+                if (ctrlOneShot) {
+                    clearCtrlOneShot()
+                    updateStatusBar()
+                }
+                return true
+            }
         }
 
         // When Ctrl is physically held, prefer native app shortcuts (rich-text editors, IDEs, etc.).
